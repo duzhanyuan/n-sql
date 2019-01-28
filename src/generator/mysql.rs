@@ -6,42 +6,33 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-
-mod visitor;
-
-mod pgsql;
-mod mysql;
-mod oracle;
-
 use ast::*;
-use self::visitor::Visitor;
+use super::Visitor;
 use std::result;
 use std::fmt::{Write, Error, Result};
+use optimizer::Optimizer;
+
 type Formatter = String;
 
-pub use self::pgsql::PgsqlGenerator;
-pub use self::oracle::OracleGenerator;
-pub use self::mysql::MySQLGenerator;
-
-pub trait Generator<T> {
-    fn to_sql(&self) -> result::Result<String, Error>;
+pub trait MySQLGenerator<T>{
+    fn to_mysql(&self) -> result::Result<String, Error>;
 }
-
 
 struct InternalGenerator;
 
-impl Visitor for InternalGenerator {
-    fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
-        self.visit_datetime_type(&function.extract_type, f)?;
+impl Visitor for InternalGenerator{
+    fn visit_nvl_fn(&self, function: &Box<NvlFn>, f: &mut Formatter) -> Result {
+        f.write_str("ifnull")?;
         f.write_char('(')?;
         self.visit_expression(&function.expr, f)?;
+        f.write_str(", ")?;
+        self.visit_expression(&function.default, f)?;
         f.write_char(')')
     }
 }
 
-
-impl Generator<Expression> for Expression {
-    fn to_sql(&self) -> result::Result<String, Error> {
+impl MySQLGenerator<Expression> for Expression {
+    fn to_mysql(&self) -> result::Result<String, Error> {
         let mut s = String::new();
         InternalGenerator.visit_expression(self, &mut s)?;
         Ok(s)
@@ -49,16 +40,16 @@ impl Generator<Expression> for Expression {
 }
 
 
-impl Generator<PredicateExpression> for PredicateExpression {
-    fn to_sql(&self) -> result::Result<String, Error> {
+impl MySQLGenerator<PredicateExpression> for PredicateExpression {
+    fn to_mysql(&self) -> result::Result<String, Error> {
         let mut s = String::new();
         InternalGenerator.visit_predicate(self, &mut s)?;
         Ok(s)
     }
 }
 
-impl Generator<Statement> for Statement {
-    fn to_sql(&self) -> result::Result<String, Error> {
+impl MySQLGenerator<Statement> for Statement {
+    fn to_mysql(&self) -> result::Result<String, Error> {
         let mut s = String::new();
         InternalGenerator.visit_statement(self, &mut s)?;
         Ok(s)

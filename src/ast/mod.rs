@@ -21,7 +21,7 @@ pub use self::statement::*;
 pub use self::catalog::*;
 
 pub enum Ast {
-    Statement(Box<Statement>),
-    Expression(Box<Expression>),
-    Predicate(Box<PredicateExpression>),
+    Statement(Statement),
+    Expression(Expression),
+    Predicate(PredicateExpression),
 }

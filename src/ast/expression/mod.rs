@@ -54,3 +54,16 @@ impl From<i32> for Expression {
     }
 }
 
+
+impl Expression {
+    pub fn constant_numeric(&self) -> Option<NumericValue> {
+        match self {
+            Expression::Constant(t) => match t {
+                ConstantValue::Numeric(n) => Some(n.clone()),
+                _ => None
+            },
+            _ => None
+        }
+    }
+}
+

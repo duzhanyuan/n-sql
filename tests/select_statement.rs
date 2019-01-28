@@ -1,5 +1,10 @@
-// Copyright (c)  YISH. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+// Copyright 2019 The n-sql Project Developers.
+//
+// Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
 
 mod common;
 
@@ -77,8 +82,28 @@ fn test_select_with_skip(){
 }
 
 #[test]
+fn test_oracle_select_with_skip(){
+    test_oracle_statement("select count(id) FROM student skip 3", "select count(id) from student offset 3 rows");
+}
+
+#[test]
+fn test_oracle_select_with_skip1(){
+    test_oracle_statement("select count(id) FROM student skip 1", "select count(id) from student offset 1 row");
+}
+
+#[test]
 fn test_select_with_limit(){
     test_statement("select count(id) FROM student limit 3", "select count(id) from student limit 3");
+}
+
+#[test]
+fn test_oracle_select_with_limit(){
+    test_oracle_statement("select count(id) FROM student limit 3", "select count(id) from student fetch first 3 rows only");
+}
+
+#[test]
+fn test_oracle_select_with_limit1(){
+    test_oracle_statement("select count(id) FROM student limit 1", "select count(id) from student fetch first 1 row only");
 }
 
 #[test]

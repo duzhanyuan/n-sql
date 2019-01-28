@@ -12,8 +12,14 @@ use std::result;
 
 type Formatter = String;
 
-
 pub trait Visitor {
+    fn visit_ast(&self, ast: &Ast, f: &mut Formatter)  -> Result {
+        match ast {
+            Ast::Statement(t) => self.visit_statement(t, f),
+            Ast::Expression(t) => self.visit_expression(t, f),
+            Ast::Predicate(t) => self.visit_predicate(t, f),
+        }
+    }
     fn visit_statement(&self, statement: &Statement, f: &mut Formatter) -> Result {
         match statement {
             Statement::Set(t) => self.visit_set_statement(t, f)
@@ -33,7 +39,9 @@ pub trait Visitor {
                 } else {
                     self.visit_set_statement(left, f)?;
                 }
-                f.write_str(" union ")?;
+                f.write_char(' ')?;
+                self.format_letter("union", f)?;
+                f.write_char(' ')?;
                 if is_set(right){
                     f.write_char('(')?;
                     self.visit_set_statement(right, f)?;
@@ -50,7 +58,12 @@ pub trait Visitor {
                 } else {
                     self.visit_set_statement(left, f)?;
                 }
-                f.write_str(" union all ")?;
+                f.write_char(' ')?;
+                self.format_letter("union", f)?;
+                f.write_char(' ')?;
+                self.format_letter("all", f)?;
+                f.write_char(' ')?;
+
                 if is_set(right){
                     f.write_char('(')?;
                     self.visit_set_statement(right, f)?;
@@ -505,8 +518,13 @@ pub trait Visitor {
         f.write_char(')')
     }
     fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
-        self.visit_datetime_type(&function.extract_type, f)?;
+        f.write_str("extract")?;
         f.write_char('(')?;
+
+        self.visit_datetime_type(&function.extract_type, f)?;
+        f.write_char(' ')?;
+        f.write_str("from")?;
+        f.write_char(' ')?;
         self.visit_expression(&function.expr, f)?;
         f.write_char(')')
     }
@@ -520,6 +538,39 @@ pub trait Visitor {
             Minute => f.write_str("minute"),
             Second => f.write_str("second")
         }
+    }
+
+    fn visit_year_add_fn(&self, function: &YearAddFn, f: &mut Formatter) -> Result {
+        f.write_str("year_add")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_str(", ")?;
+        self.visit_expression(&function.offset, f)?;
+        f.write_char(')')
+    }
+    fn visit_year_sub_fn(&self, function: &YearSubFn, f: &mut Formatter) -> Result {
+        f.write_str("year_sub")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_str(", ")?;
+        self.visit_expression(&function.offset, f)?;
+        f.write_char(')')
+    }
+    fn visit_month_add_fn(&self, function: &MonthAddFn, f: &mut Formatter) -> Result {
+        f.write_str("month_add")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_str(", ")?;
+        self.visit_expression(&function.offset, f)?;
+        f.write_char(')')
+    }
+    fn visit_month_sub_fn(&self, function: &MonthSubFn, f: &mut Formatter) -> Result {
+        f.write_str("month_sub")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_str(", ")?;
+        self.visit_expression(&function.offset, f)?;
+        f.write_char(')')
     }
     fn visit_day_add_fn(&self, function: &DayAddFn, f: &mut Formatter) -> Result {
         f.write_str("day_add")?;
@@ -569,22 +620,6 @@ pub trait Visitor {
         self.visit_expression(&function.offset, f)?;
         f.write_char(')')
     }
-    fn visit_month_add_fn(&self, function: &MonthAddFn, f: &mut Formatter) -> Result {
-        f.write_str("month_add")?;
-        f.write_char('(')?;
-        self.visit_expression(&function.expr, f)?;
-        f.write_str(", ")?;
-        self.visit_expression(&function.offset, f)?;
-        f.write_char(')')
-    }
-    fn visit_month_sub_fn(&self, function: &MonthSubFn, f: &mut Formatter) -> Result {
-        f.write_str("month_sub")?;
-        f.write_char('(')?;
-        self.visit_expression(&function.expr, f)?;
-        f.write_str(", ")?;
-        self.visit_expression(&function.offset, f)?;
-        f.write_char(')')
-    }
     fn visit_second_add_fn(&self, function: &SecondAddFn, f: &mut Formatter) -> Result {
         f.write_str("second_add")?;
         f.write_char('(')?;
@@ -595,22 +630,6 @@ pub trait Visitor {
     }
     fn visit_second_sub_fn(&self, function: &SecondSubFn, f: &mut Formatter) -> Result {
         f.write_str("second_sub")?;
-        f.write_char('(')?;
-        self.visit_expression(&function.expr, f)?;
-        f.write_str(", ")?;
-        self.visit_expression(&function.offset, f)?;
-        f.write_char(')')
-    }
-    fn visit_year_add_fn(&self, function: &YearAddFn, f: &mut Formatter) -> Result {
-        f.write_str("year_add")?;
-        f.write_char('(')?;
-        self.visit_expression(&function.expr, f)?;
-        f.write_str(", ")?;
-        self.visit_expression(&function.offset, f)?;
-        f.write_char(')')
-    }
-    fn visit_year_sub_fn(&self, function: &YearSubFn, f: &mut Formatter) -> Result {
-        f.write_str("year_sub")?;
         f.write_char('(')?;
         self.visit_expression(&function.expr, f)?;
         f.write_str(", ")?;
@@ -1070,9 +1089,13 @@ pub trait Visitor {
         }
     }
     fn visit_null(&self, f: &mut Formatter) -> Result{
-        write!(f, "null")
+        self.format_letter("null", f)
     }
     fn visit_identifier(&self, identifier: &Identifier, f: &mut Formatter) -> Result {
         write!(f, "{}", identifier)
+    }
+
+    fn format_letter(&self, letter: &str, f: &mut Formatter) -> Result {
+        f.write_str(letter)
     }
 }
