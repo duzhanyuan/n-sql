@@ -6,34 +6,17 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-
+#[macro_use]
 mod common;
 
-use common::*;
+test_init!();
 
-#[test]
-fn test_and(){
-    test_predicate("a = 3 And c is null", "a = 3 and c is null");
-}
-
-#[test]
-fn test_or(){
-    test_predicate("a = 3 or c < 5", "a = 3 or c < 5");
-}
-
-#[test]
-fn test_priority(){
-    test_predicate("a =3   and (c < 5 or c= 7)", "a = 3 and (c < 5 or c = 7)");
-}
-
-
-#[test]
-fn test_superfluous_brackets(){
-    test_predicate("(a =3 )  and ((c < 5 or c= 7))", "a = 3 and (c < 5 or c = 7)");
-}
-
-
-#[test]
-fn test_superfluous_brackets1(){
-    test_predicate("(a =3 )  and (((c < 5 or c= 7)))", "a = 3 and (c < 5 or c = 7)");
+#[theory]
+#[case("a = 3 And c is null", NSQL, "a = 3 and c is null")]
+#[case("a = 3 or c < 5", NSQL, "a = 3 or c < 5")]
+#[case("a =3   and (c < 5 or c= 7)", NSQL, "a = 3 and (c < 5 or c = 7)")]
+#[case("(a =3 )  and ((c < 5 or c= 7))", NSQL, "a = 3 and (c < 5 or c = 7)")]
+#[case("(a =3 )  and (((c < 5 or c= 7)))", NSQL, "a = 3 and (c < 5 or c = 7)")]
+fn test(left: &str, database_type: DatabaseType, right: &str){
+    test_predicate(database_type, left, right)
 }

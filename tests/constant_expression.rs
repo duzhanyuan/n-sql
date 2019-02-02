@@ -16,8 +16,10 @@ use n_sql::Expression;
 use n_sql::Optimizer;
 use n_sql::Lexer;
 
+#[macro_use]
 mod common;
-use common::*;
+
+test_init!();
 
 #[test]
 fn test(){
@@ -29,32 +31,32 @@ fn test(){
 
 #[test]
 fn test_integer(){
-    test_expression("3", "3");
+    test_expression(NSQL, "3", "3");
 }
 
 
 #[test]
 fn test_integer_minus(){
-    test_expression("-3", "-3");
+    test_expression(NSQL, "-3", "-3");
 }
 
 #[test]
 fn test_string(){
-    test_expression(" 'abc' ", "'abc'");
+    test_expression(NSQL, " 'abc' ", "'abc'");
 }
 
 #[test]
 fn test_float(){
-    test_expression("3.2", "3.2");
+    test_expression(NSQL, "3.2", "3.2");
 }
 #[test]
 fn test_float1(){
-    test_expression(".2", "0.2")
+    test_expression(NSQL, ".2", "0.2")
 }
 
 #[test]
 fn test_float_minus(){
-    test_expression("-.2", "-0.2");
+    test_expression(NSQL, "-.2", "-0.2");
 }
 
 #[test]

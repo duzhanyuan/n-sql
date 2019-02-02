@@ -5,49 +5,20 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
-
+#[macro_use]
 mod common;
-use common::*;
 
-#[test]
-fn test_add(){
-    test_expression("a     +3","a + 3" );
-}
+test_init!();
 
-
-#[test]
-fn test_sub(){
-    test_expression("a  - 3", "a - 3");
-}
-
-#[test]
-fn test_mul(){
-    test_expression("a* 3", "a * 3");
-}
-
-
-#[test]
-fn test_div(){
-    test_expression("a/ 3", "a / 3");
-}
-
-#[test]
-fn test_priority(){
-    test_expression("a/ 3 + 3", "a / 3 + 3");
-}
-
-
-#[test]
-fn test_priority1(){
-    test_expression("a/ (3 + 3)", "a / (3 + 3)");
-}
-
-#[test]
-fn test_superfluous_brackets(){
-    test_expression("(a)/ ((3 + 3))", "a / (3 + 3)");
-}
-
-#[test]
-fn test_superfluous_brackets1(){
-    test_expression("(a)/ ((m + n))", "a / (m + n)");
+#[theory]
+#[case("a     +3", NSQL, "a + 3")]
+#[case("a  - 3", NSQL, "a - 3")]
+#[case("a* 3", NSQL, "a * 3")]
+#[case("a/ 3", NSQL, "a / 3")]
+#[case("a/ 3 + 3", NSQL, "a / 3 + 3")]
+#[case("a/ (3 + 3)", NSQL, "a / (3 + 3)")]
+#[case("(a)/ ((3 + 3))", NSQL, "a / (3 + 3)" )]
+#[case("(a)/ ((m + n))", NSQL, "a / (m + n)")]
+fn test(left: &str, database_type: DatabaseType, right: &str){
+    test_expression(database_type, left, right);
 }

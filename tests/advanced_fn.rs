@@ -6,50 +6,25 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+#[macro_use]
 mod common;
 
-use common::*;
+test_init!();
 
-
-#[test]
-fn test_nvl(){
-    test_expression("nvl(a, 'no value')", "nvl(a, 'no value')");
-}
-
-#[test]
-fn test_mysql_nvl(){
-    test_mysql_expression("nvl(a, 'no value')", "ifnull(a, 'no value')");
-}
-
-#[test]
-fn test_pgsql_nvl(){
-    test_pgsql_expression("nvl(a, 'no value')", "coalesce(a, 'no value')");
+#[theory]
+#[case("nvl(a, 'no value')", NSQL, "nvl(a, 'no value')")]
+#[case("nvl(a, 'no value')", MySQL, "ifnull(a, 'no value')")]
+#[case("nvl(a, 'no value')", PostgreSQL, "coalesce(a, 'no value')")]
+#[case("NVL(a, 'no value')", NSQL, "nvl(a, 'no value')")]
+#[case("NVL(a,      123)", NSQL, "nvl(a, 123)")]
+#[case("NVL(a,      -123)", NSQL, "nvl(a, -123)")]
+fn test_nvl(left: &str, database_type: DatabaseType, right: &str) {
+    test_expression(database_type, left, right);
 }
 
 
-#[test]
-fn test_nvl1(){
-    test_expression("NVL(a, 'no value')", "nvl(a, 'no value')");
-}
-
-#[test]
-fn test_nvl2(){
-    test_expression("NVL(a,      'no value')", "nvl(a, 'no value')");
-}
-
-
-#[test]
-fn test_nvl3(){
-    test_expression("NVL(a,      123)", "nvl(a, 123)");
-}
-
-
-#[test]
-fn test_nvl4(){
-    test_expression("NVL(a,      -123)", "nvl(a, -123)");
-}
-
-#[test]
-fn test_coalesce(){
-    test_expression("COALESCE(a,b,c)", "coalesce(a, b, c)");
+#[theory]
+#[case("COALESCE(a,b,c)", NSQL, "coalesce(a, b, c)")]
+fn test_coalesce(left: &str, database_type: DatabaseType, right: &str){
+    test_expression(database_type, left, right);
 }

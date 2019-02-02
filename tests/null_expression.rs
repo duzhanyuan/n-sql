@@ -6,17 +6,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-
+#[macro_use]
 mod common;
 
-use common::*;
+test_init!();
 
-#[test]
-fn test_is_null(){
-    test_predicate("a is null", "a is null");
-}
-
-#[test]
-fn test_is_not_null(){
-    test_predicate("a is not null", "a is not null");
+#[theory]
+#[case("a is null",NSQL,"a is null")]
+#[case("a is not null",NSQL,"a is not null")]
+fn test(left: &str, database_type: DatabaseType, right: &str){
+    test_predicate(database_type, left, right);
 }

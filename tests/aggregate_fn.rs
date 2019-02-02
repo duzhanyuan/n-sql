@@ -6,49 +6,28 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+#[macro_use]
 mod common;
-use common::*;
 
-#[test]
-fn test_avg1(){
-    test_expression("avg(a)", "avg(a)");
+test_init!();
+
+#[theory]
+#[case("avg(a)", NSQL, "avg(a)")]
+#[case("avg(distinct a)", NSQL, "avg(distinct a)")]
+#[case("count(a)", NSQL, "count(a)")]
+#[case("count(unique a)", NSQL, "count(unique a)")]
+#[case("sum(all a)", NSQL, "sum(all a)")]
+#[case("sum(a)", NSQL, "sum(a)")]
+#[case("stddev(a)", NSQL, "stddev(a)")]
+fn test(left: &str, database_type: DatabaseType, right: &str){
+    test_expression(database_type, left, right );
 }
 
 #[test]
 fn test_avg2(){
-    test_predicate("avg(a) >9", "avg(a) > 9");
-}
-
-#[test]
-fn test_avg3(){
-    test_expression("avg(distinct a)", "avg(distinct a)");
-}
-
-#[test]
-fn test_count(){
-    test_expression("count(a)", "count(a)");
-}
-
-#[test]
-fn test_count1(){
-    test_expression("count(unique a)", "count(unique a)");
+    test_predicate(NSQL,"avg(a) >9", "avg(a) > 9");
 }
 
 
-#[test]
-fn test_sum(){
-    test_expression("sum(all a)", "sum(all a)");
-}
-
-#[test]
-fn test_sum1(){
-    test_expression("sum(a)", "sum(a)");
-}
-
-
-#[test]
-fn test_stddev(){
-    test_expression("stddev(a)", "stddev(a)");
-}
 
 

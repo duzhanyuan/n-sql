@@ -6,164 +6,45 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+#[macro_use]
 mod common;
 
-use common::*;
+test_init!();
 
-#[test]
-fn test_concat() {
-    test_expression("concat(a, b ,c)", "concat(a, b, c)");
-}
-
-#[test]
-fn test_left() {
-    test_expression("left(a, 3)", "left(a, 3)");
-}
-
-#[test]
-fn test_upper1(){
-    test_expression("UPPER(a)", "upper(a)");
-}
-
-#[test]
-fn test_upper2(){
-    test_expression("Upper('abc')", "upper('abc')");
-}
-
-#[test]
-fn test_lower1(){
-    test_expression("lower(a)", "lower(a)");
-}
-
-#[test]
-fn test_lower2(){
-    test_expression("lower('abc')", "lower('abc')");
-}
-
-#[test]
-fn test_length1(){
-    test_expression("LENGTH(a)", "length(a)");
-}
-
-#[test]
-fn test_length2(){
-    test_expression("Length('abc')", "length('abc')");
-}
-
-#[test]
-fn test_pad_left(){
-    test_expression("pad_left('abc', 3)", "pad_left('abc', 3)");
-}
-
-#[test]
-fn test_pad_left1(){
-    test_expression("pad_left('abc', 3, 'a')", "pad_left('abc', 3, 'a')");
-}
-
-#[test]
-fn test_pad_left2(){
-    test_expression("lpad('abc', 3, 'a')", "pad_left('abc', 3, 'a')");
-}
-
-#[test]
-fn test_pad_right(){
-    test_expression("pad_right('abc', 3)", "pad_right('abc', 3)");
-}
-
-#[test]
-fn test_pad_right1(){
-    test_expression("pad_right('abc', 3, 'a')", "pad_right('abc', 3, 'a')");
-}
-
-#[test]
-fn test_pad_right2(){
-    test_expression("rpad('abc', 3, 'a')", "pad_right('abc', 3, 'a')");
-}
-
-#[test]
-fn test_replace(){
-    test_expression("replace('abc', '88')", "replace('abc', '88')");
-}
-
-#[test]
-fn test_reverse(){
-    test_expression("reverse('abc')", "reverse('abc')");
-}
-
-#[test]
-fn test_substr(){
-    test_expression("substr('abc', 2)", "substr('abc', 2)");
-}
-#[test]
-fn test_substr1(){
-    test_expression("substr('abc', 1,1)", "substr('abc', 1, 1)");
-}
-
-#[test]
-fn test_trim_end(){
-    test_expression("trim_end('abc ')", "trim_end('abc ')");
-}
-#[test]
-fn test_trim_end1(){
-    test_expression("trim_end('abc ', 'd')", "trim_end('abc ', 'd')");
-}
-#[test]
-fn test_trim_end2(){
-    test_expression("rtrim('abc', 'a')", "trim_end('abc', 'a')");
-}
-
-#[test]
-fn test_trim_end3(){
-    test_expression("trim(trailing  'a' from 'abc')", "trim_end('abc', 'a')");
-}
-
-#[test]
-fn test_trim_end4(){
-    test_expression("trim(trailing from 'abc ')", "trim_end('abc ')");
-}
-
-#[test]
-fn test_trim(){
-    test_expression("trim('abc ')", "trim('abc ')");
-}
-
-#[test]
-fn test_trim1(){
-    test_expression("trim('abc ', 'a')", "trim('abc ', 'a')");
-}
-#[test]
-fn test_trim2(){
-    test_expression("btrim('abc ')", "trim('abc ')");
-}
-#[test]
-fn test_trim3(){
-    test_expression("btrim('abc ', 'a')", "trim('abc ', 'a')");
-}
-#[test]
-fn test_trim_start(){
-    test_expression("trim_start(' abc ')", "trim_start(' abc ')");
-}
-
-#[test]
-fn test_trim_start1(){
-    test_expression("trim_start(' abc ', 'a')", "trim_start(' abc ', 'a')");
-}
-
-#[test]
-fn test_trim_start2(){
-    test_expression("ltrim(' abc ', 'a')", "trim_start(' abc ', 'a')");
-}
-
-#[test]
-fn test_trim_start3(){
-    test_expression("ltrim(' abc ')", "trim_start(' abc ')");
-}
-#[test]
-fn test_trim_start4(){
-    test_expression("trim(leading from ' abc ')", "trim_start(' abc ')");
-}
-
-#[test]
-fn test_trim_start5(){
-    test_expression("trim(leading 'a' from ' abc ')", "trim_start(' abc ', 'a')");
+#[theory]
+#[case("concat(a, b ,c)", NSQL,  "concat(a, b, c)")]
+#[case("left(a, 3)", NSQL, "left(a, 3)")]
+#[case("UPPER(a)", NSQL, "upper(a)")]
+#[case("Upper('abc')", NSQL, "upper('abc')")]
+#[case("lower(a)", NSQL, "lower(a)")]
+#[case("lower('abc')", NSQL,  "lower('abc')")]
+#[case("LENGTH(a)", NSQL, "length(a)")]
+#[case("Length('abc')", NSQL, "length('abc')")]
+#[case("pad_left('abc', 3)", NSQL, "pad_left('abc', 3)")]
+#[case("pad_left('abc', 3, 'a')", NSQL, "pad_left('abc', 3, 'a')")]
+#[case("lpad('abc', 3, 'a')", NSQL, "pad_left('abc', 3, 'a')")]
+#[case("pad_right('abc', 3)", NSQL,  "pad_right('abc', 3)")]
+#[case("pad_right('abc', 3, 'a')", NSQL, "pad_right('abc', 3, 'a')")]
+#[case("rpad('abc', 3, 'a')", NSQL, "pad_right('abc', 3, 'a')")]
+#[case("replace('abc', '88')", NSQL, "replace('abc', '88')")]
+#[case("reverse('abc')", NSQL, "reverse('abc')")]
+#[case("substr('abc', 2)", NSQL, "substr('abc', 2)")]
+#[case("substr('abc', 1,1)", NSQL, "substr('abc', 1, 1)")]
+#[case("trim_end('abc ')", NSQL, "trim_end('abc ')")]
+#[case("trim_end('abc ', 'd')", NSQL, "trim_end('abc ', 'd')")]
+#[case("rtrim('abc', 'a')", NSQL, "trim_end('abc', 'a')")]
+#[case("trim(trailing  'a' from 'abc')", NSQL, "trim_end('abc', 'a')")]
+#[case("trim(trailing from 'abc ')", NSQL, "trim_end('abc ')")]
+#[case("trim('abc ')", NSQL,  "trim('abc ')")]
+#[case("trim('abc ', 'a')", NSQL, "trim('abc ', 'a')")]
+#[case("btrim('abc ')", NSQL,  "trim('abc ')")]
+#[case("btrim('abc ', 'a')", NSQL, "trim('abc ', 'a')" )]
+#[case("trim_start(' abc ')", NSQL, "trim_start(' abc ')")]
+#[case("trim_start(' abc ', 'a')", NSQL,  "trim_start(' abc ', 'a')")]
+#[case("ltrim(' abc ', 'a')", NSQL, "trim_start(' abc ', 'a')")]
+#[case("ltrim(' abc ')", NSQL, "trim_start(' abc ')")]
+#[case("trim(leading from ' abc ')", NSQL, "trim_start(' abc ')")]
+#[case("trim(leading 'a' from ' abc ')", NSQL, "trim_start(' abc ', 'a')")]
+fn test1(left: &str, database_type: DatabaseType, right: &str) {
+    test_expression(database_type, left, right);
 }

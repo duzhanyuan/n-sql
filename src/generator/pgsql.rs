@@ -174,6 +174,24 @@ impl Visitor for InternalGenerator {
         self.visit_expression(&function.default, f)?;
         f.write_char(')')
     }
+
+    fn visit_pagination_statement(&self, pagination_statement: &Box<PaginationStatement>, f: &mut Formatter) -> Result {
+        self.visit_set_statement(&pagination_statement.set, f)?;
+        if let Some(ref skip) = pagination_statement.skip {
+            f.write_char(' ')?;
+            f.write_str("offset")?;
+            f.write_char(' ')?;
+            self.visit_expression(skip, f)?;
+        }
+
+        if let Some(ref limit) = pagination_statement.limit {
+            f.write_char(' ')?;
+            f.write_str("limit")?;
+            f.write_char(' ')?;
+            self.visit_expression(limit, f)?;
+        }
+        Ok(())
+    }
 }
 
 

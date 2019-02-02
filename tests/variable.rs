@@ -7,17 +7,18 @@
 // except according to those terms.
 
 
+#[macro_use]
 mod common;
 
-use common::*;
+test_init!();
 
 #[test]
 fn test1(){
-    test_predicate("a = :  m", "a = :m");
+    test_predicate(NSQL,"a = :  m", "a = :m");
 }
 
 
 #[test]
 fn test2(){
-    test_statement("select * from student where a in (:a,:b,:c)", "select * from student where a in (:a, :b, :c)");
+    test_statement(NSQL,"select * from student where a in (:a,:b,:c)", "select * from student where a in (:a, :b, :c)");
 }

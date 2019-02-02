@@ -6,12 +6,13 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+#[macro_use]
 mod common;
 
-use common::*;
+test_init!();
 
 #[test]
 fn test(){
-    test_statement("select name from student where gender ='男' intersect select name from student where gender ='女'",
+    test_statement(NSQL, "select name from student where gender ='男' intersect select name from student where gender ='女'",
                    "select name from student where gender = '男' intersect select name from student where gender = '女'");
 }

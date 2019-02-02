@@ -11,9 +11,12 @@ mod common;
 
 test_init!();
 
+
 #[theory]
-#[case("nOt(a = 'abc')", NSQL, "not(a = 'abc')")]
-#[case("nOt(a = 'abc' and age <3)", NSQL, "not(a = 'abc' and age < 3)")]
-fn test(left: &str, database_type: DatabaseType, right: &str){
-    test_predicate(database_type, left, right)
+#[case(1, 2, 3)]
+#[case(3, 4, 7)]
+#[case(3, - 1, 2)]
+#[case(3, - 2, 1)]
+fn num_add(a: i32, b: i32, result: i32) {
+    (a + b).should().be_equal_to(result);
 }

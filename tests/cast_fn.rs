@@ -6,16 +6,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+#[macro_use]
 mod common;
 
-use common::*;
+test_init!();
 
-#[test]
-fn test(){
-    test_expression("cast(a as text)", "a::text");
-}
-
-#[test]
-fn test1(){
-    test_expression("a::text", "a::text");
+#[theory]
+#[case("cast(a as text)",NSQL,"a::text")]
+#[case("a::text",NSQL,"a::text")]
+fn test(left: &str, database_type: DatabaseType, right: &str){
+    test_expression(database_type, left, right);
 }
