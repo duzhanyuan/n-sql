@@ -22,6 +22,24 @@ pub trait PgsqlGenerator<T> {
 struct InternalGenerator;
 
 impl Visitor for InternalGenerator {
+    fn visit_pagination_statement(&self, pagination_statement: &Box<PaginationStatement>, f: &mut Formatter) -> Result {
+        self.visit_set_statement(&pagination_statement.set, f)?;
+        if let Some(ref skip) = pagination_statement.skip {
+            f.write_char(' ')?;
+            f.write_str("offset")?;
+            f.write_char(' ')?;
+            self.visit_expression(skip, f)?;
+        }
+
+        if let Some(ref limit) = pagination_statement.limit {
+            f.write_char(' ')?;
+            f.write_str("limit")?;
+            f.write_char(' ')?;
+            self.visit_expression(limit, f)?;
+        }
+        Ok(())
+    }
+
     fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
         f.write_str("extract")?;
         f.write_char('(')?;
@@ -33,7 +51,6 @@ impl Visitor for InternalGenerator {
         self.visit_expression(&function.expr, f)?;
         f.write_char(')')
     }
-
     fn visit_year_add_fn(&self, function: &YearAddFn, f: &mut Formatter) -> Result {
         self.visit_expression(&function.expr, f)?;
         f.write_str(" + ")?;
@@ -166,6 +183,7 @@ impl Visitor for InternalGenerator {
         f.write_char(' ')?;
         f.write_str("second")
     }
+
     fn visit_nvl_fn(&self, function: &Box<NvlFn>, f: &mut Formatter) -> Result {
         f.write_str("coalesce")?;
         f.write_char('(')?;
@@ -175,23 +193,84 @@ impl Visitor for InternalGenerator {
         f.write_char(')')
     }
 
-    fn visit_pagination_statement(&self, pagination_statement: &Box<PaginationStatement>, f: &mut Formatter) -> Result {
-        self.visit_set_statement(&pagination_statement.set, f)?;
-        if let Some(ref skip) = pagination_statement.skip {
-            f.write_char(' ')?;
-            f.write_str("offset")?;
-            f.write_char(' ')?;
-            self.visit_expression(skip, f)?;
-        }
+    fn visit_stddev_if_fn(&self, function: &StddevIfFn, f: &mut Formatter) -> Result {
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
+            (predicate, expr)
+        ], Some(Expression::Constant(ConstantValue::Null).into())))));
 
-        if let Some(ref limit) = pagination_statement.limit {
-            f.write_char(' ')?;
-            f.write_str("limit")?;
-            f.write_char(' ')?;
-            self.visit_expression(limit, f)?;
-        }
-        Ok(())
+        let stddev = StddevFn::new(aggregate_type, case_when);
+        self.visit_stddev_fn(&stddev, f)
     }
+    fn visit_avg_if_fn(&self, function: &AvgIfFn, f: &mut Formatter) -> Result {
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
+            (predicate, expr)
+        ], Some(Expression::Constant(ConstantValue::Null).into())))));
+
+        let avg = AvgFn::new(aggregate_type, case_when);
+        self.visit_avg_fn(&avg, f)
+    }
+    fn visit_count_if_fn(&self, function: &CountIfFn, f: &mut Formatter) -> Result {
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
+            (predicate, expr)
+        ], Some(Expression::Constant(ConstantValue::Null).into())))));
+
+        let count = CountFn::new(aggregate_type, case_when);
+        self.visit_count_fn(&count, f)
+    }
+    fn visit_max_if_fn(&self, function: &MaxIfFn, f: &mut Formatter) -> Result {
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
+            (predicate, expr)
+        ], Some(Expression::Constant(ConstantValue::Null).into())))));
+
+        let max = MaxFn::new(aggregate_type, case_when);
+        self.visit_max_fn(&max, f)
+    }
+    fn visit_median_if_fn(&self, function: &MedianIfFn, f: &mut Formatter) -> Result {
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
+            (predicate, expr)
+        ], Some(Expression::Constant(ConstantValue::Null).into())))));
+
+        let median = MedianFn::new(aggregate_type, case_when);
+        self.visit_median_fn(&median, f)
+    }
+    fn visit_min_if_fn(&self, function: &MinIfFn, f: &mut Formatter) -> Result {
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
+            (predicate, expr)
+        ], Some(Expression::Constant(ConstantValue::Null).into())))));
+
+        let min = MinFn::new(aggregate_type, case_when);
+        self.visit_min_fn(&min, f)
+    }
+    fn visit_sum_if_fn(&self, function: &SumIfFn, f: &mut Formatter) -> Result {
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
+            (predicate, expr)
+        ], Some(Expression::Constant(ConstantValue::Null).into())))));
+
+        let sum = SumFn::new(aggregate_type, case_when);
+        self.visit_sum_fn(&sum, f)
+    }
+
 }
 
 

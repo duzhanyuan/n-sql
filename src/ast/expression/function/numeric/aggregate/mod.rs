@@ -30,7 +30,14 @@ pub enum AggregateFn {
     Median(MedianFn),
     Min(MinFn),
     Sum(SumFn),
-    Stddev(StddevFn)
+    Stddev(StddevFn),
+    AvgIf(AvgIfFn),
+    CountIf(CountIfFn),
+    MaxIf(MaxIfFn),
+    MedianIf(MedianIfFn),
+    MinIf(MinIfFn),
+    SumIf(SumIfFn),
+    StddevIf(StddevIfFn)
 }
 
 #[derive(Clone, Debug)]

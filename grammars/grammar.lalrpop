@@ -100,6 +100,7 @@ extern {
 
         "abs" => Token::Abs,
         "avg" => Token::Avg,
+        "avgif" => Token::AvgIf,
         "btrim" => Token::BTrim,
         "cast" => Token::Cast,
         "ceil" => Token::Ceil,
@@ -151,6 +152,7 @@ extern {
         "sin" => Token::Sin,
         "sqrt" => Token::Sqrt,
         "stddev" => Token::Stddev,
+        "stddevif" => Token::StddevIf,
         "rpad" => Token::RPad,
         "rtrim" => Token::RTrim,
         "second" => Token::Second,
@@ -416,6 +418,13 @@ AggregateFn: AggregateFn = {
     "min" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Min(MinFn::new(<>)),
     "sum" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Sum(SumFn::new(<>)),
     "stddev" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Stddev(StddevFn::new(<>)),
+    "avgif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::AvgIf(AvgIfFn::new(<>)),
+    "countif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::CountIf(CountIfFn::new(<>)),
+    "maxif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::MaxIf(MaxIfFn::new(<>)).into(),
+    "medianif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::MedianIf(MedianIfFn::new(<>)),
+    "minif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::MinIf(MinIfFn::new(<>)),
+    "sumif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::SumIf(SumIfFn::new(<>)),
+    "stddevif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::StddevIf(StddevIfFn::new(<>)),
 }
 
 AggregateType: AggregateType = {

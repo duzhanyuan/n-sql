@@ -7,7 +7,7 @@
 // except according to those terms.
 
 use ast::AggregateType;
-use ast::Expression;
+use ast::{Expression, PredicateExpression};
 
 #[derive(Clone, Debug)]
 pub struct SumFn {
@@ -18,6 +18,23 @@ pub struct SumFn {
 impl SumFn {
     pub fn new(aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> SumFn {
         SumFn {
+            expr,
+            aggregate_type,
+        }
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct SumIfFn {
+    pub expr: Box<Expression>,
+    pub predicate: Box<PredicateExpression>,
+    pub aggregate_type: Option<AggregateType>,
+}
+
+impl SumIfFn {
+    pub fn new(predicate: Box<PredicateExpression>, aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> SumIfFn {
+        SumIfFn {
+            predicate,
             expr,
             aggregate_type,
         }

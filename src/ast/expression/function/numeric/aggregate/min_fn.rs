@@ -7,7 +7,7 @@
 // except according to those terms.
 
 use ast::AggregateType;
-use ast::Expression;
+use ast::{Expression, PredicateExpression};
 
 #[derive(Clone, Debug)]
 pub struct MinFn {
@@ -18,6 +18,23 @@ pub struct MinFn {
 impl MinFn {
     pub fn new(aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> MinFn {
         MinFn {
+            expr,
+            aggregate_type,
+        }
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct MinIfFn {
+    pub expr: Box<Expression>,
+    pub predicate: Box<PredicateExpression>,
+    pub aggregate_type: Option<AggregateType>,
+}
+
+impl MinIfFn {
+    pub fn new(predicate: Box<PredicateExpression>, aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> MinIfFn {
+        MinIfFn {
+            predicate,
             expr,
             aggregate_type,
         }

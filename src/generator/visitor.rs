@@ -766,7 +766,14 @@ pub trait Visitor {
             AggregateFn::Median(t) => self.visit_median_fn(t, f),
             AggregateFn::Min(t) => self.visit_min_fn(t, f),
             AggregateFn::Sum(t) => self.visit_sum_fn(t, f),
-            AggregateFn::Stddev(t) => self.visit_stddev_fn(t, f)
+            AggregateFn::Stddev(t) => self.visit_stddev_fn(t, f),
+            AggregateFn::AvgIf(t) => self.visit_avg_if_fn(t, f),
+            AggregateFn::CountIf(t) => self.visit_count_if_fn(t, f),
+            AggregateFn::MaxIf(t) => self.visit_max_if_fn(t, f),
+            AggregateFn::MedianIf(t) => self.visit_median_if_fn(t, f),
+            AggregateFn::MinIf(t) => self.visit_min_if_fn(t, f),
+            AggregateFn::SumIf(t) => self.visit_sum_if_fn(t, f),
+            AggregateFn::StddevIf(t) => self.visit_stddev_if_fn(t, f),
         }
     }
     fn visit_aggregate_type(&self, aggregate_type: &AggregateType, f: &mut Formatter) -> Result {
@@ -847,6 +854,90 @@ pub trait Visitor {
         self.visit_expression(&function.expr, f)?;
         f.write_char(')')
     }
+
+    fn visit_stddev_if_fn(&self, function: &StddevIfFn, f: &mut Formatter) -> Result {
+        f.write_str("stddevif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_avg_if_fn(&self, function: &AvgIfFn, f: &mut Formatter) -> Result {
+        f.write_str("avgif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_count_if_fn(&self, function: &CountIfFn, f: &mut Formatter) -> Result {
+        f.write_str("countif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_max_if_fn(&self, function: &MaxIfFn, f: &mut Formatter) -> Result {
+        f.write_str("maxif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_median_if_fn(&self, function: &MedianIfFn, f: &mut Formatter) -> Result {
+        f.write_str("medianif")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_min_if_fn(&self, function: &MinIfFn, f: &mut Formatter) -> Result {
+        f.write_str("minif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_sum_if_fn(&self, function: &SumIfFn, f: &mut Formatter) -> Result {
+        f.write_str("sumif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+
     fn visit_string_fn(&self, function: &StringFn, f: &mut Formatter) -> Result {
         match function {
             StringFn::Concat(t) => self.visit_concat_fn(t, f),
