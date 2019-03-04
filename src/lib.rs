@@ -5,7 +5,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
-
+#![feature(const_fn)]
 #![allow(unused_imports)]
 #![allow(dead_code)]
 #![allow(unused_variables)]
@@ -21,12 +21,17 @@ mod grammar;
 mod generator;
 mod version;
 mod lexer;
+pub mod parser;
 
 pub use ast::*;
 pub use generator::*;
 pub use optimizer::Optimizer;
-pub use grammar::{PredicateParser, ExpressionParser, StatementParser};
+pub use grammar::{
+    PredicateEntryParser as PredicateParser,
+    ExpressionEntryParser as ExpressionParser,
+    StatementEntryParser as StatementParser};
 pub use lexer::Lexer;
+
 
 
 cfg_if!{

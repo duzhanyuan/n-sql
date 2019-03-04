@@ -23,24 +23,6 @@ pub use self::sum_fn::*;
 pub use self::stddev_fn::*;
 
 #[derive(Clone, Debug)]
-pub enum AggregateFn {
-    Avg(AvgFn),
-    Count(CountFn),
-    Max(MaxFn),
-    Median(MedianFn),
-    Min(MinFn),
-    Sum(SumFn),
-    Stddev(StddevFn),
-    AvgIf(AvgIfFn),
-    CountIf(CountIfFn),
-    MaxIf(MaxIfFn),
-    MedianIf(MedianIfFn),
-    MinIf(MinIfFn),
-    SumIf(SumIfFn),
-    StddevIf(StddevIfFn)
-}
-
-#[derive(Clone, Debug)]
 pub enum AggregateType {
     All,
     Distinct,

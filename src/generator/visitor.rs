@@ -12,12 +12,14 @@ use std::result;
 
 type Formatter = String;
 
+
+
+
 pub trait Visitor {
     fn visit_ast(&self, ast: &Ast, f: &mut Formatter)  -> Result {
         match ast {
             Ast::Statement(t) => self.visit_statement(t, f),
             Ast::Expression(t) => self.visit_expression(t, f),
-            Ast::Predicate(t) => self.visit_predicate(t, f),
         }
     }
     fn visit_statement(&self, statement: &Statement, f: &mut Formatter) -> Result {
@@ -25,6 +27,214 @@ pub trait Visitor {
             Statement::Set(t) => self.visit_set_statement(t, f)
         }
     }
+    // region [expression]
+    fn visit_expression(&self, expr: &Expression,  f: &mut Formatter) -> Result {
+        match expr {
+            Expression::Scalar(s) => self.visit_scalar(s, f),
+            Expression::Vector(v) => self.visit_vector(v, f)
+        }
+    }
+
+    // region [scalar expression]
+    fn visit_scalar(&self, expr: &ScalarExpression, f: &mut Formatter) -> Result {
+        match expr {
+            ScalarExpression::Constant(t) => self.visit_constant(t, f),
+            ScalarExpression::Column(t) => self.visit_column(t, f),
+            ScalarExpression::Variable(t) => self.visit_variable(t, f),
+            ScalarExpression::Unary(t) => self.visit_unary(t, f),
+            ScalarExpression::Arithmetic(t) => self.visit_arithmetic(t, f),
+            ScalarExpression::CaseWhen(t) => self.visit_case_when(t, f),
+            ScalarExpression::Function(t) => self.visit_function(t, f)
+        }
+    }
+    // endregion
+
+    // region [vector expression]
+    fn visit_vector(&self, expr: &VectorExpression, f: &mut Formatter) -> Result {
+        match expr {
+            VectorExpression::Avg(t) => self.visit_avg_fn(t, f),
+            VectorExpression::Count(t) => self.visit_count_fn(t, f),
+            VectorExpression::Max(t) => self.visit_max_fn(t, f),
+            VectorExpression::Median(t) => self.visit_median_fn(t, f),
+            VectorExpression::Min(t) => self.visit_min_fn(t, f),
+            VectorExpression::Sum(t) => self.visit_sum_fn(t, f),
+            VectorExpression::Stddev(t) => self.visit_stddev_fn(t, f),
+            VectorExpression::AvgIf(t) => self.visit_avg_if_fn(t, f),
+            VectorExpression::CountIf(t) => self.visit_count_if_fn(t, f),
+            VectorExpression::MaxIf(t) => self.visit_max_if_fn(t, f),
+            VectorExpression::MedianIf(t) => self.visit_median_if_fn(t, f),
+            VectorExpression::MinIf(t) => self.visit_min_if_fn(t, f),
+            VectorExpression::SumIf(t) => self.visit_sum_if_fn(t, f),
+            VectorExpression::StddevIf(t) => self.visit_stddev_if_fn(t, f),
+        }
+    }
+
+
+    fn visit_aggregate_type(&self, aggregate_type: &AggregateType, f: &mut Formatter) -> Result {
+        use AggregateType::*;
+        match aggregate_type {
+            Distinct => f.write_str("distinct"),
+            All => f.write_str("all"),
+            Unique => f.write_str("unique")
+        }
+    }
+    fn visit_stddev_fn(&self, function: &StddevFn, f: &mut Formatter) -> Result {
+        f.write_str("stddev")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_avg_fn(&self, function: &AvgFn, f: &mut Formatter) -> Result {
+        f.write_str("avg")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_count_fn(&self, function: &CountFn, f: &mut Formatter) -> Result {
+        f.write_str("count")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_max_fn(&self, function: &MaxFn, f: &mut Formatter) -> Result {
+        f.write_str("max")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_median_fn(&self, function: &MedianFn, f: &mut Formatter) -> Result {
+        f.write_str("median")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_min_fn(&self, function: &MinFn, f: &mut Formatter) -> Result {
+        f.write_str("min")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_sum_fn(&self, function: &SumFn, f: &mut Formatter) -> Result {
+        f.write_str("sum")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+
+    fn visit_stddev_if_fn(&self, function: &StddevIfFn, f: &mut Formatter) -> Result {
+        f.write_str("stddevif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_avg_if_fn(&self, function: &AvgIfFn, f: &mut Formatter) -> Result {
+        f.write_str("avgif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_count_if_fn(&self, function: &CountIfFn, f: &mut Formatter) -> Result {
+        f.write_str("countif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_max_if_fn(&self, function: &MaxIfFn, f: &mut Formatter) -> Result {
+        f.write_str("maxif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_median_if_fn(&self, function: &MedianIfFn, f: &mut Formatter) -> Result {
+        f.write_str("medianif")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_min_if_fn(&self, function: &MinIfFn, f: &mut Formatter) -> Result {
+        f.write_str("minif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_sum_if_fn(&self, function: &SumIfFn, f: &mut Formatter) -> Result {
+        f.write_str("sumif")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+
+    // endregion
+
+    // endregion
     fn visit_set_statement(&self, statement: &SetStatement, f: &mut Formatter) -> Result {
         use SetStatement::*;
         let is_set: fn(&Box<SetStatement>) -> bool = |s| match s.as_ref() { Select(_)=> false, _=> true};
@@ -310,17 +520,7 @@ pub trait Visitor {
 
         self.visit_identifier(&table.name, f)
     }
-    fn visit_expression(&self, expr: &Expression,  f: &mut Formatter) -> Result {
-        match expr {
-            Expression::Constant(t) => self.visit_constant(t, f),
-            Expression::Column(t) => self.visit_column(t, f),
-            Expression::Function(t) => self.visit_function(t, f),
-            Expression::Arithmetic(t) => self.visit_arithmetic(t, f),
-            Expression::CaseWhen(t) => self.visit_case_when(t, f),
-            Expression::Unary(t) => self.visit_unary(t, f),
-            Expression::Variable(t) => self.visit_variable(t, f)
-        }
-    }
+
     fn visit_variable(&self, expr: &Variable, f: &mut Formatter) -> Result {
         f.write_char(':')?;
         self.visit_identifier(&expr.name, f)
@@ -338,7 +538,6 @@ pub trait Visitor {
     }
     fn visit_function(&self, function: &Function, f: &mut Formatter) -> Result {
         match function {
-            Function::Aggregate(t) => self.visit_aggregate_fn(t, f),
             Function::String(t) => self.visit_string_fn(t, f),
             Function::Cast(t) => self.visit_cast_fn(t, f),
             Function::Numeric(t) => self.visit_numeric_fn(t, f),
@@ -654,11 +853,14 @@ pub trait Visitor {
 
         let is_add_or_sub: fn(&Expression) -> bool = | e| {
             match e {
-                Expression::Arithmetic(t)  => {
-                    match t.op {
-                        ArithmeticOperator::Add | ArithmeticOperator::Sub => true,
-                        _ => false
-                    }
+                Expression::Scalar(t) => match t {
+                    ScalarExpression::Arithmetic(t) => {
+                        match t.op {
+                            ArithmeticOperator::Add | ArithmeticOperator::Sub => true,
+                            _ => false
+                        }
+                    },
+                    _ => false
                 },
                 _ => false
             }
@@ -757,185 +959,6 @@ pub trait Visitor {
 
         f.write_char(' ')?;
         f.write_str("end")
-    }
-    fn visit_aggregate_fn(&self, function: &AggregateFn, f: &mut Formatter) -> Result {
-        match function {
-            AggregateFn::Avg(t) => self.visit_avg_fn(t, f),
-            AggregateFn::Count(t) => self.visit_count_fn(t, f),
-            AggregateFn::Max(t) => self.visit_max_fn(t, f),
-            AggregateFn::Median(t) => self.visit_median_fn(t, f),
-            AggregateFn::Min(t) => self.visit_min_fn(t, f),
-            AggregateFn::Sum(t) => self.visit_sum_fn(t, f),
-            AggregateFn::Stddev(t) => self.visit_stddev_fn(t, f),
-            AggregateFn::AvgIf(t) => self.visit_avg_if_fn(t, f),
-            AggregateFn::CountIf(t) => self.visit_count_if_fn(t, f),
-            AggregateFn::MaxIf(t) => self.visit_max_if_fn(t, f),
-            AggregateFn::MedianIf(t) => self.visit_median_if_fn(t, f),
-            AggregateFn::MinIf(t) => self.visit_min_if_fn(t, f),
-            AggregateFn::SumIf(t) => self.visit_sum_if_fn(t, f),
-            AggregateFn::StddevIf(t) => self.visit_stddev_if_fn(t, f),
-        }
-    }
-    fn visit_aggregate_type(&self, aggregate_type: &AggregateType, f: &mut Formatter) -> Result {
-        use AggregateType::*;
-        match aggregate_type {
-            Distinct => f.write_str("distinct"),
-            All => f.write_str("all"),
-            Unique => f.write_str("unique")
-        }
-    }
-    fn visit_stddev_fn(&self, function: &StddevFn, f: &mut Formatter) -> Result {
-        f.write_str("stddev")?;
-        f.write_char('(')?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_avg_fn(&self, function: &AvgFn, f: &mut Formatter) -> Result {
-        f.write_str("avg")?;
-        f.write_char('(')?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_count_fn(&self, function: &CountFn, f: &mut Formatter) -> Result {
-        f.write_str("count")?;
-        f.write_char('(')?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_max_fn(&self, function: &MaxFn, f: &mut Formatter) -> Result {
-        f.write_str("max")?;
-        f.write_char('(')?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_median_fn(&self, function: &MedianFn, f: &mut Formatter) -> Result {
-        f.write_str("median")?;
-        f.write_char('(')?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_min_fn(&self, function: &MinFn, f: &mut Formatter) -> Result {
-        f.write_str("min")?;
-        f.write_char('(')?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_sum_fn(&self, function: &SumFn, f: &mut Formatter) -> Result {
-        f.write_str("sum")?;
-        f.write_char('(')?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-
-    fn visit_stddev_if_fn(&self, function: &StddevIfFn, f: &mut Formatter) -> Result {
-        f.write_str("stddevif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_avg_if_fn(&self, function: &AvgIfFn, f: &mut Formatter) -> Result {
-        f.write_str("avgif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_count_if_fn(&self, function: &CountIfFn, f: &mut Formatter) -> Result {
-        f.write_str("countif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_max_if_fn(&self, function: &MaxIfFn, f: &mut Formatter) -> Result {
-        f.write_str("maxif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_median_if_fn(&self, function: &MedianIfFn, f: &mut Formatter) -> Result {
-        f.write_str("medianif")?;
-        f.write_char('(')?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_min_if_fn(&self, function: &MinIfFn, f: &mut Formatter) -> Result {
-        f.write_str("minif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-    fn visit_sum_if_fn(&self, function: &SumIfFn, f: &mut Formatter) -> Result {
-        f.write_str("sumif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
     }
 
     fn visit_string_fn(&self, function: &StringFn, f: &mut Formatter) -> Result {

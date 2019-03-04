@@ -20,7 +20,7 @@ pub enum ConstantValue {
     Numeric(NumericValue),
     Null,
 }
-
+rust
 impl Display for ConstantValue {
     fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
         write!(f, "{}", self)

@@ -11,6 +11,7 @@ mod common;
 
 test_init!();
 
+
 #[theory]
 #[case("nvl(a, 'no value')", NSQL, "nvl(a, 'no value')")]
 #[case("nvl(a, 'no value')", MySQL, "ifnull(a, 'no value')")]

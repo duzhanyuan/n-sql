@@ -17,6 +17,7 @@ mod char_locations;
 mod parser_source;
 mod source;
 mod comment;
+mod token;
 
 use self::regex::{RegexSetBuilder, RegexSet};
 
@@ -29,190 +30,9 @@ use self::location::{spanned, ByteOffset, Line, Column, ColumnOffset, Span};
 pub use self::location::{Position, Spanned, Location};
 pub use self::parser_source::ParserSource;
 
+pub use self::token::Token;
+use lexer::token::Token::EOF;
 
-#[derive(Clone, PartialEq, Debug)]
-pub enum Token<'input> {
-    Identifier(&'input str),
-
-    StringLiteral(String),
-    IntLiteral(i64),
-    ByteLiteral(u8),
-    FloatLiteral(f64),
-    DocComment(Comment),
-
-    // region [builtin datatype]
-    Text,
-    Int,
-    Float,
-    Numeric,
-    Timestamp,
-    Datetime,
-    Date,
-    Time,
-    // endregion
-
-    // region [Symbol]
-    /// `(`
-    LeftParen,
-    /// `)`
-    RightParen,
-    /// `|`
-    Pipe,
-    /// `||`
-    DoublePipe,
-    /// `,`
-    Comma,
-    /// `:`
-    Colon,
-    /// `::`
-    DoubleColon,
-    /// `.`
-    Period,
-    /// `=`
-    Equal,
-    /// `!=`,`<>`, `^=`, `~=`
-    NotEqual,
-    /// `<`
-    Less,
-    /// `<=`
-    LessOrEqual,
-    /// `>`
-    Greater,
-    /// `>=`
-    GreaterOrEqual,
-    /// `+`
-    PlusSign,
-    /// `-`
-    MinusSign,
-    /// `*`
-    Asterisk,
-    /// `/`
-    Solidus,
-
-    // endregion
-
-    // region [keywords]
-    All,
-    And,
-    As,
-    Asc,
-    Both,
-    By,
-    Case,
-    Cross,
-    Desc,
-    Distinct,
-    Dual,
-    Else,
-    End,
-    Except,
-    From,
-    Full,
-    Group,
-    Having,
-    In,
-    Is,
-    Inner,
-    Intersect,
-    Join,
-    Leading,
-    Left,
-    Limit,
-    Minus,
-    Not,
-    Null,
-    Offset,
-    On,
-    Or,
-    Order,
-    Outer,
-    Right,
-    Select,
-    Skip,
-    Then,
-    Trailing,
-    Union,
-    Unique,
-    When,
-    Where,
-    // endregion
-
-    // region [function]
-    Abs,
-    Avg,
-    AvgIf,
-    BTrim,
-    Cast,
-    Ceil,
-    Ceiling,
-    Coalesce,
-    Cos,
-    Concat,
-    Count,
-    CountIf,
-    Day,
-    DayAdd,
-    DaySub,
-    Decode,
-    DenseRank,
-    Extract,
-    Floor,
-    Hour,
-    HourAdd,
-    HourSub,
-    Length,
-    Log,
-    Log10,
-    Lower,
-    LPad,
-    LTrim,
-    Max,
-    MaxIf,
-    Median,
-    MedianIf,
-    Min,
-    MinIf,
-    Minute,
-    MinuteAdd,
-    MinuteSub,
-    Month,
-    MonthAdd,
-    MonthSub,
-    Now,
-    Nvl,
-    PadLeft,
-    PadRight,
-    Pow,
-    Power,
-    Replace,
-    Reverse,
-    Rank,
-    Round,
-    Sign,
-    Sin,
-    Sqrt,
-    Stddev,
-    StddevIf,
-    RPad,
-    RTrim,
-    Second,
-    SecondAdd,
-    SecondSub,
-    Substr,
-    Substring,
-    Sum,
-    SumIf,
-    Tan,
-    Trim,
-    TrimStart,
-    TrimEnd,
-    Upper,
-    Year,
-    YearAdd,
-    YearSub,
-    // endregion
-    EOF, // Required for the layout algorithm
-}
 
 const REGEX_SOURCE:[(&str, Token); 123] = [
     // region [keyword]
@@ -441,6 +261,11 @@ pub enum LexicalError {
 pub type SpannedToken<'input> = Spanned<Token<'input>, Location>;
 
 pub type SpannedError = Spanned<LexicalError, Location>;
+
+fn error<T>(location: Location, code: LexicalError) -> Result<T, SpannedError> {
+    Err(spanned(location, location, code))
+}
+
 
 pub fn is_identifier_start(ch: char) -> bool {
     match ch {
@@ -697,7 +522,6 @@ impl<'input> Iterator for Lexer<'input> {
     fn next(&mut self) -> Option<Self::Item> {
         while let Some((start, ch)) = self.bump(){
             return match ch {
-                ch if ch.is_whitespace() => continue,
                 '-' if self.test_lookahead(|ch| ch == '-') => match self.line_comment(start) {
                     Some(token) => Some(Ok(token)),
                     None => continue,
@@ -759,7 +583,8 @@ impl<'input> Iterator for Lexer<'input> {
                 '*' => Some(Ok(spanned(start, self.next_location(), Token::Asterisk))),
                 '/' => Some(Ok(spanned(start, self.next_location(), Token::Solidus))),
                 ch if is_identifier_start(ch) => Some(self.identifier(start)),
-                ch => unimplemented!("{:?}", ch)
+                ch if ch.is_whitespace() => continue,
+                ch => Some(self.error(start, UnexpectedChar(ch))),
             }
         }
         // Return EOF instead of None so that the layout algorithm receives the eof location
@@ -994,4 +819,28 @@ mod test{
              ],
         )
     }
+
+    #[test]
+    fn test_err(){
+        test("trim(trailing  'a' from 'abc')",
+             vec![
+                 ("~~~~                          ", Trim),
+                 ("    ~                         ", LeftParen),
+                 ("     ~~~~~~~~                 ", Trailing),
+                 ("               ~~~            ", StringLiteral("a".to_string())),
+                 ("                   ~~~~       ", From),
+                 ("                        ~~~~~ ", StringLiteral("abc".to_string())),
+                 ("                             ~", RightParen),
+             ],
+        )
+    }
+
+    #[test]
+    fn string_literal_unterminated() {
+        assert_eq!(
+            tokenizer(r#"foo 'bar''\n baz"#).last(),
+            Some(error(location(4), UnterminatedStringLiteral))
+        );
+    }
+
 }

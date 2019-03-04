@@ -169,21 +169,35 @@ extern {
         "upper" => Token::Upper,
         "year" => Token::Year,
         "year_add" => Token::YearAdd,
-        "year_sub" => Token::YearSub
+        "year_sub" => Token::YearSub,
+
+        "eof" => Token::EOF
     }
 }
 
-pub Statement: Statement = {
+pub StatementEntry: Statement = {
+    <Statement>
+}
+
+pub ExpressionEntry: Expression = {
+    <Expression>
+}
+
+pub PredicateEntry: PredicateExpression = {
+    <Predicate>
+}
+
+Statement: Statement = {
     SetStatement => Statement::Set(<>)
 }
 
-pub Expression: Expression = {
-    Boxed<Expression> Add Boxed<ExpressionFactor> => Expression::Arithmetic(ArithmeticExpression::new(<>)),
-    Boxed<Expression> Sub Boxed<ExpressionFactor> => Expression::Arithmetic(ArithmeticExpression::new(<>)),
+Expression: Expression = {
+    Boxed<Expression> Add Boxed<ExpressionFactor> => Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(<>))),
+    Boxed<Expression> Sub Boxed<ExpressionFactor> => Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(<>))),
     ExpressionFactor
 }
 
-pub Predicate: PredicateExpression = {
+Predicate: PredicateExpression = {
     PredicateNextTier,
     Boxed<Predicate> Or Boxed<PredicateNextTier> => PredicateExpression::Logical(LogicalExpression::new(<>))
 }
@@ -208,7 +222,6 @@ SetStatementTerm: Box<SetStatement> = {
     SelectStatement => SetStatement::Select(<>).into(),
     "(" <SetStatement> ")"
 }
-
 
 
 SelectStatement: SelectStatement = {
@@ -289,14 +302,14 @@ SelectType: SelectType = {
 }
 
 ExpressionFactor: Expression = {
-    Boxed<ExpressionFactor> Mul Boxed<ExpressionUnary> => Expression::Arithmetic(ArithmeticExpression::new(<>)),
-    Boxed<ExpressionFactor> Div Boxed<ExpressionUnary> => Expression::Arithmetic(ArithmeticExpression::new(<>)),
+    Boxed<ExpressionFactor> Mul Boxed<ExpressionUnary> => Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(<>))),
+    Boxed<ExpressionFactor> Div Boxed<ExpressionUnary> => Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(<>))),
     ExpressionUnary
 }
 
 ExpressionUnary: Expression = {
-    "+" <Boxed<ExpressionTypeCast>> => Expression::Unary(UnaryExpression::Plus(<>)) ,
-    "-" <Boxed<ExpressionTypeCast>> => Expression::Unary(UnaryExpression::Minus(<>)),
+    "+" <Boxed<ExpressionTypeCast>> => Expression::Scalar(ScalarExpression::Unary(UnaryExpression::Plus(<>)))  ,
+    "-" <Boxed<ExpressionTypeCast>> => Expression::Scalar(ScalarExpression::Unary(UnaryExpression::Minus(<>))),
     ExpressionTypeCast
 }
 
@@ -305,12 +318,17 @@ ExpressionTypeCast: Expression = {
     ExpressionAtom
 }
 
+ScalarExpression: ScalarExpression = {
+    Constant => ScalarExpression::Constant(<>),
+    Column => ScalarExpression::Column(<>),
+    Function => ScalarExpression::Function(<>),
+    CaseWhen => ScalarExpression::CaseWhen(<>),
+    Variable => ScalarExpression::Variable(<>),
+}
+
 ExpressionAtom: Expression = {
-    Constant => Expression::Constant(<>),
-    Column => Expression::Column(<>),
-    Function => Expression::Function(<>),
-    CaseWhen => Expression::CaseWhen(<>),
-    Variable => Expression::Variable(<>),
+    VectorExpression => Expression::Vector(<>),
+    ScalarExpression => Expression::Scalar(<>),
     "(" <Expression> ")"
 }
 
@@ -400,7 +418,6 @@ Column: Column = {
 }
 
 Function: Function = {
-    AggregateFn => Function::Aggregate(<>),
     StringFn => Function::String(<>),
     CastFn => Function::Cast(<>),
     NvlFn => Function::Nvl(<>),
@@ -410,21 +427,21 @@ Function: Function = {
     "coalesce" "(" <Comma<Boxed<Expression>>> ")" => Function::Coalesce(CoalesceFn::new(<>))
 }
 
-AggregateFn: AggregateFn = {
-    "avg" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Avg(AvgFn::new(<>)),
-    "count" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Count(CountFn::new(<>)),
-    "max" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Max(MaxFn::new(<>)).into(),
-    "median" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Median(MedianFn::new(<>)),
-    "min" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Min(MinFn::new(<>)),
-    "sum" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Sum(SumFn::new(<>)),
-    "stddev" "(" <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::Stddev(StddevFn::new(<>)),
-    "avgif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::AvgIf(AvgIfFn::new(<>)),
-    "countif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::CountIf(CountIfFn::new(<>)),
-    "maxif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::MaxIf(MaxIfFn::new(<>)).into(),
-    "medianif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::MedianIf(MedianIfFn::new(<>)),
-    "minif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::MinIf(MinIfFn::new(<>)),
-    "sumif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::SumIf(SumIfFn::new(<>)),
-    "stddevif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => AggregateFn::StddevIf(StddevIfFn::new(<>)),
+VectorExpression: VectorExpression = {
+    "avg" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Avg(AvgFn::new(<>)),
+    "count" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Count(CountFn::new(<>)),
+    "max" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Max(MaxFn::new(<>)).into(),
+    "median" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Median(MedianFn::new(<>)),
+    "min" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Min(MinFn::new(<>)),
+    "sum" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Sum(SumFn::new(<>)),
+    "stddev" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Stddev(StddevFn::new(<>)),
+    "avgif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::AvgIf(AvgIfFn::new(<>)),
+    "countif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::CountIf(CountIfFn::new(<>)),
+    "maxif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::MaxIf(MaxIfFn::new(<>)).into(),
+    "medianif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::MedianIf(MedianIfFn::new(<>)),
+    "minif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::MinIf(MinIfFn::new(<>)),
+    "sumif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::SumIf(SumIfFn::new(<>)),
+    "stddevif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::StddevIf(StddevIfFn::new(<>)),
 }
 
 AggregateType: AggregateType = {

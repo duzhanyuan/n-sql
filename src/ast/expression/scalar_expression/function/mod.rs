@@ -26,7 +26,6 @@ pub use self::format_fn::*;
 
 #[derive(Clone, Debug)]
 pub enum Function {
-    Aggregate(AggregateFn),
     Numeric(NumericFn),
     String(StringFn),
     Cast(Box<CastFn>),

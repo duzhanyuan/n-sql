@@ -6,20 +6,24 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::fmt::{Debug, Error, Formatter};
+mod aggregate_expression;
 
-mod expression;
-mod identifier;
-mod statement;
-mod catalog;
-
-pub use self::expression::*;
-pub use self::identifier::*;
-pub use self::statement::*;
-pub use self::catalog::*;
+pub use self::aggregate_expression::*;
 
 #[derive(Clone, Debug)]
-pub enum Ast {
-    Statement(Statement),
-    Expression(Expression),
+pub enum VectorExpression {
+    Avg(AvgFn),
+    Count(CountFn),
+    Max(MaxFn),
+    Median(MedianFn),
+    Min(MinFn),
+    Sum(SumFn),
+    Stddev(StddevFn),
+    AvgIf(AvgIfFn),
+    CountIf(CountIfFn),
+    MaxIf(MaxIfFn),
+    MedianIf(MedianIfFn),
+    MinIf(MinIfFn),
+    SumIf(SumIfFn),
+    StddevIf(StddevIfFn)
 }

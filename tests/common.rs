@@ -12,10 +12,12 @@ extern crate fluid;
 extern crate n_sql;
 
 pub use self::fluid::prelude::*;
-use self::n_sql::{
+pub use self::n_sql::{
     ExpressionParser, StatementParser, PredicateParser, Lexer,
     Generator, PgsqlGenerator, OracleGenerator, MySQLGenerator,
 };
+
+pub use self::n_sql::parser;
 
 pub enum DatabaseType {
     NSQL,

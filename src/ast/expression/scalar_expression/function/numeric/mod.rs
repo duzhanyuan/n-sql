@@ -5,7 +5,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
-mod aggregate;
+
 mod abs_fn;
 mod ceil_fn;
 mod cos_fn;
@@ -22,7 +22,6 @@ mod sqrt_fn;
 mod tan_fn;
 
 
-pub use self::aggregate::*;
 pub use self::abs_fn::*;
 pub use self::ceil_fn::*;
 pub use self::cos_fn::*;

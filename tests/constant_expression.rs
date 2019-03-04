@@ -15,6 +15,7 @@ use n_sql::ConstantValue;
 use n_sql::Expression;
 use n_sql::Optimizer;
 use n_sql::Lexer;
+use n_sql::ScalarExpression;
 
 #[macro_use]
 mod common;
@@ -25,7 +26,7 @@ test_init!();
 fn test(){
     let left: NumericValue = 1i32.into();
     let right: NumericValue = 2.2.into();
-    let result: Box<Expression> = Expression::Constant(ConstantValue::Numeric(left + right)).into();
+    let result: Box<Expression> = Expression::Scalar(ScalarExpression::Constant(ConstantValue::Numeric(left + right))).into();
     assert_eq!("3.2", result.to_sql().unwrap());
 }
 

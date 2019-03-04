@@ -6,11 +6,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-mod table;
-mod column;
-mod data_type;
-mod datum;
-
-pub use self::table::*;
-pub use self::column::*;
-pub use self::datum::*;
+//extern crate n_sql;
+//
+//mod common;
+//
+//use common::{PgsqlGenerator};
+//use n_sql::Expression;
+//use n_sql::parser::parse;
+//
+//#[test]
+//fn test1(){
+//}

@@ -6,11 +6,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-mod table;
-mod column;
-mod data_type;
-mod datum;
-
-pub use self::table::*;
-pub use self::column::*;
-pub use self::datum::*;
+pub enum Datum {
+    I64(i64),
+    F64(f64),
+    String(String)
+}

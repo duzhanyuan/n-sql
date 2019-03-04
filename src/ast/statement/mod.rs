@@ -22,6 +22,7 @@ pub use self::table_view::*;
 pub use self::sorting_direction::*;
 pub use self::pagination_statement::*;
 
+#[derive(Clone, Debug)]
 pub enum Statement {
     Set(Box<SetStatement>),
 }
