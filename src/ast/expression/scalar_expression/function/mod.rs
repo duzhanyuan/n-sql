@@ -26,7 +26,23 @@ pub use self::format_fn::*;
 
 #[derive(Clone, Debug)]
 pub enum Function {
-    Numeric(NumericFn),
+    // region [numeric]
+    Abs(AbsFn),
+    Ceil(CeilFn),
+    Cos(CosFn),
+    DenseRank(DenseRankFn),
+    Floor(FloorFn),
+    Log10(Log10Fn),
+    Log(LogFn),
+    Pow(PowFn),
+    Rank(RankFn),
+    Round(RoundFn),
+    Sin(SinFn),
+    Sign(SignFn),
+    Sqrt(SqrtFn),
+    Tan(TanFn),
+    // endregion
+
     String(StringFn),
     Cast(Box<CastFn>),
     Nvl(Box<NvlFn>),

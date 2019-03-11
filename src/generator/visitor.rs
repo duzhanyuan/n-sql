@@ -540,7 +540,24 @@ pub trait Visitor {
         match function {
             Function::String(t) => self.visit_string_fn(t, f),
             Function::Cast(t) => self.visit_cast_fn(t, f),
-            Function::Numeric(t) => self.visit_numeric_fn(t, f),
+
+
+
+            Function::Abs(t) => self.visit_abs_fn(t, f),
+            Function::Ceil(t) => self.visit_ceil_fn(t, f),
+            Function::Cos(t) => self.visit_cos_fn(t, f),
+            Function::DenseRank(t) => self.visit_dense_rank_fn(t, f),
+            Function::Floor(t) => self.visit_floor_fn(t, f),
+            Function::Log10(t) => self.visit_log10_fn(t, f),
+            Function::Log(t) => self.visit_log_fn(t, f),
+            Function::Pow(t) => self.visit_pow_fn(t, f),
+            Function::Rank(t) => self.visit_rank_fn(t, f),
+            Function::Round(t) => self.visit_round_fn(t, f),
+            Function::Sign(t) => self.visit_sign_fn(t, f),
+            Function::Sin(t) => self.visit_sin_fn(t, f),
+            Function::Sqrt(t) => self.visit_sqrt_fn(t, f),
+            Function::Tan(t) => self.visit_tan_fn(t, f),
+
             Function::Now => f.write_str("now()"),
             Function::Nvl(t) => self.visit_nvl_fn(t, f),
             Function::Coalesce(t) => self.visit_coalesce_fn(t, f),
@@ -559,24 +576,7 @@ pub trait Visitor {
         }
         f.write_char(')')
     }
-    fn visit_numeric_fn(&self, function: &NumericFn, f: &mut Formatter) -> Result {
-        match function {
-            NumericFn::Abs(t) => self.visit_abs_fn(t, f),
-            NumericFn::Ceil(t) => self.visit_ceil_fn(t, f),
-            NumericFn::Cos(t) => self.visit_cos_fn(t, f),
-            NumericFn::DenseRank(t) => self.visit_dense_rank_fn(t, f),
-            NumericFn::Floor(t) => self.visit_floor_fn(t, f),
-            NumericFn::Log10(t) => self.visit_log10_fn(t, f),
-            NumericFn::Log(t) => self.visit_log_fn(t, f),
-            NumericFn::Pow(t) => self.visit_pow_fn(t, f),
-            NumericFn::Rank(t) => self.visit_rank_fn(t, f),
-            NumericFn::Round(t) => self.visit_round_fn(t, f),
-            NumericFn::Sign(t) => self.visit_sign_fn(t, f),
-            NumericFn::Sin(t) => self.visit_sin_fn(t, f),
-            NumericFn::Sqrt(t) => self.visit_sqrt_fn(t, f),
-            NumericFn::Tan(t) => self.visit_tan_fn(t, f)
-        }
-    }
+
     fn visit_abs_fn(&self, function: &AbsFn, f: &mut Formatter) -> Result {
         f.write_str("abs")?;
         f.write_char('(')?;

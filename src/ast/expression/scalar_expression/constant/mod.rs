@@ -13,6 +13,8 @@ mod string_value;
 
 pub use self::numeric_value::*;
 pub use self::string_value::*;
+use ast::expression::Expression;
+use ast::expression::scalar_expression::ScalarExpression;
 
 #[derive(Clone, Debug)]
 pub enum ConstantValue {
@@ -20,7 +22,7 @@ pub enum ConstantValue {
     Numeric(NumericValue),
     Null,
 }
-rust
+
 impl Display for ConstantValue {
     fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
         write!(f, "{}", self)

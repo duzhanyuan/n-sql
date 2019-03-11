@@ -24,11 +24,18 @@ pub enum Expression {
     Scalar(ScalarExpression),
 }
 
-impl From<ConstantValue> for Expression {
-    fn from(v: ConstantValue) -> Self {
-        Expression::Scalar(ScalarExpression::Constant(v))
+impl From<ScalarExpression> for Expression {
+    fn from(v: ScalarExpression) -> Self {
+        Expression::Scalar(v)
     }
 }
+
+impl From<ConstantValue> for Expression {
+    fn from(v: ConstantValue) -> Self {
+        Expression::Scalar(v.into())
+    }
+}
+
 
 impl From<CastFn> for Expression {
     fn from(v: CastFn) -> Self {

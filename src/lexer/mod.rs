@@ -224,37 +224,37 @@ impl<'input, 'builder> Iterator for Matcher<'input, 'builder> {
 }
 
 //noinspection ALL
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Fail)]
 pub enum LexicalError {
 
-    /// empty char literal
+    #[fail(display = "empty char literal")]
     EmptyCharLiteral,
 
-    /// unexpected character
+    #[fail(display = "unexpected character:{}", _0)]
     UnexpectedChar(char),
 
-    /// unexpected end of file
+    #[fail(display = "unexpected end of file")]
     UnexpectedEof,
 
-    /// unexpected escape code
+    #[fail(display = "unexpected escape code:{}", _0)]
     UnexpectedEscapeCode(char),
 
-    /// unterminated string literal
+    #[fail(display = "unterminated string literal")]
     UnterminatedStringLiteral,
 
-    /// cannot parse integer, probable overflow
+    #[fail(display = "cannot parse integer, probable overflow")]
     NonParseableInt,
 
-    /// cannot parse hex literal, overflow
+    #[fail(display = "cannot parse hex literal, overflow")]
     HexLiteralOverflow,
 
-    /// cannot parse hex literal, underflow
+    #[fail(display = "cannot parse hex literal, underflow")]
     HexLiteralUnderflow,
 
-    /// wrong hex literal prefix, should start as '0x' or '-0x'
+    #[fail(display = "wrong hex literal prefix, should start as '0x' or '-0x'")]
     HexLiteralWrongPrefix,
 
-    /// cannot parse hex literal, incomplete
+    #[fail(display = "cannot parse hex literal, incomplete")]
     HexLiteralIncomplete
 }
 

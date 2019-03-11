@@ -12,7 +12,7 @@
 
 extern crate core;
 extern crate cfg_if;
-
+#[macro_use] extern crate failure;
 
 use cfg_if::cfg_if;
 mod ast;
@@ -21,6 +21,7 @@ mod grammar;
 mod generator;
 mod version;
 mod lexer;
+mod catalog;
 pub mod parser;
 
 pub use ast::*;
@@ -31,7 +32,6 @@ pub use grammar::{
     ExpressionEntryParser as ExpressionParser,
     StatementEntryParser as StatementParser};
 pub use lexer::Lexer;
-
 
 
 cfg_if!{

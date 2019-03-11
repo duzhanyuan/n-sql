@@ -6,7 +6,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::expression::Expression;
+use ast::{Expression, DataType};
 use std::fmt::{Debug, Display, Error, Formatter};
 
 #[derive(Clone, Debug)]
@@ -20,27 +20,3 @@ impl CastFn {
     }
 }
 
-#[derive(Debug)]
-pub struct DataType {
-    pub data_type: String,
-}
-
-impl Display for DataType {
-    fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
-        write!(f, "{}", self.data_type)
-    }
-}
-
-impl Clone for DataType {
-    fn clone(&self) -> Self {
-        DataType {
-            data_type: self.data_type.clone(),
-        }
-    }
-}
-
-impl DataType {
-    pub fn new(data_type: String) -> DataType {
-        DataType { data_type }
-    }
-}

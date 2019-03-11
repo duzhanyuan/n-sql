@@ -422,7 +422,25 @@ Function: Function = {
     CastFn => Function::Cast(<>),
     NvlFn => Function::Nvl(<>),
     DatetimeFn => Function::Datetime(<>),
-    NumericFn => Function::Numeric(<>),
+
+    "abs" "(" <Boxed<Expression>> ")" => Function::Abs(AbsFn::new(<>)),
+    "ceil" "(" <Boxed<Expression>> ")" => Function::Ceil(CeilFn::new(<>)),
+    "ceiling" "(" <Boxed<Expression>> ")" => Function::Ceil(CeilFn::new(<>)),
+    "cos" "(" <Boxed<Expression>> ")" => Function::Cos(CosFn::new(<>)),
+    "dense_rank" "(" <Boxed<Expression>> <("," <SortingDirection>)?> ")" => Function::DenseRank(DenseRankFn::new(<>)),
+    "floor" "(" <Boxed<Expression>> ")" => Function::Floor(FloorFn::new(<>)),
+    "log10" "(" <Boxed<Expression>> ")" => Function::Log10(Log10Fn::new(<>)),
+    "log" "(" <(<Boxed<Expression>> ",")?> <Boxed<Expression>> ")" => Function::Log(LogFn::new(<>)),
+    "pow" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => Function::Pow(PowFn::new(<>)),
+    "power" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => Function::Pow(PowFn::new(<>)),
+    "rank" "(" <Boxed<Expression>> <("," <SortingDirection>)?> ")" => Function::Rank(RankFn::new(<>)),
+    "round" "(" <Boxed<Expression>> <("," <Boxed<Expression>>)?> ")" => Function::Round(RoundFn::new(<>)),
+    "sign" "(" <Boxed<Expression>> ")" => Function::Sign(SignFn::new(<>)),
+    "sin" "(" <Boxed<Expression>> ")" => Function::Sin(SinFn::new(<>)),
+    "sqrt" "(" <Boxed<Expression>> ")" => Function::Sqrt(SqrtFn::new(<>)),
+    "tan" "(" <Boxed<Expression>> ")" => Function::Tan(TanFn::new(<>)),
+
+
     "now" "(" ")" => Function::Now,
     "coalesce" "(" <Comma<Boxed<Expression>>> ")" => Function::Coalesce(CoalesceFn::new(<>))
 }
@@ -484,24 +502,6 @@ TrimType: TrimType = {
     "trailing" => TrimType::Trailing,
 }
 
-NumericFn: NumericFn = {
-    "abs" "(" <Boxed<Expression>> ")" => NumericFn::Abs(AbsFn::new(<>)),
-    "ceil" "(" <Boxed<Expression>> ")" => NumericFn::Ceil(CeilFn::new(<>)),
-    "ceiling" "(" <Boxed<Expression>> ")" => NumericFn::Ceil(CeilFn::new(<>)),
-    "cos" "(" <Boxed<Expression>> ")" => NumericFn::Cos(CosFn::new(<>)),
-    "dense_rank" "(" <Boxed<Expression>> <("," <SortingDirection>)?> ")" => NumericFn::DenseRank(DenseRankFn::new(<>)),
-    "floor" "(" <Boxed<Expression>> ")" => NumericFn::Floor(FloorFn::new(<>)),
-    "log10" "(" <Boxed<Expression>> ")" => NumericFn::Log10(Log10Fn::new(<>)),
-    "log" "(" <(<Boxed<Expression>> ",")?> <Boxed<Expression>> ")" => NumericFn::Log(LogFn::new(<>)),
-    "pow" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => NumericFn::Pow(PowFn::new(<>)),
-    "power" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => NumericFn::Pow(PowFn::new(<>)),
-    "rank" "(" <Boxed<Expression>> <("," <SortingDirection>)?> ")" => NumericFn::Rank(RankFn::new(<>)),
-    "round" "(" <Boxed<Expression>> <("," <Boxed<Expression>>)?> ")" => NumericFn::Round(RoundFn::new(<>)),
-    "sign" "(" <Boxed<Expression>> ")" => NumericFn::Sign(SignFn::new(<>)),
-    "sin" "(" <Boxed<Expression>> ")" => NumericFn::Sin(SinFn::new(<>)),
-    "sqrt" "(" <Boxed<Expression>> ")" => NumericFn::Sqrt(SqrtFn::new(<>)),
-    "tan" "(" <Boxed<Expression>> ")" => NumericFn::Tan(TanFn::new(<>)),
-}
 
 DatetimeFn: DatetimeFn = {
     "day_add" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => DatetimeFn::DayAdd(DayAddFn::new(<>)),

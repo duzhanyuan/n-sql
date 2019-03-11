@@ -34,3 +34,10 @@ pub enum ScalarExpression {
     CaseWhen(CaseWhenExpression),
     Function(Function),
 }
+
+
+impl From<ConstantValue> for ScalarExpression {
+    fn from(v: ConstantValue) -> Self {
+        ScalarExpression::Constant(v)
+    }
+}
