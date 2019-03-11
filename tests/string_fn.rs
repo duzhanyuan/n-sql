@@ -13,6 +13,7 @@ test_init!();
 
 #[theory]
 #[case("concat(a, b ,c)", NSQL,  "concat(a, b, c)")]
+#[case("concat('a', 'b' ,'c')", NSQL,  "concat('a', 'b', 'c')")]
 #[case("left(a, 3)", NSQL, "left(a, 3)")]
 #[case("UPPER(a)", NSQL, "upper(a)")]
 #[case("Upper('abc')", NSQL, "upper('abc')")]

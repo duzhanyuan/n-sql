@@ -17,6 +17,9 @@ test_init!();
 #[case("a =3   and (c < 5 or c= 7)", NSQL, "a = 3 and (c < 5 or c = 7)")]
 #[case("(a =3 )  and ((c < 5 or c= 7))", NSQL, "a = 3 and (c < 5 or c = 7)")]
 #[case("(a =3 )  and (((c < 5 or c= 7)))", NSQL, "a = 3 and (c < 5 or c = 7)")]
+#[case("(a = 3 or c < 5) and d = 8", NSQL, "(a = 3 or c < 5) and d = 8")]
+#[case("a = 3 and (c < 5 or d = 8)", NSQL, "a = 3 and (c < 5 or d = 8)")]
+//#[case("a between   3 and 10", NSQL, "a between 3 and 10")]
 fn test(left: &str, database_type: DatabaseType, right: &str){
     test_predicate(database_type, left, right)
 }

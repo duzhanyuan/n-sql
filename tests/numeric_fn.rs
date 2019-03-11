@@ -13,8 +13,25 @@ test_init!();
 
 #[theory]
 #[case("abs(-6)", NSQL, "abs(-6)")]
+#[case("abs(9)", NSQL, "abs(9)")]
+
 #[case("ceil(-6.8)", NSQL, "ceil(-6.8)")]
+#[case("ceil(-6.8)", PostgreSQL, "ceil(-6.8)")]
+#[case("ceil(-6.8)", Oracle, "ceil(-6.8)")]
+#[case("ceil(-6.8)", MySQL, "ceil(-6.8)")]
+//#[case("ceil(-6.8)", SQLite, "ceil(-6.8)")]
+
+
+
 #[case("cos(6.8)", NSQL, "cos(6.8)")]
+#[case("cos(6.8)", PostgreSQL, "cos(6.8)")]
+#[case("cos(6.8)", Oracle, "cos(6.8)")]
+#[case("cos(6.8)", MySQL, "cos(6.8)")]
+//#[case("cos(6.8)", SQLite, "cos(6.8)")]
+
+
+
+
 #[case("dense_rank(a)", NSQL, "dense_rank(a)")]
 #[case("dense_rank(a  , asc)", NSQL, "dense_rank(a, asc)")]
 #[case("dense_rank(a  , desc)", NSQL, "dense_rank(a, desc)")]

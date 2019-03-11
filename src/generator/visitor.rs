@@ -1128,7 +1128,19 @@ pub trait Visitor {
         }
     }
     fn visit_logical(&self, expr: &LogicalExpression, f: &mut Formatter) -> Result {
-        self.visit_predicate(&expr.left, f)?;
+
+        if let PredicateExpression::Logical(ref p) = expr.left.as_ref() {
+            if let LogicalOperator::Or = p.op {
+                f.write_char('(')?;
+                self.visit_logical(p, f)?;
+                f.write_char(')')?;
+            } else {
+                self.visit_logical(p, f)?;
+            }
+        } else {
+            self.visit_predicate(&expr.left, f)?;
+        }
+
         f.write_str(" ")?;
         self.visit_logical_operator(&expr.op, f)?;
         f.write_str(" ")?;

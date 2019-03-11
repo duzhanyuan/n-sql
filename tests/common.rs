@@ -23,7 +23,8 @@ pub enum DatabaseType {
     NSQL,
     MySQL,
     Oracle,
-    PostgreSQL
+    PostgreSQL,
+    SQLite
 }
 
 
@@ -48,7 +49,8 @@ pub fn test_expression(database_type: DatabaseType, left: &str, right:&str){
         DatabaseType::NSQL => expr.to_sql(),
         DatabaseType::MySQL => expr.to_mysql(),
         DatabaseType::Oracle => expr.to_oracle(),
-        DatabaseType::PostgreSQL => expr.to_pgsql()
+        DatabaseType::PostgreSQL => expr.to_pgsql(),
+        _ => unimplemented!()
     }.unwrap();
 
     result.as_str().should().be_equal_to(right);
@@ -64,7 +66,8 @@ pub fn test_statement(database_type: DatabaseType, left: &str, right: &str){
         DatabaseType::NSQL => expr.to_sql(),
         DatabaseType::MySQL => expr.to_mysql(),
         DatabaseType::Oracle => expr.to_oracle(),
-        DatabaseType::PostgreSQL => expr.to_pgsql()
+        DatabaseType::PostgreSQL => expr.to_pgsql(),
+        _ => unimplemented!()
     }.unwrap();
 
     result.as_str().should().be_equal_to(right);
@@ -78,7 +81,8 @@ pub fn test_predicate(database_type: DatabaseType, left: &str, right:&str){
         DatabaseType::NSQL => expr.to_sql(),
         DatabaseType::MySQL => expr.to_mysql(),
         DatabaseType::Oracle => expr.to_oracle(),
-        DatabaseType::PostgreSQL => expr.to_pgsql()
+        DatabaseType::PostgreSQL => expr.to_pgsql(),
+        _ => unimplemented!()
     }.unwrap();
 
     result.as_str().should().be_equal_to(right);

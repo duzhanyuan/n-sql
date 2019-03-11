@@ -16,6 +16,7 @@ test_init!();
 #[case("avg(distinct a)", NSQL, "avg(distinct a)")]
 #[case("count(a)", NSQL, "count(a)")]
 #[case("count(unique a)", NSQL, "count(unique a)")]
+#[case("count(all a)", NSQL, "count(all a)")]
 #[case("sum(all a)", NSQL, "sum(all a)")]
 #[case("sum(a)", NSQL, "sum(a)")]
 #[case("stddev(a)", NSQL, "stddev(a)")]
