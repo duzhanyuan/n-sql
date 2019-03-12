@@ -12,6 +12,7 @@ mod common;
 test_init!();
 
 #[theory]
+#[test]
 #[case("avg(a)", NSQL, "avg(a)")]
 #[case("avg(distinct a)", NSQL, "avg(distinct a)")]
 #[case("count(a)", NSQL, "count(a)")]

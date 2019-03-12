@@ -12,6 +12,7 @@ mod common;
 test_init!();
 
 #[theory]
+#[test]
 #[case("nOt(a = 'abc')", NSQL, "not(a = 'abc')")]
 #[case("nOt(a = 'abc' and age <3)", NSQL, "not(a = 'abc' and age < 3)")]
 fn test(left: &str, database_type: DatabaseType, right: &str){

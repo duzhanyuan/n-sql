@@ -13,6 +13,7 @@ test_init!();
 
 
 #[theory]
+#[test]
 #[case("select * FROM student", NSQL, "select * from student")]
 #[case("select name FROM student", NSQL, "select name from student")]
 #[case("select nvl(name,     'No Name') FROM student", NSQL, "select nvl(name, 'No Name') from student")]

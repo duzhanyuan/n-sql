@@ -13,6 +13,7 @@ test_init!();
 
 
 #[theory]
+#[test]
 #[case("a = c", NSQL, "a = c")]
 #[case("a = 'abc'" , NSQL, "a = 'abc'")]
 #[case("a != 'abc'" , NSQL, "a <> 'abc'")]

@@ -11,6 +11,7 @@ mod common;
 test_init!();
 
 #[theory]
+#[test]
 #[case("a     +3", NSQL, "a + 3")]
 #[case("a  - 3", NSQL, "a - 3")]
 #[case("a* 3", NSQL, "a * 3")]
@@ -30,6 +31,7 @@ fn test(left: &str, database_type: DatabaseType, right: &str){
 
 
 #[theory]
+#[test]
 #[case("x = 3+4", NSQL, "x = 3 + 4")]
 fn test1(left: &str, database_type: DatabaseType, right: &str){
     test_predicate(database_type, left, right);

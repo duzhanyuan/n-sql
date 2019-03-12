@@ -24,7 +24,8 @@ pub enum DatabaseType {
     MySQL,
     Oracle,
     PostgreSQL,
-    SQLite
+    SQLite,
+    SqlServer
 }
 
 
@@ -33,9 +34,6 @@ macro_rules! test_init {
         use common::*;
         #[allow(unused_imports)]
         use DatabaseType::*;
-        #[test]
-        fn init() {
-        }
     };
 }
 

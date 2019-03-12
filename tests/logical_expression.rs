@@ -12,6 +12,7 @@ mod common;
 test_init!();
 
 #[theory]
+#[test]
 #[case("a = 3 And c is null", NSQL, "a = 3 and c is null")]
 #[case("a = 3 or c < 5", NSQL, "a = 3 or c < 5")]
 #[case("a =3   and (c < 5 or c= 7)", NSQL, "a = 3 and (c < 5 or c = 7)")]

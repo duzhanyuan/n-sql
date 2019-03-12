@@ -13,6 +13,7 @@ test_init!();
 
 
 #[theory]
+#[test]
 #[case("nvl(a, 'no value')", NSQL, "nvl(a, 'no value')")]
 #[case("nvl(a, 'no value')", MySQL, "ifnull(a, 'no value')")]
 #[case("nvl(a, 'no value')", PostgreSQL, "coalesce(a, 'no value')")]
@@ -25,10 +26,12 @@ fn test_nvl(left: &str, database_type: DatabaseType, right: &str) {
 
 
 #[theory]
+#[test]
 #[case("COALESCE(a,b,c)", NSQL, "coalesce(a, b, c)")]
 #[case("COALESCE(a,b,c)", PostgreSQL, "coalesce(a, b, c)")]
 #[case("COALESCE(a,b,c)", Oracle, "coalesce(a, b, c)")]
 #[case("COALESCE(a,b,c)", MySQL, "coalesce(a, b, c)")]
+//#[case("COALESCE(a,b,c)", SqlServer, "coalesce(a, b, c)")]
 //#[case("COALESCE(a,b,c)", SQLite, "coalesce(a, b, c)")]
 fn test_coalesce(left: &str, database_type: DatabaseType, right: &str){
     test_expression(database_type, left, right);

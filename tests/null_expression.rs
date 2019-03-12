@@ -12,6 +12,7 @@ mod common;
 test_init!();
 
 #[theory]
+#[test]
 #[case("a is null",NSQL,"a is null")]
 #[case("a is not null",NSQL,"a is not null")]
 fn test(left: &str, database_type: DatabaseType, right: &str){

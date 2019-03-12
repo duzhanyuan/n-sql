@@ -12,6 +12,7 @@ mod common;
 test_init!();
 
 #[theory]
+#[test]
 #[case("concat(a, b ,c)", NSQL,  "concat(a, b, c)")]
 #[case("concat('a', 'b' ,'c')", NSQL,  "concat('a', 'b', 'c')")]
 #[case("left(a, 3)", NSQL, "left(a, 3)")]

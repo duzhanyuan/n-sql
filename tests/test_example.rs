@@ -13,6 +13,7 @@ test_init!();
 
 
 #[theory]
+#[test]
 #[case(1, 2, 3)]
 #[case(3, 4, 7)]
 #[case(3, - 1, 2)]

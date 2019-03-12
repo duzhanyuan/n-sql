@@ -13,6 +13,7 @@ test_init!();
 
 
 #[theory]
+#[test]
 #[case("select * from student skip 1 limit 2", NSQL, "select * from student skip 1 limit 2")]
 #[case("select * from student skip 1", NSQL, "select * from student skip 1")]
 #[case("select * from student limit 2", NSQL, "select * from student limit 2")]

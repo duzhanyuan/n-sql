@@ -12,6 +12,7 @@ mod common;
 test_init!();
 
 #[theory]
+#[test]
 #[case("a in ('x',     'y',      'z')" , NSQL, "a in ('x', 'y', 'z')")]
 #[case("a in (1,     3,      5)" , NSQL,"a in (1, 3, 5)")]
 #[case("a in ('2')" , NSQL,"a in ('2')")]

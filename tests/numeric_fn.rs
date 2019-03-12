@@ -12,6 +12,7 @@ mod common;
 test_init!();
 
 #[theory]
+#[test]
 #[case("abs(-6)", NSQL, "abs(-6)")]
 #[case("abs(9)", NSQL, "abs(9)")]
 
@@ -19,6 +20,7 @@ test_init!();
 #[case("ceil(-6.8)", PostgreSQL, "ceil(-6.8)")]
 #[case("ceil(-6.8)", Oracle, "ceil(-6.8)")]
 #[case("ceil(-6.8)", MySQL, "ceil(-6.8)")]
+//#[case("ceil(-6.8)", SqlServer, "ceiling(-6.8)")]
 //#[case("ceil(-6.8)", SQLite, "ceil(-6.8)")]
 
 
