@@ -6,11 +6,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+
 #[macro_use]
 mod common;
 
 test_init!();
-
 
 #[theory]
 #[test]
@@ -19,10 +19,17 @@ test_init!();
 #[case("select nvl(name,     'No Name') FROM student", NSQL, "select nvl(name, 'No Name') from student")]
 #[case("select nvl(name,     'No Name') as x FROM student", NSQL, "select nvl(name, 'No Name') as x from student")]
 #[case("select nvl(name,     'No Name')       x FROM student", NSQL, "select nvl(name, 'No Name') as x from student")]
+
 fn test_select(left: &str, database_type: DatabaseType, right: &str) {
     test_statement(database_type, left, right);
 }
 
+
+#[test]
+fn test_intersect(){
+    test_statement(NSQL, "select name from student where gender ='男' intersect select name from student where gender ='女'",
+                   "select name from student where gender = '男' intersect select name from student where gender = '女'");
+}
 
 
 #[test]
@@ -125,4 +132,46 @@ fn test_select_join() {
                    "select name from (select * from tree) as t join tree as t2 on (t2.parent_id = t.id)");
 }
 
+#[test]
+fn test_union(){
+    test_statement(NSQL, "select name from student where gender ='男' union select name from student where gender ='女'",
+                   "select name from student where gender = '男' union select name from student where gender = '女'");
+}
 
+#[test]
+fn test_union1(){
+    test_statement(NSQL, "select name from student where gender ='男' union select name from student where gender ='女' skip 1 limit 2",
+                   "select name from student where gender = '男' union select name from student where gender = '女' skip 1 limit 2");
+}
+
+#[test]
+fn test_union2(){
+    let statement = StatementParser::new()
+        .parse(Lexer::new("select name from student where gender ='男' skip 2 union select name from student where gender ='女' skip 1 limit 2").tokenizer());
+    assert_eq!(true, statement.is_err());
+}
+
+#[test]
+fn test_union3(){
+    test_statement(NSQL, "(select name from student where gender ='男' skip 2) union select name from student where gender ='女' skip 1 limit 2",
+                   "(select name from student where gender = '男' skip 2) union select name from student where gender = '女' skip 1 limit 2");
+}
+
+#[test]
+fn test_union_all(){
+    test_statement(NSQL, "select name from student where gender ='男' union all select name from student where gender ='女'",
+                   "select name from student where gender = '男' union all select name from student where gender = '女'");
+}
+
+
+#[test]
+fn test(){
+    test_statement(NSQL, "select name from student where gender ='男' except select name from student where gender ='女'",
+                   "select name from student where gender = '男' minus select name from student where gender = '女'");
+}
+
+#[test]
+fn test1(){
+    test_statement(NSQL, "select name from student where gender ='男' minus select name from student where gender ='女'",
+                   "select name from student where gender = '男' minus select name from student where gender = '女'");
+}
