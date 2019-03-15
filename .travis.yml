@@ -6,7 +6,7 @@ before_script:
   - rustup component add rustfmt-preview
 script:
   - cargo fmt --all
-  - cargo test --features=nightly
+  - cargo test
   - cargo bench
 
 notifications:
