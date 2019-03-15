@@ -6,7 +6,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::{Expression, AggregateType, PredicateExpression};
+use ast::{AggregateType, Expression, PredicateExpression};
 
 #[derive(Clone, Debug)]
 pub struct StddevFn {
@@ -16,7 +16,10 @@ pub struct StddevFn {
 
 impl StddevFn {
     pub fn new(aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> StddevFn {
-        StddevFn{expr, aggregate_type}
+        StddevFn {
+            expr,
+            aggregate_type,
+        }
     }
 }
 
@@ -28,7 +31,15 @@ pub struct StddevIfFn {
 }
 
 impl StddevIfFn {
-    pub fn new(predicate: Box<PredicateExpression>, aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> StddevIfFn {
-        StddevIfFn{predicate, expr, aggregate_type}
+    pub fn new(
+        predicate: Box<PredicateExpression>,
+        aggregate_type: Option<AggregateType>,
+        expr: Box<Expression>,
+    ) -> StddevIfFn {
+        StddevIfFn {
+            predicate,
+            expr,
+            aggregate_type,
+        }
     }
 }

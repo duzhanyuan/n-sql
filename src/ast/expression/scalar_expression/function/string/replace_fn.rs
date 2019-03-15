@@ -17,6 +17,6 @@ pub struct ReplaceFn {
 
 impl ReplaceFn {
     pub fn new(text: Expression, replace_text: Expression) -> ReplaceFn {
-        ReplaceFn{text, replace_text}
+        ReplaceFn { text, replace_text }
     }
 }

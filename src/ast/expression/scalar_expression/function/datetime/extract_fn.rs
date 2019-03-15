@@ -6,14 +6,13 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::{Expression, DatetimeType};
+use ast::{DatetimeType, Expression};
 
 #[derive(Clone, Debug)]
 pub struct ExtractFn {
     pub expr: Box<Expression>,
     pub extract_type: DatetimeType,
 }
-
 
 impl ExtractFn {
     pub fn new(extract_type: DatetimeType, expr: Box<Expression>) -> ExtractFn {

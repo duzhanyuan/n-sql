@@ -9,7 +9,6 @@ use ast::Expression as UnBoxExpression;
 
 type Expression = Box<UnBoxExpression>;
 
-
 #[derive(Clone, Debug)]
 pub struct PadLeftFn {
     pub text: Expression,
@@ -19,6 +18,10 @@ pub struct PadLeftFn {
 
 impl PadLeftFn {
     pub fn new(text: Expression, length: Expression, pad_text: Option<Expression>) -> PadLeftFn {
-        PadLeftFn{text, length, pad_text}
+        PadLeftFn {
+            text,
+            length,
+            pad_text,
+        }
     }
 }

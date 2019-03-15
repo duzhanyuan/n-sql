@@ -13,8 +13,8 @@ test_init!();
 
 #[theory]
 #[test]
-#[case("concat(a, b ,c)", NSQL,  "concat(a, b, c)")]
-#[case("concat('a', 'b' ,'c')", NSQL,  "concat('a', 'b', 'c')")]
+#[case("concat(a, b ,c)", NSQL, "concat(a, b, c)")]
+#[case("concat('a', 'b' ,'c')", NSQL, "concat('a', 'b', 'c')")]
 fn test_concat(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
@@ -30,11 +30,10 @@ fn test_upper(left: &str, database_type: DatabaseType, right: &str) {
 #[theory]
 #[test]
 #[case("lower(a)", NSQL, "lower(a)")]
-#[case("lower('abc')", NSQL,  "lower('abc')")]
+#[case("lower('abc')", NSQL, "lower('abc')")]
 fn test_lower(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-
 
 #[theory]
 #[test]
@@ -49,7 +48,7 @@ fn test_length(left: &str, database_type: DatabaseType, right: &str) {
 #[case("pad_left('abc', 3)", NSQL, "pad_left('abc', 3)")]
 #[case("pad_left('abc', 3, 'a')", NSQL, "pad_left('abc', 3, 'a')")]
 #[case("lpad('abc', 3, 'a')", NSQL, "pad_left('abc', 3, 'a')")]
-#[case("pad_right('abc', 3)", NSQL,  "pad_right('abc', 3)")]
+#[case("pad_right('abc', 3)", NSQL, "pad_right('abc', 3)")]
 #[case("pad_right('abc', 3, 'a')", NSQL, "pad_right('abc', 3, 'a')")]
 #[case("rpad('abc', 3, 'a')", NSQL, "pad_right('abc', 3, 'a')")]
 fn test_pad(left: &str, database_type: DatabaseType, right: &str) {
@@ -78,12 +77,12 @@ fn test_replace(left: &str, database_type: DatabaseType, right: &str) {
 #[case("rtrim('abc', 'a')", NSQL, "trim_end('abc', 'a')")]
 #[case("trim(trailing  'a' from 'abc')", NSQL, "trim_end('abc', 'a')")]
 #[case("trim(trailing from 'abc ')", NSQL, "trim_end('abc ')")]
-#[case("trim('abc ')", NSQL,  "trim('abc ')")]
+#[case("trim('abc ')", NSQL, "trim('abc ')")]
 #[case("trim('abc ', 'a')", NSQL, "trim('abc ', 'a')")]
-#[case("btrim('abc ')", NSQL,  "trim('abc ')")]
-#[case("btrim('abc ', 'a')", NSQL, "trim('abc ', 'a')" )]
+#[case("btrim('abc ')", NSQL, "trim('abc ')")]
+#[case("btrim('abc ', 'a')", NSQL, "trim('abc ', 'a')")]
 #[case("trim_start(' abc ')", NSQL, "trim_start(' abc ')")]
-#[case("trim_start(' abc ', 'a')", NSQL,  "trim_start(' abc ', 'a')")]
+#[case("trim_start(' abc ', 'a')", NSQL, "trim_start(' abc ', 'a')")]
 #[case("ltrim(' abc ', 'a')", NSQL, "trim_start(' abc ', 'a')")]
 #[case("ltrim(' abc ')", NSQL, "trim_start(' abc ')")]
 #[case("trim(leading from ' abc ')", NSQL, "trim_start(' abc ')")]
@@ -91,7 +90,6 @@ fn test_replace(left: &str, database_type: DatabaseType, right: &str) {
 fn test_trim(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-
 
 #[theory]
 #[test]

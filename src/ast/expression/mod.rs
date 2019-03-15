@@ -8,15 +8,13 @@
 
 use std::fmt::{Debug, Error, Formatter};
 
-mod vector_expression;
-mod scalar_expression;
 mod predicate_expression;
+mod scalar_expression;
+mod vector_expression;
 
+pub use self::predicate_expression::*;
 pub use self::scalar_expression::*;
 pub use self::vector_expression::*;
-pub use self::predicate_expression::*;
-
-
 
 #[derive(Clone, Debug)]
 pub enum Expression {
@@ -36,13 +34,11 @@ impl From<ConstantValue> for Expression {
     }
 }
 
-
 impl From<CastFn> for Expression {
     fn from(v: CastFn) -> Self {
         Expression::Scalar(ScalarExpression::Function(Function::Cast(v.into()).into()))
     }
 }
-
 
 impl From<i32> for Expression {
     fn from(value: i32) -> Self {
@@ -50,23 +46,17 @@ impl From<i32> for Expression {
     }
 }
 
-
 impl Expression {
     pub fn constant_numeric(&self) -> Option<NumericValue> {
         match self {
-            Expression::Scalar(s) =>
-                match s {
-                    ScalarExpression::Constant(t) => {
-                        match t {
-                            ConstantValue::Numeric(n) => Some(n.clone()),
-                            _ => None
-                        }
-                    }
-                    _ => None
+            Expression::Scalar(s) => match s {
+                ScalarExpression::Constant(t) => match t {
+                    ConstantValue::Numeric(n) => Some(n.clone()),
+                    _ => None,
                 },
-            _ => None
+                _ => None,
+            },
+            _ => None,
         }
     }
 }
-
-

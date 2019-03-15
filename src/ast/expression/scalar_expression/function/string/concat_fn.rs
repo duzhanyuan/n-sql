@@ -12,12 +12,11 @@ type Expression = Box<UnBoxExpression>;
 
 #[derive(Clone, Debug)]
 pub struct ConcatFn {
-    pub items: Vec<Expression>
+    pub items: Vec<Expression>,
 }
 
 impl ConcatFn {
     pub fn new(items: Vec<Expression>) -> ConcatFn {
-        ConcatFn{items}
+        ConcatFn { items }
     }
 }
-

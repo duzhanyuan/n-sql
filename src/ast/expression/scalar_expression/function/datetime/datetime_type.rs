@@ -13,6 +13,5 @@ pub enum DatetimeType {
     Day,
     Hour,
     Minute,
-    Second
+    Second,
 }
-

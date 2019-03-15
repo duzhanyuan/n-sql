@@ -25,5 +25,5 @@ pub enum VectorExpression {
     MedianIf(MedianIfFn),
     MinIf(MinIfFn),
     SumIf(SumIfFn),
-    StddevIf(StddevIfFn)
+    StddevIf(StddevIfFn),
 }

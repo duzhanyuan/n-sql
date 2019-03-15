@@ -13,8 +13,8 @@ mod string_value;
 
 pub use self::numeric_value::*;
 pub use self::string_value::*;
-use ast::expression::Expression;
 use ast::expression::scalar_expression::ScalarExpression;
+use ast::expression::Expression;
 
 #[derive(Clone, Debug)]
 pub enum ConstantValue {

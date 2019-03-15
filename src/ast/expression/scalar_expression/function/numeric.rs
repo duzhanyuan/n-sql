@@ -10,7 +10,7 @@ use ast::{Expression, SortingDirection};
 
 #[derive(Clone, Debug)]
 pub struct AbsFn {
-    pub expr: Box<Expression>
+    pub expr: Box<Expression>,
 }
 
 impl AbsFn {
@@ -19,36 +19,32 @@ impl AbsFn {
     }
 }
 
-
-
-
 #[derive(Clone, Debug)]
 pub struct CeilFn {
-    pub expr: Box<Expression>
+    pub expr: Box<Expression>,
 }
 
 impl CeilFn {
     pub fn new(expr: Box<Expression>) -> CeilFn {
-        CeilFn{expr}
+        CeilFn { expr }
     }
 }
 
-
 #[derive(Clone, Debug)]
 pub struct CosFn {
-    pub expr: Box<Expression>
+    pub expr: Box<Expression>,
 }
 
 impl CosFn {
     pub fn new(expr: Box<Expression>) -> CosFn {
-        CosFn{expr}
+        CosFn { expr }
     }
 }
 
 #[derive(Clone, Debug)]
 pub struct DenseRankFn {
     pub expr: Box<Expression>,
-    pub order: Option<SortingDirection>
+    pub order: Option<SortingDirection>,
 }
 
 impl DenseRankFn {
@@ -59,7 +55,7 @@ impl DenseRankFn {
 
 #[derive(Clone, Debug)]
 pub struct FloorFn {
-    pub expr: Box<Expression>
+    pub expr: Box<Expression>,
 }
 
 impl FloorFn {
@@ -70,7 +66,7 @@ impl FloorFn {
 
 #[derive(Clone, Debug)]
 pub struct Log10Fn {
-    pub expr: Box<Expression>
+    pub expr: Box<Expression>,
 }
 
 impl Log10Fn {
@@ -91,24 +87,22 @@ impl LogFn {
     }
 }
 
-
 #[derive(Clone, Debug)]
 pub struct PowFn {
     pub x: Box<Expression>,
-    pub y: Box<Expression>
+    pub y: Box<Expression>,
 }
 
 impl PowFn {
     pub fn new(x: Box<Expression>, y: Box<Expression>) -> PowFn {
-        PowFn{x, y}
+        PowFn { x, y }
     }
 }
-
 
 #[derive(Clone, Debug)]
 pub struct RankFn {
     pub expr: Box<Expression>,
-    pub order: Option<SortingDirection>
+    pub order: Option<SortingDirection>,
 }
 
 impl RankFn {
@@ -120,55 +114,55 @@ impl RankFn {
 #[derive(Clone, Debug)]
 pub struct RoundFn {
     pub expr: Box<Expression>,
-    pub precision : Option<Box<Expression>>,
+    pub precision: Option<Box<Expression>>,
 }
 
 impl RoundFn {
-    pub fn new(expr: Box<Expression>, precision : Option<Box<Expression>>) -> RoundFn {
-        RoundFn{expr, precision}
+    pub fn new(expr: Box<Expression>, precision: Option<Box<Expression>>) -> RoundFn {
+        RoundFn { expr, precision }
     }
 }
 
 #[derive(Clone, Debug)]
 pub struct SignFn {
-    pub expr: Box<Expression>
+    pub expr: Box<Expression>,
 }
 
 impl SignFn {
     pub fn new(expr: Box<Expression>) -> SignFn {
-        SignFn{expr}
+        SignFn { expr }
     }
 }
 
 #[derive(Clone, Debug)]
 pub struct SinFn {
-    pub expr: Box<Expression>
+    pub expr: Box<Expression>,
 }
 
 impl SinFn {
     pub fn new(expr: Box<Expression>) -> SinFn {
-        SinFn{expr}
+        SinFn { expr }
     }
 }
 
 #[derive(Clone, Debug)]
 pub struct SqrtFn {
-    pub expr: Box<Expression>
+    pub expr: Box<Expression>,
 }
 
 impl SqrtFn {
     pub fn new(expr: Box<Expression>) -> SqrtFn {
-        SqrtFn{expr}
+        SqrtFn { expr }
     }
 }
 
 #[derive(Clone, Debug)]
 pub struct TanFn {
-    pub expr: Box<Expression>
+    pub expr: Box<Expression>,
 }
 
 impl TanFn {
     pub fn new(expr: Box<Expression>) -> TanFn {
-        TanFn{expr}
+        TanFn { expr }
     }
 }

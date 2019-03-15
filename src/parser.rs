@@ -9,38 +9,40 @@ extern crate lalrpop_util;
 
 use self::lalrpop_util::ParseError;
 
-use lexer::SpannedError;
-use Lexer;
-use lexer::Token;
 use lexer::Position;
-use Statement;
+use lexer::SpannedError;
+use lexer::Token;
 use Expression;
+use Lexer;
+use Statement;
 
+use lexer::ParserSource;
 use ExpressionParser;
 use StatementParser;
-use lexer::ParserSource;
 
 type ParseResult<'input, T> = Result<T, ParseError<Position, Token<'input>, SpannedError>>;
 
 pub trait IParser<T> {
-    fn parse<S>(input: &S) -> ParseResult<T>  where S: ?Sized + ParserSource;
+    fn parse<S>(input: &S) -> ParseResult<T>
+    where
+        S: ?Sized + ParserSource;
 }
 
 impl IParser<Expression> for Expression {
     fn parse<S>(input: &S) -> ParseResult<Expression>
-        where S: ?Sized + ParserSource {
-        ExpressionParser::new()
-            .parse(Lexer::new(input)
-                .tokenizer())
+    where
+        S: ?Sized + ParserSource,
+    {
+        ExpressionParser::new().parse(Lexer::new(input).tokenizer())
     }
 }
 
 impl IParser<Statement> for Statement {
     fn parse<S>(input: &S) -> ParseResult<Statement>
-        where S: ?Sized + ParserSource {
-        StatementParser::new()
-            .parse(Lexer::new(input)
-                .tokenizer())
+    where
+        S: ?Sized + ParserSource,
+    {
+        StatementParser::new().parse(Lexer::new(input).tokenizer())
     }
 }
 

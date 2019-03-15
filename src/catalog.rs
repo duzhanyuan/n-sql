@@ -8,30 +8,29 @@
 
 use Identifier;
 
-
 #[derive(Debug)]
 pub enum DataType {
     I64,
     F64,
-    String
+    String,
 }
 
 #[derive(Debug)]
-pub struct DatabaseInfo{
+pub struct DatabaseInfo {
     name: Identifier,
-    schemas: Vec<SchemaInfo>
+    schemas: Vec<SchemaInfo>,
 }
 
 #[derive(Debug)]
 pub struct SchemaInfo {
     name: Identifier,
-    tables: Vec<TableInfo>
+    tables: Vec<TableInfo>,
 }
 
 #[derive(Debug)]
-pub struct TableInfo{
+pub struct TableInfo {
     name: Identifier,
-    columns: Vec<ColumnInfo>
+    columns: Vec<ColumnInfo>,
 }
 
 #[derive(Debug)]
@@ -43,7 +42,7 @@ impl DatabaseInfo {
     pub fn new(name: Identifier) -> DatabaseInfo {
         DatabaseInfo {
             name,
-            schemas: Vec::new()
+            schemas: Vec::new(),
         }
     }
     pub fn name(&self) -> &Identifier {
@@ -54,11 +53,11 @@ impl DatabaseInfo {
     }
 }
 
-impl SchemaInfo{
+impl SchemaInfo {
     pub fn new(name: Identifier) -> SchemaInfo {
-        SchemaInfo{
+        SchemaInfo {
             name,
-            tables: Vec::new()
+            tables: Vec::new(),
         }
     }
     pub fn name(&self) -> &Identifier {
@@ -72,9 +71,9 @@ impl SchemaInfo{
 
 impl TableInfo {
     pub fn new(name: Identifier) -> TableInfo {
-        TableInfo{
+        TableInfo {
             name,
-            columns: Vec::new()
+            columns: Vec::new(),
         }
     }
 
@@ -88,13 +87,9 @@ impl TableInfo {
 
 impl ColumnInfo {
     pub fn new(name: Identifier) -> ColumnInfo {
-        ColumnInfo{
-            name
-        }
+        ColumnInfo { name }
     }
     pub fn name(&self) -> &Identifier {
         &self.name
     }
 }
-
-

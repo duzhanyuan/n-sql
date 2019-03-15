@@ -6,21 +6,19 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-
-mod select_statement;
 mod join_node;
-mod set_statement;
-mod table_view;
-mod sorting_direction;
 mod pagination_statement;
+mod select_statement;
+mod set_statement;
+mod sorting_direction;
+mod table_view;
 
-
-pub use self::select_statement::*;
 pub use self::join_node::*;
-pub use self::set_statement::*;
-pub use self::table_view::*;
-pub use self::sorting_direction::*;
 pub use self::pagination_statement::*;
+pub use self::select_statement::*;
+pub use self::set_statement::*;
+pub use self::sorting_direction::*;
+pub use self::table_view::*;
 
 #[derive(Clone, Debug)]
 pub enum Statement {

@@ -32,7 +32,11 @@ pub struct AvgIfFn {
 }
 
 impl AvgIfFn {
-    pub fn new(predicate: Box<PredicateExpression>, aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> AvgIfFn {
+    pub fn new(
+        predicate: Box<PredicateExpression>,
+        aggregate_type: Option<AggregateType>,
+        expr: Box<Expression>,
+    ) -> AvgIfFn {
         AvgIfFn {
             predicate,
             expr,

@@ -6,22 +6,26 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::*;
 use super::Visitor;
-use std::result;
-use std::fmt::{Write, Error, Result};
+use ast::*;
 use optimizer::Optimizer;
+use std::fmt::{Error, Result, Write};
+use std::result;
 
 type Formatter = String;
 
-pub trait OracleGenerator<T>{
+pub trait OracleGenerator<T> {
     fn to_oracle(&self) -> result::Result<String, Error>;
 }
 
 struct InternalGenerator;
 
-impl Visitor for InternalGenerator{
-    fn visit_pagination_statement(&self, pagination_statement: &Box<PaginationStatement>, f: &mut Formatter) -> Result {
+impl Visitor for InternalGenerator {
+    fn visit_pagination_statement(
+        &self,
+        pagination_statement: &Box<PaginationStatement>,
+        f: &mut Formatter,
+    ) -> Result {
         self.visit_set_statement(&pagination_statement.set, f)?;
         if let Some(ref skip) = pagination_statement.skip {
             f.write_char(' ')?;
@@ -37,7 +41,7 @@ impl Visitor for InternalGenerator{
                         } else {
                             f.write_str(" rows")?;
                         }
-                    },
+                    }
                     NumericValue::Float(float) => {
                         if float == 1.0 {
                             f.write_str(" row")?;
@@ -67,7 +71,7 @@ impl Visitor for InternalGenerator{
                         } else {
                             f.write_str(" rows ")?;
                         }
-                    },
+                    }
                     NumericValue::Float(float) => {
                         if float == 1.0 {
                             f.write_str(" row ")?;
@@ -93,7 +97,6 @@ impl OracleGenerator<Expression> for Expression {
         Ok(s)
     }
 }
-
 
 impl OracleGenerator<PredicateExpression> for PredicateExpression {
     fn to_oracle(&self) -> result::Result<String, Error> {

@@ -13,8 +13,8 @@ extern crate n_sql;
 
 pub use self::fluid::prelude::*;
 pub use self::n_sql::{
-    ExpressionParser, StatementParser, PredicateParser, Lexer,
-    Generator, PgsqlGenerator, OracleGenerator, MySQLGenerator,
+    ExpressionParser, Generator, Lexer, MySQLGenerator, OracleGenerator, PgsqlGenerator,
+    PredicateParser, StatementParser,
 };
 
 pub use self::n_sql::parser;
@@ -25,9 +25,8 @@ pub enum DatabaseType {
     Oracle,
     PostgreSQL,
     SQLite,
-    SqlServer
+    SqlServer,
 }
-
 
 macro_rules! test_init {
     () => {
@@ -37,27 +36,25 @@ macro_rules! test_init {
     };
 }
 
-
-pub fn test_expression(database_type: DatabaseType, left: &str, right:&str){
-    let expr = ExpressionParser::new()
-        .parse(Lexer::new(left).tokenizer());
-//    expr.should().not().be_an_error();
+pub fn test_expression(database_type: DatabaseType, left: &str, right: &str) {
+    let expr = ExpressionParser::new().parse(Lexer::new(left).tokenizer());
+    //    expr.should().not().be_an_error();
     let expr = expr.unwrap();
     let result = match database_type {
         DatabaseType::NSQL => expr.to_sql(),
         DatabaseType::MySQL => expr.to_mysql(),
         DatabaseType::Oracle => expr.to_oracle(),
         DatabaseType::PostgreSQL => expr.to_pgsql(),
-        _ => unimplemented!()
-    }.unwrap();
+        _ => unimplemented!(),
+    }
+    .unwrap();
 
     result.as_str().should().be_equal_to(right);
 }
 
-pub fn test_statement(database_type: DatabaseType, left: &str, right: &str){
-    let expr = StatementParser::new()
-        .parse(Lexer::new(left).tokenizer());
-//    expr.should().not().be_an_error();
+pub fn test_statement(database_type: DatabaseType, left: &str, right: &str) {
+    let expr = StatementParser::new().parse(Lexer::new(left).tokenizer());
+    //    expr.should().not().be_an_error();
     let expr = expr.unwrap();
 
     let result = match database_type {
@@ -65,23 +62,24 @@ pub fn test_statement(database_type: DatabaseType, left: &str, right: &str){
         DatabaseType::MySQL => expr.to_mysql(),
         DatabaseType::Oracle => expr.to_oracle(),
         DatabaseType::PostgreSQL => expr.to_pgsql(),
-        _ => unimplemented!()
-    }.unwrap();
+        _ => unimplemented!(),
+    }
+    .unwrap();
 
     result.as_str().should().be_equal_to(right);
 }
-pub fn test_predicate(database_type: DatabaseType, left: &str, right:&str){
-    let expr = PredicateParser::new()
-        .parse(Lexer::new(left).tokenizer());
-//    expr.should().not().be_an_error();
+pub fn test_predicate(database_type: DatabaseType, left: &str, right: &str) {
+    let expr = PredicateParser::new().parse(Lexer::new(left).tokenizer());
+    //    expr.should().not().be_an_error();
     let expr = expr.unwrap();
     let result = match database_type {
         DatabaseType::NSQL => expr.to_sql(),
         DatabaseType::MySQL => expr.to_mysql(),
         DatabaseType::Oracle => expr.to_oracle(),
         DatabaseType::PostgreSQL => expr.to_pgsql(),
-        _ => unimplemented!()
-    }.unwrap();
+        _ => unimplemented!(),
+    }
+    .unwrap();
 
     result.as_str().should().be_equal_to(right);
 }

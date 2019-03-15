@@ -10,7 +10,7 @@ use ast::Identifier;
 
 #[derive(Clone, Debug)]
 pub struct Variable {
-    pub name: Identifier
+    pub name: Identifier,
 }
 
 impl Variable {

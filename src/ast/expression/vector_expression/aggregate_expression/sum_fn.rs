@@ -32,7 +32,11 @@ pub struct SumIfFn {
 }
 
 impl SumIfFn {
-    pub fn new(predicate: Box<PredicateExpression>, aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> SumIfFn {
+    pub fn new(
+        predicate: Box<PredicateExpression>,
+        aggregate_type: Option<AggregateType>,
+        expr: Box<Expression>,
+    ) -> SumIfFn {
         SumIfFn {
             predicate,
             expr,

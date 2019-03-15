@@ -6,8 +6,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+mod datetime_diff_fn;
+mod datetime_type;
 mod day_add_fn;
 mod day_sub_fn;
+mod extract_fn;
 mod hour_add_fn;
 mod hour_sub_fn;
 mod minute_add_fn;
@@ -18,12 +21,12 @@ mod second_add_fn;
 mod second_sub_fn;
 mod year_add_fn;
 mod year_sub_fn;
-mod extract_fn;
-mod datetime_type;
-mod datetime_diff_fn;
 
+pub use self::datetime_diff_fn::*;
+pub use self::datetime_type::*;
 pub use self::day_add_fn::*;
 pub use self::day_sub_fn::*;
+pub use self::extract_fn::*;
 pub use self::hour_add_fn::*;
 pub use self::hour_sub_fn::*;
 pub use self::minute_add_fn::*;
@@ -34,12 +37,6 @@ pub use self::second_add_fn::*;
 pub use self::second_sub_fn::*;
 pub use self::year_add_fn::*;
 pub use self::year_sub_fn::*;
-pub use self::extract_fn::*;
-pub use self::datetime_type::*;
-pub use self::datetime_diff_fn::*;
-
-
-
 
 #[derive(Clone, Debug)]
 pub enum DatetimeFn {
@@ -56,6 +53,5 @@ pub enum DatetimeFn {
     SecondAdd(SecondAddFn),
     SecondSub(SecondSubFn),
     YearAdd(YearAddFn),
-    YearSub(YearSubFn)
+    YearSub(YearSubFn),
 }
-

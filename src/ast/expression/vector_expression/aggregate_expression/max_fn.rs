@@ -32,7 +32,11 @@ pub struct MaxIfFn {
 }
 
 impl MaxIfFn {
-    pub fn new(predicate: Box<PredicateExpression>, aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> MaxIfFn {
+    pub fn new(
+        predicate: Box<PredicateExpression>,
+        aggregate_type: Option<AggregateType>,
+        expr: Box<Expression>,
+    ) -> MaxIfFn {
         MaxIfFn {
             predicate,
             expr,

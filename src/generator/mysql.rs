@@ -6,22 +6,26 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::*;
 use super::Visitor;
-use std::result;
-use std::fmt::{Write, Error, Result};
+use ast::*;
 use optimizer::Optimizer;
+use std::fmt::{Error, Result, Write};
+use std::result;
 
 type Formatter = String;
 
-pub trait MySQLGenerator<T>{
+pub trait MySQLGenerator<T> {
     fn to_mysql(&self) -> result::Result<String, Error>;
 }
 
 struct InternalGenerator;
 
-impl Visitor for InternalGenerator{
-    fn visit_pagination_statement(&self, pagination_statement: &Box<PaginationStatement>, f: &mut Formatter) -> Result {
+impl Visitor for InternalGenerator {
+    fn visit_pagination_statement(
+        &self,
+        pagination_statement: &Box<PaginationStatement>,
+        f: &mut Formatter,
+    ) -> Result {
         self.visit_set_statement(&pagination_statement.set, f)?;
 
         f.write_char(' ')?;
@@ -56,7 +60,6 @@ impl MySQLGenerator<Expression> for Expression {
         Ok(s)
     }
 }
-
 
 impl MySQLGenerator<PredicateExpression> for PredicateExpression {
     fn to_mysql(&self) -> result::Result<String, Error> {

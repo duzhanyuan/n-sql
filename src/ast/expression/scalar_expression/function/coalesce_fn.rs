@@ -10,7 +10,7 @@ use ast::Expression;
 
 #[derive(Clone, Debug)]
 pub struct CoalesceFn {
-    pub items: Vec<Box<Expression>>
+    pub items: Vec<Box<Expression>>,
 }
 
 impl CoalesceFn {

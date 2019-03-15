@@ -18,6 +18,10 @@ pub struct PadRightFn {
 
 impl PadRightFn {
     pub fn new(text: Expression, length: Expression, pad_text: Option<Expression>) -> PadRightFn {
-        PadRightFn{text, length, pad_text}
+        PadRightFn {
+            text,
+            length,
+            pad_text,
+        }
     }
 }

@@ -32,7 +32,11 @@ pub struct MedianIfFn {
 }
 
 impl MedianIfFn {
-    pub fn new(predicate: Box<PredicateExpression>, aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> MedianIfFn {
+    pub fn new(
+        predicate: Box<PredicateExpression>,
+        aggregate_type: Option<AggregateType>,
+        expr: Box<Expression>,
+    ) -> MedianIfFn {
         MedianIfFn {
             predicate,
             expr,

@@ -12,29 +12,28 @@ extern crate codespan;
 extern crate codespan_reporting;
 extern crate regex;
 
-mod location;
 mod char_locations;
+mod comment;
+mod location;
 mod parser_source;
 mod source;
-mod comment;
 mod token;
 
-use self::regex::{RegexSetBuilder, RegexSet};
+use self::regex::{RegexSet, RegexSetBuilder};
 
 use self::char_locations::CharLocations;
 use self::comment::*;
 use self::source::Source;
 
-use self::LexicalError::*;
-use self::location::{spanned, ByteOffset, Line, Column, ColumnOffset, Span};
-pub use self::location::{Position, Spanned, Location};
+use self::location::{spanned, ByteOffset, Column, ColumnOffset, Line, Span};
+pub use self::location::{Location, Position, Spanned};
 pub use self::parser_source::ParserSource;
+use self::LexicalError::*;
 
 pub use self::token::Token;
 use lexer::token::Token::EOF;
 
-
-const REGEX_SOURCE:[(&str, Token); 123] = [
+const REGEX_SOURCE: [(&str, Token); 123] = [
     // region [keyword]
     ("^([Aa][Ll][Ll])$", Token::All),
     ("^([Aa][Nn][Dd])$", Token::And),
@@ -98,7 +97,10 @@ const REGEX_SOURCE:[(&str, Token); 123] = [
     ("^([Dd][Aa][Yy]_[Aa][Dd][Dd])$", Token::DayAdd),
     ("^([Dd][Aa][Yy]_[Ss][Uu][Bb])$", Token::DaySub),
     ("^([Dd][Ee][Cc][Oo][Dd][Ee])$", Token::Decode),
-    ("^([Dd][Ee][Nn][Ss][Ee]_[Rr][Aa][Nn][Kk])$", Token::DenseRank),
+    (
+        "^([Dd][Ee][Nn][Ss][Ee]_[Rr][Aa][Nn][Kk])$",
+        Token::DenseRank,
+    ),
     ("^([Ee][Xx][Tt][Rr][Aa][Cc][Tt])$", Token::Extract),
     ("^([Ff][Ll][Oo][Oo][Rr])$", Token::Floor),
     ("^([Hh][Oo][Uu][Rr])$", Token::Hour),
@@ -117,8 +119,14 @@ const REGEX_SOURCE:[(&str, Token); 123] = [
     ("^([Mm][Ii][Nn])$", Token::Min),
     ("^([Mm][Ii][Nn][Ii][Ff])$", Token::MinIf),
     ("^([Mm][Ii][Nn][Uu][Tt][Ee])$", Token::Minute),
-    ("^([Mm][Ii][Nn][Uu][Tt][Ee]_[Aa][Dd][Dd])$", Token::MinuteAdd),
-    ("^([Mm][Ii][Nn][Uu][Tt][Ee]_[Ss][Uu][Bb])$", Token::MinuteSub),
+    (
+        "^([Mm][Ii][Nn][Uu][Tt][Ee]_[Aa][Dd][Dd])$",
+        Token::MinuteAdd,
+    ),
+    (
+        "^([Mm][Ii][Nn][Uu][Tt][Ee]_[Ss][Uu][Bb])$",
+        Token::MinuteSub,
+    ),
     ("^([Mm][Oo][Nn][Tt][Hh])$", Token::Month),
     ("^([Mm][Oo][Nn][Tt][Hh]_[Aa][Dd][Dd])$", Token::MonthAdd),
     ("^([Mm][Oo][Nn][Tt][Hh]_[Ss][Uu][Bb])$", Token::MonthSub),
@@ -140,15 +148,24 @@ const REGEX_SOURCE:[(&str, Token); 123] = [
     ("^([Rr][Pp][Aa][Dd])$", Token::RPad),
     ("^([Rr][Tt][Rr][Ii][Mm])$", Token::RTrim),
     ("^([Ss][Ee][Cc][Oo][Nn][Dd])$", Token::Second),
-    ("^([Ss][Ee][Cc][Oo][Nn][Dd]_[Aa][Dd][Dd])$", Token::SecondAdd),
-    ("^([Ss][Ee][Cc][Oo][Nn][Dd]_[Ss][Uu][Bb])$", Token::SecondSub),
+    (
+        "^([Ss][Ee][Cc][Oo][Nn][Dd]_[Aa][Dd][Dd])$",
+        Token::SecondAdd,
+    ),
+    (
+        "^([Ss][Ee][Cc][Oo][Nn][Dd]_[Ss][Uu][Bb])$",
+        Token::SecondSub,
+    ),
     ("^([Ss][Uu][Bb][Ss][Tt][Rr])$", Token::Substr),
     ("^([Ss][Uu][Bb][Ss][Tt][Rr][Ii][Nn][Gg])$", Token::Substring),
     ("^([Ss][Uu][Mm])$", Token::Sum),
     ("^([Ss][Uu][Mm][Ii][Ff])$", Token::SumIf),
     ("^([Tt][Aa][Nn])$", Token::Tan),
     ("^([Tt][Rr][Ii][Mm])$", Token::Trim),
-    ("^([Tt][Rr][Ii][Mm]_[Ss][Tt][Aa][Rr][Tt])$", Token::TrimStart),
+    (
+        "^([Tt][Rr][Ii][Mm]_[Ss][Tt][Aa][Rr][Tt])$",
+        Token::TrimStart,
+    ),
     ("^([Tt][Rr][Ii][Mm]_[Ee][Nn][Dd])$", Token::TrimEnd),
     ("^([Uu][Pp][Pp][Ee][Rr])$", Token::Upper),
     ("^([Yy][Ee][Aa][Rr])$", Token::Year),
@@ -177,7 +194,7 @@ impl<'input> Token<'input> {
             StringLiteral(_) => "string",
             IntLiteral(_) | FloatLiteral(_) => "number",
             DocComment(_) => "comment",
-            _ => "unknown"
+            _ => "unknown",
         }
     }
 }
@@ -188,8 +205,10 @@ struct MatcherBuilder {
 
 impl MatcherBuilder {
     fn new() -> Self {
-        let regex_set = RegexSetBuilder::new(REGEX_SOURCE.iter().map(|(s, _)| s)).build().unwrap();
-        MatcherBuilder{regex_set}
+        let regex_set = RegexSetBuilder::new(REGEX_SOURCE.iter().map(|(s, _)| s))
+            .build()
+            .unwrap();
+        MatcherBuilder { regex_set }
     }
 
     fn matcher<'input, 'builder>(&'builder self, s: &'input str) -> Matcher<'input, 'builder> {
@@ -204,7 +223,7 @@ impl MatcherBuilder {
 struct Matcher<'input, 'builder> {
     text: &'input str,
     consumed: usize,
-    regex_set: &'builder regex::RegexSet
+    regex_set: &'builder regex::RegexSet,
 }
 
 impl<'input, 'builder> Iterator for Matcher<'input, 'builder> {
@@ -219,14 +238,15 @@ impl<'input, 'builder> Iterator for Matcher<'input, 'builder> {
         if let Some(i) = matches.first() {
             let (_, t) = &REGEX_SOURCE[*i];
             Some(t.clone())
-        } else { None }
+        } else {
+            None
+        }
     }
 }
 
 //noinspection ALL
 #[derive(Clone, Debug, PartialEq, Eq, Fail)]
 pub enum LexicalError {
-
     #[fail(display = "empty char literal")]
     EmptyCharLiteral,
 
@@ -255,7 +275,7 @@ pub enum LexicalError {
     HexLiteralWrongPrefix,
 
     #[fail(display = "cannot parse hex literal, incomplete")]
-    HexLiteralIncomplete
+    HexLiteralIncomplete,
 }
 
 pub type SpannedToken<'input> = Spanned<Token<'input>, Location>;
@@ -265,7 +285,6 @@ pub type SpannedError = Spanned<LexicalError, Location>;
 fn error<T>(location: Location, code: LexicalError) -> Result<T, SpannedError> {
     Err(spanned(location, location, code))
 }
-
 
 pub fn is_identifier_start(ch: char) -> bool {
     match ch {
@@ -289,7 +308,6 @@ pub fn is_hex(ch: char) -> bool {
     ch.is_digit(16)
 }
 
-
 pub struct Lexer<'input> {
     input: &'input str,
     chars: CharLocations<'input>,
@@ -299,14 +317,17 @@ pub struct Lexer<'input> {
 }
 
 impl<'input> Lexer<'input> {
-    pub fn new<S>(input: &'input S) -> Self where S: ?Sized + ParserSource {
+    pub fn new<S>(input: &'input S) -> Self
+    where
+        S: ?Sized + ParserSource,
+    {
         let mut chars = CharLocations::new(input);
         Lexer {
             input: input.src(),
             start_index: input.start_index(),
             lookahead: chars.next(),
             chars,
-            builder: MatcherBuilder::new()
+            builder: MatcherBuilder::new(),
         }
     }
 
@@ -323,7 +344,6 @@ impl<'input> Lexer<'input> {
             None => None,
         }
     }
-
 
     fn skip_to_end(&mut self) {
         while let Some(_) = self.bump() {}
@@ -345,12 +365,12 @@ impl<'input> Lexer<'input> {
             _ => (),
         }
 
-        let token =match self.builder.matcher(identifier).next() {
+        let token = match self.builder.matcher(identifier).next() {
             Some(t) => t,
-            None => Token::Identifier(identifier)
+            None => Token::Identifier(identifier),
         };
 
-//        let token = Token::Identifier(identifier);
+        //        let token = Token::Identifier(identifier);
 
         Ok(spanned(start, end, token))
     }
@@ -359,9 +379,11 @@ impl<'input> Lexer<'input> {
         let (end, int) = self.take_while(start, is_digit);
         let (start, end, token) = if int.chars().next().unwrap() == '.' {
             match self.lookahead {
-                Some((_, ch)) if ch.is_whitespace() => (start, end, Token::FloatLiteral(int.parse().unwrap())),
+                Some((_, ch)) if ch.is_whitespace() => {
+                    (start, end, Token::FloatLiteral(int.parse().unwrap()))
+                }
                 None => (start, end, Token::FloatLiteral(int.parse().unwrap())),
-                _ => panic!("错误")
+                _ => panic!("错误"),
             }
         } else {
             match self.lookahead {
@@ -414,7 +436,9 @@ impl<'input> Lexer<'input> {
                         }
                     }
                 }
-                Some((start, ch)) if is_identifier_start(ch) => return self.error(start, UnexpectedChar(ch)),
+                Some((start, ch)) if is_identifier_start(ch) => {
+                    return self.error(start, UnexpectedChar(ch))
+                }
                 None | Some(_) => {
                     if let Ok(val) = int.parse() {
                         (start, end, Token::IntLiteral(val))
@@ -427,8 +451,7 @@ impl<'input> Lexer<'input> {
         Ok(spanned(start, end, token))
     }
 
-    fn test_lookahead<F: FnMut(char) -> bool>(&self, mut test: F) -> bool
-    {
+    fn test_lookahead<F: FnMut(char) -> bool>(&self, mut test: F) -> bool {
         self.lookahead.map_or(false, |(_, ch)| test(ch))
     }
 
@@ -477,13 +500,19 @@ impl<'input> Lexer<'input> {
         &self.input[start.to_usize()..end.to_usize()]
     }
 
-    fn take_while<F: FnMut(char) -> bool>(&mut self, start: Location, mut keep_going: F) -> (Location, &'input str)
-    {
+    fn take_while<F: FnMut(char) -> bool>(
+        &mut self,
+        start: Location,
+        mut keep_going: F,
+    ) -> (Location, &'input str) {
         self.take_until(start, |c| !keep_going(c))
     }
 
-    fn take_until<F: FnMut(char) -> bool>(&mut self, start: Location, mut terminate: F) -> (Location, &'input str)
-    {
+    fn take_until<F: FnMut(char) -> bool>(
+        &mut self,
+        start: Location,
+        mut terminate: F,
+    ) -> (Location, &'input str) {
         while let Some((end, ch)) = self.lookahead {
             if terminate(ch) {
                 return (end, self.slice(start, end));
@@ -491,7 +520,10 @@ impl<'input> Lexer<'input> {
                 self.bump();
             }
         }
-        (self.next_location(), self.slice(start, self.next_location()))
+        (
+            self.next_location(),
+            self.slice(start, self.next_location()),
+        )
     }
 
     fn string_literal(&mut self, start: Location) -> Result<SpannedToken<'input>, SpannedError> {
@@ -507,7 +539,7 @@ impl<'input> Lexer<'input> {
                         let token = Token::StringLiteral(string);
                         return Ok(spanned(start, end, token));
                     }
-                },
+                }
                 ch => string.push(ch),
             }
         }
@@ -520,7 +552,7 @@ impl<'input> Iterator for Lexer<'input> {
     type Item = Result<SpannedToken<'input>, SpannedError>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        while let Some((start, ch)) = self.bump(){
+        while let Some((start, ch)) = self.bump() {
             return match ch {
                 '-' if self.test_lookahead(|ch| ch == '-') => match self.line_comment(start) {
                     Some(token) => Some(Ok(token)),
@@ -529,7 +561,7 @@ impl<'input> Iterator for Lexer<'input> {
                 '!' | '^' | '~' if self.test_lookahead(|ch| ch == '=') => {
                     self.bump(); // skip '='
                     Some(Ok(spanned(start, self.next_location(), Token::NotEqual)))
-                },
+                }
                 ':' => {
                     if self.test_lookahead(|ch| ch == ':') {
                         self.bump(); // skip ':'
@@ -537,7 +569,7 @@ impl<'input> Iterator for Lexer<'input> {
                     } else {
                         Some(Ok(spanned(start, self.next_location(), Token::Colon)))
                     }
-                },
+                }
                 '|' => {
                     if self.test_lookahead(|ch| ch == '|') {
                         self.bump(); // skip ':'
@@ -545,33 +577,41 @@ impl<'input> Iterator for Lexer<'input> {
                     } else {
                         Some(Ok(spanned(start, self.next_location(), Token::Pipe)))
                     }
-                },
+                }
                 '<' => {
                     if let Some((_, ch)) = self.lookahead {
                         match ch {
                             '=' => {
                                 self.bump(); // skip '='
                                 Some(Ok(spanned(start, self.next_location(), Token::LessOrEqual)))
-                            },
+                            }
                             '>' => {
                                 self.bump(); // skip '>'
                                 Some(Ok(spanned(start, self.next_location(), Token::NotEqual)))
                             }
-                            _ => Some(Ok(spanned(start, self.next_location(), Token::Less)))
+                            _ => Some(Ok(spanned(start, self.next_location(), Token::Less))),
                         }
                     } else {
                         Some(Ok(spanned(start, self.next_location(), Token::Less)))
                     }
-                },
+                }
                 '>' => {
                     if self.test_lookahead(|ch| ch == '=') {
                         self.bump(); // skip '='
-                        Some(Ok(spanned(start, self.next_location(), Token::GreaterOrEqual)))
-                    } else { Some(Ok(spanned(start, self.next_location(), Token::Greater))) }
-                },
-                ch if is_digit(ch) || ((ch == '-' || ch == '.') && self.test_lookahead(is_digit)) => {
+                        Some(Ok(spanned(
+                            start,
+                            self.next_location(),
+                            Token::GreaterOrEqual,
+                        )))
+                    } else {
+                        Some(Ok(spanned(start, self.next_location(), Token::Greater)))
+                    }
+                }
+                ch if is_digit(ch)
+                    || ((ch == '-' || ch == '.') && self.test_lookahead(is_digit)) =>
+                {
                     Some(self.numeric_literal(start))
-                },
+                }
                 '\'' => Some(self.string_literal(start)),
                 '(' => Some(Ok(spanned(start, self.next_location(), Token::LeftParen))),
                 ')' => Some(Ok(spanned(start, self.next_location(), Token::RightParen))),
@@ -585,14 +625,14 @@ impl<'input> Iterator for Lexer<'input> {
                 ch if is_identifier_start(ch) => Some(self.identifier(start)),
                 ch if ch.is_whitespace() => continue,
                 ch => Some(self.error(start, UnexpectedChar(ch))),
-            }
+            };
         }
         // Return EOF instead of None so that the layout algorithm receives the eof location
-//        Some(Ok(spanned(
-//            self.next_location(),
-//            self.next_location(),
-//            Token::EOF,
-//        )))
+        //        Some(Ok(spanned(
+        //            self.next_location(),
+        //            self.next_location(),
+        //            Token::EOF,
+        //        )))
         None
     }
 }
@@ -606,13 +646,12 @@ impl<'input> Iterator for Tokenizer<'input> {
         match self.0.next() {
             Some(t) => Some(match t {
                 Ok(t) => Ok((t.span.start().absolute, t.value, t.span.end().absolute)),
-                Err(t) => Err(t)
+                Err(t) => Err(t),
             }),
             None => None,
         }
     }
 }
-
 
 /// Converts partial hex literal (i.e. part after `0x` or `-0x`) to 64 bit signed integer.
 ///
@@ -639,9 +678,9 @@ fn i64_from_hex(hex: &str, is_positive: bool) -> Result<i64, LexicalError> {
 }
 
 #[cfg(test)]
-mod test{
-    use super::*;
+mod test {
     use super::Token::*;
+    use super::*;
 
     fn location(byte: u32) -> Location {
         Location {
@@ -654,12 +693,15 @@ mod test{
     fn tokenizer<'input>(
         input: &'input str,
     ) -> impl Iterator<Item = Result<SpannedToken<'input>, SpannedError>> + 'input {
-        Box::new(Iterator::take_while(Lexer::new(input), |token| match *token {
-            Ok(Spanned {
-                   value: Token::EOF, ..
-               }) => false,
-            _ => true,
-        }))
+        Box::new(Iterator::take_while(
+            Lexer::new(input),
+            |token| match *token {
+                Ok(Spanned {
+                    value: Token::EOF, ..
+                }) => false,
+                _ => true,
+            },
+        ))
     }
 
     fn test(input: &str, expected: Vec<(&str, Token)>) {
@@ -677,8 +719,8 @@ mod test{
             let mut start = Source::location(&source, start_byte).unwrap();
             start.column += ColumnOffset(1);
 
-            let end_byte = source.span().start()
-                + ByteOffset(expected_span.rfind("~").unwrap() as i64 + 1);
+            let end_byte =
+                source.span().start() + ByteOffset(expected_span.rfind("~").unwrap() as i64 + 1);
             let mut end = Source::location(&source, end_byte.into()).unwrap();
             end.column += ColumnOffset(1);
 
@@ -701,22 +743,58 @@ mod test{
                 (r#"  ~                                           "#, Colon),
                 (r#"    ~                                         "#, Equal),
                 (r#"      ~                                       "#, Pipe),
-                (r#"        ~                                     "#, LeftParen),
-                (r#"          ~                                   "#, RightParen),
-                (r#"            ~                                 "#, PlusSign),
-                (r#"              ~                               "#, MinusSign),
-                (r#"                ~                             "#, Asterisk),
+                (
+                    r#"        ~                                     "#,
+                    LeftParen,
+                ),
+                (
+                    r#"          ~                                   "#,
+                    RightParen,
+                ),
+                (
+                    r#"            ~                                 "#,
+                    PlusSign,
+                ),
+                (
+                    r#"              ~                               "#,
+                    MinusSign,
+                ),
+                (
+                    r#"                ~                             "#,
+                    Asterisk,
+                ),
                 (r#"                  ~                           "#, Solidus),
                 (r#"                    ~                         "#, Greater),
                 (r#"                      ~                       "#, Less),
                 (r#"                        ~                     "#, Comma),
-                (r#"                          ~~                  "#, LessOrEqual),
-                (r#"                             ~~               "#, GreaterOrEqual),
-                (r#"                                ~~            "#, NotEqual),
-                (r#"                                   ~~         "#, NotEqual),
-                (r#"                                      ~~      "#, NotEqual),
-                (r#"                                         ~~   "#, NotEqual),
-                (r#"                                            ~~"#, DoubleColon),
+                (
+                    r#"                          ~~                  "#,
+                    LessOrEqual,
+                ),
+                (
+                    r#"                             ~~               "#,
+                    GreaterOrEqual,
+                ),
+                (
+                    r#"                                ~~            "#,
+                    NotEqual,
+                ),
+                (
+                    r#"                                   ~~         "#,
+                    NotEqual,
+                ),
+                (
+                    r#"                                      ~~      "#,
+                    NotEqual,
+                ),
+                (
+                    r#"                                         ~~   "#,
+                    NotEqual,
+                ),
+                (
+                    r#"                                            ~~"#,
+                    DoubleColon,
+                ),
             ],
         );
     }
@@ -729,7 +807,13 @@ mod test{
                 (r#"~             "#, Identifier("h")),
                 (r#" ~            "#, MinusSign),
                 (r#"  ~           "#, Identifier("i")),
-                (r#"    ~~ ~~~~~~~"#, DocComment(Comment{r#type: CommentType::Line, content: "hellooo".to_string()}))
+                (
+                    r#"    ~~ ~~~~~~~"#,
+                    DocComment(Comment {
+                        r#type: CommentType::Line,
+                        content: "hellooo".to_string(),
+                    }),
+                ),
             ],
         );
     }
@@ -741,7 +825,10 @@ mod test{
             vec![
                 (r#"~~~~~              "#, StringLiteral("abc".to_string())),
                 (r#"      ~~           "#, Identifier("mn")),
-                (r#"         ~~~~~~~~~~"#, StringLiteral(r#"hjk'xyz"#.to_string()), ),
+                (
+                    r#"         ~~~~~~~~~~"#,
+                    StringLiteral(r#"hjk'xyz"#.to_string()),
+                ),
             ],
         );
     }
@@ -773,7 +860,7 @@ mod test{
     }
 
     #[test]
-    fn variable(){
+    fn variable() {
         test(
             r#"a = :  m"#,
             vec![
@@ -787,51 +874,67 @@ mod test{
 
     #[test]
     fn test1() {
-        test("a >-3.2",
-             vec![
-                 ("~      ", Identifier("a")),
-                 ("  ~    ", Greater),
-                 ("   ~~~~", FloatLiteral(-3.2)),
-             ],
+        test(
+            "a >-3.2",
+            vec![
+                ("~      ", Identifier("a")),
+                ("  ~    ", Greater),
+                ("   ~~~~", FloatLiteral(-3.2)),
+            ],
         )
     }
     #[test]
     fn test2() {
-        test("a > '3.2'",
-             vec![
-                 ("~        ", Identifier("a")),
-                 ("  ~      ", Greater),
-                 ("    ~~~~~", StringLiteral("3.2".to_string())),
-             ],
+        test(
+            "a > '3.2'",
+            vec![
+                ("~        ", Identifier("a")),
+                ("  ~      ", Greater),
+                ("    ~~~~~", StringLiteral("3.2".to_string())),
+            ],
         )
     }
     #[test]
-    fn test3(){
-        test("trim(trailing  'a' from 'abc')",
-             vec![
-                 ("~~~~                          ", Trim),
-                 ("    ~                         ", LeftParen),
-                 ("     ~~~~~~~~                 ", Trailing),
-                 ("               ~~~            ", StringLiteral("a".to_string())),
-                 ("                   ~~~~       ", From),
-                 ("                        ~~~~~ ", StringLiteral("abc".to_string())),
-                 ("                             ~", RightParen),
-             ],
+    fn test3() {
+        test(
+            "trim(trailing  'a' from 'abc')",
+            vec![
+                ("~~~~                          ", Trim),
+                ("    ~                         ", LeftParen),
+                ("     ~~~~~~~~                 ", Trailing),
+                (
+                    "               ~~~            ",
+                    StringLiteral("a".to_string()),
+                ),
+                ("                   ~~~~       ", From),
+                (
+                    "                        ~~~~~ ",
+                    StringLiteral("abc".to_string()),
+                ),
+                ("                             ~", RightParen),
+            ],
         )
     }
 
     #[test]
-    fn test_err(){
-        test("trim(trailing  'a' from 'abc')",
-             vec![
-                 ("~~~~                          ", Trim),
-                 ("    ~                         ", LeftParen),
-                 ("     ~~~~~~~~                 ", Trailing),
-                 ("               ~~~            ", StringLiteral("a".to_string())),
-                 ("                   ~~~~       ", From),
-                 ("                        ~~~~~ ", StringLiteral("abc".to_string())),
-                 ("                             ~", RightParen),
-             ],
+    fn test_err() {
+        test(
+            "trim(trailing  'a' from 'abc')",
+            vec![
+                ("~~~~                          ", Trim),
+                ("    ~                         ", LeftParen),
+                ("     ~~~~~~~~                 ", Trailing),
+                (
+                    "               ~~~            ",
+                    StringLiteral("a".to_string()),
+                ),
+                ("                   ~~~~       ", From),
+                (
+                    "                        ~~~~~ ",
+                    StringLiteral("abc".to_string()),
+                ),
+                ("                             ~", RightParen),
+            ],
         )
     }
 

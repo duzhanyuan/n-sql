@@ -10,7 +10,6 @@ use ast::Expression as UnBoxExpression;
 
 type Expression = Box<UnBoxExpression>;
 
-
 #[derive(Clone, Debug)]
 pub struct LengthFn {
     pub text: Expression,

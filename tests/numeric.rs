@@ -71,7 +71,6 @@ fn test_pow(left: &str, database_type: DatabaseType, right: &str) {
 #[case("log(2, 3)", Oracle, "log(2, 3)")]
 #[case("log(2, 3)", MySQL, "log(2, 3)")]
 //#[case("log(2, 3)", SqlServer, "log(3, 2)")]
-
 #[case("log10(6.8)", NSQL, "log10(6.8)")]
 //#[case("log10(2)", NSQL, "log10(2)")]
 //#[case("log10(2)", PostgreSQL, "log(10, 2)")]
@@ -79,13 +78,11 @@ fn test_pow(left: &str, database_type: DatabaseType, right: &str) {
 //#[case("log10(2)", MySQL, "log10(2)")]
 //#[case("log10(2)", SqlServer, "log10(2)")]
 
-
 //#[case("log(10, 2)", NSQL, "log10(2)")]
 //#[case("log(10, 2)", PostgreSQL, "log(10, 2)")]
 //#[case("log(10, 2)", Oracle, "log(10, 2)")]
 //#[case("log(10, 2)", MySQL, "log10(2)")]
 //#[case("log(10, 2)", SqlServer, "log10(2)")]
-
 
 //#[case("log(2)", NSQL, "log10(2)")]
 #[case("log(2)", PostgreSQL, "log(2)")]
@@ -235,7 +232,6 @@ fn test_abs(left: &str, database_type: DatabaseType, right: &str) {
 //#[case("dense_rank() over (order by a)", SqlServer, "dense_rank() over (order by a)")]
 //#[case("dense_rank() over (order by a asc)", SqlServer, "dense_rank() over (order by a asc)")]
 //#[case("dense_rank() over (order by a desc)", SqlServer, "dense_rank() over (order by a desc)")]
-
 
 fn test_rank(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);

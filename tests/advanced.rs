@@ -11,7 +11,6 @@ mod common;
 
 test_init!();
 
-
 #[theory]
 #[test]
 #[case("nvl(a, 'no value')", NSQL, "nvl(a, 'no value')")]
@@ -28,7 +27,6 @@ fn test_nvl(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
-
 #[theory]
 #[test]
 #[case("COALESCE(a,b,c)", NSQL, "coalesce(a, b, c)")]
@@ -37,10 +35,9 @@ fn test_nvl(left: &str, database_type: DatabaseType, right: &str) {
 #[case("COALESCE(a,b,c)", MySQL, "coalesce(a, b, c)")]
 //#[case("COALESCE(a,b,c)", SqlServer, "coalesce(a, b, c)")]
 //#[case("COALESCE(a,b,c)", SQLite, "coalesce(a, b, c)")]
-fn test_coalesce(left: &str, database_type: DatabaseType, right: &str){
+fn test_coalesce(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-
 
 //#[theory]
 //#[test]
@@ -80,7 +77,6 @@ fn test_coalesce(left: &str, database_type: DatabaseType, right: &str){
 //#[case("format(now(), 'yyyy年mm月dd日 hh24:mi:ss')", MySQL, "date_format(now(), '%Y年%m月%d日 %H:%i:%s')")]
 
 #[allow(dead_code)]
-fn test_format(left: &str, database_type: DatabaseType, right: &str){
+fn test_format(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-

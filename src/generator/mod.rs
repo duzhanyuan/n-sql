@@ -6,27 +6,25 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-
 mod visitor;
 
-mod pgsql;
 mod mysql;
 mod oracle;
+mod pgsql;
 
-use ast::*;
 use self::visitor::Visitor;
+use ast::*;
+use std::fmt::{Error, Result, Write};
 use std::result;
-use std::fmt::{Write, Error, Result};
 type Formatter = String;
 
-pub use self::pgsql::PgsqlGenerator;
-pub use self::oracle::OracleGenerator;
 pub use self::mysql::MySQLGenerator;
+pub use self::oracle::OracleGenerator;
+pub use self::pgsql::PgsqlGenerator;
 
 pub trait Generator<T> {
     fn to_sql(&self) -> result::Result<String, Error>;
 }
-
 
 struct InternalGenerator;
 
@@ -39,7 +37,6 @@ impl Visitor for InternalGenerator {
     }
 }
 
-
 impl Generator<Expression> for Expression {
     fn to_sql(&self) -> result::Result<String, Error> {
         let mut s = String::new();
@@ -47,7 +44,6 @@ impl Generator<Expression> for Expression {
         Ok(s)
     }
 }
-
 
 impl Generator<PredicateExpression> for PredicateExpression {
     fn to_sql(&self) -> result::Result<String, Error> {

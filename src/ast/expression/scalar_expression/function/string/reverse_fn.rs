@@ -9,7 +9,6 @@ use ast::Expression as UnBoxExpression;
 
 type Expression = Box<UnBoxExpression>;
 
-
 #[derive(Clone, Debug)]
 pub struct ReverseFn {
     pub text: Expression,
@@ -17,6 +16,6 @@ pub struct ReverseFn {
 
 impl ReverseFn {
     pub fn new(text: Expression) -> ReverseFn {
-        ReverseFn{text}
+        ReverseFn { text }
     }
 }

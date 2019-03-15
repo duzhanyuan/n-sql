@@ -11,7 +11,6 @@ mod common;
 
 test_init!();
 
-
 #[theory]
 #[test]
 #[case("day(now())", NSQL, "day(now())")]
@@ -72,10 +71,9 @@ fn test_day_diff(left: &str, database_type: DatabaseType, right: &str) {
 //#[case("hour_add(now(),3)", MySQL, "date_add(now(), interval 3 hour)")]
 //#[case("hour_add(now(),3)", SqlServer, "dateadd(hour, 3, getdate())")]
 //#[case("hour_add(now(),3)", SQLite, "datetime(current_timestamp, '+3 hour')")]
-fn test_hour_add(left: &str, database_type: DatabaseType, right: &str){
+fn test_hour_add(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-
 
 #[theory]
 #[test]
@@ -85,7 +83,7 @@ fn test_hour_add(left: &str, database_type: DatabaseType, right: &str){
 //#[case("HOUR_sub(now(),3)", MySQL, "date_sub(now(), interval 3 hour)")]
 //#[case("HOUR_sub(now(),3)", SqlServer, "dateadd(hour, 3, getdate())")]
 //#[case("HOUR_sub(now(),3)", SQLite, "datetime(current_timestamp, '-1 hour')")]
-fn test_hour_sub(left: &str, database_type: DatabaseType, right: &str){
+fn test_hour_sub(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -99,7 +97,7 @@ fn test_hour_sub(left: &str, database_type: DatabaseType, right: &str){
 //#[case("extract(hour from now())", MySQL, "hour(now())")]
 //#[case("extract(hour from now())", SqlServer, "datepart(hour, getdate())")]
 //#[case("extract(hour from now())", SQLite, "")]
-fn test_hour(left: &str, database_type: DatabaseType, right: &str){
+fn test_hour(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -111,10 +109,9 @@ fn test_hour(left: &str, database_type: DatabaseType, right: &str){
 //#[case("hour_diff(a,b)", MySQL, "timestampdiff(hour, a, b)")]
 //#[case("hour_diff(a,b)", SqlServer, "datediff(hour, a, b)")]
 //#[case("hour_diff(a,b)", SQLite, "(julianday(b) - julianday(a)) * 24")]
-fn test_hour_diff(left: &str, database_type: DatabaseType, right: &str){
+fn test_hour_diff(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-
 
 #[theory]
 #[test]
@@ -124,11 +121,9 @@ fn test_hour_diff(left: &str, database_type: DatabaseType, right: &str){
 //#[case("minute_add(now(),3)", MySQL, "date_add(now(), interval 3 minute)")]
 //#[case("minute_add(now(),3)", SqlServer, "dateadd(minute, 3, getdate())")]
 //#[case("minute_add(now(),3)", SQLite, "datetime(current_timestamp, '+3 minute')")]
-fn test_minute_add(left: &str, database_type: DatabaseType, right: &str){
+fn test_minute_add(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-
-
 
 #[theory]
 #[test]
@@ -138,10 +133,9 @@ fn test_minute_add(left: &str, database_type: DatabaseType, right: &str){
 //#[case("minute_sub(now(),3)", MySQL, "date_sub(now(), interval 3 minute)")]
 //#[case("minute_sub(now(),3)", SqlServer, "dateadd(minute, -3, getdate())")]
 //#[case("minute_sub(now(),3)", SQLite, "datetime(current_timestamp, '-3 minute')")]
-fn test_minute_sub(left: &str, database_type: DatabaseType, right: &str){
+fn test_minute_sub(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-
 
 #[theory]
 #[test]
@@ -153,7 +147,7 @@ fn test_minute_sub(left: &str, database_type: DatabaseType, right: &str){
 //#[case("extract(minute from now())", MySQL, "minute(now())")]
 //#[case("extract(minute from now())", SqlServer, "datepart(minute, getdate())")]
 //#[case("extract(minute from now())", SQLite, "")]
-fn test_minute(left: &str, database_type: DatabaseType, right: &str){
+fn test_minute(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -165,7 +159,7 @@ fn test_minute(left: &str, database_type: DatabaseType, right: &str){
 //#[case("minute_diff(a,b)", MySQL, "timestampdiff(minute, a, b)")]
 //#[case("minute_diff(a,b)", SqlServer, "datediff(minute, a, b)")]
 //#[case("minute_diff(a,b)", SQLite, "(julianday(b) - julianday(a)) * 1440")]
-fn test_minute_diff(left: &str, database_type: DatabaseType, right: &str){
+fn test_minute_diff(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -177,7 +171,7 @@ fn test_minute_diff(left: &str, database_type: DatabaseType, right: &str){
 //#[case("month_add(now(),3)", MySQL, "date_add(now(), interval 3 month)")]
 //#[case("month_add(now(),3)", SqlServer, "dateadd(month, 3, getdate())")]
 //#[case("month_add(now(),3)", SQLite, "datetime(current_timestamp, '-3 Second')")]
-fn test_month_add(left: &str, database_type: DatabaseType, right: &str){
+fn test_month_add(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -189,10 +183,9 @@ fn test_month_add(left: &str, database_type: DatabaseType, right: &str){
 //#[case("month_sub(now(),3)", MySQL, "date_sub(now(), interval 3 month)")]
 //#[case("month_sub(now(),3)", SqlServer, "dateadd(month, -3, getdate())")]
 //#[case("month_sub(now(),3)", SQLite, "datetime(current_timestamp, '-3 month')")]
-fn test_month_sub(left: &str, database_type: DatabaseType, right: &str){
+fn test_month_sub(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-
 
 #[theory]
 #[test]
@@ -205,7 +198,7 @@ fn test_month_sub(left: &str, database_type: DatabaseType, right: &str){
 //#[case("extract(month from now())", MySQL, "month(now())")]
 //#[case("extract(month from now())", SqlServer, "month(getedate())")]
 //#[case("extract(month from now())", SQLite, "")]
-fn test_month(left: &str, database_type: DatabaseType, right: &str){
+fn test_month(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -217,7 +210,7 @@ fn test_month(left: &str, database_type: DatabaseType, right: &str){
 //#[case("month_diff(a,b)", MySQL, "timestampdiff(month, a, b)")]
 //#[case("month_diff(a,b)", SqlServer, "datediff(month, a, b)")]
 //#[case("month_diff(a,b)", SQLite, "(julianday(b) - julianday(a)) / 30")]
-fn test_month_diff(left: &str, database_type: DatabaseType, right: &str){
+fn test_month_diff(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -228,7 +221,7 @@ fn test_month_diff(left: &str, database_type: DatabaseType, right: &str){
 //#[case("second_add(now(),3)", MySQL, "date_add(now(), interval 3 second)")]
 //#[case("second_add(now(),3)", SqlServer, "dateadd(second, 3, getdate())")]
 //#[case("second_add(now(),3)", SQLite, "datetime(current_timestamp, '+3 second')")]
-fn test_second_add(left: &str, database_type: DatabaseType, right: &str){
+fn test_second_add(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -240,7 +233,7 @@ fn test_second_add(left: &str, database_type: DatabaseType, right: &str){
 //#[case("second_sub(now(),3)", MySQL, "date_sub(now(), interval 3 second)")]
 //#[case("second_sub(now(),3)", SqlServer, "dateadd(second, -3, getdate())")]
 //#[case("second_sub(now(),3)", SQLite, "datetime(current_timestamp, '-3 second')")]
-fn test_second_sub(left: &str, database_type: DatabaseType, right: &str){
+fn test_second_sub(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -253,7 +246,7 @@ fn test_second_sub(left: &str, database_type: DatabaseType, right: &str){
 //#[case("extract(second from now())", MySQL, "second(now())")]
 //#[case("extract(second from now())", SqlServer, "datepart(second, getdate())")]
 //#[case("extract(second from now())", SQLite, "")]
-fn test_second(left: &str, database_type: DatabaseType, right: &str){
+fn test_second(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -265,7 +258,7 @@ fn test_second(left: &str, database_type: DatabaseType, right: &str){
 //#[case("second_diff(a, b)", MySQL, "timestampdiff(second, a, b)")]
 //#[case("second_diff(a, b)", SqlServer, "datediff(second, a, b)")]
 //#[case("second_diff(a, b)", SQLite, "(julianday(b) - julianday(a)) * 86400")]
-fn test_second_diff(left: &str, database_type: DatabaseType, right: &str){
+fn test_second_diff(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -277,7 +270,7 @@ fn test_second_diff(left: &str, database_type: DatabaseType, right: &str){
 //#[case("year_add(now(),3)", MySQL, "date_add(now(), interval 3 year)")]
 //#[case("year_add(now(),3)", SqlServer, "date_add(year, 3, getdate())")]
 //#[case("year_add(now(),3)", SQLite, "datetime(current_timestamp, '-3 second')")]
-fn test_year_add(left: &str, database_type: DatabaseType, right: &str){
+fn test_year_add(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -289,10 +282,9 @@ fn test_year_add(left: &str, database_type: DatabaseType, right: &str){
 //#[case("year_sub(now(),3)", MySQL, "date_sub(now(), interval 3 year)")]
 //#[case("year_sub(now(),3)", SqlServer, "dateadd(year, -3, getdate())")]
 //#[case("year_sub(now(),3)", SQLite, "datetime(current_timestamp, '-3 year')")]
-fn test_year_sub(left: &str, database_type: DatabaseType, right: &str){
+fn test_year_sub(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
-
 
 #[theory]
 #[test]
@@ -303,7 +295,7 @@ fn test_year_sub(left: &str, database_type: DatabaseType, right: &str){
 #[case("extract(year from abc)", PostgreSQL, "extract(year from abc)")]
 //#[case("year(now())", SqlServer, "year(getdate())")]
 //#[case("year(now())", SQLite, "")]
-fn test_year(left: &str, database_type: DatabaseType, right: &str){
+fn test_year(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -315,13 +307,12 @@ fn test_year(left: &str, database_type: DatabaseType, right: &str){
 //#[case("year_diff(a,b)", MySQL, "timestampdiff(year, a, b)")]
 //#[case("year_diff(a,b)", SqlServer, "datediff(year, a, b)")]
 //#[case("year_diff(a,b)", SQLite, "(julianday(b) - julianday(a)) / 365")]
-fn test_year_diff(left: &str, database_type: DatabaseType, right: &str){
+fn test_year_diff(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
-
 #[test]
-fn test_year_err(){
+fn test_year_err() {
     let expr = ExpressionParser::new().parse(Lexer::new("extract(year form abc)").tokenizer());
     assert_eq!(true, expr.is_err());
 }

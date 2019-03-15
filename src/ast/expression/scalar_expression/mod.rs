@@ -6,20 +6,19 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-mod constant;
-mod variable;
-mod unary_expression;
-mod case_when_expression;
 mod arithmetic_expression;
+mod case_when_expression;
+mod constant;
 mod function;
+mod unary_expression;
+mod variable;
 
-pub use self::constant::*;
-pub use self::variable::*;
-pub use self::unary_expression::*;
-pub use self::case_when_expression::*;
 pub use self::arithmetic_expression::*;
+pub use self::case_when_expression::*;
+pub use self::constant::*;
 pub use self::function::*;
-
+pub use self::unary_expression::*;
+pub use self::variable::*;
 
 use ast::Column;
 
@@ -34,7 +33,6 @@ pub enum ScalarExpression {
     CaseWhen(CaseWhenExpression),
     Function(Function),
 }
-
 
 impl From<ConstantValue> for ScalarExpression {
     fn from(v: ConstantValue) -> Self {

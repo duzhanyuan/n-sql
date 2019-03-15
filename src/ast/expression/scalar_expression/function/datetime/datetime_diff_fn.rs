@@ -6,17 +6,25 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::{Expression, DatetimeType};
+use ast::{DatetimeType, Expression};
 
 #[derive(Clone, Debug)]
 pub struct DatetimeDiffFn {
     pub start: Box<Expression>,
     pub end: Box<Expression>,
-    pub diff_type: DatetimeType
+    pub diff_type: DatetimeType,
 }
 
 impl DatetimeDiffFn {
-    pub fn new(start: Box<Expression>, end: Box<Expression>, diff_type: DatetimeType) -> DatetimeDiffFn {
-        DatetimeDiffFn{start, end, diff_type}
+    pub fn new(
+        start: Box<Expression>,
+        end: Box<Expression>,
+        diff_type: DatetimeType,
+    ) -> DatetimeDiffFn {
+        DatetimeDiffFn {
+            start,
+            end,
+            diff_type,
+        }
     }
 }

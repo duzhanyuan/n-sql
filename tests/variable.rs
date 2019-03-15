@@ -6,19 +6,21 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-
 #[macro_use]
 mod common;
 
 test_init!();
 
 #[test]
-fn test1(){
-    test_predicate(NSQL,"a = :  m", "a = :m");
+fn test1() {
+    test_predicate(NSQL, "a = :  m", "a = :m");
 }
 
-
 #[test]
-fn test2(){
-    test_statement(NSQL,"select * from student where a in (:a,:b,:c)", "select * from student where a in (:a, :b, :c)");
+fn test2() {
+    test_statement(
+        NSQL,
+        "select * from student where a in (:a,:b,:c)",
+        "select * from student where a in (:a, :b, :c)",
+    );
 }

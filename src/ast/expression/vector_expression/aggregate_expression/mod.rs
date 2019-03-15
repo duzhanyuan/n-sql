@@ -11,16 +11,16 @@ mod count_fn;
 mod max_fn;
 mod median_fn;
 mod min_fn;
-mod sum_fn;
 mod stddev_fn;
+mod sum_fn;
 
 pub use self::avg_fn::*;
 pub use self::count_fn::*;
 pub use self::max_fn::*;
 pub use self::median_fn::*;
 pub use self::min_fn::*;
-pub use self::sum_fn::*;
 pub use self::stddev_fn::*;
+pub use self::sum_fn::*;
 
 #[derive(Clone, Debug)]
 pub enum AggregateType {

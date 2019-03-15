@@ -13,11 +13,11 @@ type Expression = Box<UnBoxExpression>;
 #[derive(Clone, Debug)]
 pub struct LeftFn {
     pub text: Expression,
-    pub length: Expression
+    pub length: Expression,
 }
 
 impl LeftFn {
     pub fn new(text: Expression, length: Expression) -> LeftFn {
-        LeftFn {text, length}
+        LeftFn { text, length }
     }
 }

@@ -11,11 +11,11 @@ use ast::Expression;
 #[derive(Clone, Debug)]
 pub struct DaySubFn {
     pub expr: Box<Expression>,
-    pub offset: Box<Expression>
+    pub offset: Box<Expression>,
 }
 
 impl DaySubFn {
     pub fn new(expr: Box<Expression>, offset: Box<Expression>) -> DaySubFn {
-        DaySubFn{expr, offset}
+        DaySubFn { expr, offset }
     }
 }

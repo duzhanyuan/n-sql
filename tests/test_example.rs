@@ -11,7 +11,6 @@ mod common;
 
 test_init!();
 
-
 #[theory]
 #[test]
 #[case(1, 2, 3)]

@@ -9,7 +9,6 @@ use ast::Expression as UnBoxExpression;
 
 type Expression = Box<UnBoxExpression>;
 
-
 #[derive(Clone, Debug)]
 pub struct UpperFn {
     pub text: Expression,

@@ -6,9 +6,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ops::{
-    Add, Mul, Sub, Div
-};
+use std::ops::{Add, Div, Mul, Sub};
 
 #[derive(Copy, Clone, Debug)]
 pub enum NumericValue {
@@ -48,11 +46,11 @@ impl Add for NumericValue {
         match self {
             Integer(li) => match other {
                 Integer(ri) => (li + ri).into(),
-                Float(rf) => ((li as f64) + rf).into()
+                Float(rf) => ((li as f64) + rf).into(),
             },
             Float(lf) => match other {
                 Integer(ri) => (lf + (ri as f64)).into(),
-                Float(rf) => (lf + rf).into()
+                Float(rf) => (lf + rf).into(),
             },
         }
     }
@@ -66,11 +64,11 @@ impl Sub for NumericValue {
         match self {
             Integer(li) => match other {
                 Integer(ri) => (li - ri).into(),
-                Float(rf) => ((li as f64) - rf).into()
+                Float(rf) => ((li as f64) - rf).into(),
             },
             Float(lf) => match other {
                 Integer(ri) => (lf - (ri as f64)).into(),
-                Float(rf) => (lf - rf).into()
+                Float(rf) => (lf - rf).into(),
             },
         }
     }
@@ -84,11 +82,11 @@ impl Div for NumericValue {
         match self {
             Integer(li) => match other {
                 Integer(ri) => (li / ri).into(),
-                Float(rf) => ((li as f64) / rf).into()
+                Float(rf) => ((li as f64) / rf).into(),
             },
             Float(lf) => match other {
                 Integer(ri) => (lf / (ri as f64)).into(),
-                Float(rf) => (lf / rf).into()
+                Float(rf) => (lf / rf).into(),
             },
         }
     }
@@ -102,13 +100,12 @@ impl Mul for NumericValue {
         match self {
             Integer(li) => match other {
                 Integer(ri) => (li * ri).into(),
-                Float(rf) => ((li as f64) * rf).into()
+                Float(rf) => ((li as f64) * rf).into(),
             },
             Float(lf) => match other {
                 Integer(ri) => (lf * (ri as f64)).into(),
-                Float(rf) => (lf * rf).into()
+                Float(rf) => (lf * rf).into(),
             },
         }
     }
 }
-

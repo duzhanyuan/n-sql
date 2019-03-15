@@ -13,12 +13,15 @@ type Expression = Box<UnBoxExpression>;
 pub struct SubstrFn {
     pub text: Expression,
     pub start: Expression,
-    pub length: Option<Expression>
+    pub length: Option<Expression>,
 }
 
 impl SubstrFn {
     pub fn new(text: Expression, start: Expression, length: Option<Expression>) -> SubstrFn {
-        SubstrFn {text, start, length}
+        SubstrFn {
+            text,
+            start,
+            length,
+        }
     }
 }
-

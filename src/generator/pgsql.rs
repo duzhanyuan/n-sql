@@ -6,11 +6,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::*;
 use super::Visitor;
-use std::result;
-use std::fmt::{Write, Error, Result};
+use ast::*;
 use optimizer::Optimizer;
+use std::fmt::{Error, Result, Write};
+use std::result;
 
 type Formatter = String;
 
@@ -26,9 +26,12 @@ impl Visitor for InternalGenerator {
         let predicate = function.predicate.clone();
         let expr = function.expr.clone();
         let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
-            (predicate, expr)
-        ], Some(Expression::from(ConstantValue::Null).into()))))));
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
 
         let stddev = StddevFn::new(aggregate_type, case_when);
         self.visit_stddev_fn(&stddev, f)
@@ -38,9 +41,12 @@ impl Visitor for InternalGenerator {
         let predicate = function.predicate.clone();
         let expr = function.expr.clone();
         let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
-            (predicate, expr)
-        ], Some(Expression::from(ConstantValue::Null).into()))))));
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
 
         let avg = AvgFn::new(aggregate_type, case_when);
         self.visit_avg_fn(&avg, f)
@@ -49,9 +55,12 @@ impl Visitor for InternalGenerator {
         let predicate = function.predicate.clone();
         let expr = function.expr.clone();
         let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
-            (predicate, expr)
-        ], Some(Expression::from(ConstantValue::Null).into()))))));
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
 
         let count = CountFn::new(aggregate_type, case_when);
         self.visit_count_fn(&count, f)
@@ -60,9 +69,12 @@ impl Visitor for InternalGenerator {
         let predicate = function.predicate.clone();
         let expr = function.expr.clone();
         let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
-            (predicate, expr)
-        ], Some(Expression::from(ConstantValue::Null).into()))))));
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
 
         let max = MaxFn::new(aggregate_type, case_when);
         self.visit_max_fn(&max, f)
@@ -71,9 +83,12 @@ impl Visitor for InternalGenerator {
         let predicate = function.predicate.clone();
         let expr = function.expr.clone();
         let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
-            (predicate, expr)
-        ], Some(Expression::from(ConstantValue::Null).into()))))));
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
 
         let median = MedianFn::new(aggregate_type, case_when);
         self.visit_median_fn(&median, f)
@@ -82,9 +97,12 @@ impl Visitor for InternalGenerator {
         let predicate = function.predicate.clone();
         let expr = function.expr.clone();
         let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
-            (predicate, expr)
-        ], Some(Expression::from(ConstantValue::Null).into()))))));
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
 
         let min = MinFn::new(aggregate_type, case_when);
         self.visit_min_fn(&min, f)
@@ -93,14 +111,21 @@ impl Visitor for InternalGenerator {
         let predicate = function.predicate.clone();
         let expr = function.expr.clone();
         let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(vec![
-            (predicate, expr)
-        ], Some(Expression::from(ConstantValue::Null).into()))))));
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
 
         let sum = SumFn::new(aggregate_type, case_when);
         self.visit_sum_fn(&sum, f)
     }
-    fn visit_pagination_statement(&self, pagination_statement: &Box<PaginationStatement>, f: &mut Formatter) -> Result {
+    fn visit_pagination_statement(
+        &self,
+        pagination_statement: &Box<PaginationStatement>,
+        f: &mut Formatter,
+    ) -> Result {
         self.visit_set_statement(&pagination_statement.set, f)?;
         if let Some(ref skip) = pagination_statement.skip {
             f.write_char(' ')?;
@@ -270,9 +295,7 @@ impl Visitor for InternalGenerator {
         self.visit_expression(&function.default, f)?;
         f.write_char(')')
     }
-
 }
-
 
 //noinspection SpellCheckingInspection
 impl PgsqlGenerator<Expression> for Expression {
@@ -282,7 +305,6 @@ impl PgsqlGenerator<Expression> for Expression {
         Ok(s)
     }
 }
-
 
 //noinspection SpellCheckingInspection
 impl PgsqlGenerator<PredicateExpression> for PredicateExpression {

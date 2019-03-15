@@ -24,5 +24,5 @@ impl InExpression {
 #[derive(Clone, Debug)]
 pub enum InElements {
     Values(Vec<Box<Expression>>),
-    Set(Box<SetStatement>)
+    Set(Box<SetStatement>),
 }

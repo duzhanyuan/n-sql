@@ -32,7 +32,11 @@ pub struct MinIfFn {
 }
 
 impl MinIfFn {
-    pub fn new(predicate: Box<PredicateExpression>, aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> MinIfFn {
+    pub fn new(
+        predicate: Box<PredicateExpression>,
+        aggregate_type: Option<AggregateType>,
+        expr: Box<Expression>,
+    ) -> MinIfFn {
         MinIfFn {
             predicate,
             expr,

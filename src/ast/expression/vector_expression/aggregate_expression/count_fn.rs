@@ -32,7 +32,11 @@ pub struct CountIfFn {
 }
 
 impl CountIfFn {
-    pub fn new(predicate: Box<PredicateExpression>, aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> CountIfFn {
+    pub fn new(
+        predicate: Box<PredicateExpression>,
+        aggregate_type: Option<AggregateType>,
+        expr: Box<Expression>,
+    ) -> CountIfFn {
         CountIfFn {
             predicate,
             expr,

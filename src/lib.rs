@@ -10,31 +10,31 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 
-extern crate core;
 extern crate cfg_if;
-#[macro_use] extern crate failure;
+extern crate core;
+#[macro_use]
+extern crate failure;
 
 use cfg_if::cfg_if;
 mod ast;
-mod optimizer;
-mod grammar;
-mod generator;
-mod version;
-mod lexer;
 mod catalog;
+mod generator;
+mod grammar;
+mod lexer;
+mod optimizer;
 pub mod parser;
+mod version;
 
 pub use ast::*;
 pub use generator::*;
-pub use optimizer::Optimizer;
 pub use grammar::{
-    PredicateEntryParser as PredicateParser,
-    ExpressionEntryParser as ExpressionParser,
-    StatementEntryParser as StatementParser};
+    ExpressionEntryParser as ExpressionParser, PredicateEntryParser as PredicateParser,
+    StatementEntryParser as StatementParser,
+};
 pub use lexer::Lexer;
+pub use optimizer::Optimizer;
 
-
-cfg_if!{
+cfg_if! {
     // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
     // allocator.
     if #[cfg(all(target_arch="wasm32", feature="wee_alloc"))] {
