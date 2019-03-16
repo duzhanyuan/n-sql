@@ -12,10 +12,7 @@ extern crate fluid;
 extern crate n_sql;
 
 pub use self::fluid::prelude::*;
-pub use self::n_sql::{
-    ExpressionParser, Generator, Lexer, MySQLGenerator, OracleGenerator, PgsqlGenerator,
-    PredicateParser, StatementParser,
-};
+pub use self::n_sql::{generator::*, ExpressionParser, Lexer, PredicateParser, StatementParser};
 
 pub use self::n_sql::parser;
 
@@ -45,7 +42,8 @@ pub fn test_expression(database_type: DatabaseType, left: &str, right: &str) {
         DatabaseType::MySQL => expr.to_mysql(),
         DatabaseType::Oracle => expr.to_oracle(),
         DatabaseType::PostgreSQL => expr.to_pgsql(),
-        _ => unimplemented!(),
+        DatabaseType::SQLite => expr.to_sqlite(),
+        DatabaseType::SqlServer => expr.to_sql_server(),
     }
     .unwrap();
 

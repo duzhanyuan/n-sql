@@ -112,6 +112,8 @@ pub enum Token<'input> {
     Unique,
     When,
     Where,
+    With,
+    Within,
     // endregion
 
     // region [function]
@@ -159,6 +161,10 @@ pub enum Token<'input> {
     Nvl,
     PadLeft,
     PadRight,
+    Percent,
+    Percentile,
+    PercentileCont,
+    PercentileDisc,
     Pow,
     Power,
     Replace,

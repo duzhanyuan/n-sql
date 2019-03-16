@@ -26,4 +26,5 @@ pub enum VectorExpression {
     MinIf(MinIfFn),
     SumIf(SumIfFn),
     StddevIf(StddevIfFn),
+    Percentile(PercentileFn),
 }

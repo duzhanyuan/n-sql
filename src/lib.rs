@@ -14,11 +14,13 @@ extern crate cfg_if;
 extern crate core;
 #[macro_use]
 extern crate failure;
+#[macro_use]
+extern crate lazy_static;
 
 use cfg_if::cfg_if;
 mod ast;
 mod catalog;
-mod generator;
+pub mod generator;
 mod grammar;
 mod lexer;
 mod optimizer;
@@ -26,7 +28,6 @@ pub mod parser;
 mod version;
 
 pub use ast::*;
-pub use generator::*;
 pub use grammar::{
     ExpressionEntryParser as ExpressionParser, PredicateEntryParser as PredicateParser,
     StatementEntryParser as StatementParser,

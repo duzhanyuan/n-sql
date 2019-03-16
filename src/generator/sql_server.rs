@@ -6,77 +6,71 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-mod visitor;
-
-mod mysql;
-mod oracle;
-mod pgsql;
-mod sql_server;
-mod sqlite;
-
-pub use self::mysql::MySQLGenerator;
-pub use self::oracle::OracleGenerator;
-pub use self::pgsql::PgsqlGenerator;
-pub use self::sql_server::SqlServerGenerator;
-pub use self::sqlite::SQLiterGenerator;
-
-use self::visitor::Visitor;
+use super::Visitor;
 use ast::*;
+use optimizer::Optimizer;
 use std::fmt::{Error, Result, Write};
 use std::result;
+
 type Formatter = String;
 
-pub trait Generator<T> {
-    fn to_sql(&self) -> result::Result<String, Error>;
+pub trait SqlServerGenerator<T> {
+    fn to_sql_server(&self) -> result::Result<String, Error>;
 }
 
 struct InternalGenerator;
 
 impl Visitor for InternalGenerator {
-    fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
-        self.visit_datetime_type(&function.extract_type, f)?;
-        f.write_char('(')?;
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-
     fn visit_percentile(&self, function: &PercentileFn, f: &mut Formatter) -> Result {
         match function.r#type {
-            PercentileType::Cont => f.write_str("percentile")?,
+            PercentileType::Cont => f.write_str("percentile_cont")?,
             PercentileType::Disc => f.write_str("percentile_disc")?
         };
         f.write_char('(')?;
-        self.visit_expression(&function.expr, f)?;
-        f.write_str(", ")?;
         self.visit_expression(&function.p, f)?;
+        f.write_char(')')?;
+        f.write_str(" within group (order by ")?;
+        self.visit_expression(&function.expr, f)?;
+
         if let Some(t) = function.order.as_ref() {
             match t {
-                SortingDirection::Ascending => f.write_str(", asc")?,
-                SortingDirection::Descending => f.write_str(", desc")?,
+                SortingDirection::Ascending => f.write_str(" asc")?,
+                SortingDirection::Descending => f.write_str(" desc")?,
             }
         }
+        f.write_char(')')?;
+        f.write_str(" over (partition by 0)")
+    }
+
+
+    fn visit_nvl_fn(&self, function: &Box<NvlFn>, f: &mut Formatter) -> Result {
+        f.write_str("coalesce")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_str(", ")?;
+        self.visit_expression(&function.default, f)?;
         f.write_char(')')
     }
 }
 
-impl Generator<Expression> for Expression {
-    fn to_sql(&self) -> result::Result<String, Error> {
+impl SqlServerGenerator<Expression> for Expression {
+    fn to_sql_server(&self) -> result::Result<String, Error> {
         let mut s = String::new();
         InternalGenerator.visit_expression(self, &mut s)?;
         Ok(s)
     }
 }
 
-impl Generator<PredicateExpression> for PredicateExpression {
-    fn to_sql(&self) -> result::Result<String, Error> {
+impl SqlServerGenerator<PredicateExpression> for PredicateExpression {
+    fn to_sql_server(&self) -> result::Result<String, Error> {
         let mut s = String::new();
         InternalGenerator.visit_predicate(self, &mut s)?;
         Ok(s)
     }
 }
 
-impl Generator<Statement> for Statement {
-    fn to_sql(&self) -> result::Result<String, Error> {
+impl SqlServerGenerator<Statement> for Statement {
+    fn to_sql_server(&self) -> result::Result<String, Error> {
         let mut s = String::new();
         InternalGenerator.visit_statement(self, &mut s)?;
         Ok(s)

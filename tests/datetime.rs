@@ -116,6 +116,7 @@ fn test_hour_diff(left: &str, database_type: DatabaseType, right: &str) {
 #[theory]
 #[test]
 #[case("minute_add(now(),3)", NSQL, "minute_add(now(), 3)")]
+#[case("MINUTE_ADD(now(),3)", NSQL, "minute_add(now(), 3)")]
 #[case("minute_add(now(),3)", PostgreSQL, "now() + interval '3' minute")]
 //#[case("minute_add(now(),3)", Oracle, "systimestamp + interval '3' minute")]
 //#[case("minute_add(now(),3)", MySQL, "date_add(now(), interval 3 minute)")]

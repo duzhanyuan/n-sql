@@ -11,11 +11,13 @@ use std::fmt::{Debug, Error, Formatter};
 mod data_type;
 mod expression;
 mod identifier;
+mod sorting_direction;
 mod statement;
 
 pub use self::data_type::*;
 pub use self::expression::*;
 pub use self::identifier::*;
+pub use self::sorting_direction::*;
 pub use self::statement::*;
 
 #[derive(Clone, Debug)]

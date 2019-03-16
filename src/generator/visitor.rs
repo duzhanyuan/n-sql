@@ -63,6 +63,7 @@ pub trait Visitor {
             VectorExpression::MinIf(t) => self.visit_min_if_fn(t, f),
             VectorExpression::SumIf(t) => self.visit_sum_if_fn(t, f),
             VectorExpression::StddevIf(t) => self.visit_stddev_if_fn(t, f),
+            VectorExpression::Percentile(t) => self.visit_percentile(t, f)
         }
     }
 
@@ -142,6 +143,26 @@ pub trait Visitor {
             f.write_char(' ')?;
         }
         self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_percentile(&self, function: &PercentileFn, f: &mut Formatter) -> Result {
+        match function.r#type {
+            PercentileType::Cont => f.write_str("percentile_cont")?,
+            PercentileType::Disc => f.write_str("percentile_disc")?
+        };
+        f.write_char('(')?;
+        self.visit_expression(&function.p, f)?;
+        f.write_char(')')?;
+        f.write_str(" within group (order by ")?;
+        self.visit_expression(&function.expr, f)?;
+
+        if let Some(t) = function.order.as_ref() {
+            match t {
+                SortingDirection::Ascending => f.write_str(" asc")?,
+                SortingDirection::Descending => f.write_str(" desc")?,
+            }
+        }
+
         f.write_char(')')
     }
 

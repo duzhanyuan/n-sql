@@ -8,10 +8,10 @@
 
 extern crate n_sql;
 
+use n_sql::generator::*;
 use n_sql::ConstantValue;
 use n_sql::Expression;
 use n_sql::ExpressionParser;
-use n_sql::Generator;
 use n_sql::Lexer;
 use n_sql::NumericValue;
 use n_sql::Optimizer;

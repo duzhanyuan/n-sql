@@ -11,6 +11,8 @@ mod common;
 
 test_init!();
 
+#[theory]
+#[test]
 //#[case("a between   3 and 10", NSQL, "a between 3 and 10")]
 fn test(left: &str, database_type: DatabaseType, right: &str) {
     test_predicate(database_type, left, right)

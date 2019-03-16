@@ -10,14 +10,12 @@ mod join_node;
 mod pagination_statement;
 mod select_statement;
 mod set_statement;
-mod sorting_direction;
 mod table_view;
 
 pub use self::join_node::*;
 pub use self::pagination_statement::*;
 pub use self::select_statement::*;
 pub use self::set_statement::*;
-pub use self::sorting_direction::*;
 pub use self::table_view::*;
 
 #[derive(Clone, Debug)]
