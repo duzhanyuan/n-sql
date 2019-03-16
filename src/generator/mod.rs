@@ -33,13 +33,6 @@ pub trait Generator<T> {
 struct InternalGenerator;
 
 impl Visitor for InternalGenerator {
-    fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
-        self.visit_datetime_type(&function.extract_type, f)?;
-        f.write_char('(')?;
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
-    }
-
     fn visit_percentile(&self, function: &PercentileFn, f: &mut Formatter) -> Result {
         match function.r#type {
             PercentileType::Cont => f.write_str("percentile")?,
@@ -55,6 +48,13 @@ impl Visitor for InternalGenerator {
                 SortingDirection::Descending => f.write_str(", desc")?,
             }
         }
+        f.write_char(')')
+    }
+
+    fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
+        self.visit_datetime_type(&function.extract_type, f)?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
         f.write_char(')')
     }
 }

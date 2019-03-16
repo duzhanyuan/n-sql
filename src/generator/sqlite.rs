@@ -29,6 +29,27 @@ impl Visitor for InternalGenerator {
         self.visit_expression(&function.default, f)?;
         f.write_char(')')
     }
+    fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
+        let lower_tp = function.data_type.data_type.to_lowercase();
+        let tp = lower_tp.as_str();
+
+        match tp {
+            "timestamp" | "datetime" | "date" | "time" => {
+                f.write_str(if tp == "timestamp" { "datetime" } else { &function.data_type.data_type })?;
+                f.write_char('(')?;
+                self.visit_expression(&function.expr, f)?;
+                f.write_char(')')
+            },
+            _ => {
+                f.write_str("cast")?;
+                f.write_char('(')?;
+                self.visit_expression(&function.expr, f)?;
+                f.write_str(" as ")?;
+                f.write_str(&function.data_type.data_type)?;
+                f.write_char(')')
+            }
+        }
+    }
 }
 
 impl SQLiterGenerator<Expression> for Expression {

@@ -51,6 +51,20 @@ impl Visitor for InternalGenerator {
         self.visit_expression(&function.default, f)?;
         f.write_char(')')
     }
+
+    fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
+        f.write_str("convert")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_str(", ")?;
+        f.write_str(match function.data_type.data_type.to_lowercase().as_str() {
+            "text" => "char",
+            "timestamp" => "datetime",
+            "numeric" | "float" => "decimal(65, 38)",
+            _ => &function.data_type.data_type
+        })?;
+        f.write_char(')')
+    }
 }
 
 impl MySQLGenerator<Expression> for Expression {

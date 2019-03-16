@@ -88,6 +88,38 @@ impl Visitor for InternalGenerator {
         }
         Ok(())
     }
+    fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
+        match function.data_type.data_type.to_lowercase().as_str() {
+            "text" => {
+                f.write_str("to_char")?;
+                f.write_char('(')?;
+                self.visit_expression(&function.expr, f)?;
+                f.write_char(')')
+            },
+            "date" => {
+                f.write_str("to_date")?;
+                f.write_char('(')?;
+                self.visit_expression(&function.expr, f)?;
+                f.write_str(", 'yyyy-mm-dd'")?;
+                f.write_char(')')
+            },
+            "timestamp" | "datetime" => {
+                f.write_str("to_timestamp")?;
+                f.write_char('(')?;
+                self.visit_expression(&function.expr, f)?;
+                f.write_str(", 'yyyy-mm-dd hh24:mi:ss'")?;
+                f.write_char(')')
+            },
+            _ => {
+                f.write_str("cast")?;
+                f.write_char('(')?;
+                self.visit_expression(&function.expr, f)?;
+                f.write_str(" as ")?;
+                f.write_str(&function.data_type.data_type)?;
+                f.write_char(')')
+            }
+        }
+    }
 }
 
 impl OracleGenerator<Expression> for Expression {
