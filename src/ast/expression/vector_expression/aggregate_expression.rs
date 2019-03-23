@@ -275,7 +275,6 @@ pub struct PercentileFn {
     pub order: Option<SortingDirection>,
 }
 
-
 #[derive(Clone, Debug)]
 pub enum PercentileType {
     Cont,
@@ -293,7 +292,7 @@ impl PercentileFn {
             expr,
             p,
             order,
-            r#type:tp,
+            r#type: tp,
         }
     }
 }

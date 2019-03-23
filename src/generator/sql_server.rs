@@ -24,7 +24,7 @@ impl Visitor for InternalGenerator {
     fn visit_percentile(&self, function: &PercentileFn, f: &mut Formatter) -> Result {
         match function.r#type {
             PercentileType::Cont => f.write_str("percentile_cont")?,
-            PercentileType::Disc => f.write_str("percentile_disc")?
+            PercentileType::Disc => f.write_str("percentile_disc")?,
         };
         f.write_char('(')?;
         self.visit_expression(&function.p, f)?;
@@ -42,7 +42,6 @@ impl Visitor for InternalGenerator {
         f.write_str(" over (partition by 0)")
     }
 
-
     fn visit_nvl_fn(&self, function: &Box<NvlFn>, f: &mut Formatter) -> Result {
         f.write_str("coalesce")?;
         f.write_char('(')?;
@@ -50,6 +49,10 @@ impl Visitor for InternalGenerator {
         f.write_str(", ")?;
         self.visit_expression(&function.default, f)?;
         f.write_char(')')
+    }
+
+    fn visit_now_fn(&self, f: &mut Formatter) -> Result {
+        f.write_str("systimestamp")
     }
 
     fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
@@ -63,7 +66,7 @@ impl Visitor for InternalGenerator {
                 f.write_str(" as ")?;
                 f.write_str(&function.data_type.data_type)?;
                 f.write_char(')')
-            },
+            }
             other => {
                 f.write_str("convert")?;
                 f.write_char('(')?;
@@ -71,7 +74,7 @@ impl Visitor for InternalGenerator {
                     "text" => "varchar(8000)",
                     "timestamp" => "datetime",
                     "numeric" | "float" => "numeric(38, 19)",
-                    _ => &function.data_type.data_type
+                    _ => &function.data_type.data_type,
                 })?;
                 f.write_str(", ")?;
                 self.visit_expression(&function.expr, f)?;

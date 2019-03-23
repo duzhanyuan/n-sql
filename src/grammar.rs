@@ -1,8 +1,8 @@
 // auto-generated: "lalrpop 0.16.3"
-// sha256: d188cc355bac9c2a1431fe16ad07074a53d49b95850926968b6db53aacca1be
-use std::str::FromStr;
+// sha256: 3f14d98dd3d057c4a7577bd51897961cd6baf30fa2cb1d9bf6771e0228c
 use ast::*;
-use lexer::{Token, Position, SpannedError};
+use lexer::{Position, SpannedError, Token};
+use std::str::FromStr;
 #[allow(unused_extern_crates)]
 extern crate lalrpop_util as __lalrpop_util;
 #[allow(unused_imports)]
@@ -50654,1435 +50654,997 @@ mod __parse__StatementEntry {
 }
 pub use self::__parse__StatementEntry::StatementEntryParser;
 
-fn __action0<
-    'input,
->(
-    (_, __0, _): (Position, Statement, Position),
-) -> Statement
-{
+fn __action0<'input>((_, __0, _): (Position, Statement, Position)) -> Statement {
     (__0)
 }
 
-fn __action1<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Expression
-{
+fn __action1<'input>((_, __0, _): (Position, Expression, Position)) -> Expression {
     (__0)
 }
 
-fn __action2<
-    'input,
->(
+fn __action2<'input>(
     (_, __0, _): (Position, PredicateExpression, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     (__0)
 }
 
-fn __action3<
-    'input,
->(
-    (_, __0, _): (Position, Statement, Position),
-) -> Statement
-{
+fn __action3<'input>((_, __0, _): (Position, Statement, Position)) -> Statement {
     (__0)
 }
 
-fn __action4<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Expression
-{
+fn __action4<'input>((_, __0, _): (Position, Expression, Position)) -> Expression {
     (__0)
 }
 
-fn __action5<
-    'input,
->(
+fn __action5<'input>(
     (_, __0, _): (Position, PredicateExpression, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     (__0)
 }
 
-fn __action6<
-    'input,
->(
-    (_, __0, _): (Position, Box<SetStatement>, Position),
-) -> Statement
-{
+fn __action6<'input>((_, __0, _): (Position, Box<SetStatement>, Position)) -> Statement {
     Statement::Set(__0)
 }
 
-fn __action7<
-    'input,
->(
+fn __action7<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ArithmeticOperator, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
-) -> Expression
-{
-    Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(__0, __1, __2)))
+) -> Expression {
+    Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(
+        __0, __1, __2,
+    )))
 }
 
-fn __action8<
-    'input,
->(
+fn __action8<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ArithmeticOperator, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
-) -> Expression
-{
-    Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(__0, __1, __2)))
+) -> Expression {
+    Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(
+        __0, __1, __2,
+    )))
 }
 
-fn __action9<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Expression
-{
+fn __action9<'input>((_, __0, _): (Position, Expression, Position)) -> Expression {
     (__0)
 }
 
-fn __action10<
-    'input,
->(
+fn __action10<'input>(
     (_, __0, _): (Position, PredicateExpression, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     (__0)
 }
 
-fn __action11<
-    'input,
->(
+fn __action11<'input>(
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
     (_, __1, _): (Position, LogicalOperator, Position),
     (_, __2, _): (Position, Box<PredicateExpression>, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     PredicateExpression::Logical(LogicalExpression::new(__0, __1, __2))
 }
 
-fn __action12<
-    'input,
->(
+fn __action12<'input>(
     (_, set, _): (Position, Box<SetStatement>, Position),
     (_, skip, _): (Position, Box<Expression>, Position),
-) -> Box<SetStatement>
-{
-    SetStatement::Pagination(PaginationStatement::new(set, Option::Some(skip), Option::None).into()).into()
+) -> Box<SetStatement> {
+    SetStatement::Pagination(PaginationStatement::new(set, Option::Some(skip), Option::None).into())
+        .into()
 }
 
-fn __action13<
-    'input,
->(
+fn __action13<'input>(
     (_, set, _): (Position, Box<SetStatement>, Position),
     (_, limit, _): (Position, Box<Expression>, Position),
-) -> Box<SetStatement>
-{
-    SetStatement::Pagination(PaginationStatement::new(set, Option::None, Option::Some(limit)).into()).into()
+) -> Box<SetStatement> {
+    SetStatement::Pagination(
+        PaginationStatement::new(set, Option::None, Option::Some(limit)).into(),
+    )
+    .into()
 }
 
-fn __action14<
-    'input,
->(
+fn __action14<'input>(
     (_, set, _): (Position, Box<SetStatement>, Position),
     (_, skip, _): (Position, Box<Expression>, Position),
     (_, limit, _): (Position, Box<Expression>, Position),
-) -> Box<SetStatement>
-{
-    SetStatement::Pagination(PaginationStatement::new(set, Option::Some(skip), Option::Some(limit)).into()).into()
+) -> Box<SetStatement> {
+    SetStatement::Pagination(
+        PaginationStatement::new(set, Option::Some(skip), Option::Some(limit)).into(),
+    )
+    .into()
 }
 
-fn __action15<
-    'input,
->(
-    (_, __0, _): (Position, Box<SetStatement>, Position),
-) -> Box<SetStatement>
-{
+fn __action15<'input>((_, __0, _): (Position, Box<SetStatement>, Position)) -> Box<SetStatement> {
     (__0)
 }
 
-fn __action16<
-    'input,
->(
+fn __action16<'input>(
     (_, __0, _): (Position, Box<SetStatement>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<SetStatement>, Position),
-) -> Box<SetStatement>
-{
+) -> Box<SetStatement> {
     SetStatement::Intersect(__0, __1).into()
 }
 
-fn __action17<
-    'input,
->(
+fn __action17<'input>(
     (_, __0, _): (Position, Box<SetStatement>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<SetStatement>, Position),
-) -> Box<SetStatement>
-{
+) -> Box<SetStatement> {
     SetStatement::Union(__0, __1).into()
 }
 
-fn __action18<
-    'input,
->(
+fn __action18<'input>(
     (_, __0, _): (Position, Box<SetStatement>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<SetStatement>, Position),
-) -> Box<SetStatement>
-{
+) -> Box<SetStatement> {
     SetStatement::UnionAll(__0, __1).into()
 }
 
-fn __action19<
-    'input,
->(
+fn __action19<'input>(
     (_, __0, _): (Position, Box<SetStatement>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<SetStatement>, Position),
-) -> Box<SetStatement>
-{
+) -> Box<SetStatement> {
     SetStatement::Minus(__0, __1).into()
 }
 
-fn __action20<
-    'input,
->(
+fn __action20<'input>(
     (_, __0, _): (Position, Box<SetStatement>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<SetStatement>, Position),
-) -> Box<SetStatement>
-{
+) -> Box<SetStatement> {
     SetStatement::Minus(__0, __1).into()
 }
 
-fn __action21<
-    'input,
->(
-    (_, __0, _): (Position, Box<SetStatement>, Position),
-) -> Box<SetStatement>
-{
+fn __action21<'input>((_, __0, _): (Position, Box<SetStatement>, Position)) -> Box<SetStatement> {
     (__0)
 }
 
-fn __action22<
-    'input,
->(
-    (_, __0, _): (Position, SelectStatement, Position),
-) -> Box<SetStatement>
-{
+fn __action22<'input>((_, __0, _): (Position, SelectStatement, Position)) -> Box<SetStatement> {
     SetStatement::Select(__0).into()
 }
 
-fn __action23<
-    'input,
->(
+fn __action23<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<SetStatement>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Box<SetStatement>
-{
+) -> Box<SetStatement> {
     (__0)
 }
 
-fn __action24<
-    'input,
->(
+fn __action24<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, select_type, _): (Position, ::std::option::Option<SelectType>, Position),
     (_, elements, _): (Position, Vec<SelectElement>, Position),
-) -> SelectStatement
-{
-    SelectStatement::new(select_type, elements, Option::None, Option::None, Option::None, Option::None)
+) -> SelectStatement {
+    SelectStatement::new(
+        select_type,
+        elements,
+        Option::None,
+        Option::None,
+        Option::None,
+        Option::None,
+    )
 }
 
-fn __action25<
-    'input,
->(
+fn __action25<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, select_type, _): (Position, ::std::option::Option<SelectType>, Position),
     (_, elements, _): (Position, Vec<SelectElement>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> SelectStatement
-{
-    SelectStatement::new(select_type, elements, Option::None, Option::None, Option::None, Option::None)
+) -> SelectStatement {
+    SelectStatement::new(
+        select_type,
+        elements,
+        Option::None,
+        Option::None,
+        Option::None,
+        Option::None,
+    )
 }
 
-fn __action26<
-    'input,
->(
+fn __action26<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, select_type, _): (Position, ::std::option::Option<SelectType>, Position),
     (_, elements, _): (Position, Vec<SelectElement>, Position),
-    (_, f, _): (Position, (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>), Position),
-) -> SelectStatement
-{
+    (_, f, _): (
+        Position,
+        (
+            Vec<Box<TableView>>,
+            ::std::option::Option<Box<PredicateExpression>>,
+            ::std::option::Option<GroupElements>,
+            ::std::option::Option<Vec<SortingElement>>,
+        ),
+        Position,
+    ),
+) -> SelectStatement {
     SelectStatement::new(select_type, elements, Option::Some(f.0), f.1, f.2, f.3)
 }
 
-fn __action27<
-    'input,
->(
+fn __action27<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Vec<Box<TableView>>, Position),
-    (_, __1, _): (Position, ::std::option::Option<Box<PredicateExpression>>, Position),
+    (_, __1, _): (
+        Position,
+        ::std::option::Option<Box<PredicateExpression>>,
+        Position,
+    ),
     (_, __2, _): (Position, ::std::option::Option<GroupElements>, Position),
-    (_, __3, _): (Position, ::std::option::Option<Vec<SortingElement>>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+    (_, __3, _): (
+        Position,
+        ::std::option::Option<Vec<SortingElement>>,
+        Position,
+    ),
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     (__0, __1, __2, __3)
 }
 
-fn __action28<
-    'input,
->(
+fn __action28<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Vec<Box<Expression>>, Position),
-    (_, __1, _): (Position, ::std::option::Option<Box<PredicateExpression>>, Position),
-) -> GroupElements
-{
+    (_, __1, _): (
+        Position,
+        ::std::option::Option<Box<PredicateExpression>>,
+        Position,
+    ),
+) -> GroupElements {
     GroupElements::new(__0, __1)
 }
 
-fn __action29<
-    'input,
->(
+fn __action29<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> Box<Expression>
-{
+) -> Box<Expression> {
     (__0)
 }
 
-fn __action30<
-    'input,
->(
+fn __action30<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> Box<Expression>
-{
+) -> Box<Expression> {
     (__0)
 }
 
-fn __action31<
-    'input,
->(
-    (_, __0, _): (Position, Identifier, Position),
-) -> Table
-{
+fn __action31<'input>((_, __0, _): (Position, Identifier, Position)) -> Table {
     Table::new(__0, Option::None, Option::None)
 }
 
-fn __action32<
-    'input,
->(
+fn __action32<'input>(
     (_, schema, _): (Position, Identifier, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, table, _): (Position, Identifier, Position),
-) -> Table
-{
+) -> Table {
     Table::new(table, Option::Some(schema), Option::None)
 }
 
-fn __action33<
-    'input,
->(
+fn __action33<'input>(
     (_, database, _): (Position, Identifier, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, schema, _): (Position, Identifier, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, table, _): (Position, Identifier, Position),
-) -> Table
-{
+) -> Table {
     Table::new(table, Option::Some(schema), Option::Some(database))
 }
 
-fn __action34<
-    'input,
->(
+fn __action34<'input>(
     (_, __0, _): (Position, Box<TableView>, Position),
     (_, __1, _): (Position, JoinType, Position),
     (_, __2, _): (Position, Box<TableView>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __3, _): (Position, Box<PredicateExpression>, Position),
-) -> Box<TableView>
-{
+) -> Box<TableView> {
     TableView::Join(JoinNode::new(__0, __1, __2, __3).into()).into()
 }
 
-fn __action35<
-    'input,
->(
-    (_, __0, _): (Position, Box<TableView>, Position),
-) -> Box<TableView>
-{
+fn __action35<'input>((_, __0, _): (Position, Box<TableView>, Position)) -> Box<TableView> {
     (__0)
 }
 
-fn __action36<
-    'input,
->(
+fn __action36<'input>(
     (_, __0, _): (Position, Table, Position),
     (_, __1, _): (Position, ::std::option::Option<Identifier>, Position),
-) -> Box<TableView>
-{
+) -> Box<TableView> {
     TableView::Table(__0, __1).into()
 }
 
-fn __action37<
-    'input,
->(
+fn __action37<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<SetStatement>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Identifier, Position),
-) -> Box<TableView>
-{
+) -> Box<TableView> {
     TableView::Set(__0, __1).into()
 }
 
-fn __action38<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> JoinType
-{
+fn __action38<'input>((_, __0, _): (Position, Token<'input>, Position)) -> JoinType {
     JoinType::None
 }
 
-fn __action39<
-    'input,
->(
+fn __action39<'input>(
     (_, __0, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Token<'input>, Position),
-) -> JoinType
-{
+) -> JoinType {
     JoinType::Inner
 }
 
-fn __action40<
-    'input,
->(
+fn __action40<'input>(
     (_, __0, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Token<'input>, Position),
-) -> JoinType
-{
+) -> JoinType {
     JoinType::Left
 }
 
-fn __action41<
-    'input,
->(
+fn __action41<'input>(
     (_, __0, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Token<'input>, Position),
-) -> JoinType
-{
+) -> JoinType {
     JoinType::Right
 }
 
-fn __action42<
-    'input,
->(
+fn __action42<'input>(
     (_, __0, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Token<'input>, Position),
     (_, __2, _): (Position, Token<'input>, Position),
-) -> JoinType
-{
+) -> JoinType {
     JoinType::LeftOuter
 }
 
-fn __action43<
-    'input,
->(
+fn __action43<'input>(
     (_, __0, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Token<'input>, Position),
     (_, __2, _): (Position, Token<'input>, Position),
-) -> JoinType
-{
+) -> JoinType {
     JoinType::RightOuter
 }
 
-fn __action44<
-    'input,
->(
+fn __action44<'input>(
     (_, __0, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Token<'input>, Position),
-) -> JoinType
-{
+) -> JoinType {
     JoinType::Cross
 }
 
-fn __action45<
-    'input,
->(
+fn __action45<'input>(
     (_, __0, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Token<'input>, Position),
-) -> JoinType
-{
+) -> JoinType {
     JoinType::Full
 }
 
-fn __action46<
-    'input,
->(
+fn __action46<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<Identifier>, Position),
-) -> SelectElement
-{
+) -> SelectElement {
     SelectElement::Expression(__0, __1)
 }
 
-fn __action47<
-    'input,
->(
+fn __action47<'input>(
     (_, __0, _): (Position, ::std::option::Option<Identifier>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> SelectElement
-{
+) -> SelectElement {
     SelectElement::Asterisk(__0)
 }
 
-fn __action48<
-    'input,
->(
+fn __action48<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<SortingDirection>, Position),
-) -> SortingElement
-{
+) -> SortingElement {
     SortingElement::new(__0, __1)
 }
 
-fn __action49<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> SortingDirection
-{
+fn __action49<'input>((_, __0, _): (Position, Token<'input>, Position)) -> SortingDirection {
     SortingDirection::Ascending
 }
 
-fn __action50<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> SortingDirection
-{
+fn __action50<'input>((_, __0, _): (Position, Token<'input>, Position)) -> SortingDirection {
     SortingDirection::Descending
 }
 
-fn __action51<
-    'input,
->(
-    (_, __0, _): (Position, Identifier, Position),
-) -> Identifier
-{
+fn __action51<'input>((_, __0, _): (Position, Identifier, Position)) -> Identifier {
     (__0)
 }
 
-fn __action52<
-    'input,
->(
+fn __action52<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Identifier, Position),
-) -> Identifier
-{
+) -> Identifier {
     (__0)
 }
 
-fn __action53<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> SelectType
-{
+fn __action53<'input>((_, __0, _): (Position, Token<'input>, Position)) -> SelectType {
     SelectType::All
 }
 
-fn __action54<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> SelectType
-{
+fn __action54<'input>((_, __0, _): (Position, Token<'input>, Position)) -> SelectType {
     SelectType::Distinct
 }
 
-fn __action55<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> SelectType
-{
+fn __action55<'input>((_, __0, _): (Position, Token<'input>, Position)) -> SelectType {
     SelectType::Unique
 }
 
-fn __action56<
-    'input,
->(
+fn __action56<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ArithmeticOperator, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
-) -> Expression
-{
-    Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(__0, __1, __2)))
+) -> Expression {
+    Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(
+        __0, __1, __2,
+    )))
 }
 
-fn __action57<
-    'input,
->(
+fn __action57<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ArithmeticOperator, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
-) -> Expression
-{
-    Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(__0, __1, __2)))
+) -> Expression {
+    Expression::Scalar(ScalarExpression::Arithmetic(ArithmeticExpression::new(
+        __0, __1, __2,
+    )))
 }
 
-fn __action58<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Expression
-{
+fn __action58<'input>((_, __0, _): (Position, Expression, Position)) -> Expression {
     (__0)
 }
 
-fn __action59<
-    'input,
->(
+fn __action59<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> Expression
-{
+) -> Expression {
     Expression::Scalar(ScalarExpression::Unary(UnaryExpression::Plus(__0)))
 }
 
-fn __action60<
-    'input,
->(
+fn __action60<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> Expression
-{
+) -> Expression {
     Expression::Scalar(ScalarExpression::Unary(UnaryExpression::Minus(__0)))
 }
 
-fn __action61<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Expression
-{
+fn __action61<'input>((_, __0, _): (Position, Expression, Position)) -> Expression {
     (__0)
 }
 
-fn __action62<
-    'input,
->(
+fn __action62<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, DataType, Position),
-) -> Expression
-{
+) -> Expression {
     CastFn::new(__0, __1).into()
 }
 
-fn __action63<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Expression
-{
+fn __action63<'input>((_, __0, _): (Position, Expression, Position)) -> Expression {
     (__0)
 }
 
-fn __action64<
-    'input,
->(
-    (_, __0, _): (Position, ConstantValue, Position),
-) -> ScalarExpression
-{
+fn __action64<'input>((_, __0, _): (Position, ConstantValue, Position)) -> ScalarExpression {
     ScalarExpression::Constant(__0)
 }
 
-fn __action65<
-    'input,
->(
-    (_, __0, _): (Position, Column, Position),
-) -> ScalarExpression
-{
+fn __action65<'input>((_, __0, _): (Position, Column, Position)) -> ScalarExpression {
     ScalarExpression::Column(__0)
 }
 
-fn __action66<
-    'input,
->(
-    (_, __0, _): (Position, Function, Position),
-) -> ScalarExpression
-{
+fn __action66<'input>((_, __0, _): (Position, Function, Position)) -> ScalarExpression {
     ScalarExpression::Function(__0)
 }
 
-fn __action67<
-    'input,
->(
-    (_, __0, _): (Position, CaseWhenExpression, Position),
-) -> ScalarExpression
-{
+fn __action67<'input>((_, __0, _): (Position, CaseWhenExpression, Position)) -> ScalarExpression {
     ScalarExpression::CaseWhen(__0)
 }
 
-fn __action68<
-    'input,
->(
-    (_, __0, _): (Position, Variable, Position),
-) -> ScalarExpression
-{
+fn __action68<'input>((_, __0, _): (Position, Variable, Position)) -> ScalarExpression {
     ScalarExpression::Variable(__0)
 }
 
-fn __action69<
-    'input,
->(
-    (_, __0, _): (Position, VectorExpression, Position),
-) -> Expression
-{
+fn __action69<'input>((_, __0, _): (Position, VectorExpression, Position)) -> Expression {
     Expression::Vector(__0)
 }
 
-fn __action70<
-    'input,
->(
-    (_, __0, _): (Position, ScalarExpression, Position),
-) -> Expression
-{
+fn __action70<'input>((_, __0, _): (Position, ScalarExpression, Position)) -> Expression {
     Expression::Scalar(__0)
 }
 
-fn __action71<
-    'input,
->(
+fn __action71<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Expression, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Expression
-{
+) -> Expression {
     (__0)
 }
 
-fn __action72<
-    'input,
->(
+fn __action72<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Identifier, Position),
-) -> Variable
-{
+) -> Variable {
     Variable::new(__0)
 }
 
-fn __action73<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ArithmeticOperator
-{
+fn __action73<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ArithmeticOperator {
     ArithmeticOperator::Mul
 }
 
-fn __action74<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ArithmeticOperator
-{
+fn __action74<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ArithmeticOperator {
     ArithmeticOperator::Div
 }
 
-fn __action75<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ArithmeticOperator
-{
+fn __action75<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ArithmeticOperator {
     ArithmeticOperator::Add
 }
 
-fn __action76<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ArithmeticOperator
-{
+fn __action76<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ArithmeticOperator {
     ArithmeticOperator::Sub
 }
 
-fn __action77<
-    'input,
->(
+fn __action77<'input>(
     (_, __0, _): (Position, PredicateExpression, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     (__0)
 }
 
-fn __action78<
-    'input,
->(
+fn __action78<'input>(
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
     (_, __1, _): (Position, LogicalOperator, Position),
     (_, __2, _): (Position, Box<PredicateExpression>, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     PredicateExpression::Logical(LogicalExpression::new(__0, __1, __2)).into()
 }
 
-fn __action79<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> LogicalOperator
-{
+fn __action79<'input>((_, __0, _): (Position, Token<'input>, Position)) -> LogicalOperator {
     LogicalOperator::And
 }
 
-fn __action80<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> LogicalOperator
-{
+fn __action80<'input>((_, __0, _): (Position, Token<'input>, Position)) -> LogicalOperator {
     LogicalOperator::Or
 }
 
-fn __action81<
-    'input,
->(
+fn __action81<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ComparisonOperator, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     PredicateExpression::Comparison(ComparisonExpression::new(__0, __1, __2))
 }
 
-fn __action82<
-    'input,
->(
+fn __action82<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     PredicateExpression::Not(NotExpression::new(__0))
 }
 
-fn __action83<
-    'input,
->(
+fn __action83<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     PredicateExpression::IsNull(IsNullExpression::new(__0))
 }
 
-fn __action84<
-    'input,
->(
+fn __action84<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     PredicateExpression::IsNotNull(IsNotNullExpression::new(__0))
 }
 
-fn __action85<
-    'input,
->(
+fn __action85<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, InElements, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     PredicateExpression::In(InExpression::new(__0, __1))
 }
 
-fn __action86<
-    'input,
->(
+fn __action86<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, InElements, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     PredicateExpression::NotIn(NotInExpression::new(__0, __1))
 }
 
-fn __action87<
-    'input,
->(
+fn __action87<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, PredicateExpression, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> PredicateExpression
-{
+) -> PredicateExpression {
     (__0)
 }
 
-fn __action88<
-    'input,
->(
-    (_, __0, _): (Position, Vec<Box<Expression>>, Position),
-) -> InElements
-{
+fn __action88<'input>((_, __0, _): (Position, Vec<Box<Expression>>, Position)) -> InElements {
     InElements::Values(__0)
 }
 
-fn __action89<
-    'input,
->(
-    (_, __0, _): (Position, Box<SetStatement>, Position),
-) -> InElements
-{
+fn __action89<'input>((_, __0, _): (Position, Box<SetStatement>, Position)) -> InElements {
     InElements::Set(__0)
 }
 
-fn __action90<
-    'input,
->(
+fn __action90<'input>(
     (_, __0, _): (Position, SimpleCaseWhenExpression, Position),
-) -> CaseWhenExpression
-{
+) -> CaseWhenExpression {
     CaseWhenExpression::Simple(__0)
 }
 
-fn __action91<
-    'input,
->(
+fn __action91<'input>(
     (_, __0, _): (Position, SearchedCaseWhenExpression, Position),
-) -> CaseWhenExpression
-{
+) -> CaseWhenExpression {
     CaseWhenExpression::Searched(__0)
 }
 
-fn __action92<
-    'input,
->(
+fn __action92<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
-    (_, __1, _): (Position, ::std::vec::Vec<(Box<Expression>, Box<Expression>)>, Position),
+    (_, __1, _): (
+        Position,
+        ::std::vec::Vec<(Box<Expression>, Box<Expression>)>,
+        Position,
+    ),
     (_, __2, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> SimpleCaseWhenExpression
-{
+) -> SimpleCaseWhenExpression {
     SimpleCaseWhenExpression::new(__0, __1, __2)
 }
 
-fn __action93<
-    'input,
->(
+fn __action93<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
-) -> (Box<Expression>, Box<Expression>)
-{
+) -> (Box<Expression>, Box<Expression>) {
     (__0, __1)
 }
 
-fn __action94<
-    'input,
->(
+fn __action94<'input>(
     (_, _, _): (Position, Token<'input>, Position),
-    (_, __0, _): (Position, ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>, Position),
+    (_, __0, _): (
+        Position,
+        ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>,
+        Position,
+    ),
     (_, __1, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> SearchedCaseWhenExpression
-{
+) -> SearchedCaseWhenExpression {
     SearchedCaseWhenExpression::new(__0, __1)
 }
 
-fn __action95<
-    'input,
->(
+fn __action95<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
-) -> (Box<PredicateExpression>, Box<Expression>)
-{
+) -> (Box<PredicateExpression>, Box<Expression>) {
     (__0, __1)
 }
 
-fn __action96<
-    'input,
->(
+fn __action96<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> Box<Expression>
-{
+) -> Box<Expression> {
     (__0)
 }
 
-fn __action97<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ComparisonOperator
-{
+fn __action97<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ComparisonOperator {
     ComparisonOperator::Equal
 }
 
-fn __action98<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ComparisonOperator
-{
+fn __action98<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ComparisonOperator {
     ComparisonOperator::NotEqual
 }
 
-fn __action99<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ComparisonOperator
-{
+fn __action99<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ComparisonOperator {
     ComparisonOperator::Less
 }
 
-fn __action100<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ComparisonOperator
-{
+fn __action100<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ComparisonOperator {
     ComparisonOperator::Greater
 }
 
-fn __action101<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ComparisonOperator
-{
+fn __action101<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ComparisonOperator {
     ComparisonOperator::LessOrEqual
 }
 
-fn __action102<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ComparisonOperator
-{
+fn __action102<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ComparisonOperator {
     ComparisonOperator::GreaterOrEqual
 }
 
-fn __action103<
-    'input,
->(
-    (_, __0, _): (Position, Identifier, Position),
-) -> Column
-{
+fn __action103<'input>((_, __0, _): (Position, Identifier, Position)) -> Column {
     Column::new(__0, Option::None, Option::None)
 }
 
-fn __action104<
-    'input,
->(
+fn __action104<'input>(
     (_, table, _): (Position, Identifier, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, column, _): (Position, Identifier, Position),
-) -> Column
-{
+) -> Column {
     Column::new(column, Option::Some(table), Option::None)
 }
 
-fn __action105<
-    'input,
->(
+fn __action105<'input>(
     (_, schema, _): (Position, Identifier, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, table, _): (Position, Identifier, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, column, _): (Position, Identifier, Position),
-) -> Column
-{
+) -> Column {
     Column::new(column, Option::Some(table), Option::Some(schema))
 }
 
-fn __action106<
-    'input,
->(
-    (_, __0, _): (Position, StringFn, Position),
-) -> Function
-{
+fn __action106<'input>((_, __0, _): (Position, StringFn, Position)) -> Function {
     Function::String(__0)
 }
 
-fn __action107<
-    'input,
->(
-    (_, __0, _): (Position, Box<CastFn>, Position),
-) -> Function
-{
+fn __action107<'input>((_, __0, _): (Position, Box<CastFn>, Position)) -> Function {
     Function::Cast(__0)
 }
 
-fn __action108<
-    'input,
->(
-    (_, __0, _): (Position, Box<NvlFn>, Position),
-) -> Function
-{
+fn __action108<'input>((_, __0, _): (Position, Box<NvlFn>, Position)) -> Function {
     Function::Nvl(__0)
 }
 
-fn __action109<
-    'input,
->(
-    (_, __0, _): (Position, DatetimeFn, Position),
-) -> Function
-{
+fn __action109<'input>((_, __0, _): (Position, DatetimeFn, Position)) -> Function {
     Function::Datetime(__0)
 }
 
-fn __action110<
-    'input,
->(
+fn __action110<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Abs(AbsFn::new(__0))
 }
 
-fn __action111<
-    'input,
->(
+fn __action111<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Ceil(CeilFn::new(__0))
 }
 
-fn __action112<
-    'input,
->(
+fn __action112<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Ceil(CeilFn::new(__0))
 }
 
-fn __action113<
-    'input,
->(
+fn __action113<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Cos(CosFn::new(__0))
 }
 
-fn __action114<
-    'input,
->(
+fn __action114<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<SortingDirection>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::DenseRank(DenseRankFn::new(__0, __1))
 }
 
-fn __action115<
-    'input,
->(
+fn __action115<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Floor(FloorFn::new(__0))
 }
 
-fn __action116<
-    'input,
->(
+fn __action116<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Log10(Log10Fn::new(__0))
 }
 
-fn __action117<
-    'input,
->(
+fn __action117<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Log(LogFn::new(__0, __1))
 }
 
-fn __action118<
-    'input,
->(
+fn __action118<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Pow(PowFn::new(__0, __1))
 }
 
-fn __action119<
-    'input,
->(
+fn __action119<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Pow(PowFn::new(__0, __1))
 }
 
-fn __action120<
-    'input,
->(
+fn __action120<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<SortingDirection>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Rank(RankFn::new(__0, __1))
 }
 
-fn __action121<
-    'input,
->(
+fn __action121<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Round(RoundFn::new(__0, __1))
 }
 
-fn __action122<
-    'input,
->(
+fn __action122<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Sign(SignFn::new(__0))
 }
 
-fn __action123<
-    'input,
->(
+fn __action123<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Sin(SinFn::new(__0))
 }
 
-fn __action124<
-    'input,
->(
+fn __action124<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Sqrt(SqrtFn::new(__0))
 }
 
-fn __action125<
-    'input,
->(
+fn __action125<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Tan(TanFn::new(__0))
 }
 
-fn __action126<
-    'input,
->(
+fn __action126<'input>(
     (_, __0, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Token<'input>, Position),
     (_, __2, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Now
 }
 
-fn __action127<
-    'input,
->(
+fn __action127<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Vec<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     Function::Coalesce(CoalesceFn::new(__0))
 }
 
-fn __action128<
-    'input,
->(
+fn __action128<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Avg(AvgFn::new(__0, __1))
 }
 
-fn __action129<
-    'input,
->(
+fn __action129<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Count(CountFn::new(__0, __1))
 }
 
-fn __action130<
-    'input,
->(
+fn __action130<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Max(MaxFn::new(__0, __1)).into()
 }
 
-fn __action131<
-    'input,
->(
+fn __action131<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Median(MedianFn::new(__0, __1))
 }
 
-fn __action132<
-    'input,
->(
+fn __action132<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Min(MinFn::new(__0, __1))
 }
 
-fn __action133<
-    'input,
->(
+fn __action133<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Sum(SumFn::new(__0, __1))
 }
 
-fn __action134<
-    'input,
->(
+fn __action134<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Stddev(StddevFn::new(__0, __1))
 }
 
-fn __action135<
-    'input,
->(
+fn __action135<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
@@ -52090,14 +51652,11 @@ fn __action135<
     (_, __1, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::AvgIf(AvgIfFn::new(__0, __1, __2))
 }
 
-fn __action136<
-    'input,
->(
+fn __action136<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
@@ -52105,14 +51664,11 @@ fn __action136<
     (_, __1, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::CountIf(CountIfFn::new(__0, __1, __2))
 }
 
-fn __action137<
-    'input,
->(
+fn __action137<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
@@ -52120,14 +51676,11 @@ fn __action137<
     (_, __1, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::MaxIf(MaxIfFn::new(__0, __1, __2)).into()
 }
 
-fn __action138<
-    'input,
->(
+fn __action138<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
@@ -52135,14 +51688,11 @@ fn __action138<
     (_, __1, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::MedianIf(MedianIfFn::new(__0, __1, __2))
 }
 
-fn __action139<
-    'input,
->(
+fn __action139<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
@@ -52150,14 +51700,11 @@ fn __action139<
     (_, __1, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::MinIf(MinIfFn::new(__0, __1, __2))
 }
 
-fn __action140<
-    'input,
->(
+fn __action140<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
@@ -52165,14 +51712,11 @@ fn __action140<
     (_, __1, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::SumIf(SumIfFn::new(__0, __1, __2))
 }
 
-fn __action141<
-    'input,
->(
+fn __action141<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
@@ -52180,14 +51724,11 @@ fn __action141<
     (_, __1, _): (Position, ::std::option::Option<AggregateType>, Position),
     (_, __2, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::StddevIf(StddevIfFn::new(__0, __1, __2))
 }
 
-fn __action142<
-    'input,
->(
+fn __action142<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52195,14 +51736,11 @@ fn __action142<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<SortingDirection>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Percentile(PercentileFn::new(__0, __1, __2, PercentileType::Cont))
 }
 
-fn __action143<
-    'input,
->(
+fn __action143<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52210,14 +51748,11 @@ fn __action143<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<SortingDirection>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Percentile(PercentileFn::new(__0, __1, __2, PercentileType::Cont))
 }
 
-fn __action144<
-    'input,
->(
+fn __action144<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52225,14 +51760,11 @@ fn __action144<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<SortingDirection>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Percentile(PercentileFn::new(__0, __1, __2, PercentileType::Cont))
 }
 
-fn __action145<
-    'input,
->(
+fn __action145<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52240,14 +51772,11 @@ fn __action145<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<SortingDirection>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Percentile(PercentileFn::new(__0, __1, __2, PercentileType::Disc))
 }
 
-fn __action146<
-    'input,
->(
+fn __action146<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, p, _): (Position, Box<Expression>, Position),
@@ -52260,14 +51789,11 @@ fn __action146<
     (_, expr, _): (Position, Box<Expression>, Position),
     (_, order, _): (Position, ::std::option::Option<SortingDirection>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Percentile(PercentileFn::new(expr, p, order, PercentileType::Cont))
 }
 
-fn __action147<
-    'input,
->(
+fn __action147<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, p, _): (Position, Box<Expression>, Position),
@@ -52280,91 +51806,61 @@ fn __action147<
     (_, expr, _): (Position, Box<Expression>, Position),
     (_, order, _): (Position, ::std::option::Option<SortingDirection>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     VectorExpression::Percentile(PercentileFn::new(expr, p, order, PercentileType::Disc))
 }
 
-fn __action148<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> AggregateType
-{
+fn __action148<'input>((_, __0, _): (Position, Token<'input>, Position)) -> AggregateType {
     AggregateType::All
 }
 
-fn __action149<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> AggregateType
-{
+fn __action149<'input>((_, __0, _): (Position, Token<'input>, Position)) -> AggregateType {
     AggregateType::Distinct
 }
 
-fn __action150<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> AggregateType
-{
+fn __action150<'input>((_, __0, _): (Position, Token<'input>, Position)) -> AggregateType {
     AggregateType::Unique
 }
 
-fn __action151<
-    'input,
->(
+fn __action151<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Vec<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Concat(ConcatFn::new(__0))
 }
 
-fn __action152<
-    'input,
->(
+fn __action152<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Left(LeftFn::new(__0, __1))
 }
 
-fn __action153<
-    'input,
->(
+fn __action153<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Length(LengthFn::new(__0))
 }
 
-fn __action154<
-    'input,
->(
+fn __action154<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Lower(LowerFn::new(__0))
 }
 
-fn __action155<
-    'input,
->(
+fn __action155<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52372,14 +51868,11 @@ fn __action155<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::PadLeft(PadLeftFn::new(__0, __1, __2))
 }
 
-fn __action156<
-    'input,
->(
+fn __action156<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52387,14 +51880,11 @@ fn __action156<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::PadLeft(PadLeftFn::new(__0, __1, __2))
 }
 
-fn __action157<
-    'input,
->(
+fn __action157<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52402,14 +51892,11 @@ fn __action157<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::PadRight(PadRightFn::new(__0, __1, __2))
 }
 
-fn __action158<
-    'input,
->(
+fn __action158<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52417,54 +51904,42 @@ fn __action158<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::PadRight(PadRightFn::new(__0, __1, __2))
 }
 
-fn __action159<
-    'input,
->(
+fn __action159<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Replace(ReplaceFn::new(__0, __1))
 }
 
-fn __action160<
-    'input,
->(
+fn __action160<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Reverse(ReverseFn::new(__0))
 }
 
-fn __action161<
-    'input,
->(
+fn __action161<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Right(RightFn::new(__0, __1))
 }
 
-fn __action162<
-    'input,
->(
+fn __action162<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52472,14 +51947,11 @@ fn __action162<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Substr(SubstrFn::new(__0, __1, __2))
 }
 
-fn __action163<
-    'input,
->(
+fn __action163<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
@@ -52487,113 +51959,84 @@ fn __action163<
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, __2, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Substr(SubstrFn::new(__0, __1, __2))
 }
 
-fn __action164<
-    'input,
->(
-    (_, __0, _): (Position, TrimFn, Position),
-) -> StringFn
-{
+fn __action164<'input>((_, __0, _): (Position, TrimFn, Position)) -> StringFn {
     StringFn::Trim(__0)
 }
 
-fn __action165<
-    'input,
->(
+fn __action165<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     StringFn::Upper(UpperFn::new(__0))
 }
 
-fn __action166<
-    'input,
->(
+fn __action166<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     TrimFn::new(__0, __1, TrimType::Both)
 }
 
-fn __action167<
-    'input,
->(
+fn __action167<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     TrimFn::new(__0, __1, TrimType::Leading)
 }
 
-fn __action168<
-    'input,
->(
+fn __action168<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     TrimFn::new(__0, __1, TrimType::Trailing)
 }
 
-fn __action169<
-    'input,
->(
+fn __action169<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     TrimFn::new(__0, __1, TrimType::Leading)
 }
 
-fn __action170<
-    'input,
->(
+fn __action170<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     TrimFn::new(__0, __1, TrimType::Trailing)
 }
 
-fn __action171<
-    'input,
->(
+fn __action171<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, __1, _): (Position, ::std::option::Option<Box<Expression>>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     TrimFn::new(__0, __1, TrimType::Both)
 }
 
-fn __action172<
-    'input,
->(
+fn __action172<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, trim_type, _): (Position, TrimType, Position),
@@ -52601,781 +52044,523 @@ fn __action172<
     (_, _, _): (Position, Token<'input>, Position),
     (_, expr, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     TrimFn::new(expr, trim_text, trim_type)
 }
 
-fn __action173<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> TrimType
-{
+fn __action173<'input>((_, __0, _): (Position, Token<'input>, Position)) -> TrimType {
     TrimType::Both
 }
 
-fn __action174<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> TrimType
-{
+fn __action174<'input>((_, __0, _): (Position, Token<'input>, Position)) -> TrimType {
     TrimType::Leading
 }
 
-fn __action175<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> TrimType
-{
+fn __action175<'input>((_, __0, _): (Position, Token<'input>, Position)) -> TrimType {
     TrimType::Trailing
 }
 
-fn __action176<
-    'input,
->(
+fn __action176<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::DayAdd(DayAddFn::new(__0, __1))
 }
 
-fn __action177<
-    'input,
->(
+fn __action177<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::DaySub(DaySubFn::new(__0, __1))
 }
 
-fn __action178<
-    'input,
->(
+fn __action178<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::HourAdd(HourAddFn::new(__0, __1))
 }
 
-fn __action179<
-    'input,
->(
+fn __action179<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::HourSub(HourSubFn::new(__0, __1))
 }
 
-fn __action180<
-    'input,
->(
+fn __action180<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::MinuteAdd(MinuteAddFn::new(__0, __1))
 }
 
-fn __action181<
-    'input,
->(
+fn __action181<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::MinuteSub(MinuteSubFn::new(__0, __1))
 }
 
-fn __action182<
-    'input,
->(
+fn __action182<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::MonthAdd(MonthAddFn::new(__0, __1))
 }
 
-fn __action183<
-    'input,
->(
+fn __action183<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::MonthSub(MonthSubFn::new(__0, __1))
 }
 
-fn __action184<
-    'input,
->(
+fn __action184<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::SecondAdd(SecondAddFn::new(__0, __1))
 }
 
-fn __action185<
-    'input,
->(
+fn __action185<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::SecondSub(SecondSubFn::new(__0, __1))
 }
 
-fn __action186<
-    'input,
->(
+fn __action186<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::YearAdd(YearAddFn::new(__0, __1))
 }
 
-fn __action187<
-    'input,
->(
+fn __action187<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::YearSub(YearSubFn::new(__0, __1))
 }
 
-fn __action188<
-    'input,
->(
+fn __action188<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, DatetimeType, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::Extract(ExtractFn::new(__0, __1))
 }
 
-fn __action189<
-    'input,
->(
+fn __action189<'input>(
     (_, __0, _): (Position, DatetimeType, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> DatetimeFn
-{
+) -> DatetimeFn {
     DatetimeFn::Extract(ExtractFn::new(__0, __1))
 }
 
-fn __action190<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DatetimeType
-{
+fn __action190<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DatetimeType {
     DatetimeType::Year
 }
 
-fn __action191<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DatetimeType
-{
+fn __action191<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DatetimeType {
     DatetimeType::Month
 }
 
-fn __action192<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DatetimeType
-{
+fn __action192<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DatetimeType {
     DatetimeType::Day
 }
 
-fn __action193<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DatetimeType
-{
+fn __action193<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DatetimeType {
     DatetimeType::Hour
 }
 
-fn __action194<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DatetimeType
-{
+fn __action194<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DatetimeType {
     DatetimeType::Minute
 }
 
-fn __action195<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DatetimeType
-{
+fn __action195<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DatetimeType {
     DatetimeType::Second
 }
 
-fn __action196<
-    'input,
->(
+fn __action196<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Box<NvlFn>
-{
+) -> Box<NvlFn> {
     NvlFn::new(__0, __1).into()
 }
 
-fn __action197<
-    'input,
->(
+fn __action197<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __1, _): (Position, DataType, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Box<CastFn>
-{
+) -> Box<CastFn> {
     CastFn::new(__0, __1).into()
 }
 
-fn __action198<
-    'input,
->(
-    (_, __0, _): (Position, DataType, Position),
-) -> DataType
-{
+fn __action198<'input>((_, __0, _): (Position, DataType, Position)) -> DataType {
     (__0)
 }
 
-fn __action199<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DataType
-{
+fn __action199<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DataType {
     DataType::new(String::from_str("text").unwrap())
 }
 
-fn __action200<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DataType
-{
+fn __action200<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DataType {
     DataType::new(String::from_str("int").unwrap())
 }
 
-fn __action201<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DataType
-{
+fn __action201<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DataType {
     DataType::new(String::from_str("float").unwrap())
 }
 
-fn __action202<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DataType
-{
+fn __action202<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DataType {
     DataType::new(String::from_str("numeric").unwrap())
 }
 
-fn __action203<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DataType
-{
+fn __action203<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DataType {
     DataType::new(String::from_str("timestamp").unwrap())
 }
 
-fn __action204<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DataType
-{
+fn __action204<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DataType {
     DataType::new(String::from_str("datetime").unwrap())
 }
 
-fn __action205<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DataType
-{
+fn __action205<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DataType {
     DataType::new(String::from_str("date").unwrap())
 }
 
-fn __action206<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> DataType
-{
+fn __action206<'input>((_, __0, _): (Position, Token<'input>, Position)) -> DataType {
     DataType::new(String::from_str("time").unwrap())
 }
 
-fn __action207<
-    'input,
->(
-    (_, __0, _): (Position, NumericValue, Position),
-) -> ConstantValue
-{
+fn __action207<'input>((_, __0, _): (Position, NumericValue, Position)) -> ConstantValue {
     ConstantValue::Numeric(__0)
 }
 
-fn __action208<
-    'input,
->(
-    (_, __0, _): (Position, StringValue, Position),
-) -> ConstantValue
-{
+fn __action208<'input>((_, __0, _): (Position, StringValue, Position)) -> ConstantValue {
     ConstantValue::String(__0)
 }
 
-fn __action209<
-    'input,
->(
-    (_, __0, _): (Position, Token<'input>, Position),
-) -> ConstantValue
-{
+fn __action209<'input>((_, __0, _): (Position, Token<'input>, Position)) -> ConstantValue {
     ConstantValue::Null
 }
 
-fn __action210<
-    'input,
->(
-    (_, __0, _): (Position, String, Position),
-) -> StringValue
-{
+fn __action210<'input>((_, __0, _): (Position, String, Position)) -> StringValue {
     __0.into()
 }
 
-fn __action211<
-    'input,
->(
-    (_, __0, _): (Position, i64, Position),
-) -> NumericValue
-{
+fn __action211<'input>((_, __0, _): (Position, i64, Position)) -> NumericValue {
     __0.into()
 }
 
-fn __action212<
-    'input,
->(
-    (_, __0, _): (Position, f64, Position),
-) -> NumericValue
-{
+fn __action212<'input>((_, __0, _): (Position, f64, Position)) -> NumericValue {
     __0.into()
 }
 
-fn __action213<
-    'input,
->(
-    (_, __0, _): (Position, &'input str, Position),
-) -> Identifier
-{
+fn __action213<'input>((_, __0, _): (Position, &'input str, Position)) -> Identifier {
     __0.into()
 }
 
-fn __action214<
-    'input,
->(
+fn __action214<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     Some(__0)
 }
 
-fn __action215<
-    'input,
->(
+fn __action215<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     None
 }
 
-fn __action216<
-    'input,
->(
+fn __action216<'input>(
     (_, __0, _): (Position, AggregateType, Position),
-) -> ::std::option::Option<AggregateType>
-{
+) -> ::std::option::Option<AggregateType> {
     Some(__0)
 }
 
-fn __action217<
-    'input,
->(
+fn __action217<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<AggregateType>
-{
+) -> ::std::option::Option<AggregateType> {
     None
 }
 
-fn __action218<
-    'input,
->(
+fn __action218<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     Some(__0)
 }
 
-fn __action219<
-    'input,
->(
+fn __action219<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     None
 }
 
-fn __action220<
-    'input,
->(
+fn __action220<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> Box<Expression>
-{
+) -> Box<Expression> {
     (__0)
 }
 
-fn __action221<
-    'input,
->(
+fn __action221<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     Some(__0)
 }
 
-fn __action222<
-    'input,
->(
+fn __action222<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     None
 }
 
-fn __action223<
-    'input,
->(
+fn __action223<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Box<Expression>
-{
+) -> Box<Expression> {
     (__0)
 }
 
-fn __action224<
-    'input,
->(
+fn __action224<'input>(
     (_, __0, _): (Position, SortingDirection, Position),
-) -> ::std::option::Option<SortingDirection>
-{
+) -> ::std::option::Option<SortingDirection> {
     Some(__0)
 }
 
-fn __action225<
-    'input,
->(
+fn __action225<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<SortingDirection>
-{
+) -> ::std::option::Option<SortingDirection> {
     None
 }
 
-fn __action226<
-    'input,
->(
+fn __action226<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, SortingDirection, Position),
-) -> SortingDirection
-{
+) -> SortingDirection {
     (__0)
 }
 
-fn __action227<
-    'input,
->(
-    (_, __0, _): (Position, (Box<PredicateExpression>, Box<Expression>), Position),
-) -> ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>
-{
+fn __action227<'input>(
+    (_, __0, _): (
+        Position,
+        (Box<PredicateExpression>, Box<Expression>),
+        Position,
+    ),
+) -> ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)> {
     vec![__0]
 }
 
-fn __action228<
-    'input,
->(
-    (_, v, _): (Position, ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>, Position),
-    (_, e, _): (Position, (Box<PredicateExpression>, Box<Expression>), Position),
-) -> ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>
-{
-    { let mut v = v; v.push(e); v }
+fn __action228<'input>(
+    (_, v, _): (
+        Position,
+        ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>,
+        Position,
+    ),
+    (_, e, _): (
+        Position,
+        (Box<PredicateExpression>, Box<Expression>),
+        Position,
+    ),
+) -> ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
-fn __action229<
-    'input,
->(
+fn __action229<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     Some(__0)
 }
 
-fn __action230<
-    'input,
->(
+fn __action230<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     None
 }
 
-fn __action231<
-    'input,
->(
+fn __action231<'input>(
     (_, __0, _): (Position, (Box<Expression>, Box<Expression>), Position),
-) -> ::std::vec::Vec<(Box<Expression>, Box<Expression>)>
-{
+) -> ::std::vec::Vec<(Box<Expression>, Box<Expression>)> {
     vec![__0]
 }
 
-fn __action232<
-    'input,
->(
-    (_, v, _): (Position, ::std::vec::Vec<(Box<Expression>, Box<Expression>)>, Position),
+fn __action232<'input>(
+    (_, v, _): (
+        Position,
+        ::std::vec::Vec<(Box<Expression>, Box<Expression>)>,
+        Position,
+    ),
     (_, e, _): (Position, (Box<Expression>, Box<Expression>), Position),
-) -> ::std::vec::Vec<(Box<Expression>, Box<Expression>)>
-{
-    { let mut v = v; v.push(e); v }
+) -> ::std::vec::Vec<(Box<Expression>, Box<Expression>)> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
-fn __action233<
-    'input,
->(
+fn __action233<'input>(
     (_, __0, _): (Position, PredicateExpression, Position),
-) -> Box<PredicateExpression>
-{
+) -> Box<PredicateExpression> {
     Box::new(__0)
 }
 
-fn __action234<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Box<Expression>
-{
+fn __action234<'input>((_, __0, _): (Position, Expression, Position)) -> Box<Expression> {
     Box::new(__0)
 }
 
-fn __action235<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Box<Expression>
-{
+fn __action235<'input>((_, __0, _): (Position, Expression, Position)) -> Box<Expression> {
     Box::new(__0)
 }
 
-fn __action236<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Box<Expression>
-{
+fn __action236<'input>((_, __0, _): (Position, Expression, Position)) -> Box<Expression> {
     Box::new(__0)
 }
 
-fn __action237<
-    'input,
->(
+fn __action237<'input>(
     (_, __0, _): (Position, SortingDirection, Position),
-) -> ::std::option::Option<SortingDirection>
-{
+) -> ::std::option::Option<SortingDirection> {
     Some(__0)
 }
 
-fn __action238<
-    'input,
->(
+fn __action238<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<SortingDirection>
-{
+) -> ::std::option::Option<SortingDirection> {
     None
 }
 
-fn __action239<
-    'input,
->(
+fn __action239<'input>(
     (_, __0, _): (Position, Identifier, Position),
-) -> ::std::option::Option<Identifier>
-{
+) -> ::std::option::Option<Identifier> {
     Some(__0)
 }
 
-fn __action240<
-    'input,
->(
+fn __action240<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Identifier>
-{
+) -> ::std::option::Option<Identifier> {
     None
 }
 
-fn __action241<
-    'input,
->(
+fn __action241<'input>(
     (_, __0, _): (Position, Identifier, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Identifier
-{
+) -> Identifier {
     (__0)
 }
 
-fn __action242<
-    'input,
->(
+fn __action242<'input>(
     (_, __0, _): (Position, Identifier, Position),
-) -> ::std::option::Option<Identifier>
-{
+) -> ::std::option::Option<Identifier> {
     Some(__0)
 }
 
-fn __action243<
-    'input,
->(
+fn __action243<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Identifier>
-{
+) -> ::std::option::Option<Identifier> {
     None
 }
 
-fn __action244<
-    'input,
->(
+fn __action244<'input>(
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
-) -> ::std::option::Option<Box<PredicateExpression>>
-{
+) -> ::std::option::Option<Box<PredicateExpression>> {
     Some(__0)
 }
 
-fn __action245<
-    'input,
->(
+fn __action245<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Box<PredicateExpression>>
-{
+) -> ::std::option::Option<Box<PredicateExpression>> {
     None
 }
 
-fn __action246<
-    'input,
->(
+fn __action246<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
-) -> Box<PredicateExpression>
-{
+) -> Box<PredicateExpression> {
     (__0)
 }
 
-fn __action247<
-    'input,
->(
+fn __action247<'input>(
     (_, v, _): (Position, ::std::vec::Vec<Box<Expression>>, Position),
     (_, e, _): (Position, ::std::option::Option<Box<Expression>>, Position),
-) -> Vec<Box<Expression>>
-{
+) -> Vec<Box<Expression>> {
     match e {
-        None=> v,
+        None => v,
         Some(e) => {
             let mut v = v;
             v.push(e);
@@ -53384,45 +52569,33 @@ fn __action247<
     }
 }
 
-fn __action248<
-    'input,
->(
+fn __action248<'input>(
     (_, __0, _): (Position, Vec<SortingElement>, Position),
-) -> ::std::option::Option<Vec<SortingElement>>
-{
+) -> ::std::option::Option<Vec<SortingElement>> {
     Some(__0)
 }
 
-fn __action249<
-    'input,
->(
+fn __action249<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Vec<SortingElement>>
-{
+) -> ::std::option::Option<Vec<SortingElement>> {
     None
 }
 
-fn __action250<
-    'input,
->(
+fn __action250<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Vec<SortingElement>, Position),
-) -> Vec<SortingElement>
-{
+) -> Vec<SortingElement> {
     (__0)
 }
 
-fn __action251<
-    'input,
->(
+fn __action251<'input>(
     (_, v, _): (Position, ::std::vec::Vec<SortingElement>, Position),
     (_, e, _): (Position, ::std::option::Option<SortingElement>, Position),
-) -> Vec<SortingElement>
-{
+) -> Vec<SortingElement> {
     match e {
-        None=> v,
+        None => v,
         Some(e) => {
             let mut v = v;
             v.push(e);
@@ -53431,63 +52604,45 @@ fn __action251<
     }
 }
 
-fn __action252<
-    'input,
->(
+fn __action252<'input>(
     (_, __0, _): (Position, GroupElements, Position),
-) -> ::std::option::Option<GroupElements>
-{
+) -> ::std::option::Option<GroupElements> {
     Some(__0)
 }
 
-fn __action253<
-    'input,
->(
+fn __action253<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<GroupElements>
-{
+) -> ::std::option::Option<GroupElements> {
     None
 }
 
-fn __action254<
-    'input,
->(
+fn __action254<'input>(
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
-) -> ::std::option::Option<Box<PredicateExpression>>
-{
+) -> ::std::option::Option<Box<PredicateExpression>> {
     Some(__0)
 }
 
-fn __action255<
-    'input,
->(
+fn __action255<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Box<PredicateExpression>>
-{
+) -> ::std::option::Option<Box<PredicateExpression>> {
     None
 }
 
-fn __action256<
-    'input,
->(
+fn __action256<'input>(
     (_, _, _): (Position, Token<'input>, Position),
     (_, __0, _): (Position, Box<PredicateExpression>, Position),
-) -> Box<PredicateExpression>
-{
+) -> Box<PredicateExpression> {
     (__0)
 }
 
-fn __action257<
-    'input,
->(
+fn __action257<'input>(
     (_, v, _): (Position, ::std::vec::Vec<Box<TableView>>, Position),
     (_, e, _): (Position, ::std::option::Option<Box<TableView>>, Position),
-) -> Vec<Box<TableView>>
-{
+) -> Vec<Box<TableView>> {
     match e {
-        None=> v,
+        None => v,
         Some(e) => {
             let mut v = v;
             v.push(e);
@@ -53496,15 +52651,12 @@ fn __action257<
     }
 }
 
-fn __action258<
-    'input,
->(
+fn __action258<'input>(
     (_, v, _): (Position, ::std::vec::Vec<SelectElement>, Position),
     (_, e, _): (Position, ::std::option::Option<SelectElement>, Position),
-) -> Vec<SelectElement>
-{
+) -> Vec<SelectElement> {
     match e {
-        None=> v,
+        None => v,
         Some(e) => {
             let mut v = v;
             v.push(e);
@@ -53513,374 +52665,259 @@ fn __action258<
     }
 }
 
-fn __action259<
-    'input,
->(
+fn __action259<'input>(
     (_, __0, _): (Position, SelectType, Position),
-) -> ::std::option::Option<SelectType>
-{
+) -> ::std::option::Option<SelectType> {
     Some(__0)
 }
 
-fn __action260<
-    'input,
->(
+fn __action260<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<SelectType>
-{
+) -> ::std::option::Option<SelectType> {
     None
 }
 
-fn __action261<
-    'input,
->(
+fn __action261<'input>(
     (_, __0, _): (Position, PredicateExpression, Position),
-) -> Box<PredicateExpression>
-{
+) -> Box<PredicateExpression> {
     Box::new(__0)
 }
 
-fn __action262<
-    'input,
->(
+fn __action262<'input>(
     (_, __0, _): (Position, PredicateExpression, Position),
-) -> Box<PredicateExpression>
-{
+) -> Box<PredicateExpression> {
     Box::new(__0)
 }
 
-fn __action263<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Box<Expression>
-{
+fn __action263<'input>((_, __0, _): (Position, Expression, Position)) -> Box<Expression> {
     Box::new(__0)
 }
 
-fn __action264<
-    'input,
->(
-    (_, __0, _): (Position, Expression, Position),
-) -> Box<Expression>
-{
+fn __action264<'input>((_, __0, _): (Position, Expression, Position)) -> Box<Expression> {
     Box::new(__0)
 }
 
-fn __action265<
-    'input,
->(
+fn __action265<'input>(
     (_, __0, _): (Position, SelectElement, Position),
-) -> ::std::option::Option<SelectElement>
-{
+) -> ::std::option::Option<SelectElement> {
     Some(__0)
 }
 
-fn __action266<
-    'input,
->(
+fn __action266<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<SelectElement>
-{
+) -> ::std::option::Option<SelectElement> {
     None
 }
 
-fn __action267<
-    'input,
->(
+fn __action267<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::vec::Vec<SelectElement>
-{
+) -> ::std::vec::Vec<SelectElement> {
     vec![]
 }
 
-fn __action268<
-    'input,
->(
+fn __action268<'input>(
     (_, v, _): (Position, ::std::vec::Vec<SelectElement>, Position),
-) -> ::std::vec::Vec<SelectElement>
-{
+) -> ::std::vec::Vec<SelectElement> {
     v
 }
 
-fn __action269<
-    'input,
->(
+fn __action269<'input>(
     (_, __0, _): (Position, SelectElement, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> SelectElement
-{
+) -> SelectElement {
     (__0)
 }
 
-fn __action270<
-    'input,
->(
+fn __action270<'input>(
     (_, __0, _): (Position, Box<TableView>, Position),
-) -> ::std::option::Option<Box<TableView>>
-{
+) -> ::std::option::Option<Box<TableView>> {
     Some(__0)
 }
 
-fn __action271<
-    'input,
->(
+fn __action271<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<Box<TableView>>
-{
+) -> ::std::option::Option<Box<TableView>> {
     None
 }
 
-fn __action272<
-    'input,
->(
+fn __action272<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::vec::Vec<Box<TableView>>
-{
+) -> ::std::vec::Vec<Box<TableView>> {
     vec![]
 }
 
-fn __action273<
-    'input,
->(
+fn __action273<'input>(
     (_, v, _): (Position, ::std::vec::Vec<Box<TableView>>, Position),
-) -> ::std::vec::Vec<Box<TableView>>
-{
+) -> ::std::vec::Vec<Box<TableView>> {
     v
 }
 
-fn __action274<
-    'input,
->(
+fn __action274<'input>(
     (_, __0, _): (Position, Box<TableView>, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> Box<TableView>
-{
+) -> Box<TableView> {
     (__0)
 }
 
-fn __action275<
-    'input,
->(
+fn __action275<'input>(
     (_, __0, _): (Position, SortingElement, Position),
-) -> ::std::option::Option<SortingElement>
-{
+) -> ::std::option::Option<SortingElement> {
     Some(__0)
 }
 
-fn __action276<
-    'input,
->(
+fn __action276<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::option::Option<SortingElement>
-{
+) -> ::std::option::Option<SortingElement> {
     None
 }
 
-fn __action277<
-    'input,
->(
+fn __action277<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::vec::Vec<SortingElement>
-{
+) -> ::std::vec::Vec<SortingElement> {
     vec![]
 }
 
-fn __action278<
-    'input,
->(
+fn __action278<'input>(
     (_, v, _): (Position, ::std::vec::Vec<SortingElement>, Position),
-) -> ::std::vec::Vec<SortingElement>
-{
+) -> ::std::vec::Vec<SortingElement> {
     v
 }
 
-fn __action279<
-    'input,
->(
+fn __action279<'input>(
     (_, __0, _): (Position, SortingElement, Position),
     (_, _, _): (Position, Token<'input>, Position),
-) -> SortingElement
-{
+) -> SortingElement {
     (__0)
 }
 
-fn __action280<
-    'input,
->(
+fn __action280<'input>(
     __lookbehind: &Position,
     __lookahead: &Position,
-) -> ::std::vec::Vec<Box<Expression>>
-{
+) -> ::std::vec::Vec<Box<Expression>> {
     vec![]
 }
 
-fn __action281<
-    'input,
->(
+fn __action281<'input>(
     (_, v, _): (Position, ::std::vec::Vec<Box<Expression>>, Position),
-) -> ::std::vec::Vec<Box<Expression>>
-{
+) -> ::std::vec::Vec<Box<Expression>> {
     v
 }
 
-fn __action282<
-    'input,
->(
+fn __action282<'input>(
     (_, __0, _): (Position, Box<Expression>, Position),
-) -> ::std::vec::Vec<Box<Expression>>
-{
+) -> ::std::vec::Vec<Box<Expression>> {
     vec![__0]
 }
 
-fn __action283<
-    'input,
->(
+fn __action283<'input>(
     (_, v, _): (Position, ::std::vec::Vec<Box<Expression>>, Position),
     (_, e, _): (Position, Box<Expression>, Position),
-) -> ::std::vec::Vec<Box<Expression>>
-{
-    { let mut v = v; v.push(e); v }
+) -> ::std::vec::Vec<Box<Expression>> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
-fn __action284<
-    'input,
->(
+fn __action284<'input>(
     (_, __0, _): (Position, SortingElement, Position),
-) -> ::std::vec::Vec<SortingElement>
-{
+) -> ::std::vec::Vec<SortingElement> {
     vec![__0]
 }
 
-fn __action285<
-    'input,
->(
+fn __action285<'input>(
     (_, v, _): (Position, ::std::vec::Vec<SortingElement>, Position),
     (_, e, _): (Position, SortingElement, Position),
-) -> ::std::vec::Vec<SortingElement>
-{
-    { let mut v = v; v.push(e); v }
+) -> ::std::vec::Vec<SortingElement> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
-fn __action286<
-    'input,
->(
+fn __action286<'input>(
     (_, __0, _): (Position, Box<TableView>, Position),
-) -> ::std::vec::Vec<Box<TableView>>
-{
+) -> ::std::vec::Vec<Box<TableView>> {
     vec![__0]
 }
 
-fn __action287<
-    'input,
->(
+fn __action287<'input>(
     (_, v, _): (Position, ::std::vec::Vec<Box<TableView>>, Position),
     (_, e, _): (Position, Box<TableView>, Position),
-) -> ::std::vec::Vec<Box<TableView>>
-{
-    { let mut v = v; v.push(e); v }
+) -> ::std::vec::Vec<Box<TableView>> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
-fn __action288<
-    'input,
->(
+fn __action288<'input>(
     (_, __0, _): (Position, SelectElement, Position),
-) -> ::std::vec::Vec<SelectElement>
-{
+) -> ::std::vec::Vec<SelectElement> {
     vec![__0]
 }
 
-fn __action289<
-    'input,
->(
+fn __action289<'input>(
     (_, v, _): (Position, ::std::vec::Vec<SelectElement>, Position),
     (_, e, _): (Position, SelectElement, Position),
-) -> ::std::vec::Vec<SelectElement>
-{
-    { let mut v = v; v.push(e); v }
+) -> ::std::vec::Vec<SelectElement> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
-fn __action290<
-    'input,
->(
+fn __action290<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Box<Expression>, Position),
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action220(
-        __0,
-        __1,
-    );
+    let __temp0 = __action220(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action218(
-        __temp0,
-    )
+    __action218(__temp0)
 }
 
-fn __action291<
-    'input,
->(
+fn __action291<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action290(
-        __3,
-        __4,
-    );
+    let __temp0 = __action290(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action121(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __5,
-    )
+    __action121(__0, __1, __2, __temp0, __5)
 }
 
-fn __action292<
-    'input,
->(
+fn __action292<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action121(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action121(__0, __1, __2, __temp0, __3)
 }
 
-fn __action293<
-    'input,
->(
+fn __action293<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -53889,58 +52926,30 @@ fn __action293<
     __5: (Position, Token<'input>, Position),
     __6: (Position, Box<Expression>, Position),
     __7: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action290(
-        __5,
-        __6,
-    );
+    let __temp0 = __action290(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action155(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action155(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action294<
-    'input,
->(
+fn __action294<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action155(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action155(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action295<
-    'input,
->(
+fn __action295<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -53949,58 +52958,30 @@ fn __action295<
     __5: (Position, Token<'input>, Position),
     __6: (Position, Box<Expression>, Position),
     __7: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action290(
-        __5,
-        __6,
-    );
+    let __temp0 = __action290(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action156(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action156(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action296<
-    'input,
->(
+fn __action296<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action156(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action156(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action297<
-    'input,
->(
+fn __action297<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -54009,58 +52990,30 @@ fn __action297<
     __5: (Position, Token<'input>, Position),
     __6: (Position, Box<Expression>, Position),
     __7: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action290(
-        __5,
-        __6,
-    );
+    let __temp0 = __action290(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action157(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action157(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action298<
-    'input,
->(
+fn __action298<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action157(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action157(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action299<
-    'input,
->(
+fn __action299<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -54069,58 +53022,30 @@ fn __action299<
     __5: (Position, Token<'input>, Position),
     __6: (Position, Box<Expression>, Position),
     __7: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action290(
-        __5,
-        __6,
-    );
+    let __temp0 = __action290(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action158(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action158(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action300<
-    'input,
->(
+fn __action300<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action158(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action158(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action301<
-    'input,
->(
+fn __action301<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -54129,58 +53054,30 @@ fn __action301<
     __5: (Position, Token<'input>, Position),
     __6: (Position, Box<Expression>, Position),
     __7: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action290(
-        __5,
-        __6,
-    );
+    let __temp0 = __action290(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action162(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action162(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action302<
-    'input,
->(
+fn __action302<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action162(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action162(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action303<
-    'input,
->(
+fn __action303<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -54189,493 +53086,265 @@ fn __action303<
     __5: (Position, Token<'input>, Position),
     __6: (Position, Box<Expression>, Position),
     __7: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action290(
-        __5,
-        __6,
-    );
+    let __temp0 = __action290(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action163(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action163(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action304<
-    'input,
->(
+fn __action304<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> StringFn
-{
+) -> StringFn {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action163(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action163(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action305<
-    'input,
->(
+fn __action305<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action290(
-        __3,
-        __4,
-    );
+    let __temp0 = __action290(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action166(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __5,
-    )
+    __action166(__0, __1, __2, __temp0, __5)
 }
 
-fn __action306<
-    'input,
->(
+fn __action306<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action166(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action166(__0, __1, __2, __temp0, __3)
 }
 
-fn __action307<
-    'input,
->(
+fn __action307<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action290(
-        __3,
-        __4,
-    );
+    let __temp0 = __action290(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action167(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __5,
-    )
+    __action167(__0, __1, __2, __temp0, __5)
 }
 
-fn __action308<
-    'input,
->(
+fn __action308<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action167(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action167(__0, __1, __2, __temp0, __3)
 }
 
-fn __action309<
-    'input,
->(
+fn __action309<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action290(
-        __3,
-        __4,
-    );
+    let __temp0 = __action290(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action168(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __5,
-    )
+    __action168(__0, __1, __2, __temp0, __5)
 }
 
-fn __action310<
-    'input,
->(
+fn __action310<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action168(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action168(__0, __1, __2, __temp0, __3)
 }
 
-fn __action311<
-    'input,
->(
+fn __action311<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action290(
-        __3,
-        __4,
-    );
+    let __temp0 = __action290(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action169(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __5,
-    )
+    __action169(__0, __1, __2, __temp0, __5)
 }
 
-fn __action312<
-    'input,
->(
+fn __action312<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action169(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action169(__0, __1, __2, __temp0, __3)
 }
 
-fn __action313<
-    'input,
->(
+fn __action313<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action290(
-        __3,
-        __4,
-    );
+    let __temp0 = __action290(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action170(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __5,
-    )
+    __action170(__0, __1, __2, __temp0, __5)
 }
 
-fn __action314<
-    'input,
->(
+fn __action314<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action170(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action170(__0, __1, __2, __temp0, __3)
 }
 
-fn __action315<
-    'input,
->(
+fn __action315<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action290(
-        __3,
-        __4,
-    );
+    let __temp0 = __action290(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action171(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __5,
-    )
+    __action171(__0, __1, __2, __temp0, __5)
 }
 
-fn __action316<
-    'input,
->(
+fn __action316<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action219(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action219(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action171(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action171(__0, __1, __2, __temp0, __3)
 }
 
-fn __action317<
-    'input,
->(
+fn __action317<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, SortingDirection, Position),
-) -> ::std::option::Option<SortingDirection>
-{
+) -> ::std::option::Option<SortingDirection> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action226(
-        __0,
-        __1,
-    );
+    let __temp0 = __action226(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action224(
-        __temp0,
-    )
+    __action224(__temp0)
 }
 
-fn __action318<
-    'input,
->(
+fn __action318<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, SortingDirection, Position),
     __5: (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action317(
-        __3,
-        __4,
-    );
+    let __temp0 = __action317(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action114(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __5,
-    )
+    __action114(__0, __1, __2, __temp0, __5)
 }
 
-fn __action319<
-    'input,
->(
+fn __action319<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action225(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action225(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action114(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action114(__0, __1, __2, __temp0, __3)
 }
 
-fn __action320<
-    'input,
->(
+fn __action320<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, SortingDirection, Position),
     __5: (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action317(
-        __3,
-        __4,
-    );
+    let __temp0 = __action317(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action120(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __5,
-    )
+    __action120(__0, __1, __2, __temp0, __5)
 }
 
-fn __action321<
-    'input,
->(
+fn __action321<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action225(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action225(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action120(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action120(__0, __1, __2, __temp0, __3)
 }
 
-fn __action322<
-    'input,
->(
+fn __action322<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -54684,58 +53353,30 @@ fn __action322<
     __5: (Position, Token<'input>, Position),
     __6: (Position, SortingDirection, Position),
     __7: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action317(
-        __5,
-        __6,
-    );
+    let __temp0 = __action317(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action142(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action142(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action323<
-    'input,
->(
+fn __action323<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action225(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action225(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action142(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action142(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action324<
-    'input,
->(
+fn __action324<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -54744,58 +53385,30 @@ fn __action324<
     __5: (Position, Token<'input>, Position),
     __6: (Position, SortingDirection, Position),
     __7: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action317(
-        __5,
-        __6,
-    );
+    let __temp0 = __action317(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action143(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action143(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action325<
-    'input,
->(
+fn __action325<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action225(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action225(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action143(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action143(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action326<
-    'input,
->(
+fn __action326<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -54804,58 +53417,30 @@ fn __action326<
     __5: (Position, Token<'input>, Position),
     __6: (Position, SortingDirection, Position),
     __7: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action317(
-        __5,
-        __6,
-    );
+    let __temp0 = __action317(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action144(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action144(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action327<
-    'input,
->(
+fn __action327<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action225(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action225(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action144(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action144(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action328<
-    'input,
->(
+fn __action328<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -54864,219 +53449,137 @@ fn __action328<
     __5: (Position, Token<'input>, Position),
     __6: (Position, SortingDirection, Position),
     __7: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __5.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action317(
-        __5,
-        __6,
-    );
+    let __temp0 = __action317(__5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action145(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __7,
-    )
+    __action145(__0, __1, __2, __3, __4, __temp0, __7)
 }
 
-fn __action329<
-    'input,
->(
+fn __action329<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.2.clone();
     let __end0 = __5.0.clone();
-    let __temp0 = __action225(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action225(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action145(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __temp0,
-        __5,
-    )
+    __action145(__0, __1, __2, __3, __4, __temp0, __5)
 }
 
-fn __action330<
-    'input,
->(
+fn __action330<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Box<PredicateExpression>, Position),
-) -> ::std::option::Option<Box<PredicateExpression>>
-{
+) -> ::std::option::Option<Box<PredicateExpression>> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action246(
-        __0,
-        __1,
-    );
+    let __temp0 = __action246(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action244(
-        __temp0,
-    )
+    __action244(__temp0)
 }
 
-fn __action331<
-    'input,
->(
+fn __action331<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Vec<Box<Expression>>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<PredicateExpression>, Position),
-) -> GroupElements
-{
+) -> GroupElements {
     let __start0 = __3.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action330(
-        __3,
-        __4,
-    );
+    let __temp0 = __action330(__3, __4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action28(
-        __0,
-        __1,
-        __2,
-        __temp0,
-    )
+    __action28(__0, __1, __2, __temp0)
 }
 
-fn __action332<
-    'input,
->(
+fn __action332<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Vec<Box<Expression>>, Position),
-) -> GroupElements
-{
+) -> GroupElements {
     let __start0 = __2.2.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action245(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action245(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action28(
-        __0,
-        __1,
-        __2,
-        __temp0,
-    )
+    __action28(__0, __1, __2, __temp0)
 }
 
-fn __action333<
-    'input,
->(
+fn __action333<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Vec<SortingElement>, Position),
-) -> ::std::option::Option<Vec<SortingElement>>
-{
+) -> ::std::option::Option<Vec<SortingElement>> {
     let __start0 = __0.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action250(
-        __0,
-        __1,
-        __2,
-    );
+    let __temp0 = __action250(__0, __1, __2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action248(
-        __temp0,
-    )
+    __action248(__temp0)
 }
 
-fn __action334<
-    'input,
->(
+fn __action334<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
-    __2: (Position, ::std::option::Option<Box<PredicateExpression>>, Position),
+    __2: (
+        Position,
+        ::std::option::Option<Box<PredicateExpression>>,
+        Position,
+    ),
     __3: (Position, ::std::option::Option<GroupElements>, Position),
     __4: (Position, Token<'input>, Position),
     __5: (Position, Token<'input>, Position),
     __6: (Position, Vec<SortingElement>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __4.0.clone();
     let __end0 = __6.2.clone();
-    let __temp0 = __action333(
-        __4,
-        __5,
-        __6,
-    );
+    let __temp0 = __action333(__4, __5, __6);
     let __temp0 = (__start0, __temp0, __end0);
-    __action27(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-    )
+    __action27(__0, __1, __2, __3, __temp0)
 }
 
-fn __action335<
-    'input,
->(
+fn __action335<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
-    __2: (Position, ::std::option::Option<Box<PredicateExpression>>, Position),
+    __2: (
+        Position,
+        ::std::option::Option<Box<PredicateExpression>>,
+        Position,
+    ),
     __3: (Position, ::std::option::Option<GroupElements>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __3.2.clone();
     let __end0 = __3.2.clone();
-    let __temp0 = __action249(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action249(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action27(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-    )
+    __action27(__0, __1, __2, __3, __temp0)
 }
 
-fn __action336<
-    'input,
->(
+fn __action336<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Box<PredicateExpression>, Position),
-) -> ::std::option::Option<Box<PredicateExpression>>
-{
+) -> ::std::option::Option<Box<PredicateExpression>> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action256(
-        __0,
-        __1,
-    );
+    let __temp0 = __action256(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action254(
-        __temp0,
-    )
+    __action254(__temp0)
 }
 
-fn __action337<
-    'input,
->(
+fn __action337<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, Token<'input>, Position),
@@ -55085,898 +53588,511 @@ fn __action337<
     __5: (Position, Token<'input>, Position),
     __6: (Position, Token<'input>, Position),
     __7: (Position, Vec<SortingElement>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __2.0.clone();
     let __end0 = __3.2.clone();
-    let __temp0 = __action336(
-        __2,
-        __3,
-    );
+    let __temp0 = __action336(__2, __3);
     let __temp0 = (__start0, __temp0, __end0);
-    __action334(
-        __0,
-        __1,
-        __temp0,
-        __4,
-        __5,
-        __6,
-        __7,
-    )
+    __action334(__0, __1, __temp0, __4, __5, __6, __7)
 }
 
-fn __action338<
-    'input,
->(
+fn __action338<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, ::std::option::Option<GroupElements>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Token<'input>, Position),
     __5: (Position, Vec<SortingElement>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action255(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action255(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action334(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-        __4,
-        __5,
-    )
+    __action334(__0, __1, __temp0, __2, __3, __4, __5)
 }
 
-fn __action339<
-    'input,
->(
+fn __action339<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, Token<'input>, Position),
     __3: (Position, Box<PredicateExpression>, Position),
     __4: (Position, ::std::option::Option<GroupElements>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __2.0.clone();
     let __end0 = __3.2.clone();
-    let __temp0 = __action336(
-        __2,
-        __3,
-    );
+    let __temp0 = __action336(__2, __3);
     let __temp0 = (__start0, __temp0, __end0);
-    __action335(
-        __0,
-        __1,
-        __temp0,
-        __4,
-    )
+    __action335(__0, __1, __temp0, __4)
 }
 
-fn __action340<
-    'input,
->(
+fn __action340<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, ::std::option::Option<GroupElements>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action255(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action255(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action335(
-        __0,
-        __1,
-        __temp0,
-        __2,
-    )
+    __action335(__0, __1, __temp0, __2)
 }
 
-fn __action341<
-    'input,
->(
+fn __action341<'input>(
     __0: (Position, Box<Expression>, Position),
     __1: (Position, Token<'input>, Position),
-) -> ::std::vec::Vec<Box<Expression>>
-{
+) -> ::std::vec::Vec<Box<Expression>> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action223(
-        __0,
-        __1,
-    );
+    let __temp0 = __action223(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action282(
-        __temp0,
-    )
+    __action282(__temp0)
 }
 
-fn __action342<
-    'input,
->(
+fn __action342<'input>(
     __0: (Position, ::std::vec::Vec<Box<Expression>>, Position),
     __1: (Position, Box<Expression>, Position),
     __2: (Position, Token<'input>, Position),
-) -> ::std::vec::Vec<Box<Expression>>
-{
+) -> ::std::vec::Vec<Box<Expression>> {
     let __start0 = __1.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action223(
-        __1,
-        __2,
-    );
+    let __temp0 = __action223(__1, __2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action283(
-        __0,
-        __temp0,
-    )
+    __action283(__0, __temp0)
 }
 
-fn __action343<
-    'input,
->(
+fn __action343<'input>(
     __0: (Position, Box<Expression>, Position),
     __1: (Position, Token<'input>, Position),
-) -> ::std::option::Option<Box<Expression>>
-{
+) -> ::std::option::Option<Box<Expression>> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action223(
-        __0,
-        __1,
-    );
+    let __temp0 = __action223(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action221(
-        __temp0,
-    )
+    __action221(__temp0)
 }
 
-fn __action344<
-    'input,
->(
+fn __action344<'input>(
     __0: (Position, ::std::option::Option<Box<Expression>>, Position),
-) -> Vec<Box<Expression>>
-{
+) -> Vec<Box<Expression>> {
     let __start0 = __0.0.clone();
     let __end0 = __0.0.clone();
-    let __temp0 = __action280(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action280(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action247(
-        __temp0,
-        __0,
-    )
+    __action247(__temp0, __0)
 }
 
-fn __action345<
-    'input,
->(
+fn __action345<'input>(
     __0: (Position, ::std::vec::Vec<Box<Expression>>, Position),
     __1: (Position, ::std::option::Option<Box<Expression>>, Position),
-) -> Vec<Box<Expression>>
-{
+) -> Vec<Box<Expression>> {
     let __start0 = __0.0.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action281(
-        __0,
-    );
+    let __temp0 = __action281(__0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action247(
-        __temp0,
-        __1,
-    )
+    __action247(__temp0, __1)
 }
 
-fn __action346<
-    'input,
->(
+fn __action346<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     let __start0 = __2.0.clone();
     let __end0 = __3.2.clone();
-    let __temp0 = __action343(
-        __2,
-        __3,
-    );
+    let __temp0 = __action343(__2, __3);
     let __temp0 = (__start0, __temp0, __end0);
-    __action117(
-        __0,
-        __1,
-        __temp0,
-        __4,
-        __5,
-    )
+    __action117(__0, __1, __temp0, __4, __5)
 }
 
-fn __action347<
-    'input,
->(
+fn __action347<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> Function
-{
+) -> Function {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action222(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action222(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action117(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-    )
+    __action117(__0, __1, __temp0, __2, __3)
 }
 
-fn __action348<
-    'input,
->(
+fn __action348<'input>(
     __0: (Position, Identifier, Position),
     __1: (Position, Token<'input>, Position),
-) -> ::std::option::Option<Identifier>
-{
+) -> ::std::option::Option<Identifier> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action241(
-        __0,
-        __1,
-    );
+    let __temp0 = __action241(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action239(
-        __temp0,
-    )
+    __action239(__temp0)
 }
 
-fn __action349<
-    'input,
->(
+fn __action349<'input>(
     __0: (Position, Identifier, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Token<'input>, Position),
-) -> SelectElement
-{
+) -> SelectElement {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action348(
-        __0,
-        __1,
-    );
+    let __temp0 = __action348(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action47(
-        __temp0,
-        __2,
-    )
+    __action47(__temp0, __2)
 }
 
-fn __action350<
-    'input,
->(
-    __0: (Position, Token<'input>, Position),
-) -> SelectElement
-{
+fn __action350<'input>(__0: (Position, Token<'input>, Position)) -> SelectElement {
     let __start0 = __0.0.clone();
     let __end0 = __0.0.clone();
-    let __temp0 = __action240(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action240(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action47(
-        __temp0,
-        __0,
-    )
+    __action47(__temp0, __0)
 }
 
-fn __action351<
-    'input,
->(
+fn __action351<'input>(
     __0: (Position, SelectElement, Position),
     __1: (Position, Token<'input>, Position),
-) -> ::std::vec::Vec<SelectElement>
-{
+) -> ::std::vec::Vec<SelectElement> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action269(
-        __0,
-        __1,
-    );
+    let __temp0 = __action269(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action288(
-        __temp0,
-    )
+    __action288(__temp0)
 }
 
-fn __action352<
-    'input,
->(
+fn __action352<'input>(
     __0: (Position, ::std::vec::Vec<SelectElement>, Position),
     __1: (Position, SelectElement, Position),
     __2: (Position, Token<'input>, Position),
-) -> ::std::vec::Vec<SelectElement>
-{
+) -> ::std::vec::Vec<SelectElement> {
     let __start0 = __1.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action269(
-        __1,
-        __2,
-    );
+    let __temp0 = __action269(__1, __2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action289(
-        __0,
-        __temp0,
-    )
+    __action289(__0, __temp0)
 }
 
-fn __action353<
-    'input,
->(
+fn __action353<'input>(
     __0: (Position, ::std::option::Option<SelectElement>, Position),
-) -> Vec<SelectElement>
-{
+) -> Vec<SelectElement> {
     let __start0 = __0.0.clone();
     let __end0 = __0.0.clone();
-    let __temp0 = __action267(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action267(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action258(
-        __temp0,
-        __0,
-    )
+    __action258(__temp0, __0)
 }
 
-fn __action354<
-    'input,
->(
+fn __action354<'input>(
     __0: (Position, ::std::vec::Vec<SelectElement>, Position),
     __1: (Position, ::std::option::Option<SelectElement>, Position),
-) -> Vec<SelectElement>
-{
+) -> Vec<SelectElement> {
     let __start0 = __0.0.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action268(
-        __0,
-    );
+    let __temp0 = __action268(__0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action258(
-        __temp0,
-        __1,
-    )
+    __action258(__temp0, __1)
 }
 
-fn __action355<
-    'input,
->(
+fn __action355<'input>(
     __0: (Position, SortingElement, Position),
     __1: (Position, Token<'input>, Position),
-) -> ::std::vec::Vec<SortingElement>
-{
+) -> ::std::vec::Vec<SortingElement> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action279(
-        __0,
-        __1,
-    );
+    let __temp0 = __action279(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action284(
-        __temp0,
-    )
+    __action284(__temp0)
 }
 
-fn __action356<
-    'input,
->(
+fn __action356<'input>(
     __0: (Position, ::std::vec::Vec<SortingElement>, Position),
     __1: (Position, SortingElement, Position),
     __2: (Position, Token<'input>, Position),
-) -> ::std::vec::Vec<SortingElement>
-{
+) -> ::std::vec::Vec<SortingElement> {
     let __start0 = __1.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action279(
-        __1,
-        __2,
-    );
+    let __temp0 = __action279(__1, __2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action285(
-        __0,
-        __temp0,
-    )
+    __action285(__0, __temp0)
 }
 
-fn __action357<
-    'input,
->(
+fn __action357<'input>(
     __0: (Position, ::std::option::Option<SortingElement>, Position),
-) -> Vec<SortingElement>
-{
+) -> Vec<SortingElement> {
     let __start0 = __0.0.clone();
     let __end0 = __0.0.clone();
-    let __temp0 = __action277(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action277(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action251(
-        __temp0,
-        __0,
-    )
+    __action251(__temp0, __0)
 }
 
-fn __action358<
-    'input,
->(
+fn __action358<'input>(
     __0: (Position, ::std::vec::Vec<SortingElement>, Position),
     __1: (Position, ::std::option::Option<SortingElement>, Position),
-) -> Vec<SortingElement>
-{
+) -> Vec<SortingElement> {
     let __start0 = __0.0.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action278(
-        __0,
-    );
+    let __temp0 = __action278(__0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action251(
-        __temp0,
-        __1,
-    )
+    __action251(__temp0, __1)
 }
 
-fn __action359<
-    'input,
->(
+fn __action359<'input>(
     __0: (Position, Box<TableView>, Position),
     __1: (Position, Token<'input>, Position),
-) -> ::std::vec::Vec<Box<TableView>>
-{
+) -> ::std::vec::Vec<Box<TableView>> {
     let __start0 = __0.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action274(
-        __0,
-        __1,
-    );
+    let __temp0 = __action274(__0, __1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action286(
-        __temp0,
-    )
+    __action286(__temp0)
 }
 
-fn __action360<
-    'input,
->(
+fn __action360<'input>(
     __0: (Position, ::std::vec::Vec<Box<TableView>>, Position),
     __1: (Position, Box<TableView>, Position),
     __2: (Position, Token<'input>, Position),
-) -> ::std::vec::Vec<Box<TableView>>
-{
+) -> ::std::vec::Vec<Box<TableView>> {
     let __start0 = __1.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action274(
-        __1,
-        __2,
-    );
+    let __temp0 = __action274(__1, __2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action287(
-        __0,
-        __temp0,
-    )
+    __action287(__0, __temp0)
 }
 
-fn __action361<
-    'input,
->(
+fn __action361<'input>(
     __0: (Position, ::std::option::Option<Box<TableView>>, Position),
-) -> Vec<Box<TableView>>
-{
+) -> Vec<Box<TableView>> {
     let __start0 = __0.0.clone();
     let __end0 = __0.0.clone();
-    let __temp0 = __action272(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action272(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action257(
-        __temp0,
-        __0,
-    )
+    __action257(__temp0, __0)
 }
 
-fn __action362<
-    'input,
->(
+fn __action362<'input>(
     __0: (Position, ::std::vec::Vec<Box<TableView>>, Position),
     __1: (Position, ::std::option::Option<Box<TableView>>, Position),
-) -> Vec<Box<TableView>>
-{
+) -> Vec<Box<TableView>> {
     let __start0 = __0.0.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action273(
-        __0,
-    );
+    let __temp0 = __action273(__0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action257(
-        __temp0,
-        __1,
-    )
+    __action257(__temp0, __1)
 }
 
-fn __action363<
-    'input,
->(
+fn __action363<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, AggregateType, Position),
     __3: (Position, Box<Expression>, Position),
     __4: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action216(
-        __2,
-    );
+    let __temp0 = __action216(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action128(
-        __0,
-        __1,
-        __temp0,
-        __3,
-        __4,
-    )
+    __action128(__0, __1, __temp0, __3, __4)
 }
 
-fn __action364<
-    'input,
->(
+fn __action364<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action128(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-    )
+    __action128(__0, __1, __temp0, __2, __3)
 }
 
-fn __action365<
-    'input,
->(
+fn __action365<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, AggregateType, Position),
     __3: (Position, Box<Expression>, Position),
     __4: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action216(
-        __2,
-    );
+    let __temp0 = __action216(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action129(
-        __0,
-        __1,
-        __temp0,
-        __3,
-        __4,
-    )
+    __action129(__0, __1, __temp0, __3, __4)
 }
 
-fn __action366<
-    'input,
->(
+fn __action366<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action129(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-    )
+    __action129(__0, __1, __temp0, __2, __3)
 }
 
-fn __action367<
-    'input,
->(
+fn __action367<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, AggregateType, Position),
     __3: (Position, Box<Expression>, Position),
     __4: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action216(
-        __2,
-    );
+    let __temp0 = __action216(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action130(
-        __0,
-        __1,
-        __temp0,
-        __3,
-        __4,
-    )
+    __action130(__0, __1, __temp0, __3, __4)
 }
 
-fn __action368<
-    'input,
->(
+fn __action368<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action130(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-    )
+    __action130(__0, __1, __temp0, __2, __3)
 }
 
-fn __action369<
-    'input,
->(
+fn __action369<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, AggregateType, Position),
     __3: (Position, Box<Expression>, Position),
     __4: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action216(
-        __2,
-    );
+    let __temp0 = __action216(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action131(
-        __0,
-        __1,
-        __temp0,
-        __3,
-        __4,
-    )
+    __action131(__0, __1, __temp0, __3, __4)
 }
 
-fn __action370<
-    'input,
->(
+fn __action370<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action131(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-    )
+    __action131(__0, __1, __temp0, __2, __3)
 }
 
-fn __action371<
-    'input,
->(
+fn __action371<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, AggregateType, Position),
     __3: (Position, Box<Expression>, Position),
     __4: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action216(
-        __2,
-    );
+    let __temp0 = __action216(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action132(
-        __0,
-        __1,
-        __temp0,
-        __3,
-        __4,
-    )
+    __action132(__0, __1, __temp0, __3, __4)
 }
 
-fn __action372<
-    'input,
->(
+fn __action372<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action132(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-    )
+    __action132(__0, __1, __temp0, __2, __3)
 }
 
-fn __action373<
-    'input,
->(
+fn __action373<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, AggregateType, Position),
     __3: (Position, Box<Expression>, Position),
     __4: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action216(
-        __2,
-    );
+    let __temp0 = __action216(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action133(
-        __0,
-        __1,
-        __temp0,
-        __3,
-        __4,
-    )
+    __action133(__0, __1, __temp0, __3, __4)
 }
 
-fn __action374<
-    'input,
->(
+fn __action374<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action133(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-    )
+    __action133(__0, __1, __temp0, __2, __3)
 }
 
-fn __action375<
-    'input,
->(
+fn __action375<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, AggregateType, Position),
     __3: (Position, Box<Expression>, Position),
     __4: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action216(
-        __2,
-    );
+    let __temp0 = __action216(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action134(
-        __0,
-        __1,
-        __temp0,
-        __3,
-        __4,
-    )
+    __action134(__0, __1, __temp0, __3, __4)
 }
 
-fn __action376<
-    'input,
->(
+fn __action376<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action134(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-    )
+    __action134(__0, __1, __temp0, __2, __3)
 }
 
-fn __action377<
-    'input,
->(
+fn __action377<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
@@ -55984,57 +54100,30 @@ fn __action377<
     __4: (Position, AggregateType, Position),
     __5: (Position, Box<Expression>, Position),
     __6: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action216(
-        __4,
-    );
+    let __temp0 = __action216(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action135(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-        __6,
-    )
+    __action135(__0, __1, __2, __3, __temp0, __5, __6)
 }
 
-fn __action378<
-    'input,
->(
+fn __action378<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __3.2.clone();
     let __end0 = __4.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action135(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-        __5,
-    )
+    __action135(__0, __1, __2, __3, __temp0, __4, __5)
 }
 
-fn __action379<
-    'input,
->(
+fn __action379<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
@@ -56042,57 +54131,30 @@ fn __action379<
     __4: (Position, AggregateType, Position),
     __5: (Position, Box<Expression>, Position),
     __6: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action216(
-        __4,
-    );
+    let __temp0 = __action216(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action136(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-        __6,
-    )
+    __action136(__0, __1, __2, __3, __temp0, __5, __6)
 }
 
-fn __action380<
-    'input,
->(
+fn __action380<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __3.2.clone();
     let __end0 = __4.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action136(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-        __5,
-    )
+    __action136(__0, __1, __2, __3, __temp0, __4, __5)
 }
 
-fn __action381<
-    'input,
->(
+fn __action381<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
@@ -56100,57 +54162,30 @@ fn __action381<
     __4: (Position, AggregateType, Position),
     __5: (Position, Box<Expression>, Position),
     __6: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action216(
-        __4,
-    );
+    let __temp0 = __action216(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action137(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-        __6,
-    )
+    __action137(__0, __1, __2, __3, __temp0, __5, __6)
 }
 
-fn __action382<
-    'input,
->(
+fn __action382<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __3.2.clone();
     let __end0 = __4.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action137(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-        __5,
-    )
+    __action137(__0, __1, __2, __3, __temp0, __4, __5)
 }
 
-fn __action383<
-    'input,
->(
+fn __action383<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
@@ -56158,57 +54193,30 @@ fn __action383<
     __4: (Position, AggregateType, Position),
     __5: (Position, Box<Expression>, Position),
     __6: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action216(
-        __4,
-    );
+    let __temp0 = __action216(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action138(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-        __6,
-    )
+    __action138(__0, __1, __2, __3, __temp0, __5, __6)
 }
 
-fn __action384<
-    'input,
->(
+fn __action384<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __3.2.clone();
     let __end0 = __4.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action138(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-        __5,
-    )
+    __action138(__0, __1, __2, __3, __temp0, __4, __5)
 }
 
-fn __action385<
-    'input,
->(
+fn __action385<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
@@ -56216,57 +54224,30 @@ fn __action385<
     __4: (Position, AggregateType, Position),
     __5: (Position, Box<Expression>, Position),
     __6: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action216(
-        __4,
-    );
+    let __temp0 = __action216(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action139(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-        __6,
-    )
+    __action139(__0, __1, __2, __3, __temp0, __5, __6)
 }
 
-fn __action386<
-    'input,
->(
+fn __action386<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __3.2.clone();
     let __end0 = __4.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action139(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-        __5,
-    )
+    __action139(__0, __1, __2, __3, __temp0, __4, __5)
 }
 
-fn __action387<
-    'input,
->(
+fn __action387<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
@@ -56274,57 +54255,30 @@ fn __action387<
     __4: (Position, AggregateType, Position),
     __5: (Position, Box<Expression>, Position),
     __6: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action216(
-        __4,
-    );
+    let __temp0 = __action216(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action140(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-        __6,
-    )
+    __action140(__0, __1, __2, __3, __temp0, __5, __6)
 }
 
-fn __action388<
-    'input,
->(
+fn __action388<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __3.2.clone();
     let __end0 = __4.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action140(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-        __5,
-    )
+    __action140(__0, __1, __2, __3, __temp0, __4, __5)
 }
 
-fn __action389<
-    'input,
->(
+fn __action389<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
@@ -56332,207 +54286,105 @@ fn __action389<
     __4: (Position, AggregateType, Position),
     __5: (Position, Box<Expression>, Position),
     __6: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __4.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action216(
-        __4,
-    );
+    let __temp0 = __action216(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action141(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-        __6,
-    )
+    __action141(__0, __1, __2, __3, __temp0, __5, __6)
 }
 
-fn __action390<
-    'input,
->(
+fn __action390<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<PredicateExpression>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __3.2.clone();
     let __end0 = __4.0.clone();
-    let __temp0 = __action217(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action217(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action141(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-        __5,
-    )
+    __action141(__0, __1, __2, __3, __temp0, __4, __5)
 }
 
-fn __action391<
-    'input,
->(
+fn __action391<'input>(
     __0: (Position, Box<Expression>, Position),
     __1: (Position, Identifier, Position),
-) -> SelectElement
-{
+) -> SelectElement {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action242(
-        __1,
-    );
+    let __temp0 = __action242(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action46(
-        __0,
-        __temp0,
-    )
+    __action46(__0, __temp0)
 }
 
-fn __action392<
-    'input,
->(
-    __0: (Position, Box<Expression>, Position),
-) -> SelectElement
-{
+fn __action392<'input>(__0: (Position, Box<Expression>, Position)) -> SelectElement {
     let __start0 = __0.2.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action243(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action243(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action46(
-        __0,
-        __temp0,
-    )
+    __action46(__0, __temp0)
 }
 
-fn __action393<
-    'input,
->(
+fn __action393<'input>(
     __0: (Position, Table, Position),
     __1: (Position, Identifier, Position),
-) -> Box<TableView>
-{
+) -> Box<TableView> {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action242(
-        __1,
-    );
+    let __temp0 = __action242(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action36(
-        __0,
-        __temp0,
-    )
+    __action36(__0, __temp0)
 }
 
-fn __action394<
-    'input,
->(
-    __0: (Position, Table, Position),
-) -> Box<TableView>
-{
+fn __action394<'input>(__0: (Position, Table, Position)) -> Box<TableView> {
     let __start0 = __0.2.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action243(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action243(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action36(
-        __0,
-        __temp0,
-    )
+    __action36(__0, __temp0)
 }
 
-fn __action395<
-    'input,
->(
-    __0: (Position, Box<Expression>, Position),
-) -> Vec<Box<Expression>>
-{
+fn __action395<'input>(__0: (Position, Box<Expression>, Position)) -> Vec<Box<Expression>> {
     let __start0 = __0.0.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action214(
-        __0,
-    );
+    let __temp0 = __action214(__0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action344(
-        __temp0,
-    )
+    __action344(__temp0)
 }
 
-fn __action396<
-    'input,
->(
-    __lookbehind: &Position,
-    __lookahead: &Position,
-) -> Vec<Box<Expression>>
-{
+fn __action396<'input>(__lookbehind: &Position, __lookahead: &Position) -> Vec<Box<Expression>> {
     let __start0 = __lookbehind.clone();
     let __end0 = __lookahead.clone();
-    let __temp0 = __action215(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action215(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action344(
-        __temp0,
-    )
+    __action344(__temp0)
 }
 
-fn __action397<
-    'input,
->(
+fn __action397<'input>(
     __0: (Position, ::std::vec::Vec<Box<Expression>>, Position),
     __1: (Position, Box<Expression>, Position),
-) -> Vec<Box<Expression>>
-{
+) -> Vec<Box<Expression>> {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action214(
-        __1,
-    );
+    let __temp0 = __action214(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action345(
-        __0,
-        __temp0,
-    )
+    __action345(__0, __temp0)
 }
 
-fn __action398<
-    'input,
->(
+fn __action398<'input>(
     __0: (Position, ::std::vec::Vec<Box<Expression>>, Position),
-) -> Vec<Box<Expression>>
-{
+) -> Vec<Box<Expression>> {
     let __start0 = __0.2.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action215(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action215(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action345(
-        __0,
-        __temp0,
-    )
+    __action345(__0, __temp0)
 }
 
-fn __action399<
-    'input,
->(
+fn __action399<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, TrimType, Position),
@@ -56540,153 +54392,98 @@ fn __action399<
     __4: (Position, Token<'input>, Position),
     __5: (Position, Box<Expression>, Position),
     __6: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __3.0.clone();
     let __end0 = __3.2.clone();
-    let __temp0 = __action214(
-        __3,
-    );
+    let __temp0 = __action214(__3);
     let __temp0 = (__start0, __temp0, __end0);
-    __action172(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __4,
-        __5,
-        __6,
-    )
+    __action172(__0, __1, __2, __temp0, __4, __5, __6)
 }
 
-fn __action400<
-    'input,
->(
+fn __action400<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, TrimType, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Box<Expression>, Position),
     __5: (Position, Token<'input>, Position),
-) -> TrimFn
-{
+) -> TrimFn {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action215(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action215(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action172(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-        __4,
-        __5,
-    )
+    __action172(__0, __1, __2, __temp0, __3, __4, __5)
 }
 
-fn __action401<
-    'input,
->(
+fn __action401<'input>(
     __0: (Position, Token<'input>, Position),
-    __1: (Position, ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>, Position),
+    __1: (
+        Position,
+        ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>,
+        Position,
+    ),
     __2: (Position, Box<Expression>, Position),
     __3: (Position, Token<'input>, Position),
-) -> SearchedCaseWhenExpression
-{
+) -> SearchedCaseWhenExpression {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action229(
-        __2,
-    );
+    let __temp0 = __action229(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action94(
-        __0,
-        __1,
-        __temp0,
-        __3,
-    )
+    __action94(__0, __1, __temp0, __3)
 }
 
-fn __action402<
-    'input,
->(
+fn __action402<'input>(
     __0: (Position, Token<'input>, Position),
-    __1: (Position, ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>, Position),
+    __1: (
+        Position,
+        ::std::vec::Vec<(Box<PredicateExpression>, Box<Expression>)>,
+        Position,
+    ),
     __2: (Position, Token<'input>, Position),
-) -> SearchedCaseWhenExpression
-{
+) -> SearchedCaseWhenExpression {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action230(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action230(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action94(
-        __0,
-        __1,
-        __temp0,
-        __2,
-    )
+    __action94(__0, __1, __temp0, __2)
 }
 
-fn __action403<
-    'input,
->(
+fn __action403<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Box<Expression>, Position),
-    __2: (Position, ::std::vec::Vec<(Box<Expression>, Box<Expression>)>, Position),
+    __2: (
+        Position,
+        ::std::vec::Vec<(Box<Expression>, Box<Expression>)>,
+        Position,
+    ),
     __3: (Position, Box<Expression>, Position),
     __4: (Position, Token<'input>, Position),
-) -> SimpleCaseWhenExpression
-{
+) -> SimpleCaseWhenExpression {
     let __start0 = __3.0.clone();
     let __end0 = __3.2.clone();
-    let __temp0 = __action229(
-        __3,
-    );
+    let __temp0 = __action229(__3);
     let __temp0 = (__start0, __temp0, __end0);
-    __action92(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __4,
-    )
+    __action92(__0, __1, __2, __temp0, __4)
 }
 
-fn __action404<
-    'input,
->(
+fn __action404<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Box<Expression>, Position),
-    __2: (Position, ::std::vec::Vec<(Box<Expression>, Box<Expression>)>, Position),
+    __2: (
+        Position,
+        ::std::vec::Vec<(Box<Expression>, Box<Expression>)>,
+        Position,
+    ),
     __3: (Position, Token<'input>, Position),
-) -> SimpleCaseWhenExpression
-{
+) -> SimpleCaseWhenExpression {
     let __start0 = __2.2.clone();
     let __end0 = __3.0.clone();
-    let __temp0 = __action230(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action230(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action92(
-        __0,
-        __1,
-        __2,
-        __temp0,
-        __3,
-    )
+    __action92(__0, __1, __2, __temp0, __3)
 }
 
-fn __action405<
-    'input,
->(
+fn __action405<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, Token<'input>, Position),
@@ -56695,29 +54492,20 @@ fn __action405<
     __5: (Position, Token<'input>, Position),
     __6: (Position, Token<'input>, Position),
     __7: (Position, Vec<SortingElement>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __4.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action252(
-        __4,
-    );
+    let __temp0 = __action252(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action337(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __5,
-        __6,
-        __7,
-    )
+    __action337(__0, __1, __2, __3, __temp0, __5, __6, __7)
 }
 
-fn __action406<
-    'input,
->(
+fn __action406<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, Token<'input>, Position),
@@ -56725,426 +54513,278 @@ fn __action406<
     __4: (Position, Token<'input>, Position),
     __5: (Position, Token<'input>, Position),
     __6: (Position, Vec<SortingElement>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __3.2.clone();
     let __end0 = __4.0.clone();
-    let __temp0 = __action253(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action253(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action337(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-        __4,
-        __5,
-        __6,
-    )
+    __action337(__0, __1, __2, __3, __temp0, __4, __5, __6)
 }
 
-fn __action407<
-    'input,
->(
+fn __action407<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, GroupElements, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Token<'input>, Position),
     __5: (Position, Vec<SortingElement>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action252(
-        __2,
-    );
+    let __temp0 = __action252(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action338(
-        __0,
-        __1,
-        __temp0,
-        __3,
-        __4,
-        __5,
-    )
+    __action338(__0, __1, __temp0, __3, __4, __5)
 }
 
-fn __action408<
-    'input,
->(
+fn __action408<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, Token<'input>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Vec<SortingElement>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __1.2.clone();
     let __end0 = __2.0.clone();
-    let __temp0 = __action253(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action253(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action338(
-        __0,
-        __1,
-        __temp0,
-        __2,
-        __3,
-        __4,
-    )
+    __action338(__0, __1, __temp0, __2, __3, __4)
 }
 
-fn __action409<
-    'input,
->(
+fn __action409<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, Token<'input>, Position),
     __3: (Position, Box<PredicateExpression>, Position),
     __4: (Position, GroupElements, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __4.0.clone();
     let __end0 = __4.2.clone();
-    let __temp0 = __action252(
-        __4,
-    );
+    let __temp0 = __action252(__4);
     let __temp0 = (__start0, __temp0, __end0);
-    __action339(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-    )
+    __action339(__0, __1, __2, __3, __temp0)
 }
 
-fn __action410<
-    'input,
->(
+fn __action410<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, Token<'input>, Position),
     __3: (Position, Box<PredicateExpression>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __3.2.clone();
     let __end0 = __3.2.clone();
-    let __temp0 = __action253(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action253(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action339(
-        __0,
-        __1,
-        __2,
-        __3,
-        __temp0,
-    )
+    __action339(__0, __1, __2, __3, __temp0)
 }
 
-fn __action411<
-    'input,
->(
+fn __action411<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
     __2: (Position, GroupElements, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __2.0.clone();
     let __end0 = __2.2.clone();
-    let __temp0 = __action252(
-        __2,
-    );
+    let __temp0 = __action252(__2);
     let __temp0 = (__start0, __temp0, __end0);
-    __action340(
-        __0,
-        __1,
-        __temp0,
-    )
+    __action340(__0, __1, __temp0)
 }
 
-fn __action412<
-    'input,
->(
+fn __action412<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<Box<TableView>>, Position),
-) -> (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>)
-{
+) -> (
+    Vec<Box<TableView>>,
+    ::std::option::Option<Box<PredicateExpression>>,
+    ::std::option::Option<GroupElements>,
+    ::std::option::Option<Vec<SortingElement>>,
+) {
     let __start0 = __1.2.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action253(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action253(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action340(
-        __0,
-        __1,
-        __temp0,
-    )
+    __action340(__0, __1, __temp0)
 }
 
-fn __action413<
-    'input,
->(
-    __0: (Position, SelectElement, Position),
-) -> Vec<SelectElement>
-{
+fn __action413<'input>(__0: (Position, SelectElement, Position)) -> Vec<SelectElement> {
     let __start0 = __0.0.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action265(
-        __0,
-    );
+    let __temp0 = __action265(__0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action353(
-        __temp0,
-    )
+    __action353(__temp0)
 }
 
-fn __action414<
-    'input,
->(
-    __lookbehind: &Position,
-    __lookahead: &Position,
-) -> Vec<SelectElement>
-{
+fn __action414<'input>(__lookbehind: &Position, __lookahead: &Position) -> Vec<SelectElement> {
     let __start0 = __lookbehind.clone();
     let __end0 = __lookahead.clone();
-    let __temp0 = __action266(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action266(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action353(
-        __temp0,
-    )
+    __action353(__temp0)
 }
 
-fn __action415<
-    'input,
->(
+fn __action415<'input>(
     __0: (Position, ::std::vec::Vec<SelectElement>, Position),
     __1: (Position, SelectElement, Position),
-) -> Vec<SelectElement>
-{
+) -> Vec<SelectElement> {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action265(
-        __1,
-    );
+    let __temp0 = __action265(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action354(
-        __0,
-        __temp0,
-    )
+    __action354(__0, __temp0)
 }
 
-fn __action416<
-    'input,
->(
+fn __action416<'input>(
     __0: (Position, ::std::vec::Vec<SelectElement>, Position),
-) -> Vec<SelectElement>
-{
+) -> Vec<SelectElement> {
     let __start0 = __0.2.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action266(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action266(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action354(
-        __0,
-        __temp0,
-    )
+    __action354(__0, __temp0)
 }
 
-fn __action417<
-    'input,
->(
+fn __action417<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, SelectType, Position),
     __2: (Position, Vec<SelectElement>, Position),
-) -> SelectStatement
-{
+) -> SelectStatement {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action259(
-        __1,
-    );
+    let __temp0 = __action259(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action24(
-        __0,
-        __temp0,
-        __2,
-    )
+    __action24(__0, __temp0, __2)
 }
 
-fn __action418<
-    'input,
->(
+fn __action418<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<SelectElement>, Position),
-) -> SelectStatement
-{
+) -> SelectStatement {
     let __start0 = __0.2.clone();
     let __end0 = __1.0.clone();
-    let __temp0 = __action260(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action260(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action24(
-        __0,
-        __temp0,
-        __1,
-    )
+    __action24(__0, __temp0, __1)
 }
 
-fn __action419<
-    'input,
->(
+fn __action419<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, SelectType, Position),
     __2: (Position, Vec<SelectElement>, Position),
     __3: (Position, Token<'input>, Position),
     __4: (Position, Token<'input>, Position),
-) -> SelectStatement
-{
+) -> SelectStatement {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action259(
-        __1,
-    );
+    let __temp0 = __action259(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action25(
-        __0,
-        __temp0,
-        __2,
-        __3,
-        __4,
-    )
+    __action25(__0, __temp0, __2, __3, __4)
 }
 
-fn __action420<
-    'input,
->(
+fn __action420<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<SelectElement>, Position),
     __2: (Position, Token<'input>, Position),
     __3: (Position, Token<'input>, Position),
-) -> SelectStatement
-{
+) -> SelectStatement {
     let __start0 = __0.2.clone();
     let __end0 = __1.0.clone();
-    let __temp0 = __action260(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action260(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action25(
-        __0,
-        __temp0,
-        __1,
-        __2,
-        __3,
-    )
+    __action25(__0, __temp0, __1, __2, __3)
 }
 
-fn __action421<
-    'input,
->(
+fn __action421<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, SelectType, Position),
     __2: (Position, Vec<SelectElement>, Position),
-    __3: (Position, (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>), Position),
-) -> SelectStatement
-{
+    __3: (
+        Position,
+        (
+            Vec<Box<TableView>>,
+            ::std::option::Option<Box<PredicateExpression>>,
+            ::std::option::Option<GroupElements>,
+            ::std::option::Option<Vec<SortingElement>>,
+        ),
+        Position,
+    ),
+) -> SelectStatement {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action259(
-        __1,
-    );
+    let __temp0 = __action259(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action26(
-        __0,
-        __temp0,
-        __2,
-        __3,
-    )
+    __action26(__0, __temp0, __2, __3)
 }
 
-fn __action422<
-    'input,
->(
+fn __action422<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Vec<SelectElement>, Position),
-    __2: (Position, (Vec<Box<TableView>>, ::std::option::Option<Box<PredicateExpression>>, ::std::option::Option<GroupElements>, ::std::option::Option<Vec<SortingElement>>), Position),
-) -> SelectStatement
-{
+    __2: (
+        Position,
+        (
+            Vec<Box<TableView>>,
+            ::std::option::Option<Box<PredicateExpression>>,
+            ::std::option::Option<GroupElements>,
+            ::std::option::Option<Vec<SortingElement>>,
+        ),
+        Position,
+    ),
+) -> SelectStatement {
     let __start0 = __0.2.clone();
     let __end0 = __1.0.clone();
-    let __temp0 = __action260(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action260(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action26(
-        __0,
-        __temp0,
-        __1,
-        __2,
-    )
+    __action26(__0, __temp0, __1, __2)
 }
 
-fn __action423<
-    'input,
->(
+fn __action423<'input>(
     __0: (Position, Box<Expression>, Position),
     __1: (Position, SortingDirection, Position),
-) -> SortingElement
-{
+) -> SortingElement {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action237(
-        __1,
-    );
+    let __temp0 = __action237(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action48(
-        __0,
-        __temp0,
-    )
+    __action48(__0, __temp0)
 }
 
-fn __action424<
-    'input,
->(
-    __0: (Position, Box<Expression>, Position),
-) -> SortingElement
-{
+fn __action424<'input>(__0: (Position, Box<Expression>, Position)) -> SortingElement {
     let __start0 = __0.2.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action238(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action238(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action48(
-        __0,
-        __temp0,
-    )
+    __action48(__0, __temp0)
 }
 
-fn __action425<
-    'input,
->(
+fn __action425<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -57157,33 +54797,17 @@ fn __action425<
     __9: (Position, Box<Expression>, Position),
     __10: (Position, SortingDirection, Position),
     __11: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __10.0.clone();
     let __end0 = __10.2.clone();
-    let __temp0 = __action237(
-        __10,
-    );
+    let __temp0 = __action237(__10);
     let __temp0 = (__start0, __temp0, __end0);
     __action146(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __5,
-        __6,
-        __7,
-        __8,
-        __9,
-        __temp0,
-        __11,
+        __0, __1, __2, __3, __4, __5, __6, __7, __8, __9, __temp0, __11,
     )
 }
 
-fn __action426<
-    'input,
->(
+fn __action426<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -57195,34 +54819,17 @@ fn __action426<
     __8: (Position, Token<'input>, Position),
     __9: (Position, Box<Expression>, Position),
     __10: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __9.2.clone();
     let __end0 = __10.0.clone();
-    let __temp0 = __action238(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action238(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
     __action146(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __5,
-        __6,
-        __7,
-        __8,
-        __9,
-        __temp0,
-        __10,
+        __0, __1, __2, __3, __4, __5, __6, __7, __8, __9, __temp0, __10,
     )
 }
 
-fn __action427<
-    'input,
->(
+fn __action427<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -57235,33 +54842,17 @@ fn __action427<
     __9: (Position, Box<Expression>, Position),
     __10: (Position, SortingDirection, Position),
     __11: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __10.0.clone();
     let __end0 = __10.2.clone();
-    let __temp0 = __action237(
-        __10,
-    );
+    let __temp0 = __action237(__10);
     let __temp0 = (__start0, __temp0, __end0);
     __action147(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __5,
-        __6,
-        __7,
-        __8,
-        __9,
-        __temp0,
-        __11,
+        __0, __1, __2, __3, __4, __5, __6, __7, __8, __9, __temp0, __11,
     )
 }
 
-fn __action428<
-    'input,
->(
+fn __action428<'input>(
     __0: (Position, Token<'input>, Position),
     __1: (Position, Token<'input>, Position),
     __2: (Position, Box<Expression>, Position),
@@ -57273,190 +54864,116 @@ fn __action428<
     __8: (Position, Token<'input>, Position),
     __9: (Position, Box<Expression>, Position),
     __10: (Position, Token<'input>, Position),
-) -> VectorExpression
-{
+) -> VectorExpression {
     let __start0 = __9.2.clone();
     let __end0 = __10.0.clone();
-    let __temp0 = __action238(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action238(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
     __action147(
-        __0,
-        __1,
-        __2,
-        __3,
-        __4,
-        __5,
-        __6,
-        __7,
-        __8,
-        __9,
-        __temp0,
-        __10,
+        __0, __1, __2, __3, __4, __5, __6, __7, __8, __9, __temp0, __10,
     )
 }
 
-fn __action429<
-    'input,
->(
-    __0: (Position, SortingElement, Position),
-) -> Vec<SortingElement>
-{
+fn __action429<'input>(__0: (Position, SortingElement, Position)) -> Vec<SortingElement> {
     let __start0 = __0.0.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action275(
-        __0,
-    );
+    let __temp0 = __action275(__0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action357(
-        __temp0,
-    )
+    __action357(__temp0)
 }
 
-fn __action430<
-    'input,
->(
-    __lookbehind: &Position,
-    __lookahead: &Position,
-) -> Vec<SortingElement>
-{
+fn __action430<'input>(__lookbehind: &Position, __lookahead: &Position) -> Vec<SortingElement> {
     let __start0 = __lookbehind.clone();
     let __end0 = __lookahead.clone();
-    let __temp0 = __action276(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action276(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action357(
-        __temp0,
-    )
+    __action357(__temp0)
 }
 
-fn __action431<
-    'input,
->(
+fn __action431<'input>(
     __0: (Position, ::std::vec::Vec<SortingElement>, Position),
     __1: (Position, SortingElement, Position),
-) -> Vec<SortingElement>
-{
+) -> Vec<SortingElement> {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action275(
-        __1,
-    );
+    let __temp0 = __action275(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action358(
-        __0,
-        __temp0,
-    )
+    __action358(__0, __temp0)
 }
 
-fn __action432<
-    'input,
->(
+fn __action432<'input>(
     __0: (Position, ::std::vec::Vec<SortingElement>, Position),
-) -> Vec<SortingElement>
-{
+) -> Vec<SortingElement> {
     let __start0 = __0.2.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action276(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action276(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action358(
-        __0,
-        __temp0,
-    )
+    __action358(__0, __temp0)
 }
 
-fn __action433<
-    'input,
->(
-    __0: (Position, Box<TableView>, Position),
-) -> Vec<Box<TableView>>
-{
+fn __action433<'input>(__0: (Position, Box<TableView>, Position)) -> Vec<Box<TableView>> {
     let __start0 = __0.0.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action270(
-        __0,
-    );
+    let __temp0 = __action270(__0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action361(
-        __temp0,
-    )
+    __action361(__temp0)
 }
 
-fn __action434<
-    'input,
->(
-    __lookbehind: &Position,
-    __lookahead: &Position,
-) -> Vec<Box<TableView>>
-{
+fn __action434<'input>(__lookbehind: &Position, __lookahead: &Position) -> Vec<Box<TableView>> {
     let __start0 = __lookbehind.clone();
     let __end0 = __lookahead.clone();
-    let __temp0 = __action271(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action271(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action361(
-        __temp0,
-    )
+    __action361(__temp0)
 }
 
-fn __action435<
-    'input,
->(
+fn __action435<'input>(
     __0: (Position, ::std::vec::Vec<Box<TableView>>, Position),
     __1: (Position, Box<TableView>, Position),
-) -> Vec<Box<TableView>>
-{
+) -> Vec<Box<TableView>> {
     let __start0 = __1.0.clone();
     let __end0 = __1.2.clone();
-    let __temp0 = __action270(
-        __1,
-    );
+    let __temp0 = __action270(__1);
     let __temp0 = (__start0, __temp0, __end0);
-    __action362(
-        __0,
-        __temp0,
-    )
+    __action362(__0, __temp0)
 }
 
-fn __action436<
-    'input,
->(
+fn __action436<'input>(
     __0: (Position, ::std::vec::Vec<Box<TableView>>, Position),
-) -> Vec<Box<TableView>>
-{
+) -> Vec<Box<TableView>> {
     let __start0 = __0.2.clone();
     let __end0 = __0.2.clone();
-    let __temp0 = __action271(
-        &__start0,
-        &__end0,
-    );
+    let __temp0 = __action271(&__start0, &__end0);
     let __temp0 = (__start0, __temp0, __end0);
-    __action362(
-        __0,
-        __temp0,
-    )
+    __action362(__0, __temp0)
 }
 
-pub trait __ToTriple<'input, > {
-    fn to_triple(value: Self) -> Result<(Position,Token<'input>,Position), __lalrpop_util::ParseError<Position, Token<'input>, SpannedError>>;
+pub trait __ToTriple<'input> {
+    fn to_triple(
+        value: Self,
+    ) -> Result<
+        (Position, Token<'input>, Position),
+        __lalrpop_util::ParseError<Position, Token<'input>, SpannedError>,
+    >;
 }
 
-impl<'input, > __ToTriple<'input, > for (Position, Token<'input>, Position) {
-    fn to_triple(value: Self) -> Result<(Position,Token<'input>,Position), __lalrpop_util::ParseError<Position, Token<'input>, SpannedError>> {
+impl<'input> __ToTriple<'input> for (Position, Token<'input>, Position) {
+    fn to_triple(
+        value: Self,
+    ) -> Result<
+        (Position, Token<'input>, Position),
+        __lalrpop_util::ParseError<Position, Token<'input>, SpannedError>,
+    > {
         Ok(value)
     }
 }
-impl<'input, > __ToTriple<'input, > for Result<(Position, Token<'input>, Position), SpannedError> {
-    fn to_triple(value: Self) -> Result<(Position,Token<'input>,Position), __lalrpop_util::ParseError<Position, Token<'input>, SpannedError>> {
+impl<'input> __ToTriple<'input> for Result<(Position, Token<'input>, Position), SpannedError> {
+    fn to_triple(
+        value: Self,
+    ) -> Result<
+        (Position, Token<'input>, Position),
+        __lalrpop_util::ParseError<Position, Token<'input>, SpannedError>,
+    > {
         match value {
             Ok(v) => Ok(v),
             Err(error) => Err(__lalrpop_util::ParseError::User { error }),

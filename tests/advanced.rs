@@ -96,7 +96,6 @@ fn test_type_cast(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
-
 #[theory]
 #[test]
 //#[case("format(now(), 'yyyy-mm-dd')", NSQL, "format(now(), 'yyyy-mm-dd')")]
