@@ -7,7 +7,7 @@
  It translates SQLs in a traversable hierarchy of CSharp classes. N-SQL is not limited to one database but provides support for a lot of specials of Oracle, MySQL, PostgreSQL, SqlServer, sqlite ... To name some, relational operators like != and so on.
 
 - See the [Quick start](quick_start) guide for more details.
-- Visit [here](/Web-Editor/) to play online.
+- Visit [here](/playground/) to play online.
 
 ## Features
 
