@@ -34,4 +34,5 @@ lalrpop = "0.16.3"
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.
+lto = true
 opt-level = "s"

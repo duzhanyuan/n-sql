@@ -20,12 +20,12 @@ extern crate lazy_static;
 use cfg_if::cfg_if;
 mod ast;
 mod catalog;
-pub mod generator;
 mod grammar;
 mod lexer;
 mod optimizer;
-pub mod parser;
 mod version;
+pub mod generator;
+pub mod parser;
 
 pub use ast::*;
 pub use grammar::{
@@ -35,50 +35,13 @@ pub use grammar::{
 pub use lexer::Lexer;
 pub use optimizer::Optimizer;
 
-cfg_if! {
-    // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
-    // allocator.
-    if #[cfg(all(target_arch="wasm32", feature="wee_alloc"))] {
-        extern crate wee_alloc;
-        #[global_allocator]
-        static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
-    }
-}
 
-cfg_if! {
-    if #[cfg(target_arch="wasm32")] {
-        extern crate wasm_bindgen;
+#[cfg(target_arch="wasm32")]
+extern crate wasm_bindgen;
+#[cfg(target_arch="wasm32")]
+mod wasm;
 
-        mod wasm_utils;
-        use wasm_bindgen::prelude::*;
 
-        #[wasm_bindgen]
-        extern "C" {
-            fn alert(s: &str);
-        }
 
-        #[wasm_bindgen]
-        pub fn translate(sql: &str) -> String {
-            let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
-            statement.to_sql().unwrap()
-        }
 
-        #[wasm_bindgen]
-        pub fn translate_pgsql(sql: &str) -> String {
-            let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
-            statement.to_pgsql().unwrap()
-        }
 
-        #[wasm_bindgen]
-        pub fn translate_oracle(sql: &str) -> String {
-            let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
-            statement.to_oracle().unwrap()
-        }
-
-        #[wasm_bindgen]
-        pub fn translate_mysql(sql: &str) -> String {
-            let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
-            statement.to_mysql().unwrap()
-        }
-    }
-}
