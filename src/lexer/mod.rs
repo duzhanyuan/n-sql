@@ -34,7 +34,7 @@ pub use self::token::Token;
 use lexer::token::Token::EOF;
 
 //noinspection SpellCheckingInspection
-const REGEX_SOURCE: [(&str, Token); 129] = [
+const REGEX_SOURCE: [(&str, Token); 135] = [
     // region [keyword]
     ("^(?i)all$", Token::All),
     ("^(?i)and$", Token::And),
@@ -98,6 +98,7 @@ const REGEX_SOURCE: [(&str, Token); 129] = [
     ("^(?i)countif$", Token::CountIf),
     ("^(?i)day$", Token::Day),
     ("^(?i)day_add$", Token::DayAdd),
+    ("^(?i)day_diff$", Token::DayDiff),
     ("^(?i)day_sub$", Token::DaySub),
     ("^(?i)decode$", Token::Decode),
     ("^(?i)dense_rank$", Token::DenseRank),
@@ -105,6 +106,7 @@ const REGEX_SOURCE: [(&str, Token); 129] = [
     ("^(?i)floor$", Token::Floor),
     ("^(?i)hour$", Token::Hour),
     ("^(?i)hour_add$", Token::HourAdd),
+    ("^(?i)hour_diff$", Token::HourDiff),
     ("^(?i)hour_sub$", Token::HourSub),
     ("^(?i)length$", Token::Length),
     ("^(?i)log$", Token::Log),
@@ -120,9 +122,11 @@ const REGEX_SOURCE: [(&str, Token); 129] = [
     ("^(?i)minif$", Token::MinIf),
     ("^(?i)minute$", Token::Minute),
     ("^(?i)minute_add$", Token::MinuteAdd),
+    ("^(?i)minute_diff$", Token::MinuteDiff),
     ("^(?i)minute_sub$", Token::MinuteSub),
     ("^(?i)month$", Token::Month),
     ("^(?i)month_add$", Token::MonthAdd),
+    ("^(?i)month_diff$", Token::MonthDiff),
     ("^(?i)month_sub$", Token::MonthSub),
     ("^(?i)now$", Token::Now),
     ("^(?i)nvl$", Token::Nvl),
@@ -147,6 +151,7 @@ const REGEX_SOURCE: [(&str, Token); 129] = [
     ("^(?i)rtrim$", Token::RTrim),
     ("^(?i)second$", Token::Second),
     ("^(?i)second_add$", Token::SecondAdd),
+    ("^(?i)second_diff$", Token::SecondDiff),
     ("^(?i)second_sub", Token::SecondSub),
     ("^(?i)substr$", Token::Substr),
     ("^(?i)substring$", Token::Substring),
@@ -159,6 +164,7 @@ const REGEX_SOURCE: [(&str, Token); 129] = [
     ("^(?i)upper$", Token::Upper),
     ("^(?i)year$", Token::Year),
     ("^(?i)year_add$", Token::YearAdd),
+    ("^(?i)year_diff$", Token::YearDiff),
     ("^(?i)year_sub$", Token::YearSub),
     // endregion
 
