@@ -4,10 +4,12 @@ sudo: false
 rust: nightly
 before_script:
   - rustup component add rustfmt-preview
+  - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 script:
   - cargo fmt --all
   - cargo test
   - cargo bench
+  - wasm-pack build -t no-modules --release -d docs/playground/assets/n-sql
 
 notifications:
   email:
