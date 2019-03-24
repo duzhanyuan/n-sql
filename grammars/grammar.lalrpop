@@ -114,6 +114,7 @@ extern {
         "countif" => Token::CountIf,
         "day" => Token::Day,
         "day_add" => Token::DayAdd,
+        "day_diff" => Token::DayDiff,
         "day_sub" => Token::DaySub,
         "decode" => Token::Decode,
         "dense_rank" => Token::DenseRank,
@@ -121,6 +122,7 @@ extern {
         "floor" => Token::Floor,
         "hour" => Token::Hour,
         "hour_add" => Token::HourAdd,
+        "hour_diff" => Token::HourDiff,
         "hour_sub" => Token::HourSub,
         "length" => Token::Length,
         "log" => Token::Log,
@@ -136,9 +138,11 @@ extern {
         "minif" => Token::MinIf,
         "minute" => Token::Minute,
         "minute_add" => Token::MinuteAdd,
+        "minute_diff" => Token::MinuteDiff,
         "minute_sub" => Token::MinuteSub,
         "month" => Token::Month,
         "month_add" => Token::MonthAdd,
+        "month_diff" => Token::MonthDiff,
         "month_sub" => Token::MonthSub,
         "now" => Token::Now,
         "nvl" => Token::Nvl,
@@ -163,6 +167,7 @@ extern {
         "rtrim" => Token::RTrim,
         "second" => Token::Second,
         "second_add" => Token::SecondAdd,
+        "second_diff" => Token::SecondDiff,
         "second_sub" => Token::SecondSub,
         "substr" => Token::Substr,
         "substring" => Token::Substring,
@@ -175,6 +180,7 @@ extern {
         "upper" => Token::Upper,
         "year" => Token::Year,
         "year_add" => Token::YearAdd,
+        "year_diff" => Token::YearDiff,
         "year_sub" => Token::YearSub,
 
         "eof" => Token::EOF
@@ -529,7 +535,13 @@ DatetimeFn: DatetimeFn = {
     "year_add" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => DatetimeFn::YearAdd(YearAddFn::new(<>)),
     "year_sub" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => DatetimeFn::YearSub(YearSubFn::new(<>)),
     "extract" "(" <DatetimeType> "from" <Boxed<Expression>> ")" => DatetimeFn::Extract(ExtractFn::new(<>)),
-    <DatetimeType> "(" <Boxed<Expression>> ")" => DatetimeFn::Extract(ExtractFn::new(<>))
+    <DatetimeType> "(" <Boxed<Expression>> ")" => DatetimeFn::Extract(ExtractFn::new(<>)),
+    "year_diff" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => DatetimeFn::Diff(DatetimeDiffFn::new(<>, DatetimeType::Year)),
+    "month_diff" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => DatetimeFn::Diff(DatetimeDiffFn::new(<>, DatetimeType::Month)),
+    "day_diff" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => DatetimeFn::Diff(DatetimeDiffFn::new(<>, DatetimeType::Day)),
+    "hour_diff" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => DatetimeFn::Diff(DatetimeDiffFn::new(<>, DatetimeType::Hour)),
+    "minute_diff" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => DatetimeFn::Diff(DatetimeDiffFn::new(<>, DatetimeType::Minute)),
+    "second_diff" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => DatetimeFn::Diff(DatetimeDiffFn::new(<>, DatetimeType::Second)),
 }
 
 DatetimeType: DatetimeType = {

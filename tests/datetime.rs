@@ -53,7 +53,7 @@ fn test_day_sub(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-//#[case("day_diff(a, b)", NSQL, "day_diff(a, b)")]
+#[case("day_diff(a, b)", NSQL, "day_diff(a, b)")]
 //#[case("day_diff(a, b)", PostgreSQL, "extract(epoch from (b - a)) / 86400")]
 //#[case("day_diff(a, b)", Oracle, "b - a")]
 //#[case("day_diff(a, b)", MySQL, "timestampdiff(day, a, b)")]
@@ -103,7 +103,7 @@ fn test_hour(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-//#[case("hour_diff(a,b)", NSQL, "hour_diff(a, b)")]
+#[case("hour_diff(a,b)", NSQL, "hour_diff(a, b)")]
 //#[case("hour_diff(a,b)", PostgreSQL, "extract(epoch from (b - a)) / 3600")]
 //#[case("hour_diff(a,b)", Oracle, "(b - a) * 24")]
 //#[case("hour_diff(a,b)", MySQL, "timestampdiff(hour, a, b)")]
@@ -154,7 +154,7 @@ fn test_minute(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-//#[case("minute_diff(a,b)", NSQL, "minute_diff(a, b)")]
+#[case("minute_diff(a,b)", NSQL, "minute_diff(a, b)")]
 //#[case("minute_diff(a,b)", PostgreSQL, "extract(epoch from (b - a)) / 60")]
 //#[case("minute_diff(a,b)", Oracle, "(b - a) * 1440")]
 //#[case("minute_diff(a,b)", MySQL, "timestampdiff(minute, a, b)")]
@@ -205,7 +205,7 @@ fn test_month(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-//#[case("month_diff(a,b)", NSQL, "month_diff(a, b)")]
+#[case("month_diff(a,b)", NSQL, "month_diff(a, b)")]
 //#[case("month_diff(a,b)", PostgreSQL, "extract(epoch from (b - a)) / 2592000")]
 //#[case("month_diff(a,b)", Oracle, "(b - a) / 30")]
 //#[case("month_diff(a,b)", MySQL, "timestampdiff(month, a, b)")]
@@ -253,7 +253,7 @@ fn test_second(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-//#[case("second_diff(a, b)", NSQL, "second_diff(a, b)")]
+#[case("second_diff(a, b)", NSQL, "second_diff(a, b)")]
 //#[case("second_diff(a, b)", PostgreSQL, "extract(epoch from (b - a))")]
 //#[case("second_diff(a, b)", Oracle, "(b - a) * 86400")]
 //#[case("second_diff(a, b)", MySQL, "timestampdiff(second, a, b)")]
@@ -302,7 +302,7 @@ fn test_year(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-//#[case("year_diff(a,b)", NSQL, "year_diff(a, b)")]
+#[case("year_diff(a,b)", NSQL, "year_diff(a, b)")]
 //#[case("year_diff(a,b)", PostgreSQL, "extract(epoch from (b - a)) / 31536000")]
 //#[case("year_diff(a,b)", Oracle, "(b - a) / 365")]
 //#[case("year_diff(a,b)", MySQL, "timestampdiff(year, a, b)")]

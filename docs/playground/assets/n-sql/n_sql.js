@@ -3,7 +3,7 @@
     const __exports = {};
 
 
-    let cachedTextEncoder = new TextEncoder('utf-8');//44
+    let cachedTextEncoder = new TextEncoder('utf-8');
 
     let cachegetUint8Memory = null;
     function getUint8Memory() {
