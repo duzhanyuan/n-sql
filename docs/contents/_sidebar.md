@@ -5,4 +5,5 @@
   <!-- * [Quick Start](quick_start) -->
 
 * [N-SQL Functions](functions)
+* [playground](playground)
 * [Support](support)
