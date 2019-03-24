@@ -10,6 +10,7 @@ Currently only these online test sites are collected, if there is a better welco
 
 - [rextester](https://rextester.com/l/postgresql_online_compiler)
 - [db-fiddle](https://www.db-fiddle.com/)
+- [ElephantSQL](https://www.elephantsql.com/)
 
 ## 2. Oracle
 
@@ -19,6 +20,7 @@ Currently only these online test sites are collected, if there is a better welco
 
 - [rextester](https://rextester.com/l/mysql_online_compiler)
 - [db-fiddle](https://www.db-fiddle.com/)
+- [paiza.io](https://paiza.io/projects/_syDUOC4IlCxlirUwgSNmw?language=mysql)
   
 ## 4. SQL Server
 
@@ -26,4 +28,5 @@ Currently only these online test sites are collected, if there is a better welco
 
 ## 5. SQLite
 
+- [SqLite Browser](https://sqliteonline.com/)
 - [db-fiddle](https://www.db-fiddle.com/)
