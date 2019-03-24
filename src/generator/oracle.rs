@@ -88,6 +88,9 @@ impl Visitor for InternalGenerator {
         }
         Ok(())
     }
+    fn visit_now_fn(&self, f: &mut Formatter) -> Result {
+        f.write_str("systimestamp")
+    }
     fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
         match function.data_type.data_type.to_lowercase().as_str() {
             "text" => {
@@ -95,21 +98,22 @@ impl Visitor for InternalGenerator {
                 f.write_char('(')?;
                 self.visit_expression(&function.expr, f)?;
                 f.write_char(')')
-            },
+            }
             "date" => {
                 f.write_str("to_date")?;
                 f.write_char('(')?;
                 self.visit_expression(&function.expr, f)?;
                 f.write_str(", 'yyyy-mm-dd'")?;
                 f.write_char(')')
-            },
+            }
+
             "timestamp" | "datetime" => {
                 f.write_str("to_timestamp")?;
                 f.write_char('(')?;
                 self.visit_expression(&function.expr, f)?;
                 f.write_str(", 'yyyy-mm-dd hh24:mi:ss'")?;
                 f.write_char(')')
-            },
+            }
             _ => {
                 f.write_str("cast")?;
                 f.write_char('(')?;
