@@ -1,4 +1,4 @@
-# SQL 试炼场
+# SQL Playground
 
 > N-SQL supports the translation of sql equivalent into SQL statements of several databases such as PostgreSQL, Oracle, MySQL, sqlserver, sqlite. (The current support is not comprehensive enough)
 
