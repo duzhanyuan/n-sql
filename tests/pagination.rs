@@ -23,7 +23,7 @@ test_init!();
 #[case(
     "select * from student skip 1 limit 2",
     MySQL,
-    "select * from student limit 2, 1"
+    "select * from student limit 1, 2"
 )]
 #[case(
     "select * from student skip 1 limit 2",

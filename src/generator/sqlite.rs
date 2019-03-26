@@ -21,6 +21,31 @@ pub trait SQLiterGenerator<T> {
 struct InternalGenerator;
 
 impl Visitor for InternalGenerator {
+    fn visit_pagination_statement(
+        &self,
+        pagination_statement: &Box<PaginationStatement>,
+        f: &mut Formatter,
+    ) -> Result {
+        self.visit_set_statement(&pagination_statement.set, f)?;
+        f.write_char(' ')?;
+        f.write_str("limit")?;
+        f.write_char(' ')?;
+        if let Some(ref limit) = pagination_statement.limit {
+            self.visit_expression(limit, f)?;
+        } else {
+            f.write_str("-1")?;
+        }
+
+        if let Some(ref skip) = pagination_statement.skip {
+            f.write_char(' ')?;
+            f.write_str("offset")?;
+            f.write_char(' ')?;
+            self.visit_expression(skip, f)?;
+        }
+
+        Ok(())
+    }
+
     fn visit_nvl_fn(&self, function: &Box<NvlFn>, f: &mut Formatter) -> Result {
         f.write_str("ifnull")?;
         f.write_char('(')?;

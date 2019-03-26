@@ -93,12 +93,14 @@ fn test_intersect(left: &str, database_type: DatabaseType, right: &str) {
     "select count(id) from student offset 1 row"
 )]
 #[case("select * from student skip 1", NSQL, "select * from student skip 1")]
-//#[case("select * from student skip 1", PostgreSQL, "select * from student offset 1")]
-//#[case("select * from student skip 1", MySQL, "select * from student limit 1")]
-//#[case("select * from student skip 1", SqlServer, "select * from student order by 1 offset 1 row")]
-//#[case("select * from student skip 2", SqlServer, "select * from student order by 1 offset 2 rows")]
-//#[case("select * from student skip 1", SQLite, "select * from student limit -1 offset 1")]
-fn test_select_with_skip(left: &str, database_type: DatabaseType, right: &str) {
+#[case("select * from student skip 1", PostgreSQL, "select * from student offset 1")]
+#[case("select * from student skip 1", MySQL, "select * from student limit 1, 9999999999999999999")]
+#[case("select * from student skip 1", SqlServer, "select * from student order by 1 offset 1 row")]
+#[case("select * from student skip 2", SqlServer, "select * from student order by 1 offset 2 rows")]
+#[case("select * from student order by age skip 1", SqlServer, "select * from student order by age offset 1 row")]
+#[case("select * from student order by age skip 2", SqlServer, "select * from student order by age offset 2 rows")]
+#[case("select * from student skip 1", SQLite, "select * from student limit -1 offset 1")]
+fn  test_select_with_skip(left: &str, database_type: DatabaseType, right: &str) {
     test_statement(database_type, left, right);
 }
 
@@ -125,21 +127,30 @@ fn test_select_with_skip(left: &str, database_type: DatabaseType, right: &str) {
     "select count(id) from student fetch first 1 row only"
 )]
 
-//#[case("select * from student limit 1", NSQL, "select * from student limit 1")]
-//#[case("select * from student limit 1", PostgreSQL, "select * from student limit 1")]
-//#[case("select * from student limit 1", Oracle, "select * from student fetch first 1 row only")]
-//#[case("select * from student limit 2", Oracle, "select * from student fetch first 2 rows only")]
-//#[case("select * from student limit 1", MySQL, "select * from student limit 0, 1")]
-//#[case("select * from student limit 1", SqlServer, "select * from student order by 1 offset 0 row fetch next 1 row only")]
-//#[case("select * from student limit 2", SqlServer, "select * from student order by 1 offset 0 row fetch next 2 rows only")]
-//
-//#[case("select * from student skip 3 limit 2", NSQL, "select * from student skip 3 limit 2")]
-//#[case("select * from student skip 3 limit 2", PostgreSQL, "select * from student offset 3 limit 2")]
-//#[case("select * from student skip 3 limit 2", Oracle, "select * from student offset 3 rows fetch first 2 rows only")]
-//#[case("select * from student skip 3 limit 2", MySQL, "select * from student limit 3, 2")]
-//#[case("select * from student skip 3 limit 2", SqlServer, "select * from student order by 1 offset 3 rows fetch next 2 rows only")]
-//#[case("select * from student skip 3 limit 2", SQLite, "select * from student limit 2 offset 3")]
+#[case("select * from student limit 1", NSQL, "select * from student limit 1")]
+#[case("select * from student limit 1", PostgreSQL, "select * from student limit 1")]
+#[case("select * from student limit 1", Oracle, "select * from student fetch first 1 row only")]
+#[case("select * from student limit 2", Oracle, "select * from student fetch first 2 rows only")]
+#[case("select * from student limit 1", MySQL, "select * from student limit 1")]
+#[case("select * from student limit 1", SqlServer, "select * from student order by 1 offset 0 row fetch next 1 row only")]
+#[case("select * from student limit 2", SqlServer, "select * from student order by 1 offset 0 row fetch next 2 rows only")]
+#[case("select * from student limit 1", SQLite, "select * from student limit 1")]
+
 fn test_select_with_limit(left: &str, database_type: DatabaseType, right: &str) {
+    test_statement(database_type, left, right);
+}
+
+
+
+#[theory]
+#[test]
+#[case("select * from student skip 3 limit 2", NSQL, "select * from student skip 3 limit 2")]
+#[case("select * from student skip 3 limit 2", PostgreSQL, "select * from student offset 3 limit 2")]
+#[case("select * from student skip 3 limit 2", Oracle, "select * from student offset 3 rows fetch first 2 rows only")]
+#[case("select * from student skip 3 limit 2", MySQL, "select * from student limit 3, 2")]
+#[case("select * from student skip 3 limit 2", SqlServer, "select * from student order by 1 offset 3 rows fetch next 2 rows only")]
+#[case("select * from student skip 3 limit 2", SQLite, "select * from student limit 2 offset 3")]
+fn test_select_with_skip_limit(left: &str, database_type: DatabaseType, right: &str) {
     test_statement(database_type, left, right);
 }
 
@@ -147,7 +158,7 @@ fn test_select_with_limit(left: &str, database_type: DatabaseType, right: &str) 
 #[test]
 #[case("select now()", NSQL, "select now()")]
 #[case("select now() from dual", NSQL, "select now()")]
-//#[case("select now() from dual", Oracle, "select now() from dual")]
+#[case("select now() from dual", Oracle, "select systimestamp from dual")]
 fn test_select_from_dual(left: &str, database_type: DatabaseType, right: &str) {
     test_statement(database_type, left, right);
 }

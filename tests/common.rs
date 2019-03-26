@@ -50,6 +50,13 @@ pub fn test_expression(database_type: DatabaseType, left: &str, right: &str) {
     result.as_str().should().be_equal_to(right);
 }
 
+#[test]
+fn test_select_with_limit1() {
+    let expr = StatementParser::new().parse(Lexer::new("select * from student limit 2").tokenizer()).unwrap();
+    let p = expr.to_sql_server().unwrap();
+    println!("################{}", p);
+}
+
 pub fn test_statement(database_type: DatabaseType, left: &str, right: &str) {
     let expr = StatementParser::new().parse(Lexer::new(left).tokenizer());
     //    expr.should().not().be_an_error();
@@ -60,7 +67,8 @@ pub fn test_statement(database_type: DatabaseType, left: &str, right: &str) {
         DatabaseType::MySQL => expr.to_mysql(),
         DatabaseType::Oracle => expr.to_oracle(),
         DatabaseType::PostgreSQL => expr.to_pgsql(),
-        _ => unimplemented!(),
+        DatabaseType::SqlServer => expr.to_sql_server(),
+        DatabaseType::SQLite=> expr.to_sqlite(),
     }
     .unwrap();
 
