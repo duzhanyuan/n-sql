@@ -42,6 +42,99 @@ impl Visitor for InternalGenerator {
         f.write_str(" over (partition by 0)")
     }
 
+    fn visit_pagination_statement(
+        &self,
+        pagination_statement: &Box<PaginationStatement>,
+        f: &mut Formatter,
+    ) -> Result {
+
+        self.visit_set_statement(&pagination_statement.set, f)?;
+
+        let has_order = ||match pagination_statement.set.as_ref() {
+            SetStatement::Select(t) if t.sorts.is_some() => true,
+            _ =>  false
+        };
+
+        let mut has_add_order = false;
+
+        if let Some(ref skip) = pagination_statement.skip {
+            if !has_order(){
+                f.write_str(" order by 1")?;
+                has_add_order = true;
+            }
+            f.write_char(' ')?;
+            f.write_str("offset")?;
+            f.write_char(' ')?;
+
+            self.visit_expression(skip, f)?;
+            if let Some(skip) = skip.as_ref().constant_numeric() {
+                match skip {
+                    NumericValue::Integer(integer) => {
+                        if integer == 1 {
+                            f.write_str(" row")?;
+                        } else {
+                            f.write_str(" rows")?;
+                        }
+                    }
+                    NumericValue::Float(float) => {
+                        if float == 1.0 {
+                            f.write_str(" row")?;
+                        } else {
+                            f.write_str(" rows")?;
+                        }
+                    }
+                }
+            } else {
+                f.write_str(" rows")?;
+            }
+        }
+
+        if let Some(ref limit) = pagination_statement.limit {
+            if !has_add_order{
+                if !has_order() {
+                    f.write_str(" order by 1")?;
+                }
+
+                f.write_str(" offset 0 row")?;
+            }
+
+            f.write_char(' ')?;
+            f.write_str("fetch")?;
+            f.write_char(' ')?;
+            f.write_str("next")?;
+            f.write_char(' ')?;
+            self.visit_expression(limit, f)?;
+
+            if let Some(limit) = limit.as_ref().constant_numeric() {
+                match limit {
+                    NumericValue::Integer(integer) => {
+                        if integer == 1 {
+                            f.write_str(" row ")?;
+                        } else {
+                            f.write_str(" rows ")?;
+                        }
+                    }
+                    NumericValue::Float(float) => {
+                        if float == 1.0 {
+                            f.write_str(" row ")?;
+                        } else {
+                            f.write_str(" rows ")?;
+                        }
+                    }
+                }
+            } else {
+                f.write_str(" rows ")?;
+            }
+
+            f.write_str("only")?;
+        }
+        Ok(())
+    }
+
+    fn visit_now_fn(&self, f: &mut Formatter) -> Result {
+        f.write_str("systimestamp")
+    }
+
     fn visit_nvl_fn(&self, function: &Box<NvlFn>, f: &mut Formatter) -> Result {
         f.write_str("coalesce")?;
         f.write_char('(')?;
@@ -49,10 +142,6 @@ impl Visitor for InternalGenerator {
         f.write_str(", ")?;
         self.visit_expression(&function.default, f)?;
         f.write_char(')')
-    }
-
-    fn visit_now_fn(&self, f: &mut Formatter) -> Result {
-        f.write_str("systimestamp")
     }
 
     fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {

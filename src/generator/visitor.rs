@@ -418,6 +418,7 @@ pub trait Visitor {
         }
         Ok(())
     }
+
     fn visit_select_elements(
         &self,
         select_elements: &Vec<SelectElement>,

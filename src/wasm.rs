@@ -7,10 +7,10 @@
 // except according to those terms.
 #![cfg(target_arch="wasm32")]
 
+use cfg_if;
+use generator::*;
 use wasm_bindgen::prelude::*;
-use ::{StatementParser, Lexer};
-use ::generator::*;
-use ::cfg_if;
+use {Lexer, StatementParser};
 
 cfg_if! {
     // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -27,42 +27,54 @@ extern "C" {
     fn alert(s: &str);
 }
 
-#[cfg_attr(target_arch="wasm32", wasm_bindgen)]
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen)]
 pub fn translate(sql: &str) -> String {
-    let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
+    let statement = StatementParser::new()
+        .parse(Lexer::new(sql).tokenizer())
+        .unwrap();
     statement.to_sql().unwrap()
 }
 #[wasm_bindgen]
 pub fn translate_pgsql(sql: &str) -> String {
-    let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
+    let statement = StatementParser::new()
+        .parse(Lexer::new(sql).tokenizer())
+        .unwrap();
     statement.to_pgsql().unwrap()
 }
 #[wasm_bindgen]
 pub fn translate_oracle(sql: &str) -> String {
-    let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
+    let statement = StatementParser::new()
+        .parse(Lexer::new(sql).tokenizer())
+        .unwrap();
     statement.to_oracle().unwrap()
 }
 
 #[wasm_bindgen]
 pub fn translate_mysql(sql: &str) -> String {
-    let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
+    let statement = StatementParser::new()
+        .parse(Lexer::new(sql).tokenizer())
+        .unwrap();
     statement.to_mysql().unwrap()
 }
 
 #[wasm_bindgen]
 pub fn translate_sql_server(sql: &str) -> String {
-    let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
+    let statement = StatementParser::new()
+        .parse(Lexer::new(sql).tokenizer())
+        .unwrap();
     statement.to_sql_server().unwrap()
 }
 
 #[wasm_bindgen]
 pub fn translate_sqlite(sql: &str) -> String {
-    let statement = StatementParser::new().parse(Lexer::new(sql).tokenizer()).unwrap();
+    let statement = StatementParser::new()
+        .parse(Lexer::new(sql).tokenizer())
+        .unwrap();
     statement.to_sqlite().unwrap()
 }
 
-mod utils{
-    use ::cfg_if;
+mod utils {
+    use cfg_if;
     cfg_if! {
         // When the `console_error_panic_hook` feature is enabled, we can call the
         // `set_panic_hook` function at least once during initialization, and then

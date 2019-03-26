@@ -32,29 +32,34 @@ impl Visitor for InternalGenerator {
         f.write_str("limit")?;
         f.write_char(' ')?;
 
-        if let Some(ref limit) = pagination_statement.limit {
-            self.visit_expression(limit, f)?;
-        }
 
         if let Some(ref skip) = pagination_statement.skip {
-            f.write_str(", ")?;
             self.visit_expression(skip, f)?;
+            f.write_str(", ")?;
         }
+
+        if let Some(ref limit) = pagination_statement.limit {
+            self.visit_expression(limit, f)?;
+        } else {
+            f.write_str("9999999999999999999")?;
+        }
+
+
         Ok(())
     }
 
+    fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
+        self.visit_datetime_type(&function.extract_type, f)?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
     fn visit_nvl_fn(&self, function: &Box<NvlFn>, f: &mut Formatter) -> Result {
         f.write_str("ifnull")?;
         f.write_char('(')?;
         self.visit_expression(&function.expr, f)?;
         f.write_str(", ")?;
         self.visit_expression(&function.default, f)?;
-        f.write_char(')')
-    }
-    fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
-        self.visit_datetime_type(&function.extract_type, f)?;
-        f.write_char('(')?;
-        self.visit_expression(&function.expr, f)?;
         f.write_char(')')
     }
     fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
