@@ -16,8 +16,8 @@ test_init!();
 #[case("day(now())", NSQL, "day(now())")]
 #[case("extract(day from now())", NSQL, "day(now())")]
 #[case("day(now())", PostgreSQL, "extract(day from now())")]
-//#[case("day(now())", Oracle, "extract(day from systimestamp)")]
-//#[case("day(now())", MySQL, "day(now())")]
+#[case("day(now())", Oracle, "extract(day from systimestamp)")]
+#[case("day(now())", MySQL, "day(now())")]
 //#[case("day(now())", SqlServer, "day(getdate())")]
 //#[case("day(now())", SQLite, "")]
 fn test_day(left: &str, database_type: DatabaseType, right: &str) {
@@ -144,8 +144,12 @@ fn test_minute_sub(left: &str, database_type: DatabaseType, right: &str) {
 #[case("minute(now())", PostgreSQL, "extract(minute from now())")]
 #[case("extract(minute from now())", NSQL, "minute(now())")]
 #[case("extract(minute from now())", PostgreSQL, "extract(minute from now())")]
-#[case("extract(minute from now())", Oracle, "extract(minute from now())")]
-//#[case("extract(minute from now())", MySQL, "minute(now())")]
+#[case(
+    "extract(minute from now())",
+    Oracle,
+    "extract(minute from systimestamp)"
+)]
+#[case("extract(minute from now())", MySQL, "minute(now())")]
 //#[case("extract(minute from now())", SqlServer, "datepart(minute, getdate())")]
 //#[case("extract(minute from now())", SQLite, "")]
 fn test_minute(left: &str, database_type: DatabaseType, right: &str) {

@@ -591,12 +591,15 @@ pub trait Visitor {
             Function::Sin(t) => self.visit_sin_fn(t, f),
             Function::Sqrt(t) => self.visit_sqrt_fn(t, f),
             Function::Tan(t) => self.visit_tan_fn(t, f),
-
-            Function::Now => f.write_str("now()"),
+            Function::Now => self.visit_now_fn(f),
             Function::Nvl(t) => self.visit_nvl_fn(t, f),
             Function::Coalesce(t) => self.visit_coalesce_fn(t, f),
             Function::Datetime(t) => self.visit_datetime_fn(t, f),
         }
+    }
+
+    fn visit_now_fn(&self, f: &mut Formatter) -> Result {
+        f.write_str("now()")
     }
     fn visit_coalesce_fn(&self, function: &CoalesceFn, f: &mut Formatter) -> Result {
         f.write_str("coalesce")?;

@@ -51,7 +51,12 @@ impl Visitor for InternalGenerator {
         self.visit_expression(&function.default, f)?;
         f.write_char(')')
     }
-
+    fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
+        self.visit_datetime_type(&function.extract_type, f)?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
     fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
         f.write_str("convert")?;
         f.write_char('(')?;

@@ -51,6 +51,10 @@ impl Visitor for InternalGenerator {
         f.write_char(')')
     }
 
+    fn visit_now_fn(&self, f: &mut Formatter) -> Result {
+        f.write_str("systimestamp")
+    }
+
     fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
         let lower_tp = function.data_type.data_type.to_lowercase();
         let tp = lower_tp.as_str();
