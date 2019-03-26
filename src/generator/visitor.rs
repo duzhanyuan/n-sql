@@ -63,7 +63,7 @@ pub trait Visitor {
             VectorExpression::MinIf(t) => self.visit_min_if_fn(t, f),
             VectorExpression::SumIf(t) => self.visit_sum_if_fn(t, f),
             VectorExpression::StddevIf(t) => self.visit_stddev_if_fn(t, f),
-            VectorExpression::Percentile(t) => self.visit_percentile(t, f)
+            VectorExpression::Percentile(t) => self.visit_percentile(t, f),
         }
     }
 
@@ -148,7 +148,7 @@ pub trait Visitor {
     fn visit_percentile(&self, function: &PercentileFn, f: &mut Formatter) -> Result {
         match function.r#type {
             PercentileType::Cont => f.write_str("percentile_cont")?,
-            PercentileType::Disc => f.write_str("percentile_disc")?
+            PercentileType::Disc => f.write_str("percentile_disc")?,
         };
         f.write_char('(')?;
         self.visit_expression(&function.p, f)?;

@@ -61,7 +61,7 @@ impl Visitor for InternalGenerator {
             "text" => "char",
             "timestamp" => "datetime",
             "numeric" | "float" => "decimal(65, 38)",
-            _ => &function.data_type.data_type
+            _ => &function.data_type.data_type,
         })?;
         f.write_char(')')
     }

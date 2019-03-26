@@ -20,12 +20,12 @@ extern crate lazy_static;
 use cfg_if::cfg_if;
 mod ast;
 mod catalog;
+pub mod generator;
 mod grammar;
 mod lexer;
 mod optimizer;
-mod version;
-pub mod generator;
 pub mod parser;
+mod version;
 
 pub use ast::*;
 pub use grammar::{
@@ -35,13 +35,7 @@ pub use grammar::{
 pub use lexer::Lexer;
 pub use optimizer::Optimizer;
 
-
-#[cfg(target_arch="wasm32")]
+#[cfg(target_arch = "wasm32")]
 extern crate wasm_bindgen;
-#[cfg(target_arch="wasm32")]
+#[cfg(target_arch = "wasm32")]
 mod wasm;
-
-
-
-
-

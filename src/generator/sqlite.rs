@@ -35,11 +35,15 @@ impl Visitor for InternalGenerator {
 
         match tp {
             "timestamp" | "datetime" | "date" | "time" => {
-                f.write_str(if tp == "timestamp" { "datetime" } else { &function.data_type.data_type })?;
+                f.write_str(if tp == "timestamp" {
+                    "datetime"
+                } else {
+                    &function.data_type.data_type
+                })?;
                 f.write_char('(')?;
                 self.visit_expression(&function.expr, f)?;
                 f.write_char(')')
-            },
+            }
             _ => {
                 f.write_str("cast")?;
                 f.write_char('(')?;

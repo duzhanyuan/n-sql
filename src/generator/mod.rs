@@ -36,7 +36,7 @@ impl Visitor for InternalGenerator {
     fn visit_percentile(&self, function: &PercentileFn, f: &mut Formatter) -> Result {
         match function.r#type {
             PercentileType::Cont => f.write_str("percentile")?,
-            PercentileType::Disc => f.write_str("percentile_disc")?
+            PercentileType::Disc => f.write_str("percentile_disc")?,
         };
         f.write_char('(')?;
         self.visit_expression(&function.expr, f)?;
