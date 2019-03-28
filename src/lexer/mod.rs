@@ -34,12 +34,13 @@ pub use self::token::Token;
 use lexer::token::Token::EOF;
 
 //noinspection SpellCheckingInspection
-const REGEX_SOURCE: [(&str, Token); 135] = [
+const REGEX_SOURCE: [(&str, Token); 137] = [
     // region [keyword]
     ("^(?i)all$", Token::All),
     ("^(?i)and$", Token::And),
     ("^(?i)as$", Token::As),
     ("^(?i)asc$", Token::Asc),
+    ("^(?i)between$", Token::Between),
     ("^(?i)both$", Token::Both),
     ("^(?i)by$", Token::By),
     ("^(?i)case$", Token::Case),
@@ -61,6 +62,7 @@ const REGEX_SOURCE: [(&str, Token); 135] = [
     ("^(?i)join$", Token::Join),
     ("^(?i)leading$", Token::Leading),
     ("^(?i)left$", Token::Left),
+    ("^(?i)like$", Token::Like),
     ("^(?i)limit$", Token::Limit),
     ("^(?i)minus$", Token::Minus),
     ("^(?i)not$", Token::Not),

@@ -58,6 +58,7 @@ extern {
         "and" => Token::And,
         "as" => Token::As,
         "asc" => Token::Asc,
+        "between" => Token::Between,
         "both" => Token::Both,
         "by" => Token::By,
         "case" => Token::Case,
@@ -79,6 +80,7 @@ extern {
         "join" => Token::Join,
         "leading" => Token::Leading,
         "left" => Token::Left,
+        "like" => Token::Like,
         "limit" => Token::Limit,
         "minus" => Token::Minus,
         "not" => Token::Not,
@@ -362,8 +364,8 @@ Sub: ArithmeticOperator = {
 }
 
 PredicateNextTier: PredicateExpression = {
-    PredicateTerm,
-    Boxed<PredicateNextTier> And Boxed<PredicateTerm> => PredicateExpression::Logical(LogicalExpression::new(<>)).into(),
+    NotPredicate,
+    Boxed<PredicateNextTier> And Boxed<NotPredicate> => PredicateExpression::Logical(LogicalExpression::new(<>)).into(),
 }
 
 And: LogicalOperator = {
@@ -373,13 +375,19 @@ Or: LogicalOperator = {
     "or" => LogicalOperator::Or
 }
 
+NotPredicate: PredicateExpression = {
+    PredicateTerm,
+    "not" <Boxed<PredicateTerm>> => PredicateExpression::Not(NotExpression::new(<>))
+}
+
 PredicateTerm: PredicateExpression = {
     Boxed<Expression> ComparisonOperator Boxed<Expression> => PredicateExpression::Comparison(ComparisonExpression::new(<>)),
-    "not" "(" <Boxed<Predicate>> ")" => PredicateExpression::Not(NotExpression::new(<>)),
     <Boxed<Expression>> "is" "null" => PredicateExpression::IsNull(IsNullExpression::new(<>)),
     <Boxed<Expression>> "is" "not" "null" => PredicateExpression::IsNotNull(IsNotNullExpression::new(<>)),
     <Boxed<Expression>> "in" "(" <InElements> ")" => PredicateExpression::In(InExpression::new(<>)),
     <Boxed<Expression>> "not" "in" "(" <InElements> ")" => PredicateExpression::NotIn(NotInExpression::new(<>)),
+    <Boxed<Expression>> "between" <Boxed<Expression>> "and" <Boxed<Expression>> => PredicateExpression::Between(BetweenExpression::new(<>)),
+    <Boxed<Expression>> "like" <Boxed<Expression>> => PredicateExpression::Like(LikeExpression::new(<>)),
     "(" <Predicate> ")",
 }
 

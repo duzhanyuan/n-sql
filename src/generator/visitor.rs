@@ -571,7 +571,21 @@ pub trait Visitor {
             PredicateExpression::IsNotNull(p) => self.visit_is_not_null(p, f),
             PredicateExpression::In(p) => self.visit_in(p, f),
             PredicateExpression::NotIn(p) => self.visit_not_in(p, f),
+            PredicateExpression::Between(p) => self.visit_between(p, f),
+            PredicateExpression::Like(p) => self.visit_like(p, f)
         }
+    }
+    fn visit_like(&self, expr: &LikeExpression, f: &mut Formatter) -> Result {
+        self.visit_expression(&expr.expr, f)?;
+        f.write_str(" like ")?;
+        self.visit_expression(&expr.pattern, f)
+    }
+    fn visit_between(&self, expr: &BetweenExpression,  f: &mut Formatter) -> Result {
+        self.visit_expression(&expr.expr, f)?;
+        f.write_str(" between ")?;
+        self.visit_expression(&expr.begin, f)?;
+        f.write_str(" and ")?;
+        self.visit_expression(&expr.end, f)
     }
     fn visit_function(&self, function: &Function, f: &mut Formatter) -> Result {
         match function {
@@ -1200,9 +1214,18 @@ pub trait Visitor {
         }
     }
     fn visit_not(&self, expr: &NotExpression, f: &mut Formatter) -> Result {
-        f.write_str("not(")?;
-        self.visit_predicate(&expr.expr, f)?;
-        f.write_str(")")
+        let need_brace = match expr.expr.as_ref() {
+            PredicateExpression::Logical(_) => true,
+            _ => false
+        };
+        if need_brace {
+            f.write_str("not(")?;
+            self.visit_predicate(&expr.expr, f)?;
+            f.write_str(")")
+        } else {
+            f.write_str("not ")?;
+            self.visit_predicate(&expr.expr, f)
+        }
     }
     fn visit_is_null(&self, expr: &IsNullExpression, f: &mut Formatter) -> Result {
         self.visit_expression(&expr.expr, f)?;
