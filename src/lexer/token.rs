@@ -197,6 +197,7 @@ pub enum Token<'input> {
     TrimStart,
     TrimEnd,
     Upper,
+    Variance,
     Year,
     YearAdd,
     YearDiff,

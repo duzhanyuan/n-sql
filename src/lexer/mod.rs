@@ -34,7 +34,7 @@ pub use self::token::Token;
 use lexer::token::Token::EOF;
 
 //noinspection SpellCheckingInspection
-const REGEX_SOURCE: [(&str, Token); 137] = [
+const REGEX_SOURCE: [(&str, Token); 138] = [
     // region [keyword]
     ("^(?i)all$", Token::All),
     ("^(?i)and$", Token::And),
@@ -164,6 +164,7 @@ const REGEX_SOURCE: [(&str, Token); 137] = [
     ("^(?i)trim_start$", Token::TrimStart),
     ("^(?i)trim_end$", Token::TrimEnd),
     ("^(?i)upper$", Token::Upper),
+    ("^(?i)variance$", Token::Variance),
     ("^(?i)year$", Token::Year),
     ("^(?i)year_add$", Token::YearAdd),
     ("^(?i)year_diff$", Token::YearDiff),

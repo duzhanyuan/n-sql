@@ -45,6 +45,11 @@ impl From<i32> for Expression {
         ConstantValue::from(value).into()
     }
 }
+impl From<f64> for Expression {
+    fn from(value: f64) -> Self {
+        ConstantValue::from(value).into()
+    }
+}
 
 impl Expression {
     pub fn constant_numeric(&self) -> Option<NumericValue> {

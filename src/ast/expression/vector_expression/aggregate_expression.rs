@@ -296,3 +296,14 @@ impl PercentileFn {
         }
     }
 }
+
+impl From<&MedianFn> for PercentileFn {
+    fn from(v: &MedianFn) -> Self {
+        PercentileFn::new(
+            v.expr.clone(),
+            Expression::from(0.5).into(),
+            None,
+            PercentileType::Cont,
+        )
+    }
+}

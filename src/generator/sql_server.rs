@@ -21,6 +21,10 @@ pub trait SqlServerGenerator<T> {
 struct InternalGenerator;
 
 impl Visitor for InternalGenerator {
+    fn visit_median_fn(&self, function: &MedianFn, f: &mut Formatter) -> Result {
+        self.visit_percentile(&PercentileFn::from(function), f)
+    }
+
     fn visit_percentile(&self, function: &PercentileFn, f: &mut Formatter) -> Result {
         match function.r#type {
             PercentileType::Cont => f.write_str("percentile_cont")?,
@@ -41,7 +45,6 @@ impl Visitor for InternalGenerator {
         f.write_char(')')?;
         f.write_str(" over (partition by 0)")
     }
-
     fn visit_pagination_statement(
         &self,
         pagination_statement: &Box<PaginationStatement>,

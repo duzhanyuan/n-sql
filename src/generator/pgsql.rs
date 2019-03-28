@@ -22,6 +22,10 @@ pub trait PgsqlGenerator<T> {
 struct InternalGenerator;
 
 impl Visitor for InternalGenerator {
+    fn visit_median_fn(&self, function: &MedianFn, f: &mut Formatter) -> Result {
+        self.visit_percentile(&PercentileFn::from(function), f)
+    }
+
     fn visit_stddev_if_fn(&self, function: &StddevIfFn, f: &mut Formatter) -> Result {
         let predicate = function.predicate.clone();
         let expr = function.expr.clone();
@@ -36,7 +40,6 @@ impl Visitor for InternalGenerator {
         let stddev = StddevFn::new(aggregate_type, case_when);
         self.visit_stddev_fn(&stddev, f)
     }
-
     fn visit_avg_if_fn(&self, function: &AvgIfFn, f: &mut Formatter) -> Result {
         let predicate = function.predicate.clone();
         let expr = function.expr.clone();
