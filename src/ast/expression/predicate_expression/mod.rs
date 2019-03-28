@@ -13,6 +13,8 @@ mod is_null_expression;
 mod logical_expression;
 mod not_expression;
 mod not_in_expression;
+mod between_expression;
+mod like_expression;
 
 pub use self::comparison_expression::*;
 pub use self::in_expression::*;
@@ -21,12 +23,16 @@ pub use self::is_null_expression::*;
 pub use self::logical_expression::*;
 pub use self::not_expression::*;
 pub use self::not_in_expression::*;
+pub use self::between_expression::*;
+pub use self::like_expression::*;
 
 use std::fmt::{Debug, Error, Formatter};
 
 #[derive(Clone, Debug)]
 pub enum PredicateExpression {
     Comparison(ComparisonExpression),
+    Between(BetweenExpression),
+    Like(LikeExpression),
     Logical(LogicalExpression),
     Not(NotExpression),
     IsNull(IsNullExpression),

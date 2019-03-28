@@ -11,12 +11,6 @@ mod common;
 
 test_init!();
 
-#[theory]
-#[test]
-//#[case("a between   3 and 10", NSQL, "a between 3 and 10")]
-fn test(left: &str, database_type: DatabaseType, right: &str) {
-    test_predicate(database_type, left, right)
-}
 
 #[theory]
 #[test]
@@ -27,8 +21,7 @@ fn test(left: &str, database_type: DatabaseType, right: &str) {
 #[case("(a =3 )  and (((c < 5 or c= 7)))", NSQL, "a = 3 and (c < 5 or c = 7)")]
 #[case("(a = 3 or c < 5) and d = 8", NSQL, "(a = 3 or c < 5) and d = 8")]
 #[case("a = 3 and (c < 5 or d = 8)", NSQL, "a = 3 and (c < 5 or d = 8)")]
-
-//#[case("a between   3 and 10", NSQL, "a between 3 and 10")]
+#[case("a between   3 and 10", NSQL, "a between 3 and 10")]
 fn test_logical(left: &str, database_type: DatabaseType, right: &str) {
     test_predicate(database_type, left, right)
 }
@@ -51,13 +44,10 @@ fn test_in(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-#[case("nOt(a = 'abc')", NSQL, "not(a = 'abc')")]
+#[case("nOt(a = 'abc')", NSQL, "not a = 'abc'")]
 #[case("nOt(a = 'abc' and age <3)", NSQL, "not(a = 'abc' and age < 3)")]
-//#[case("not a = 'abc'", NSQL, "not a = 'abc'")]
-//#[case("not a > 3 or a < 7", NSQL, "not a > 3 or a < 7")]
-//#[case("not (a > 3 or a < 7)", NSQL, "not(a > 3 or a < 7)")]
-
-//#[case("a between   3 and 10", NSQL, "a between 3 and 10")]
+#[case("not a > 3 or a < 7", NSQL, "not a > 3 or a < 7")]
+#[case("not (a > 3 or a < 7)", NSQL, "not(a > 3 or a < 7)")]
 fn test_not(left: &str, database_type: DatabaseType, right: &str) {
     test_predicate(database_type, left, right)
 }
@@ -90,7 +80,7 @@ fn test_comparison(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-//#[case("a like '%c'", NSQL, "a like '%c'")]
+#[case("a like '%c'", NSQL, "a like '%c'")]
 fn test_like(left: &str, database_type: DatabaseType, right: &str) {
     test_predicate(database_type, left, right)
 }
