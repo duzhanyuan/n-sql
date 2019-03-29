@@ -13,7 +13,7 @@ test_init!();
 
 #[theory]
 #[test]
-#[case("variance(a)", NSQL, "variance(a)")]
+//#[case("variance(a)", NSQL, "variance(a)")]
 
 fn test(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
