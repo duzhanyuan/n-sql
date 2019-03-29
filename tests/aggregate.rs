@@ -37,11 +37,11 @@ fn test_stddev(left: &str, database_type: DatabaseType, right: &str) {
 #[theory]
 #[test]
 #[case("median(abc)", NSQL, "median(abc)")]
-//#[case("median(abc)", PostgreSQL, "percentile_cont(0.5) within group (order by abc)")]
+#[case("median(abc)", PostgreSQL, "percentile_cont(0.5) within group (order by abc)")]
 #[case("median(abc)", Oracle, "median(abc)")]
-//#[case("median(abc)", MySQL, "median(abc)")]
-//#[case("median(abc)", SqlServer, "percentile_cont(0.5) within group (order by abc) over (partition by 0)")]
-//#[case("median(abc)", SQLite, "median(abc)")]
+#[case("median(abc)", MySQL, "median(abc)")]
+#[case("median(abc)", SqlServer, "percentile_cont(0.5) within group (order by abc) over (partition by 0)")]
+#[case("median(abc)", SQLite, "median(abc)")]
 fn test_median(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }

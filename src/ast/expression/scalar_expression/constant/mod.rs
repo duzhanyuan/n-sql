@@ -46,6 +46,11 @@ impl From<i32> for ConstantValue {
         ConstantValue::Numeric(value.into())
     }
 }
+impl From<f64> for ConstantValue {
+    fn from(value: f64) -> Self {
+        ConstantValue::Numeric(value.into())
+    }
+}
 
 impl From<String> for ConstantValue {
     fn from(value: String) -> Self {
