@@ -12,7 +12,6 @@
 
 #[macro_use]
 extern crate cfg_if;
-extern crate core;
 #[macro_use]
 extern crate failure;
 #[macro_use]
@@ -37,7 +36,5 @@ pub use crate::grammar::{
 };
 
 
-#[cfg(target_arch = "wasm32")]
-extern crate wasm_bindgen;
 #[cfg(target_arch = "wasm32")]
 mod wasm;

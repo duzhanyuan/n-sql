@@ -125,12 +125,12 @@ fn test_abs(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-//#[case("rank(a)", NSQL, "rank(a)")]
-//#[case("rank(a  , asc)", NSQL, "rank(a, asc)")]
-//#[case("rank(a  , desc)", NSQL, "rank(a, desc)")]
-//#[case("rank(count(a))", NSQL, "rank(count(a))")]
-//#[case("rank(count(a), asc)", NSQL, "rank(count(a), asc)")]
-//#[case("rank(count(a), desc)", NSQL, "rank(count(a), desc)")]
+#[case("rank(a)", NSQL, "rank(a)")]
+#[case("rank(a  , asc)", NSQL, "rank(a, asc)")]
+#[case("rank(a  , desc)", NSQL, "rank(a, desc)")]
+#[case("rank(count(a))", NSQL, "rank(count(a))")]
+#[case("rank(count(a), asc)", NSQL, "rank(count(a), asc)")]
+#[case("rank(count(a), desc)", NSQL, "rank(count(a), desc)")]
 //
 //#[case("rank() over (order by a)", NSQL, "rank(a)")]
 //#[case("rank() over (order by a asc)", NSQL, "rank(a, asc)")]

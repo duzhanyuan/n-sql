@@ -26,7 +26,7 @@ extern "C" {
     fn alert(s: &str);
 }
 
-#[cfg_attr(target_arch = "wasm32", wasm_bindgen)]
+#[wasm_bindgen]
 pub fn translate(sql: &str) -> String {
     let statement = StatementParser::new()
         .parse(Lexer::new(sql).tokenizer())

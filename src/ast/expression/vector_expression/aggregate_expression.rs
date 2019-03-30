@@ -231,6 +231,46 @@ impl StddevIfFn {
     }
 }
 
+
+#[derive(Clone, Debug)]
+pub struct VarianceFn {
+    pub expr: Box<Expression>,
+    pub aggregate_type: Option<AggregateType>,
+}
+
+impl VarianceFn {
+    pub fn new(aggregate_type: Option<AggregateType>, expr: Box<Expression>) -> VarianceFn {
+        VarianceFn {
+            expr,
+            aggregate_type,
+        }
+    }
+}
+
+
+#[derive(Clone, Debug)]
+pub struct VarianceIfFn {
+    pub expr: Box<Expression>,
+    pub predicate: Box<PredicateExpression>,
+    pub aggregate_type: Option<AggregateType>,
+}
+
+impl VarianceIfFn {
+    pub fn new(
+        predicate: Box<PredicateExpression>,
+        aggregate_type: Option<AggregateType>,
+        expr: Box<Expression>,
+    ) -> VarianceIfFn {
+        VarianceIfFn {
+            predicate,
+            expr,
+            aggregate_type,
+        }
+    }
+}
+
+
+
 #[derive(Clone, Debug)]
 pub struct SumFn {
     pub expr: Box<Expression>,
