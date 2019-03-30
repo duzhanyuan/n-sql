@@ -27,9 +27,9 @@ pub enum DatabaseType {
 
 macro_rules! test_init {
     () => {
-        use common::*;
+        use crate::common::*;
         #[allow(unused_imports)]
-        use DatabaseType::*;
+        use crate::DatabaseType::*;
     };
 }
 

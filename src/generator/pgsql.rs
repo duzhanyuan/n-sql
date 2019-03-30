@@ -7,8 +7,8 @@
 // except according to those terms.
 
 use super::Visitor;
-use ast::*;
-use optimizer::Optimizer;
+use crate::ast::*;
+use crate::optimizer::Optimizer;
 use std::fmt::{Error, Result, Write};
 use std::result;
 

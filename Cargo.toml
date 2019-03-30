@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["YISH <mokeyish@hotmail.com>"]
 build = "build.rs" # LALRPOP preprocessing
 license = "Apache-2.0/MIT"
+edition = "2018"
 
 [lib]
 crate-type = ["cdylib", "rlib"]

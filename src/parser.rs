@@ -9,16 +9,16 @@ extern crate lalrpop_util;
 
 use self::lalrpop_util::ParseError;
 
-use lexer::Position;
-use lexer::SpannedError;
-use lexer::Token;
-use Expression;
-use Lexer;
-use Statement;
+use crate::lexer::Position;
+use crate::lexer::SpannedError;
+use crate::lexer::Token;
+use crate::Expression;
+use crate::Lexer;
+use crate::Statement;
 
-use lexer::ParserSource;
-use ExpressionParser;
-use StatementParser;
+use crate::lexer::ParserSource;
+use crate::ExpressionParser;
+use crate::StatementParser;
 
 type ParseResult<'input, T> = Result<T, ParseError<Position, Token<'input>, SpannedError>>;
 

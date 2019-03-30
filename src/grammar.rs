@@ -1,8 +1,8 @@
 // auto-generated: "lalrpop 0.16.3"
 // sha256: 71abb21aaabc49eb7629d4f11618de241d14bcda8926f21d29d0598f8b4e
 use std::str::FromStr;
-use ast::*;
-use lexer::{Token, Position, SpannedError};
+use crate::ast::*;
+use crate::lexer::{Token, Position, SpannedError};
 #[allow(unused_extern_crates)]
 extern crate lalrpop_util as __lalrpop_util;
 #[allow(unused_imports)]
@@ -13,8 +13,8 @@ mod __parse__ExpressionEntry {
     #![allow(non_snake_case, non_camel_case_types, unused_mut, unused_variables, unused_imports, unused_parens)]
 
     use std::str::FromStr;
-    use ast::*;
-    use lexer::{Token, Position, SpannedError};
+    use crate::ast::*;
+    use crate::lexer::{Token, Position, SpannedError};
     #[allow(unused_extern_crates)]
     extern crate lalrpop_util as __lalrpop_util;
     #[allow(unused_imports)]
@@ -17497,8 +17497,8 @@ mod __parse__PredicateEntry {
     #![allow(non_snake_case, non_camel_case_types, unused_mut, unused_variables, unused_imports, unused_parens)]
 
     use std::str::FromStr;
-    use ast::*;
-    use lexer::{Token, Position, SpannedError};
+    use crate::ast::*;
+    use crate::lexer::{Token, Position, SpannedError};
     #[allow(unused_extern_crates)]
     extern crate lalrpop_util as __lalrpop_util;
     #[allow(unused_imports)]
@@ -34981,8 +34981,8 @@ mod __parse__StatementEntry {
     #![allow(non_snake_case, non_camel_case_types, unused_mut, unused_variables, unused_imports, unused_parens)]
 
     use std::str::FromStr;
-    use ast::*;
-    use lexer::{Token, Position, SpannedError};
+    use crate::ast::*;
+    use crate::lexer::{Token, Position, SpannedError};
     #[allow(unused_extern_crates)]
     extern crate lalrpop_util as __lalrpop_util;
     #[allow(unused_imports)]

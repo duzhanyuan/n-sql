@@ -6,7 +6,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::{Expression, PredicateExpression, SortingDirection};
+use crate::ast::{Expression, PredicateExpression, SortingDirection};
 
 #[derive(Clone, Debug)]
 pub enum AggregateType {

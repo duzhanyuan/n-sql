@@ -6,10 +6,10 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::Identifier;
-use ast::JoinNode;
-use ast::SetStatement;
-use ast::Table;
+use crate::ast::Identifier;
+use crate::ast::JoinNode;
+use crate::ast::SetStatement;
+use crate::ast::Table;
 
 #[derive(Clone, Debug)]
 pub enum TableView {

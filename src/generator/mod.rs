@@ -21,7 +21,7 @@ pub use self::sql_server::SqlServerGenerator;
 pub use self::sqlite::SQLiterGenerator;
 
 use self::visitor::Visitor;
-use ast::*;
+use crate::ast::*;
 use std::fmt::{Error, Result, Write};
 use std::result;
 type Formatter = String;

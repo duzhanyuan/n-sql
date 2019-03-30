@@ -6,7 +6,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::Expression;
+use crate::ast::Expression;
 
 #[derive(Clone, Debug)]
 pub struct MinuteSubFn {

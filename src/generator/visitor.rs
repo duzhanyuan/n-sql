@@ -6,7 +6,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::*;
+use crate::ast::*;
 use std::fmt::{Error, Result, Write};
 use std::result;
 
@@ -68,7 +68,7 @@ pub trait Visitor {
     }
 
     fn visit_aggregate_type(&self, aggregate_type: &AggregateType, f: &mut Formatter) -> Result {
-        use AggregateType::*;
+        use crate::AggregateType::*;
         match aggregate_type {
             Distinct => f.write_str("distinct"),
             All => f.write_str("all"),
@@ -253,7 +253,7 @@ pub trait Visitor {
 
     // endregion
     fn visit_set_statement(&self, statement: &SetStatement, f: &mut Formatter) -> Result {
-        use SetStatement::*;
+        use crate::SetStatement::*;
         let is_set: fn(&Box<SetStatement>) -> bool = |s| match s.as_ref() {
             Select(_) => false,
             _ => true,
@@ -367,7 +367,7 @@ pub trait Visitor {
         f.write_str("select")?;
         if let Some(ref t) = statement.select_type {
             f.write_char(' ')?;
-            use SelectType::*;
+            use crate::SelectType::*;
             match t {
                 All => f.write_str("all")?,
                 Distinct => f.write_str("distinct")?,
@@ -433,7 +433,7 @@ pub trait Visitor {
         Ok(())
     }
     fn visit_select_element(&self, select_element: &SelectElement, f: &mut Formatter) -> Result {
-        use SelectElement::*;
+        use crate::SelectElement::*;
         match select_element {
             Expression(expr, alias) => {
                 self.visit_expression(&expr, f)?;
@@ -468,7 +468,7 @@ pub trait Visitor {
         self.visit_expression(&sorting_element.expr, f)?;
         if let Some(ref sorting) = sorting_element.direction {
             f.write_char(' ')?;
-            use SortingDirection::*;
+            use crate::SortingDirection::*;
             match sorting {
                 Ascending => f.write_str("asc"),
                 Descending => f.write_str("desc"),
@@ -487,7 +487,7 @@ pub trait Visitor {
         Ok(())
     }
     fn visit_table_view(&self, table_view: &Box<TableView>, f: &mut Formatter) -> Result {
-        use TableView::*;
+        use crate::TableView::*;
         match table_view.as_ref() {
             Table(table, alias) => {
                 self.visit_table(table, f)?;
@@ -653,7 +653,7 @@ pub trait Visitor {
         self.visit_expression(&function.expr, f)?;
         if let Some(ref order) = function.order {
             f.write_str(", ")?;
-            use SortingDirection::*;
+            use crate::SortingDirection::*;
             match order {
                 Ascending => f.write_str("asc")?,
                 Descending => f.write_str("desc")?,
@@ -667,7 +667,7 @@ pub trait Visitor {
         self.visit_expression(&function.expr, f)?;
         if let Some(ref order) = function.order {
             f.write_str(", ")?;
-            use SortingDirection::*;
+            use crate::SortingDirection::*;
             match order {
                 Ascending => f.write_str("asc")?,
                 Descending => f.write_str("desc")?,
@@ -740,7 +740,7 @@ pub trait Visitor {
         f.write_char(')')
     }
     fn visit_datetime_fn(&self, function: &DatetimeFn, f: &mut Formatter) -> Result {
-        use DatetimeFn::*;
+        use crate::DatetimeFn::*;
         match function {
             DayAdd(t) => self.visit_day_add_fn(t, f),
             DaySub(t) => self.visit_day_sub_fn(t, f),
@@ -780,7 +780,7 @@ pub trait Visitor {
         f.write_char(')')
     }
     fn visit_datetime_type(&self, datetime_type: &DatetimeType, f: &mut Formatter) -> Result {
-        use DatetimeType::*;
+        use crate::DatetimeType::*;
         match datetime_type {
             Year => f.write_str("year"),
             Month => f.write_str("month"),
@@ -1120,7 +1120,7 @@ pub trait Visitor {
     }
 
     fn visit_trim_fn(&self, function: &TrimFn, f: &mut Formatter) -> Result {
-        use TrimType::*;
+        use crate::TrimType::*;
         match function.trim_type {
             Both => f.write_str("trim")?,
             Leading => f.write_str("trim_start")?,
@@ -1207,7 +1207,7 @@ pub trait Visitor {
         }
     }
     fn visit_logical_operator(&self, op: &LogicalOperator, f: &mut Formatter) -> Result {
-        use LogicalOperator::*;
+        use crate::LogicalOperator::*;
         match op {
             And => f.write_str("and"),
             Or => f.write_str("or"),

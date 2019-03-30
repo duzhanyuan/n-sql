@@ -31,7 +31,7 @@ pub use self::parser_source::ParserSource;
 use self::LexicalError::*;
 
 pub use self::token::Token;
-use lexer::token::Token::EOF;
+use crate::lexer::token::Token::EOF;
 
 //noinspection SpellCheckingInspection
 const REGEX_SOURCE: [(&str, Token); 138] = [

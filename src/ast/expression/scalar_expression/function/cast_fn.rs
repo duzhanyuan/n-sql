@@ -6,7 +6,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::{DataType, Expression};
+use crate::ast::{DataType, Expression};
 use std::fmt::{Debug, Display, Error, Formatter};
 
 #[derive(Clone, Debug)]
