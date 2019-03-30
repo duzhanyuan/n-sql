@@ -13,8 +13,7 @@ test_init!();
 
 #[theory]
 #[test]
-//#[case("variance(a)", NSQL, "variance(a)")]
-
+#[case("variance(a)", NSQL, "variance(a)")]
 fn test(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
@@ -23,14 +22,21 @@ fn test(left: &str, database_type: DatabaseType, right: &str) {
 #[test]
 #[case("stddev(a)", NSQL, "stddev(a)")]
 #[case("STddev(a)", NSQL, "stddev(a)")]
-#[case("stddevif(gender = '男',a)", NSQL, "stddevif(gender = '男', a)")]
-#[case(
-    "stddevif(gender = '男',a)",
-    PostgreSQL,
-    "stddev(case when gender = '男' then a else null end)"
-)]
+
 
 fn test_stddev(left: &str, database_type: DatabaseType, right: &str) {
+    test_expression(database_type, left, right);
+}
+
+#[theory]
+#[test]
+#[case("stddevif(gender = '男',a)", NSQL, "stddev_if(gender = '男', a)")]
+#[case(
+"stddev_if(gender = '男',a)",
+PostgreSQL,
+"stddev(case when gender = '男' then a else null end)"
+)]
+fn test_stddev_if(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -46,24 +52,40 @@ fn test_median(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
+
+#[theory]
+#[test]
+#[case("median_if(abc > 5,abc)", NSQL, "median_if(abc > 5, abc)")]
+#[case("medianif(abc > 5,abc)", NSQL, "median_if(abc > 5, abc)")]
+fn test_median_if(left: &str, database_type: DatabaseType, right: &str) {
+    test_expression(database_type, left, right);
+}
+
 #[theory]
 #[test]
 #[case("sum(all a)", NSQL, "sum(all a)")]
 #[case("sum(a)", NSQL, "sum(a)")]
-#[case("sumif(gender = '男',all a)", NSQL, "sumif(gender = '男', all a)")]
-#[case("sumif(gender = '男',a)", NSQL, "sumif(gender = '男', a)")]
-#[case(
-    "sumif(gender = '男',all a)",
-    PostgreSQL,
-    "sum(all case when gender = '男' then a else null end)"
-)]
-#[case(
-    "sumif(gender = '男',a)",
-    PostgreSQL,
-    "sum(case when gender = '男' then a else null end)"
-)]
+
 
 fn test_sum(left: &str, database_type: DatabaseType, right: &str) {
+    test_expression(database_type, left, right);
+}
+
+#[theory]
+#[test]
+#[case("sumif(gender = '男',all a)", NSQL, "sum_if(gender = '男', all a)")]
+#[case("sumif(gender = '男',a)", NSQL, "sum_if(gender = '男', a)")]
+#[case(
+"sumif(gender = '男',all a)",
+PostgreSQL,
+"sum(all case when gender = '男' then a else null end)"
+)]
+#[case(
+"sumif(gender = '男',a)",
+PostgreSQL,
+"sum(case when gender = '男' then a else null end)"
+)]
+fn test_sum_if(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -72,23 +94,30 @@ fn test_sum(left: &str, database_type: DatabaseType, right: &str) {
 #[case("count(a)", NSQL, "count(a)")]
 #[case("count(unique a)", NSQL, "count(unique a)")]
 #[case("count(all a)", NSQL, "count(all a)")]
-#[case("countif(gender = '男',a)", NSQL, "countif(gender = '男', a)")]
-#[case(
-    "countif(gender = '男',unique a)",
-    NSQL,
-    "countif(gender = '男', unique a)"
-)]
-#[case(
-    "countif(gender = '男',a)",
-    PostgreSQL,
-    "count(case when gender = '男' then a else null end)"
-)]
-#[case(
-    "countif(gender = '男',unique a)",
-    PostgreSQL,
-    "count(unique case when gender = '男' then a else null end)"
-)]
+
 fn test_count(left: &str, database_type: DatabaseType, right: &str) {
+    test_expression(database_type, left, right);
+}
+
+#[theory]
+#[test]
+#[case("countif(gender = '男',a)", NSQL, "count_if(gender = '男', a)")]
+#[case(
+"count_if(gender = '男',unique a)",
+NSQL,
+"count_if(gender = '男', unique a)"
+)]
+#[case(
+"countif(gender = '男',a)",
+PostgreSQL,
+"count(case when gender = '男' then a else null end)"
+)]
+#[case(
+"countif(gender = '男',unique a)",
+PostgreSQL,
+"count(unique case when gender = '男' then a else null end)"
+)]
+fn test_count_if(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 
@@ -96,23 +125,30 @@ fn test_count(left: &str, database_type: DatabaseType, right: &str) {
 #[test]
 #[case("avg(a)", NSQL, "avg(a)")]
 #[case("avg(distinct a)", NSQL, "avg(distinct a)")]
-#[case("avgif(gender = '男', a)", NSQL, "avgif(gender = '男', a)")]
-#[case(
-    "avgif(gender = '男',distinct a)",
-    NSQL,
-    "avgif(gender = '男', distinct a)"
-)]
-#[case(
-    "avgif(gender = '男', a)",
-    PostgreSQL,
-    "avg(case when gender = '男' then a else null end)"
-)]
-#[case(
-    "avgif(gender = '男',distinct a)",
-    PostgreSQL,
-    "avg(distinct case when gender = '男' then a else null end)"
-)]
+
 fn test_avg(left: &str, database_type: DatabaseType, right: &str) {
+    test_expression(database_type, left, right);
+}
+
+#[theory]
+#[test]
+#[case("avg_if(gender = '男', a)", NSQL, "avg_if(gender = '男', a)")]
+#[case(
+"avgif(gender = '男',distinct a)",
+NSQL,
+"avg_if(gender = '男', distinct a)"
+)]
+#[case(
+"avgif(gender = '男', a)",
+PostgreSQL,
+"avg(case when gender = '男' then a else null end)"
+)]
+#[case(
+"avgif(gender = '男',distinct a)",
+PostgreSQL,
+"avg(distinct case when gender = '男' then a else null end)"
+)]
+fn test_avg_if(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 

@@ -20,7 +20,7 @@ pub use self::function::*;
 pub use self::unary_expression::*;
 pub use self::variable::*;
 
-use ast::Column;
+use crate::ast::Column;
 
 #[derive(Clone, Debug)]
 pub enum ScalarExpression {

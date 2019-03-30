@@ -21,7 +21,7 @@ pub use self::sql_server::SqlServerGenerator;
 pub use self::sqlite::SQLiterGenerator;
 
 use self::visitor::Visitor;
-use ast::*;
+use crate::ast::*;
 use std::fmt::{Error, Result, Write};
 use std::result;
 type Formatter = String;
@@ -51,12 +51,111 @@ impl Visitor for InternalGenerator {
         f.write_char(')')
     }
 
+    fn visit_variance_if_fn(&self, function: &VarianceIfFn, f: &mut Formatter) -> Result {
+        f.write_str("variance_if")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+
+    fn visit_stddev_if_fn(&self, function: &StddevIfFn, f: &mut Formatter) -> Result {
+        f.write_str("stddev_if")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+
+    fn visit_avg_if_fn(&self, function: &AvgIfFn, f: &mut Formatter) -> Result {
+        f.write_str("avg_if")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_count_if_fn(&self, function: &CountIfFn, f: &mut Formatter) -> Result {
+        f.write_str("count_if")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_max_if_fn(&self, function: &MaxIfFn, f: &mut Formatter) -> Result {
+        f.write_str("max_if")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_median_if_fn(&self, function: &MedianIfFn, f: &mut Formatter) -> Result {
+        f.write_str("median_if")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_min_if_fn(&self, function: &MinIfFn, f: &mut Formatter) -> Result {
+        f.write_str("min_if")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_sum_if_fn(&self, function: &SumIfFn, f: &mut Formatter) -> Result {
+        f.write_str("sum_if")?;
+        f.write_char('(')?;
+        self.visit_predicate(&function.predicate, f)?;
+        f.write_str(", ")?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
     fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
         self.visit_datetime_type(&function.extract_type, f)?;
         f.write_char('(')?;
         self.visit_expression(&function.expr, f)?;
         f.write_char(')')
     }
+
 }
 
 impl Generator<Expression> for Expression {

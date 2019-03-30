@@ -19,6 +19,7 @@ pub enum VectorExpression {
     Min(MinFn),
     Sum(SumFn),
     Stddev(StddevFn),
+    Variance(VarianceFn),
     AvgIf(AvgIfFn),
     CountIf(CountIfFn),
     MaxIf(MaxIfFn),
@@ -26,5 +27,6 @@ pub enum VectorExpression {
     MinIf(MinIfFn),
     SumIf(SumIfFn),
     StddevIf(StddevIfFn),
+    VarianceIf(VarianceIfFn),
     Percentile(PercentileFn),
 }

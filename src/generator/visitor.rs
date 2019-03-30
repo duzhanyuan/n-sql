@@ -6,7 +6,7 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::*;
+use crate::ast::*;
 use std::fmt::{Error, Result, Write};
 use std::result;
 
@@ -56,6 +56,7 @@ pub trait Visitor {
             VectorExpression::Min(t) => self.visit_min_fn(t, f),
             VectorExpression::Sum(t) => self.visit_sum_fn(t, f),
             VectorExpression::Stddev(t) => self.visit_stddev_fn(t, f),
+            VectorExpression::Variance(t) => self.visit_variance_fn(t, f),
             VectorExpression::AvgIf(t) => self.visit_avg_if_fn(t, f),
             VectorExpression::CountIf(t) => self.visit_count_if_fn(t, f),
             VectorExpression::MaxIf(t) => self.visit_max_if_fn(t, f),
@@ -63,17 +64,28 @@ pub trait Visitor {
             VectorExpression::MinIf(t) => self.visit_min_if_fn(t, f),
             VectorExpression::SumIf(t) => self.visit_sum_if_fn(t, f),
             VectorExpression::StddevIf(t) => self.visit_stddev_if_fn(t, f),
+            VectorExpression::VarianceIf(t) => self.visit_variance_if_fn(t, f),
             VectorExpression::Percentile(t) => self.visit_percentile(t, f),
         }
     }
 
     fn visit_aggregate_type(&self, aggregate_type: &AggregateType, f: &mut Formatter) -> Result {
-        use AggregateType::*;
+        use crate::AggregateType::*;
         match aggregate_type {
             Distinct => f.write_str("distinct"),
             All => f.write_str("all"),
             Unique => f.write_str("unique"),
         }
+    }
+    fn visit_variance_fn(&self, function: &VarianceFn, f: &mut Formatter) -> Result {
+        f.write_str("variance")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.aggregate_type {
+            self.visit_aggregate_type(t, f)?;
+            f.write_char(' ')?;
+        }
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
     }
     fn visit_stddev_fn(&self, function: &StddevFn, f: &mut Formatter) -> Result {
         f.write_str("stddev")?;
@@ -166,94 +178,125 @@ pub trait Visitor {
         f.write_char(')')
     }
 
+    fn visit_variance_if_fn(&self, function: &VarianceIfFn, f: &mut Formatter) -> Result {
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
+
+        let variance = VarianceFn::new(aggregate_type, case_when);
+        self.visit_variance_fn(&variance, f)
+    }
+
     fn visit_stddev_if_fn(&self, function: &StddevIfFn, f: &mut Formatter) -> Result {
-        f.write_str("stddevif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
+
+        let stddev = StddevFn::new(aggregate_type, case_when);
+        self.visit_stddev_fn(&stddev, f)
     }
     fn visit_avg_if_fn(&self, function: &AvgIfFn, f: &mut Formatter) -> Result {
-        f.write_str("avgif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
+
+        let avg = AvgFn::new(aggregate_type, case_when);
+        self.visit_avg_fn(&avg, f)
     }
     fn visit_count_if_fn(&self, function: &CountIfFn, f: &mut Formatter) -> Result {
-        f.write_str("countif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
+
+        let count = CountFn::new(aggregate_type, case_when);
+        self.visit_count_fn(&count, f)
     }
     fn visit_max_if_fn(&self, function: &MaxIfFn, f: &mut Formatter) -> Result {
-        f.write_str("maxif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
+
+        let max = MaxFn::new(aggregate_type, case_when);
+        self.visit_max_fn(&max, f)
     }
     fn visit_median_if_fn(&self, function: &MedianIfFn, f: &mut Formatter) -> Result {
-        f.write_str("medianif")?;
-        f.write_char('(')?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
+
+        let median = MedianFn::new(aggregate_type, case_when);
+        self.visit_median_fn(&median, f)
     }
     fn visit_min_if_fn(&self, function: &MinIfFn, f: &mut Formatter) -> Result {
-        f.write_str("minif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
+
+        let min = MinFn::new(aggregate_type, case_when);
+        self.visit_min_fn(&min, f)
     }
     fn visit_sum_if_fn(&self, function: &SumIfFn, f: &mut Formatter) -> Result {
-        f.write_str("sumif")?;
-        f.write_char('(')?;
-        self.visit_predicate(&function.predicate, f)?;
-        f.write_str(", ")?;
-        if let Some(ref t) = function.aggregate_type {
-            self.visit_aggregate_type(t, f)?;
-            f.write_char(' ')?;
-        }
-        self.visit_expression(&function.expr, f)?;
-        f.write_char(')')
+        let predicate = function.predicate.clone();
+        let expr = function.expr.clone();
+        let aggregate_type = function.aggregate_type.clone();
+        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
+            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
+                vec![(predicate, expr)],
+                Some(Expression::from(ConstantValue::Null).into()),
+            )),
+        )));
+
+        let sum = SumFn::new(aggregate_type, case_when);
+        self.visit_sum_fn(&sum, f)
     }
 
     // endregion
 
     // endregion
     fn visit_set_statement(&self, statement: &SetStatement, f: &mut Formatter) -> Result {
-        use SetStatement::*;
+        use crate::SetStatement::*;
         let is_set: fn(&Box<SetStatement>) -> bool = |s| match s.as_ref() {
             Select(_) => false,
             _ => true,
@@ -367,7 +410,7 @@ pub trait Visitor {
         f.write_str("select")?;
         if let Some(ref t) = statement.select_type {
             f.write_char(' ')?;
-            use SelectType::*;
+            use crate::SelectType::*;
             match t {
                 All => f.write_str("all")?,
                 Distinct => f.write_str("distinct")?,
@@ -433,7 +476,7 @@ pub trait Visitor {
         Ok(())
     }
     fn visit_select_element(&self, select_element: &SelectElement, f: &mut Formatter) -> Result {
-        use SelectElement::*;
+        use crate::SelectElement::*;
         match select_element {
             Expression(expr, alias) => {
                 self.visit_expression(&expr, f)?;
@@ -468,7 +511,7 @@ pub trait Visitor {
         self.visit_expression(&sorting_element.expr, f)?;
         if let Some(ref sorting) = sorting_element.direction {
             f.write_char(' ')?;
-            use SortingDirection::*;
+            use crate::SortingDirection::*;
             match sorting {
                 Ascending => f.write_str("asc"),
                 Descending => f.write_str("desc"),
@@ -487,7 +530,7 @@ pub trait Visitor {
         Ok(())
     }
     fn visit_table_view(&self, table_view: &Box<TableView>, f: &mut Formatter) -> Result {
-        use TableView::*;
+        use crate::TableView::*;
         match table_view.as_ref() {
             Table(table, alias) => {
                 self.visit_table(table, f)?;
@@ -653,7 +696,7 @@ pub trait Visitor {
         self.visit_expression(&function.expr, f)?;
         if let Some(ref order) = function.order {
             f.write_str(", ")?;
-            use SortingDirection::*;
+            use crate::SortingDirection::*;
             match order {
                 Ascending => f.write_str("asc")?,
                 Descending => f.write_str("desc")?,
@@ -667,7 +710,7 @@ pub trait Visitor {
         self.visit_expression(&function.expr, f)?;
         if let Some(ref order) = function.order {
             f.write_str(", ")?;
-            use SortingDirection::*;
+            use crate::SortingDirection::*;
             match order {
                 Ascending => f.write_str("asc")?,
                 Descending => f.write_str("desc")?,
@@ -740,7 +783,7 @@ pub trait Visitor {
         f.write_char(')')
     }
     fn visit_datetime_fn(&self, function: &DatetimeFn, f: &mut Formatter) -> Result {
-        use DatetimeFn::*;
+        use crate::DatetimeFn::*;
         match function {
             DayAdd(t) => self.visit_day_add_fn(t, f),
             DaySub(t) => self.visit_day_sub_fn(t, f),
@@ -780,7 +823,7 @@ pub trait Visitor {
         f.write_char(')')
     }
     fn visit_datetime_type(&self, datetime_type: &DatetimeType, f: &mut Formatter) -> Result {
-        use DatetimeType::*;
+        use crate::DatetimeType::*;
         match datetime_type {
             Year => f.write_str("year"),
             Month => f.write_str("month"),
@@ -1089,7 +1132,9 @@ pub trait Visitor {
         f.write_char('(')?;
         self.visit_expression(&function.text, f)?;
         f.write_str(", ")?;
-        self.visit_expression(&function.replace_text, f)?;
+        self.visit_expression(&function.old_text, f)?;
+        f.write_str(", ")?;
+        self.visit_expression(&function.new_text, f)?;
         f.write_char(')')
     }
     fn visit_reverse_fn(&self, function: &ReverseFn, f: &mut Formatter) -> Result {
@@ -1120,7 +1165,7 @@ pub trait Visitor {
     }
 
     fn visit_trim_fn(&self, function: &TrimFn, f: &mut Formatter) -> Result {
-        use TrimType::*;
+        use crate::TrimType::*;
         match function.trim_type {
             Both => f.write_str("trim")?,
             Leading => f.write_str("trim_start")?,
@@ -1207,7 +1252,7 @@ pub trait Visitor {
         }
     }
     fn visit_logical_operator(&self, op: &LogicalOperator, f: &mut Formatter) -> Result {
-        use LogicalOperator::*;
+        use crate::LogicalOperator::*;
         match op {
             And => f.write_str("and"),
             Or => f.write_str("or"),

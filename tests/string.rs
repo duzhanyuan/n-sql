@@ -65,7 +65,7 @@ fn test_substr(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
-//#[case("replace('123nj', '1', 'pp')", NSQL, "replace('123nj', '1', 'pp')")]
+#[case("replace('123nj', '1', 'pp')", NSQL, "replace('123nj', '1', 'pp')")]
 fn test_replace(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }

@@ -6,11 +6,11 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::Expression;
-use ast::Identifier;
-use ast::PredicateExpression;
-use ast::SortingDirection;
-use ast::TableView;
+use crate::ast::Expression;
+use crate::ast::Identifier;
+use crate::ast::PredicateExpression;
+use crate::ast::SortingDirection;
+use crate::ast::TableView;
 
 #[derive(Clone, Debug)]
 pub struct SelectStatement {

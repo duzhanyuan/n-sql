@@ -6,8 +6,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::PredicateExpression;
-use ast::TableView;
+use crate::ast::PredicateExpression;
+use crate::ast::TableView;
 
 #[derive(Clone, Debug)]
 pub struct JoinNode {

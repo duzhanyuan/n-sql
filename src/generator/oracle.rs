@@ -7,8 +7,8 @@
 // except according to those terms.
 
 use super::Visitor;
-use ast::*;
-use optimizer::Optimizer;
+use crate::ast::*;
+use crate::optimizer::Optimizer;
 use std::fmt::{Error, Result, Write};
 use std::result;
 
@@ -94,7 +94,7 @@ impl Visitor for InternalGenerator {
         f.write_str("select")?;
         if let Some(ref t) = statement.select_type {
             f.write_char(' ')?;
-            use SelectType::*;
+            use crate::SelectType::*;
             match t {
                 All => f.write_str("all")?,
                 Distinct => f.write_str("distinct")?,

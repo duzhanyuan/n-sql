@@ -42,7 +42,7 @@ impl Add for NumericValue {
     type Output = NumericValue;
 
     fn add(self, other: NumericValue) -> Self::Output {
-        use NumericValue::*;
+        use crate::NumericValue::*;
         match self {
             Integer(li) => match other {
                 Integer(ri) => (li + ri).into(),
@@ -60,7 +60,7 @@ impl Sub for NumericValue {
     type Output = NumericValue;
 
     fn sub(self, other: NumericValue) -> Self::Output {
-        use NumericValue::*;
+        use crate::NumericValue::*;
         match self {
             Integer(li) => match other {
                 Integer(ri) => (li - ri).into(),
@@ -78,7 +78,7 @@ impl Div for NumericValue {
     type Output = NumericValue;
 
     fn div(self, other: NumericValue) -> Self::Output {
-        use NumericValue::*;
+        use crate::NumericValue::*;
         match self {
             Integer(li) => match other {
                 Integer(ri) => (li / ri).into(),
@@ -96,7 +96,7 @@ impl Mul for NumericValue {
     type Output = NumericValue;
 
     fn mul(self, other: NumericValue) -> Self::Output {
-        use NumericValue::*;
+        use crate::NumericValue::*;
         match self {
             Integer(li) => match other {
                 Integer(ri) => (li * ri).into(),

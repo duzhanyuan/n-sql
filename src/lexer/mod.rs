@@ -31,10 +31,10 @@ pub use self::parser_source::ParserSource;
 use self::LexicalError::*;
 
 pub use self::token::Token;
-use lexer::token::Token::EOF;
+use crate::lexer::token::Token::EOF;
 
 //noinspection SpellCheckingInspection
-const REGEX_SOURCE: [(&str, Token); 138] = [
+const REGEX_SOURCE: [(&str, Token); 139] = [
     // region [keyword]
     ("^(?i)all$", Token::All),
     ("^(?i)and$", Token::And),
@@ -88,7 +88,7 @@ const REGEX_SOURCE: [(&str, Token); 138] = [
     // region [function]
     ("^(?i)abs", Token::Abs),
     ("^(?i)avg$", Token::Avg),
-    ("^(?i)avgif$", Token::AvgIf),
+    ("^(?i)avg[_]?if$", Token::AvgIf),
     ("^(?i)btrim$", Token::BTrim),
     ("^(?i)cast$", Token::Cast),
     ("^(?i)ceil$", Token::Ceil),
@@ -97,7 +97,7 @@ const REGEX_SOURCE: [(&str, Token); 138] = [
     ("^(?i)cos$", Token::Cos),
     ("^(?i)concat$", Token::Concat),
     ("^(?i)count$", Token::Count),
-    ("^(?i)countif$", Token::CountIf),
+    ("^(?i)count[_]?if$", Token::CountIf),
     ("^(?i)day$", Token::Day),
     ("^(?i)day_add$", Token::DayAdd),
     ("^(?i)day_diff$", Token::DayDiff),
@@ -117,11 +117,11 @@ const REGEX_SOURCE: [(&str, Token); 138] = [
     ("^(?i)lpad$", Token::LPad),
     ("^(?i)ltrim$", Token::LTrim),
     ("^(?i)max$", Token::Max),
-    ("^(?i)maxif$", Token::MaxIf),
+    ("^(?i)max[_]?if$", Token::MaxIf),
     ("^(?i)median$", Token::Median),
-    ("^(?i)medianif$", Token::MedianIf),
+    ("^(?i)median[_]?if$", Token::MedianIf),
     ("^(?i)min$", Token::Min),
-    ("^(?i)minif$", Token::MinIf),
+    ("^(?i)min[_]?if$", Token::MinIf),
     ("^(?i)minute$", Token::Minute),
     ("^(?i)minute_add$", Token::MinuteAdd),
     ("^(?i)minute_diff$", Token::MinuteDiff),
@@ -144,13 +144,13 @@ const REGEX_SOURCE: [(&str, Token); 138] = [
     ("^(?i)reverse$", Token::Reverse),
     ("^(?i)rank$", Token::Rank),
     ("^(?i)round$", Token::Round),
+    ("^(?i)rpad$", Token::RPad),
+    ("^(?i)rtrim$", Token::RTrim),
     ("^(?i)sign$", Token::Sign),
     ("^(?i)sin$", Token::Sin),
     ("^(?i)sqrt$", Token::Sqrt),
     ("^(?i)stddev$", Token::Stddev),
-    ("^(?i)stddevif$", Token::StddevIf),
-    ("^(?i)rpad$", Token::RPad),
-    ("^(?i)rtrim$", Token::RTrim),
+    ("^(?i)stddev[_]?if$", Token::StddevIf),
     ("^(?i)second$", Token::Second),
     ("^(?i)second_add$", Token::SecondAdd),
     ("^(?i)second_diff$", Token::SecondDiff),
@@ -158,13 +158,14 @@ const REGEX_SOURCE: [(&str, Token); 138] = [
     ("^(?i)substr$", Token::Substr),
     ("^(?i)substring$", Token::Substring),
     ("^(?i)sum$", Token::Sum),
-    ("^(?i)sumif$", Token::SumIf),
+    ("^(?i)sum[_]?if$", Token::SumIf),
     ("^(?i)tan$", Token::Tan),
     ("^(?i)trim$", Token::Trim),
     ("^(?i)trim_start$", Token::TrimStart),
     ("^(?i)trim_end$", Token::TrimEnd),
     ("^(?i)upper$", Token::Upper),
     ("^(?i)variance$", Token::Variance),
+    ("^(?i)variance[_]?if$", Token::VarianceIf),
     ("^(?i)year$", Token::Year),
     ("^(?i)year_add$", Token::YearAdd),
     ("^(?i)year_diff$", Token::YearDiff),

@@ -7,8 +7,8 @@
 // except according to those terms.
 
 use super::Visitor;
-use ast::*;
-use optimizer::Optimizer;
+use crate::ast::*;
+use crate::optimizer::Optimizer;
 use std::fmt::{Error, Result, Write};
 use std::result;
 
@@ -26,104 +26,7 @@ impl Visitor for InternalGenerator {
         self.visit_percentile(&PercentileFn::from(function), f)
     }
 
-    fn visit_stddev_if_fn(&self, function: &StddevIfFn, f: &mut Formatter) -> Result {
-        let predicate = function.predicate.clone();
-        let expr = function.expr.clone();
-        let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
-            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
-                vec![(predicate, expr)],
-                Some(Expression::from(ConstantValue::Null).into()),
-            )),
-        )));
 
-        let stddev = StddevFn::new(aggregate_type, case_when);
-        self.visit_stddev_fn(&stddev, f)
-    }
-    fn visit_avg_if_fn(&self, function: &AvgIfFn, f: &mut Formatter) -> Result {
-        let predicate = function.predicate.clone();
-        let expr = function.expr.clone();
-        let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
-            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
-                vec![(predicate, expr)],
-                Some(Expression::from(ConstantValue::Null).into()),
-            )),
-        )));
-
-        let avg = AvgFn::new(aggregate_type, case_when);
-        self.visit_avg_fn(&avg, f)
-    }
-    fn visit_count_if_fn(&self, function: &CountIfFn, f: &mut Formatter) -> Result {
-        let predicate = function.predicate.clone();
-        let expr = function.expr.clone();
-        let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
-            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
-                vec![(predicate, expr)],
-                Some(Expression::from(ConstantValue::Null).into()),
-            )),
-        )));
-
-        let count = CountFn::new(aggregate_type, case_when);
-        self.visit_count_fn(&count, f)
-    }
-    fn visit_max_if_fn(&self, function: &MaxIfFn, f: &mut Formatter) -> Result {
-        let predicate = function.predicate.clone();
-        let expr = function.expr.clone();
-        let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
-            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
-                vec![(predicate, expr)],
-                Some(Expression::from(ConstantValue::Null).into()),
-            )),
-        )));
-
-        let max = MaxFn::new(aggregate_type, case_when);
-        self.visit_max_fn(&max, f)
-    }
-    fn visit_median_if_fn(&self, function: &MedianIfFn, f: &mut Formatter) -> Result {
-        let predicate = function.predicate.clone();
-        let expr = function.expr.clone();
-        let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
-            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
-                vec![(predicate, expr)],
-                Some(Expression::from(ConstantValue::Null).into()),
-            )),
-        )));
-
-        let median = MedianFn::new(aggregate_type, case_when);
-        self.visit_median_fn(&median, f)
-    }
-    fn visit_min_if_fn(&self, function: &MinIfFn, f: &mut Formatter) -> Result {
-        let predicate = function.predicate.clone();
-        let expr = function.expr.clone();
-        let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
-            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
-                vec![(predicate, expr)],
-                Some(Expression::from(ConstantValue::Null).into()),
-            )),
-        )));
-
-        let min = MinFn::new(aggregate_type, case_when);
-        self.visit_min_fn(&min, f)
-    }
-    fn visit_sum_if_fn(&self, function: &SumIfFn, f: &mut Formatter) -> Result {
-        let predicate = function.predicate.clone();
-        let expr = function.expr.clone();
-        let aggregate_type = function.aggregate_type.clone();
-        let case_when = Box::new(Expression::Scalar(ScalarExpression::CaseWhen(
-            CaseWhenExpression::Searched(SearchedCaseWhenExpression::new(
-                vec![(predicate, expr)],
-                Some(Expression::from(ConstantValue::Null).into()),
-            )),
-        )));
-
-        let sum = SumFn::new(aggregate_type, case_when);
-        self.visit_sum_fn(&sum, f)
-    }
     fn visit_pagination_statement(
         &self,
         pagination_statement: &Box<PaginationStatement>,

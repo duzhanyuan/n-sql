@@ -6,8 +6,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use ast::Expression;
-use ast::PredicateExpression;
+use crate::ast::Expression;
+use crate::ast::PredicateExpression;
 
 #[derive(Clone, Debug)]
 pub enum CaseWhenExpression {

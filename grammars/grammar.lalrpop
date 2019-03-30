@@ -7,8 +7,8 @@
 // except according to those terms.
 
 use std::str::FromStr;
-use ast::*;
-use lexer::{Token, Position, SpannedError};
+use crate::ast::*;
+use crate::lexer::{Token, Position, SpannedError};
 
 //grammar<'input>(text: &'input ParserSource);
 grammar<'input>;
@@ -104,7 +104,7 @@ extern {
 
         "abs" => Token::Abs,
         "avg" => Token::Avg,
-        "avgif" => Token::AvgIf,
+        "avg_if" => Token::AvgIf,
         "btrim" => Token::BTrim,
         "cast" => Token::Cast,
         "ceil" => Token::Ceil,
@@ -113,7 +113,7 @@ extern {
         "cos" => Token::Cos,
         "concat" => Token::Concat,
         "count" => Token::Count,
-        "countif" => Token::CountIf,
+        "count_if" => Token::CountIf,
         "day" => Token::Day,
         "day_add" => Token::DayAdd,
         "day_diff" => Token::DayDiff,
@@ -133,11 +133,11 @@ extern {
         "lpad" => Token::LPad,
         "ltrim" => Token::LTrim,
         "max" => Token::Max,
-        "maxif" => Token::MaxIf,
+        "max_if" => Token::MaxIf,
         "median" => Token::Median,
-        "medianif" => Token::MedianIf,
+        "median_if" => Token::MedianIf,
         "min" => Token::Min,
-        "minif" => Token::MinIf,
+        "min_if" => Token::MinIf,
         "minute" => Token::Minute,
         "minute_add" => Token::MinuteAdd,
         "minute_diff" => Token::MinuteDiff,
@@ -164,7 +164,7 @@ extern {
         "sin" => Token::Sin,
         "sqrt" => Token::Sqrt,
         "stddev" => Token::Stddev,
-        "stddevif" => Token::StddevIf,
+        "stddev_if" => Token::StddevIf,
         "rpad" => Token::RPad,
         "rtrim" => Token::RTrim,
         "second" => Token::Second,
@@ -174,12 +174,14 @@ extern {
         "substr" => Token::Substr,
         "substring" => Token::Substring,
         "sum" => Token::Sum,
-        "sumif" => Token::SumIf,
+        "sum_if" => Token::SumIf,
         "tan" => Token::Tan,
         "trim" => Token::Trim,
         "trim_start" => Token::TrimStart,
         "trim_end" => Token::TrimEnd,
         "upper" => Token::Upper,
+        "variance" => Token::Variance,
+        "variance_if" => Token::VarianceIf,
         "year" => Token::Year,
         "year_add" => Token::YearAdd,
         "year_diff" => Token::YearDiff,
@@ -471,13 +473,15 @@ VectorExpression: VectorExpression = {
     "min" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Min(MinFn::new(<>)),
     "sum" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Sum(SumFn::new(<>)),
     "stddev" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Stddev(StddevFn::new(<>)),
-    "avgif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::AvgIf(AvgIfFn::new(<>)),
-    "countif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::CountIf(CountIfFn::new(<>)),
-    "maxif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::MaxIf(MaxIfFn::new(<>)).into(),
-    "medianif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::MedianIf(MedianIfFn::new(<>)),
-    "minif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::MinIf(MinIfFn::new(<>)),
-    "sumif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::SumIf(SumIfFn::new(<>)),
-    "stddevif" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::StddevIf(StddevIfFn::new(<>)),
+    "variance" "(" <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::Variance(VarianceFn::new(<>)),
+    "avg_if" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::AvgIf(AvgIfFn::new(<>)),
+    "count_if" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::CountIf(CountIfFn::new(<>)),
+    "max_if" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::MaxIf(MaxIfFn::new(<>)).into(),
+    "median_if" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::MedianIf(MedianIfFn::new(<>)),
+    "min_if" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::MinIf(MinIfFn::new(<>)),
+    "sum_if" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::SumIf(SumIfFn::new(<>)),
+    "stddev_if" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::StddevIf(StddevIfFn::new(<>)),
+    "variance_if" "(" <Boxed<Predicate>> "," <AggregateType?> <Boxed<Expression>> ")" => VectorExpression::VarianceIf(VarianceIfFn::new(<>)),
 
     "percent" "(" <Boxed<Expression>> "," <Boxed<Expression>> <("," <SortingDirection>)?> ")" => VectorExpression::Percentile(PercentileFn::new(<>, PercentileType::Cont)),
     "percentile" "(" <Boxed<Expression>> "," <Boxed<Expression>> <("," <SortingDirection>)?> ")" => VectorExpression::Percentile(PercentileFn::new(<>, PercentileType::Cont)),
@@ -503,7 +507,7 @@ StringFn: StringFn = {
     "lpad" "(" <Boxed<Expression>> "," <Boxed<Expression>> <("," <Boxed<Expression>>)?> ")" => StringFn::PadLeft(PadLeftFn::new(<>)),
     "pad_right" "(" <Boxed<Expression>> "," <Boxed<Expression>> <("," <Boxed<Expression>>)?> ")" => StringFn::PadRight(PadRightFn::new(<>)),
     "rpad" "(" <Boxed<Expression>> "," <Boxed<Expression>> <("," <Boxed<Expression>>)?> ")" => StringFn::PadRight(PadRightFn::new(<>)),
-    "replace" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => StringFn::Replace(ReplaceFn::new(<>)),
+    "replace" "(" <Boxed<Expression>> "," <Boxed<Expression>> "," <Boxed<Expression>>  ")" => StringFn::Replace(ReplaceFn::new(<>)),
     "reverse" "(" <Boxed<Expression>> ")" => StringFn::Reverse(ReverseFn::new(<>)),
     "right" "(" <Boxed<Expression>> "," <Boxed<Expression>> ")" => StringFn::Right(RightFn::new(<>)),
     "substr" "(" <Boxed<Expression>> "," <Boxed<Expression>> <("," <Boxed<Expression>> )?>  ")" => StringFn::Substr(SubstrFn::new(<>)),

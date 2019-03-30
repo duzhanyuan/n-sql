@@ -7,7 +7,7 @@
 // except according to those terms.
 
 use super::super::{Expression, NumericValue, StringValue};
-use ast::SetStatement;
+use crate::ast::SetStatement;
 
 #[derive(Clone, Debug)]
 pub struct InExpression {

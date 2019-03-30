@@ -7,10 +7,9 @@
 // except according to those terms.
 #![cfg(target_arch="wasm32")]
 
-use cfg_if;
-use generator::*;
 use wasm_bindgen::prelude::*;
-use {Lexer, StatementParser};
+use crate::generator::*;
+use crate::{Lexer, StatementParser};
 
 cfg_if! {
     // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -27,7 +26,7 @@ extern "C" {
     fn alert(s: &str);
 }
 
-#[cfg_attr(target_arch = "wasm32", wasm_bindgen)]
+#[wasm_bindgen]
 pub fn translate(sql: &str) -> String {
     let statement = StatementParser::new()
         .parse(Lexer::new(sql).tokenizer())
