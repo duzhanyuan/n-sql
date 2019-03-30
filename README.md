@@ -38,7 +38,7 @@ This is the graph of functional module.
 
 N-SQL currently is still under development. It is not yet stable.
 
-N-SQL currently requires Rust 1.34 +nightly or later
+N-SQL currently requires Rust 1.33 stable or later
 
 ## Example
 

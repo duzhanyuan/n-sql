@@ -17,8 +17,8 @@ test_init!();
 #[case("ceil(-6.8)", PostgreSQL, "ceil(-6.8)")]
 #[case("ceil(-6.8)", Oracle, "ceil(-6.8)")]
 #[case("ceil(-6.8)", MySQL, "ceil(-6.8)")]
-//#[case("ceil(-6.8)", SqlServer, "ceiling(-6.8)")]
-//#[case("ceil(-6.8)", SQLite, "ceil(-6.8)")]
+#[case("ceil(-6.8)", SqlServer, "ceiling(-6.8)")]
+#[case("ceil(-6.8)", SQLite, "ceil(-6.8)")]
 fn test_ceil(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
@@ -29,7 +29,7 @@ fn test_ceil(left: &str, database_type: DatabaseType, right: &str) {
 #[case("cos(6.8)", PostgreSQL, "cos(6.8)")]
 #[case("cos(6.8)", Oracle, "cos(6.8)")]
 #[case("cos(6.8)", MySQL, "cos(6.8)")]
-//#[case("cos(6.8)", SQLite, "cos(6.8)")]
+#[case("cos(6.8)", SQLite, "cos(6.8)")]
 fn test_cos(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
@@ -70,13 +70,13 @@ fn test_pow(left: &str, database_type: DatabaseType, right: &str) {
 #[case("log(2, 3)", PostgreSQL, "log(2, 3)")]
 #[case("log(2, 3)", Oracle, "log(2, 3)")]
 #[case("log(2, 3)", MySQL, "log(2, 3)")]
-//#[case("log(2, 3)", SqlServer, "log(3, 2)")]
+#[case("log(2, 3)", SqlServer, "log(3, 2)")]
 #[case("log10(6.8)", NSQL, "log10(6.8)")]
-//#[case("log10(2)", NSQL, "log10(2)")]
+#[case("log10(2)", NSQL, "log10(2)")]
 //#[case("log10(2)", PostgreSQL, "log(10, 2)")]
 //#[case("log10(2)", Oracle, "log(10, 2)")]
-//#[case("log10(2)", MySQL, "log10(2)")]
-//#[case("log10(2)", SqlServer, "log10(2)")]
+#[case("log10(2)", MySQL, "log10(2)")]
+#[case("log10(2)", SqlServer, "log10(2)")]
 
 //#[case("log(10, 2)", NSQL, "log10(2)")]
 //#[case("log(10, 2)", PostgreSQL, "log(10, 2)")]

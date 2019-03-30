@@ -31,7 +31,7 @@ Function | Description
 [COS](/#/functions?id=cos) | Returns the cosine of a number
 [DENSE_RANK](/#/functions?id=dense_rank) | Returns the rank of each row within a result set partition, with no gaps in the ranking values.
 [FLOOR](/#/functions?id=floor) | Returns the largest integer value that is <= to a number
-[LOG](/#/functions?id=log) | Returns the natural logarithm of a number, or the logarithm of a number to a specified base
+[LOG](/#/functions#log) | Returns the natural logarithm of a number, or the logarithm of a number to a specified base
 [LOG10](/#/functions?id=log10) | Returns the natural logarithm of a number to base 10
 [MAX](/#/functions?id=max) | Returns the maximum value in a set of values
 [MEDIAN](/#/functions?id=median) | Retuns the median of a series of numbers
@@ -488,6 +488,18 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
 
 > The LOG() function returns the natural logarithm of a specified number, or the logarithm of the number to the specified base.
 
+- Syntax
+
+ > `LOG(N)`, `LOG(B, N)`;
+
+ **Note**: `LOG(B,N)` is equivalent to `LOG(N) / LOG(B)`.
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  N | numreic| A number.
+  B | numreic| Indicate the base of N.
+
 - Support
   Database | Support
   -- | --
@@ -495,19 +507,41 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Oracle | $\color{green} {\checkmark}$
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
-  SQlite |
+  SQlite | Partial support.
 
-- Syntax
-  
- 1. `log(:number)`
- 2. `log(base: number, :number)`
+- Details of the LOG() function in each database
+  - PostgreSQL
+    > Baisc syntax: `LOG(B, N)`.
+    1. `LOG(N)` is equivalent to `LOG(10, N)` in N-SQL.
+  - Oracle
+    > Baisc syntax: `LOG(B, N)`.
+    1. There is no other way of writing in Oracle.
+  - MySQL
+    > Baisc syntax: `LOG(B, N)`.
+    1. `LOG(N)` is equivalent to `LOG(e, N)` in N-SQL.
+    2. `LOG10(N)` is equivalent to `LOG(10, N)` in N-SQL.
+  - Sql Server
+    > Baisc syntax: `LOG(N, B)`, It's not the same as other databases, The argument **N** and **B** are the opposite.
+    1. `LOG(N)` is equivalent to `LOG(e, N)` in N-SQL.
+    2. `LOG10(N)` is equivalent to `LOG(10, N)` in N-SQL.
+  - SQLite
+    > SQLite does not support custom the **B**, and only supports the following two syntax.
+    1. `LOG(N)` is equivalent to `LOG(e, N)` in N-SQL.
+    2. `LOG10(N)` is equivalent to `LOG(10, N)` in N-SQL.
 
 ### LOG10
 
 > The LOG10() function returns the natural logarithm of a number to base-10.
 
-**Note**: See also the [LOG()](/#/functions?id=log) function.
+**Note**: See also the [LOG()](/#/functions#log) function.
 
+- Syntax
+  
+   > `LOG10(N)`;
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  N | numreic| A number.
 - Support
   Database | Support
   -- | --
@@ -515,11 +549,7 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Oracle | $\color{Orange} {\checkmark}$
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
-  SQlite |
-
-- Syntax
-  
-   `log10(:number)`
+  SQlite | $\color{green} {\checkmark}$
 
 ### LTRIM
 
