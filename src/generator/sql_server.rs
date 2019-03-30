@@ -24,7 +24,6 @@ impl Visitor for InternalGenerator {
     fn visit_median_fn(&self, function: &MedianFn, f: &mut Formatter) -> Result {
         self.visit_percentile(&PercentileFn::from(function), f)
     }
-
     fn visit_percentile(&self, function: &PercentileFn, f: &mut Formatter) -> Result {
         match function.r#type {
             PercentileType::Cont => f.write_str("percentile_cont")?,
@@ -133,9 +132,25 @@ impl Visitor for InternalGenerator {
         }
         Ok(())
     }
-
     fn visit_now_fn(&self, f: &mut Formatter) -> Result {
         f.write_str("systimestamp")
+    }
+    fn visit_ceil_fn(&self, function: &CeilFn, f: &mut Formatter) -> Result {
+        f.write_str("ceiling")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+
+    fn visit_log_fn(&self, function: &LogFn, f: &mut Formatter) -> Result {
+        f.write_str("log")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.number, f)?;
+        if let Some(ref t) = function.base {
+            f.write_str(", ")?;
+            self.visit_expression(t, f)?;
+        }
+        f.write_char(')')
     }
 
     fn visit_nvl_fn(&self, function: &Box<NvlFn>, f: &mut Formatter) -> Result {

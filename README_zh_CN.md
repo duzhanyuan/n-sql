@@ -36,7 +36,7 @@ N-SQL是一个SQL语言，它提供简化且统一的SQL语言，能够将SQL翻
 ## 现状
 
 - N-SQL目前还在开发中，它并不稳定。
-- n-sql需要`Rust 1.34 +nightly`或者更新。
+- n-sql需要`Rust 1.33 stable`或者更新的版本。
 
 ## 例子
 

@@ -93,6 +93,7 @@ fn test_trim(left: &str, database_type: DatabaseType, right: &str) {
 
 #[theory]
 #[test]
+#[case("reverse(abc)", NSQL, "reverse(abc)")]
 #[case("reverse('123nj')", NSQL, "reverse('123nj')")]
 #[case("reverse('123nj')", PostgreSQL, "reverse('123nj')")]
 #[case("reverse('123nj')", Oracle, "reverse('123nj')")]

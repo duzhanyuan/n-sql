@@ -48,6 +48,17 @@ impl Visitor for InternalGenerator {
         Ok(())
     }
 
+    fn visit_log_fn(&self, function: &LogFn, f: &mut Formatter) -> Result {
+        f.write_str("log")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.base {
+            self.visit_expression(t, f)?;
+            f.write_str(", ")?;
+        }
+        self.visit_expression(&function.number, f)?;
+        f.write_char(')')
+    }
+
     fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
         self.visit_datetime_type(&function.extract_type, f)?;
         f.write_char('(')?;
