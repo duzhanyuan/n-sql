@@ -155,6 +155,34 @@ impl Visitor for InternalGenerator {
         self.visit_expression(&function.expr, f)?;
         f.write_char(')')
     }
+    fn visit_dense_rank_fn(&self, function: &DenseRankFn, f: &mut Formatter) -> Result {
+        f.write_str("dense_rank")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        if let Some(ref order) = function.order {
+            f.write_str(", ")?;
+            use crate::SortingDirection::*;
+            match order {
+                Ascending => f.write_str("asc")?,
+                Descending => f.write_str("desc")?,
+            }
+        }
+        f.write_char(')')
+    }
+    fn visit_rank_fn(&self, function: &RankFn, f: &mut Formatter) -> Result {
+        f.write_str("rank")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        if let Some(ref order) = function.order {
+            f.write_str(", ")?;
+            use crate::SortingDirection::*;
+            match order {
+                Ascending => f.write_str("asc")?,
+                Descending => f.write_str("desc")?,
+            }
+        }
+        f.write_char(')')
+    }
 }
 
 impl Generator<Expression> for Expression {

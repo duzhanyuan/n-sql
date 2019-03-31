@@ -698,11 +698,10 @@ pub trait Visitor {
         f.write_char(')')
     }
     fn visit_dense_rank_fn(&self, function: &DenseRankFn, f: &mut Formatter) -> Result {
-        f.write_str("dense_rank")?;
-        f.write_char('(')?;
+        f.write_str("dense_rank() over (order by ")?;
         self.visit_expression(&function.expr, f)?;
         if let Some(ref order) = function.order {
-            f.write_str(", ")?;
+            f.write_char(' ')?;
             use crate::SortingDirection::*;
             match order {
                 Ascending => f.write_str("asc")?,
@@ -712,11 +711,10 @@ pub trait Visitor {
         f.write_char(')')
     }
     fn visit_rank_fn(&self, function: &RankFn, f: &mut Formatter) -> Result {
-        f.write_str("rank")?;
-        f.write_char('(')?;
+        f.write_str("rank() over (order by ")?;
         self.visit_expression(&function.expr, f)?;
         if let Some(ref order) = function.order {
-            f.write_str(", ")?;
+            f.write_char(' ')?;
             use crate::SortingDirection::*;
             match order {
                 Ascending => f.write_str("asc")?,
