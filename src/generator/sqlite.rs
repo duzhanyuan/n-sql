@@ -45,7 +45,6 @@ impl Visitor for InternalGenerator {
 
         Ok(())
     }
-
     fn visit_nvl_fn(&self, function: &Box<NvlFn>, f: &mut Formatter) -> Result {
         f.write_str("ifnull")?;
         f.write_char('(')?;
@@ -54,6 +53,7 @@ impl Visitor for InternalGenerator {
         self.visit_expression(&function.default, f)?;
         f.write_char(')')
     }
+
     fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
         let lower_tp = function.data_type.data_type.to_lowercase();
         let tp = lower_tp.as_str();
@@ -78,6 +78,9 @@ impl Visitor for InternalGenerator {
                 f.write_char(')')
             }
         }
+    }
+    fn visit_left_fn(&self, function: &LeftFn, f: &mut Formatter) -> Result {
+        self.visit_substr_fn(&SubstrFn::from(function), f)
     }
 }
 

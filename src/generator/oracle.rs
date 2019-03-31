@@ -205,6 +205,9 @@ impl Visitor for InternalGenerator {
             }
         }
     }
+    fn visit_left_fn(&self, function: &LeftFn, f: &mut Formatter) -> Result {
+        self.visit_substr_fn(&SubstrFn::from(function), f)
+    }
 }
 
 impl OracleGenerator<Expression> for Expression {
