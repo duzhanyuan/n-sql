@@ -1,5 +1,6 @@
 /* tslint:disable */
 export const memory: WebAssembly.Memory;
+export const __indirect_function_table: WebAssembly.Table;
 export function __wbindgen_global_argument_ptr(): number;
 export function __wbindgen_describe___wbg_alert_98e56d55082384db(): void;
 export function translate(a: number, b: number, c: number): void;
