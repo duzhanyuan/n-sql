@@ -98,8 +98,8 @@ fn test_trim(left: &str, database_type: DatabaseType, right: &str) {
 #[case("reverse('123nj')", PostgreSQL, "reverse('123nj')")]
 #[case("reverse('123nj')", Oracle, "reverse('123nj')")]
 #[case("reverse('123nj')", MySQL, "reverse('123nj')")]
-//#[case("reverse('123nj')", SqlServer, "reverse('123nj')")]
-//#[case("reverse('123nj')", SQLite, "reverse('123nj')")]
+#[case("reverse('123nj')", SqlServer, "reverse('123nj')")]
+#[case("reverse('123nj')", SQLite, "reverse('123nj')")]
 #[case("reverse('abc')", NSQL, "reverse('abc')")]
 fn test_reverse(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
@@ -110,9 +110,9 @@ fn test_reverse(left: &str, database_type: DatabaseType, right: &str) {
 #[case("left(a, 3)", NSQL, "left(a, 3)")]
 #[case("left(a,2)", NSQL, "left(a, 2)")]
 #[case("left(a,2)", PostgreSQL, "left(a, 2)")]
-//#[case("left(a,2)", Oracle, "substr(a, 1, 2)")]
+#[case("left(a,2)", Oracle, "substr(a, 1, 2)")]
 #[case("left(a,2)", MySQL, "left(a, 2)")]
-//#[case("left(a,2)", SQLite, "substr(a, 1, 2)")]
+#[case("left(a,2)", SQLite, "substr(a, 1, 2)")]
 fn test_left(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }

@@ -88,8 +88,6 @@ impl Visitor for InternalGenerator {
         }
         Ok(())
     }
-
-
     fn visit_select_statement(&self, statement: &SelectStatement, f: &mut Formatter) -> Result {
         f.write_str("select")?;
         if let Some(ref t) = statement.select_type {
@@ -150,8 +148,30 @@ impl Visitor for InternalGenerator {
         }
         Ok(())
     }
+
+
     fn visit_now_fn(&self, f: &mut Formatter) -> Result {
         f.write_str("systimestamp")
+    }
+    fn visit_log10_fn(&self, function: &Log10Fn, f: &mut Formatter) -> Result {
+        f.write_str("log")?;
+        f.write_char('(')?;
+        f.write_str("10, ")?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+    fn visit_log_fn(&self, function: &LogFn, f: &mut Formatter) -> Result {
+        f.write_str("log")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.base {
+            self.visit_expression(t, f)?;
+        } else {
+            let exp = ExpFn::new(Expression::from(1).into());
+            self.visit_exp_fn(&exp, f)?;
+        }
+        f.write_str(", ")?;
+        self.visit_expression(&function.number, f)?;
+        f.write_char(')')
     }
     fn visit_cast_fn(&self, function: &Box<CastFn>, f: &mut Formatter) -> Result {
         match function.data_type.data_type.to_lowercase().as_str() {
@@ -184,6 +204,9 @@ impl Visitor for InternalGenerator {
                 f.write_char(')')
             }
         }
+    }
+    fn visit_left_fn(&self, function: &LeftFn, f: &mut Formatter) -> Result {
+        self.visit_substr_fn(&SubstrFn::from(function), f)
     }
 }
 

@@ -65,6 +65,18 @@ impl FloorFn {
 }
 
 #[derive(Clone, Debug)]
+pub struct LogFn {
+    pub base: Option<Box<Expression>>,
+    pub number: Box<Expression>,
+}
+
+impl LogFn {
+    pub fn new(base: Option<Box<Expression>>, number: Box<Expression>) -> LogFn {
+        LogFn { base, number }
+    }
+}
+
+#[derive(Clone, Debug)]
 pub struct Log10Fn {
     pub expr: Box<Expression>,
 }
@@ -76,16 +88,16 @@ impl Log10Fn {
 }
 
 #[derive(Clone, Debug)]
-pub struct LogFn {
-    pub base: Option<Box<Expression>>,
-    pub number: Box<Expression>,
+pub struct ExpFn {
+    pub expr: Box<Expression>,
 }
 
-impl LogFn {
-    pub fn new(base: Option<Box<Expression>>, number: Box<Expression>) -> LogFn {
-        LogFn { base, number }
+impl ExpFn {
+    pub fn new(expr: Box<Expression>) -> ExpFn {
+        ExpFn { expr }
     }
 }
+
 
 #[derive(Clone, Debug)]
 pub struct PowFn {

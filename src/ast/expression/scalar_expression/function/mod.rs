@@ -29,6 +29,7 @@ pub enum Function {
     Ceil(CeilFn),
     Cos(CosFn),
     DenseRank(DenseRankFn),
+    Exp(ExpFn),
     Floor(FloorFn),
     Log10(Log10Fn),
     Log(LogFn),

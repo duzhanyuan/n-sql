@@ -639,6 +639,7 @@ pub trait Visitor {
             Function::Ceil(t) => self.visit_ceil_fn(t, f),
             Function::Cos(t) => self.visit_cos_fn(t, f),
             Function::DenseRank(t) => self.visit_dense_rank_fn(t, f),
+            Function::Exp(t) => self.visit_exp_fn(t, f),
             Function::Floor(t) => self.visit_floor_fn(t, f),
             Function::Log10(t) => self.visit_log10_fn(t, f),
             Function::Log(t) => self.visit_log_fn(t, f),
@@ -656,6 +657,12 @@ pub trait Visitor {
         }
     }
 
+    fn visit_exp_fn(&self, function: &ExpFn, f: &mut Formatter) -> Result {
+        f.write_str("exp")?;
+        f.write_char('(')?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
     fn visit_now_fn(&self, f: &mut Formatter) -> Result {
         f.write_str("now()")
     }
@@ -691,11 +698,10 @@ pub trait Visitor {
         f.write_char(')')
     }
     fn visit_dense_rank_fn(&self, function: &DenseRankFn, f: &mut Formatter) -> Result {
-        f.write_str("dense_rank")?;
-        f.write_char('(')?;
+        f.write_str("dense_rank() over (order by ")?;
         self.visit_expression(&function.expr, f)?;
         if let Some(ref order) = function.order {
-            f.write_str(", ")?;
+            f.write_char(' ')?;
             use crate::SortingDirection::*;
             match order {
                 Ascending => f.write_str("asc")?,
@@ -705,11 +711,10 @@ pub trait Visitor {
         f.write_char(')')
     }
     fn visit_rank_fn(&self, function: &RankFn, f: &mut Formatter) -> Result {
-        f.write_str("rank")?;
-        f.write_char('(')?;
+        f.write_str("rank() over (order by ")?;
         self.visit_expression(&function.expr, f)?;
         if let Some(ref order) = function.order {
-            f.write_str(", ")?;
+            f.write_char(' ')?;
             use crate::SortingDirection::*;
             match order {
                 Ascending => f.write_str("asc")?,

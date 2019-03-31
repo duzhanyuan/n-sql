@@ -48,6 +48,28 @@ impl Visitor for InternalGenerator {
         }
         Ok(())
     }
+
+    fn visit_log10_fn(&self, function: &Log10Fn, f: &mut Formatter) -> Result {
+        f.write_str("log")?;
+        f.write_char('(')?;
+        f.write_str("10, ")?;
+        self.visit_expression(&function.expr, f)?;
+        f.write_char(')')
+    }
+
+    fn visit_log_fn(&self, function: &LogFn, f: &mut Formatter) -> Result {
+        f.write_str("log")?;
+        f.write_char('(')?;
+        if let Some(ref t) = function.base {
+            self.visit_expression(t, f)?;
+        } else {
+            let exp = ExpFn::new(Expression::from(1).into());
+            self.visit_exp_fn(&exp, f)?;
+        }
+        f.write_str(", ")?;
+        self.visit_expression(&function.number, f)?;
+        f.write_char(')')
+    }
     fn visit_extract_fn(&self, function: &ExtractFn, f: &mut Formatter) -> Result {
         f.write_str("extract")?;
         f.write_char('(')?;

@@ -5,7 +5,7 @@
 // <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
-use crate::ast::Expression as UnBoxExpression;
+use crate::ast::{Expression as UnBoxExpression, LeftFn};
 
 type Expression = Box<UnBoxExpression>;
 
@@ -23,5 +23,14 @@ impl SubstrFn {
             start,
             length,
         }
+    }
+}
+
+impl From<&LeftFn> for SubstrFn {
+    fn from(v: &LeftFn) -> Self {
+        SubstrFn::new(
+            v.text.clone(),
+            UnBoxExpression::from(1).into(),
+            v.length.clone().into())
     }
 }
