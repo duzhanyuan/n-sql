@@ -73,22 +73,22 @@ fn test_pow(left: &str, database_type: DatabaseType, right: &str) {
 #[case("log(2, 3)", SqlServer, "log(3, 2)")]
 #[case("log10(6.8)", NSQL, "log10(6.8)")]
 #[case("log10(2)", NSQL, "log10(2)")]
-//#[case("log10(2)", PostgreSQL, "log(10, 2)")]
-//#[case("log10(2)", Oracle, "log(10, 2)")]
+#[case("log10(2)", PostgreSQL, "log(10, 2)")]
+#[case("log10(2)", Oracle, "log(10, 2)")]
 #[case("log10(2)", MySQL, "log10(2)")]
 #[case("log10(2)", SqlServer, "log10(2)")]
 
-//#[case("log(10, 2)", NSQL, "log10(2)")]
-//#[case("log(10, 2)", PostgreSQL, "log(10, 2)")]
-//#[case("log(10, 2)", Oracle, "log(10, 2)")]
-//#[case("log(10, 2)", MySQL, "log10(2)")]
-//#[case("log(10, 2)", SqlServer, "log10(2)")]
+#[case("log(10, 2)", NSQL, "log(10, 2)")]
+#[case("log(10, 2)", PostgreSQL, "log(10, 2)")]
+#[case("log(10, 2)", Oracle, "log(10, 2)")]
+#[case("log(10, 2)", MySQL, "log(10, 2)")]
+#[case("log(10, 2)", SqlServer, "log(2, 10)")]
 
-//#[case("log(2)", NSQL, "log10(2)")]
-#[case("log(2)", PostgreSQL, "log(2)")]
-#[case("log(2)", Oracle, "log(2)")]
+#[case("log(2)", NSQL, "log(2)")]
+#[case("log(2)", PostgreSQL, "log(exp(1), 2)")]
+#[case("log(2)", Oracle, "log(exp(1), 2)")]
 #[case("log(2)", MySQL, "log(2)")]
-//#[case("log(2)", SqlServer, "log(2)")]
+#[case("log(2)", SqlServer, "log(2)")]
 fn test_log(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
@@ -97,6 +97,13 @@ fn test_log(left: &str, database_type: DatabaseType, right: &str) {
 #[test]
 #[case("sin(6.855)", NSQL, "sin(6.855)")]
 fn test_sin(left: &str, database_type: DatabaseType, right: &str) {
+    test_expression(database_type, left, right);
+}
+
+#[theory]
+#[test]
+#[case("exp(1)", NSQL, "exp(1)")]
+fn test_exp(left: &str, database_type: DatabaseType, right: &str) {
     test_expression(database_type, left, right);
 }
 

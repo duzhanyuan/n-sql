@@ -34,7 +34,7 @@ pub use self::token::Token;
 use crate::lexer::token::Token::EOF;
 
 //noinspection SpellCheckingInspection
-const REGEX_SOURCE: [(&str, Token); 139] = [
+const REGEX_SOURCE: [(&str, Token); 140] = [
     // region [keyword]
     ("^(?i)all$", Token::All),
     ("^(?i)and$", Token::And),
@@ -104,6 +104,7 @@ const REGEX_SOURCE: [(&str, Token); 139] = [
     ("^(?i)day_sub$", Token::DaySub),
     ("^(?i)decode$", Token::Decode),
     ("^(?i)dense_rank$", Token::DenseRank),
+    ("^(?i)exp$", Token::Exp),
     ("^(?i)extract$", Token::Extract),
     ("^(?i)floor$", Token::Floor),
     ("^(?i)hour$", Token::Hour),

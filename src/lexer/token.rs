@@ -137,6 +137,7 @@ pub enum Token<'input> {
     DaySub,
     Decode,
     DenseRank,
+    Exp,
     Extract,
     Floor,
     Hour,

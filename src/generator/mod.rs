@@ -155,7 +155,6 @@ impl Visitor for InternalGenerator {
         self.visit_expression(&function.expr, f)?;
         f.write_char(')')
     }
-
 }
 
 impl Generator<Expression> for Expression {
