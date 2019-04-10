@@ -2,55 +2,65 @@
 
 > N-SQL has many built-in functions.
 
+## N-SQL Aggregate Functions
+
+Function | Description
+-- | --
+[AVG](/#/functions#avg) | Returns the average value of an expression
+[COUNT](/#/functions#count) | Returns the number of records returned by a select query
+[COUNT_IF](/#/functions#count) | todo
+[MAX](/#/functions#max) | Returns the maximum value in a set of values
+[MAX_IF](/#/functions#count) | todo
+[MEDIAN](/#/functions#median) | Retuns the median of a series of numbers
+[MEDIAN_IF](/#/functions#count) | todo
+[MIN](/#/functions#min) | Returns the minimum value in a set of values
+[MIN_IF](/#/functions#count) | todo
+[PERCENT](/#/functions#percentile_cont) | This function is equal to the PERCENTILE_CONT() function.
+[PERCENTILE](/#/functions#percentile_cont) | This function is equal to the PERCENTILE_CONT() function.
+[PERCENTILE_CONT](/#/functions#percentile_cont) | Returns an interpolated value in An inverse distribution function that assumes a continuous distribution model.
+[PERCENTILE_DISC](/#/functions#percentile_disc) | Returns an element from An inverse distribution function that assumes a discrete distribution model
+[STDDEV](/#/functions#stddev) | Returns the population standard deviation of expression.
+[SUM](/#/functions#sum) | Calculates the sum of a set of values
+[SUM_IF](/#/functions#count) | todo
+[VARIANCE](/#/functions#variance) |  Returns the population standard variance of an expression.
+
 ## N-SQL String Functions
 
 Function | Description
 -- | --
-[CONCAT](/#/functions?id=concat) | Adds two or more strings together
-[LEFT](/#/functions?id=left) | Extracts a number of characters from a string (starting from left)
-[LENGTH](/#/functions?id=length) | Returns the length of a string
-[LOWER](/#/functions?id=lower) | Converts a string to lower-case
-[LTRIM](/#/functions?id=ltrim) | Removes leading spaces from a string
-[REPLACE](/#/functions?id=replace) | Replaces all occurrences of a substring within a string, with a new substring
-[REVERSE](/#/functions?id=reverse) | Reverses a string and returns the result.
-[RIGHT](/#/functions?id=right) | Extracts a number of characters from a string (starting from right)
-[RTRIM](/#/functions?id=rtrim) | Removes trailing spaces from a string
-[SUBSTR](/#/functions?id=substr) | Extracts a substring from a string (starting at any position).
-[TRIM](/#/functions?id=trim) | Removes leading and trailing spaces (or other specified characters) from a string
-[UPPER](/#/functions?id=upper) | Converts a string to upper-case
+[CONCAT](/#/functions#concat) | Adds two or more strings together
+[LEFT](/#/functions#left) | Extracts a number of characters from a string (starting from left)
+[LENGTH](/#/functions#length) | Returns the length of a string
+[LOWER](/#/functions#lower) | Converts a string to lower-case
+[LTRIM](/#/functions#ltrim) | Removes leading spaces from a string
+[REPLACE](/#/functions#replace) | Replaces all occurrences of a substring within a string, with a new substring
+[REVERSE](/#/functions#reverse) | Reverses a string and returns the result.
+[RIGHT](/#/functions#right) | Extracts a number of characters from a string (starting from right)
+[RTRIM](/#/functions#rtrim) | Removes trailing spaces from a string
+[SUBSTR](/#/functions#substr) | Extracts a substring from a string (starting at any position).
+[TRIM](/#/functions#trim) | Removes leading and trailing spaces (or other specified characters) from a string
+[UPPER](/#/functions#upper) | Converts a string to upper-case
 
 ## N-SQL Math/Numeric Functions
 
 Function | Description
 -- | --
-[ABS](/#/functions?id=abs) | Returns the absolute value of a number
-[AVG](/#/functions?id=avg) | Returns the average value of an expression
-[COUNT](/#/functions?id=count) | Returns the number of records returned by a select query
-[CEIL](/#/functions?id=ceil) | Returns the smallest integer value that is >= to a number
-[CEILING](/#/functions?id=ceil) | This function is equal to the CEIL() function.
+[ABS](/#/functions#abs) | Returns the absolute value of a number
+[CEIL](/#/functions#ceil) | Returns the smallest integer value that is >= to a number
+[CEILING](/#/functions#ceil) | This function is equal to the [CEIL()](/#/functions#ceil) function.
 [COS](/#/functions?id=cos) | Returns the cosine of a number
-[DENSE_RANK](/#/functions?id=dense_rank) | Returns the rank of each row within a result set partition, with no gaps in the ranking values.
+[DENSE_RANK](/#/functions#dense_rank) | Returns the rank of each row within a result set partition, with no gaps in the ranking values.
 [FLOOR](/#/functions?id=floor) | Returns the largest integer value that is <= to a number
 [LOG](/#/functions#log) | Returns the natural logarithm of a number, or the logarithm of a number to a specified base
-[LOG10](/#/functions?id=log10) | Returns the natural logarithm of a number to base 10
-[MAX](/#/functions?id=max) | Returns the maximum value in a set of values
-[MEDIAN](/#/functions?id=median) | Retuns the median of a series of numbers
-[MIN](/#/functions?id=min) | Returns the minimum value in a set of values
-[PERCENT](/#/functions?id=percentile_cont) | This function is equal to the PERCENTILE_CONT() function.
-[PERCENTILE](/#/functions?id=percentile_cont) | This function is equal to the PERCENTILE_CONT() function.
-[PERCENTILE_CONT](/#/functions?id=percentile_cont) | Returns an interpolated value in An inverse distribution function that assumes a continuous distribution model.
-[PERCENTILE_DISC](/#/functions?id=percentile_disc) | Returns an element from An inverse distribution function that assumes a discrete distribution model
-[POW](/#/functions?id=pow) | Returns the value of a number raised to the power of another number
-[POWER](/#/functions?id=power) | Returns the value of a number raised to the power of another number
-[RANK](/#/functions?id=rank) | Returns the rank of a value in a group of values
-[ROUND](/#/functions?id=round) | Rounds a number to a specified number of decimal places
-[SIGN](/#/functions?id=sign) | Returns the sign of a number
-[SIN](/#/functions?id=sin) | Returns the sine of a number
-[SQRT](/#/functions?id=sqrt) | Returns the square of a number
-[STDDEV](/#/functions?id=stddev) | Returns the population standard deviation of expression.
-[SUM](/#/functions?id=sum) | Calculates the sum of a set of values
-[TAN](/#/functions?id=tan) | Returns the tangent of a number.
-[VARIANCE](/#/functions?id=variance) |  Returns the population standard variance of an expression.
+[LOG10](/#/functions#log10) | Returns the natural logarithm of a number to base 10
+[POW](/#/functions#pow) | Returns the value of a number raised to the power of another number
+[POWER](/#/functions#power) | Returns the value of a number raised to the power of another number
+[RANK](/#/functions#rank) | Returns the rank of a value in a group of values
+[ROUND](/#/functions#round) | Rounds a number to a specified number of decimal places
+[SIGN](/#/functions#sign) | Returns the sign of a number
+[SIN](/#/functions#sin) | Returns the sine of a number
+[SQRT](/#/functions#sqrt) | Returns the square of a number
+[TAN](/#/functions#tan) | Returns the tangent of a number.
 
 ## N-SQL Date Functions
 
@@ -104,6 +114,14 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
 
 > The ABS() function returns the absolute value of a number.
 
+- Syntax
+  > ABS(N);
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  N | numeric | A number whose absolute value is to be retrieved.
+
 - Support
    Database | Support
   -- | --
@@ -112,15 +130,21 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
-
-- Syntax
-  
-  `abs(:number)`
 
 ### AVG
 
 > The AVG() function returns the average value of a numeric column
 
+- Syntax
+  > AVG([ALL | DISTINCT] expression)
+
+- Argument
+  Name | Description
+  -- | --
+  ALL | Applies to all values.
+  DISTINCT | Return avg of unique values.
+  expression | Expression made up of a single contant,variable,scalar function, or clomun name.The expression is an expression of the exact numeric or aproximate numeric data type category,except of the bit data type.Aggreate function and subqueries are not permitted.
+
 - Support
    Database | Support
   -- | --
@@ -129,10 +153,6 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
-
-- Syntax
-  
-  `avg([:number])`
 
 ### CEIL
 
@@ -604,6 +624,8 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   
   `max([:number])`
 
+### MAX_IF
+
 ### MEDIAN
 
 > The MEDIAN() function calculates the median of a series of numbers and returns it.
@@ -637,6 +659,8 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
 - Syntax
   
   `min([:number])`
+
+### MIN_IF
 
 ### MINUTE
 
@@ -834,19 +858,25 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
 
 > The PERCENTILE_DISC() function is an inverse distribution function that assumes a discrete distribution model. It takes a percentile value and a sort specification and returns an element from the set. Nulls are ignored in the calculation.
 
+- Syntax
+  > `percentile_dist(expr: [:number], p:float)`;`percentile_dist(expr: [:number], p:float, asc | desc)`
+
+- Argument
+  Name | Description
+  -- | --
+  expr | A single expression that can be of any type that can be sorted
+  p | The value must evaluate to a numeric value between 0 and 1, because it is a percentile value
+
 - Support
   Database | Support
   -- | --
   PostgreSQL | $\color{orange} {\checkmark}$
   Oracle | $\color{orange} {\checkmark}$
-  MySQL |
+  MySQL | $\color{red} {\times}$
   Sql Server | $\color{orange} {\checkmark}$
-  SQlite |
+  SQlite | $\color{red} {\times}$
 
-- Syntax
 
-  1. `percentile_dist([:number], p:float)`
-  2. `percentile_dist([:number], p:float, asc | desc)`
 
 ### POW
 
@@ -854,24 +884,14 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
 
 **Note**: This function is equal to the [POWER()](/#/functions?id=power) function.
 
-- Support
-  Database | Support
-  -- | --
-  PostgreSQL | $\color{green} {\checkmark}$
-  Oracle | $\color{green} {\checkmark}$
-  MySQL | $\color{green} {\checkmark}$
-  Sql Server | $\color{green} {\checkmark}$
-  SQlite | $\color{green} {\checkmark}$
-
 - Syntax
+  > `POW(x, y)`
 
-  `pow(x:number, y:number)`
-
-### POWER
-
-> The POWER() function returns the value of a number raised to the power of another number.
-
-**Note**: This function is equal to the [POW()](/#/functions?id=pow) function.
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  x | numeric | Required. A number (the base)
+  y | numeric | Required. A number (the exponent)
 
 - Support
   Database | Support
@@ -881,14 +901,15 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
-
-- Syntax
-
-  `power(x:number, y:number)`
 
 ### RANK
 
 > RANK calculates the rank of a value in a group of values. The return type is NUMBER.
+
+- Syntax
+
+  `rank(expression, ASC | DESC)`
+
 - Support
    Database | Support
   -- | --
@@ -896,34 +917,44 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Oracle | $\color{green} {\checkmark}$
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
-  SQlite |
-
-- Syntax
-
-  `rank([number]|number, ASC | DESC)`
+  SQlite | $\color{red} {\times}$
 
 ### REPLACE
 
-> The REPLACE() function replaces all occurrences of a substring within a string, with a new substring.
+> The `REPLACE()` function replaces all occurrences of a substring within a string, with a new substring.
 
-  Note: The search is case-insensitive.
+**Note**: The search is case-insensitive.
+
+- Syntax
+  > `REPLACE(string, from_string, new_string)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  string | string |Required. The original string
+  from_string | string | Required. The substring to be replaced
+  new_string | string | Required. The new replacement substring
 
 - Support
-   Database | Support
+  Database | Support
   -- | --
   PostgreSQL | $\color{green} {\checkmark}$
   Oracle | $\color{green} {\checkmark}$
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
-
-- Syntax
-
-  `replace(:string, old: string, new: string)`
 
 ### REVERSE
 
-> The REVERSE() function reverses a string and returns the result.
+> The `REVERSE()` function reverses a string and returns the result.
+
+- Syntax
+  > `REVERSE(string)`
+
+- Argument
+  Name | Data Type | Decription
+  -- | -- | --
+  string | string | Required. The string to reverse.
 
 - Support
    Database | Support
@@ -934,13 +965,18 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
 
-- Syntax
-
-  `reverse(:string)`
-
 ### RIGHT
 
-> The RIGHT() function extracts a number of characters from a string (starting from right).
+> The `RIGHT()` function extracts a number of characters from a string (starting from right).
+
+- Syntax
+  > `RIGHT(text, number_of_chars)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  text | string | Required. The string to extract from
+  number_of_chars  | int | Required. The number of characters to extract. If this parameter is larger than the number of characters in string, this function will return string
 
 - Support
   Database | Support
@@ -951,13 +987,19 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{orange} {\checkmark}$
 
-- Syntax
-  
-  `right(:string, length:int)`
-
 ### ROUND
 
-> The ROUND() function rounds a number to a specified number of decimal places.
+> The `ROUND()` function rounds a number to a specified number of decimal places.
+
+**Note**: See also the `FLOOR()`, `CEIL()` and `CEILING()` functions.
+
+- Syntax
+  > `ROUND(number, decimals, operation)`
+
+- Argument
+  Name | Data Type | Description
+  number | numeric | Required. The number to be rounded
+  decimals | int | Optional. The number of decimal places to round number to. If omitted, it returns the integer (no decimals)
 
 - Support
   Database | Support
@@ -968,13 +1010,18 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
 
-- Syntax
-  
-  `round(:number, :decimals)`
-
 ### RTRIM
 
-> The TRIM() function removes the space character OR other specified characters from the start or end of a string.
+> The RTRIM() function removes the space character OR other specified characters from end of a string.
+
+- Syntax
+  > `RTRIM(text, trim_text)`; `TRIM_END(text, trim_text)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  text | string | Required. The text to be modified.
+  trim_text| Optional. The characters to be removed from right (If omit means remove spaces).
 
 - Support
   Database | Support
@@ -985,14 +1032,17 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | Only Support trim whitespace
   SQlite | $\color{green} {\checkmark}$
 
-- Syntax
-
-  1. `rtrim(:string, trimText: string?)`
-  2. `trim_end(:string, trimText: string?)`
-
 ### SECOND
 
 > The SECOND() function returns the seconds part of a time/datetime.
+
+- Syntax
+  > `SECOND(date)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  date | date to timestamp | Required. The date to be extracted second part.
 
 - Support
   Database | Support
@@ -1001,7 +1051,7 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Oracle | $\color{orange} {\checkmark}$
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{orange} {\checkmark}$
-  SQlite |
+  SQlite | $\color{red}{\times}$
 
 - Syntax
 
@@ -1010,6 +1060,15 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
 ### SECOND_ADD
 
 > The SECOND_ADD() function adds a second or serveral seconds interval to a date and then returns the date.
+
+- Syntax
+  > `SECOND_ADD(date, number)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  date | date or timestamp | Required. The date to be modified.
+  number | int | Required. The number of seconds to be added.
 
 - Support
   Database | Support
@@ -1028,6 +1087,15 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
 
 > The SECOND_DIFF() function returns the number of seconds between two date values.
 
+- Syntax
+   > `SECOND_DIFF(start, end)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  start | date or timestamp | Required. The start date.
+  end | date or timestamp | Required. The end date.
+
 - Support
   Database | Support
   -- | --
@@ -1037,13 +1105,18 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | $\color{orange} {\checkmark}$
   SQlite | $\color{orange} {\checkmark}$
 
-- Syntax
-
-   `second_diff(start: datetime, end: datetime)`
-
 ### SECOND_SUB
 
 > The SECOND_SUB() function subtracts a second or serveral seconds interval to a date and then returns the date.
+
+- Syntax
+  > `SECOND_SUB(date, number)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  date | datetime or timestamp | Required. The date to be modified.
+  number | int | The number of seconds to be subtract to the date.
 
 - Support
   Database | Support
@@ -1061,6 +1134,7 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
 ### SIGN
 
 > The SIGN() function returns the sign of a number.
+
 - Note
 
   This function will return one of the following:
@@ -1068,6 +1142,14 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   - If number = 0, it returns 0
   - If number < 0, it returns -1
 
+- Syntax
+  > `SIGN(number)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  number | numeric | Required. The number to return the sign for
+
 - Support
   Database | Support
   -- | --
@@ -1076,15 +1158,19 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
-
-- Syntax
-
-   `sign(:number)`
 
 ### SIN
 
 > The SIN() function returns the sine of a number.
 
+- Syntax
+
+   `SIN(number)`
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  number | numeric | Required. A numeric value
+
 - Support
   Database | Support
   -- | --
@@ -1094,14 +1180,20 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
 
-- Syntax
 
-   `sin(:number)`
 
 ### SQRT
 
 > The SQRT() function returns the square of a number.
 
+- Syntax
+  > `SQRT(number)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  number | Required. A number to caclulate the square root of, Must be greater than 0
+
 - Support
   Database | Support
   -- | --
@@ -1111,13 +1203,19 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
 
-- Syntax
-
-   `sqrt(:number)`
-
 ### STDDEV
 
 > The STDDEV() function returns the population standard deviation of expression. It returns NULL if no matching rows found.
+
+- Syntax
+  > `STDDEV([ALL | DISTINCT] expression)`
+
+- Argument
+  Name | Description
+  -- | --
+  ALL | Applies to all values.
+  DISTINCT | Return population standard deviation of unique values.
+  expression | Expression made up of a single contant,variable,scalar function, or clomun name.The expression is an expression of the exact numeric or aproximate numeric data type category,except of the bit data type.Aggreate function and subqueries are not permitted.
 
 - Support
   Database | Support
@@ -1126,16 +1224,21 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Oracle | $\color{green} {\checkmark}$
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
-  SQlite |
-
-- Syntax
-
-   1. `stddev([:number])`
-   2. `stddev(all | distinct [:number])`
+  SQlite | $\color{red}{\times}$
 
 ### SUBSTR
 
 > The SUBSTR() function extracts a substring from a string (starting at any position)
+
+- Syntax
+  > `SUBSTR(text, start, length)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  text | string | Required. The string to extract from
+  start | int | Required. The start position. Can be both a positive or negative number. If it is a positive number, this function extracts from the beginning of the string. If it is a negative number, this function extracts from the end of the string
+  length | int | Optional. The number of characters to extract. If omitted, the whole string will be returned (from the start position)
 
 - Support
   Database | Support
@@ -1146,13 +1249,19 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | $\color{orange} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
 
-- Syntax
-  
-  `substr(:string, start: int, length:int)`
-
 ### SUM
 
 > The SUM() function returns the total sum of a numeric column.
+
+- Syntax
+  > `SUM([ALL | DISTINCT] expression)`
+
+- Argument
+  Name | Description
+  -- | --
+  ALL | Applies to all values.
+  DISTINCT | Return sum of unique values.
+  expression | Expression made up of a single contant,variable,scalar function, or clomun name.The expression is an expression of the exact numeric or aproximate numeric data type category,except of the bit data type.Aggreate function and subqueries are not permitted.
 
 - Support
   Database | Support
@@ -1162,15 +1271,19 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
-
-- Syntax
-
-   `sum([:number])`
 
 ### TAN
 
 > The TAN() function returns the tangent of a number.
 
+- Syntax
+  > `TAN(N)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  N | numeric | A number.
+
 - Support
   Database | Support
   -- | --
@@ -1180,13 +1293,18 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
 
-  - Syntax
-
-   `tan(:number)`
-
 ### TRIM
 
-> Removes leading and trailing spaces (or other specified characters) from a string
+> The TRIM() function Removes leading and trailing spaces (or other specified characters) from a string
+
+- Syntax
+  > `TRIM(text)`; `TRIM(text, trim_text)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  text | string | Required. The text to be modified.
+  trim_text | string | Optional. The characters to be removed (If omit means remove spaces).
 
 - Support
   Database | Support
@@ -1197,15 +1315,20 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Sql Server | Only Support trim whitespace
   SQlite | $\color{green} {\checkmark}$
 
-- Syntax
-
-   `trim(:string, trimText: string?)`
-
 ### UPPER
 
 > The UPPER() function converts a string to upper-case.
 
-**Note**: Also look at the [LOWER()](/#/functions?id=lower) function.
+**Note**: Also look at the [LOWER()](/#/functions#lower) function.
+
+- Syntax
+
+  `UPPER(text)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  text | string | The string to be converted into upper-case
 
 - Support
   Database | Support
@@ -1215,31 +1338,41 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
-
-- Syntax
-
-  `upper(:string)`
 
 ### VARIANCE
 
 > The VARIANCE() function returns the population standard variance of an expression.
 
+- Syntax
+  > `VARIANCE([ALL | DISTINCT] expression)`
+
+- Argument
+  Name | Description
+  -- | --
+  ALL | Applies to all values.
+  DISTINCT | Return avg of unique values.
+  expression | Expression made up of a single contant,variable,scalar function, or clomun name.The expression is an expression of the exact numeric or aproximate numeric data type category,except of the bit data type.Aggreate function and subqueries are not permitted.
+
 - Support
   Database | Support
   -- | --
   PostgreSQL | $\color{green} {\checkmark}$
   Oracle | $\color{green} {\checkmark}$
-  MySQL | $\color{orange} {\checkmark}$
-  Sql Server | $\color{orange} {\checkmark}$
+  MySQL | $\color{green} {\checkmark}$
+  Sql Server | $\color{green} {\checkmark}$
   SQlite | $\color{green} {\checkmark}$
-
-- Syntax
-
-  `variance([:number])`
 
 ### YEAR
 
 > The YEAR() function returns the year part for a specified date.
+
+- Syntax
+  > `YEAR(D)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  N | date or timestamp | The date to be extrated year part.
 
 - Support
   Database | Support
@@ -1248,16 +1381,21 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   Oracle | $\color{Orange} {\checkmark}$
   MySQL | $\color{green} {\checkmark}$
   Sql Server | $\color{green} {\checkmark}$
-  SQlite |
-
-- Syntax
-
-  `year(:datetime)`
+  SQlite | $\color{red} {\times}$
 
 ### YEAR_ADD
 
 > The YEAR_ADD() fucntion adds a year or serveral years interval to a date and then returns the date.
 
+- Syntax
+  > `YEAR_ADD(D, N)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  D | date or timestamp | The date to be modified
+  N | int | The numerc of years to add.
+
 - Support
   Database | Support
   -- | --
@@ -1266,15 +1404,20 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   MySQL | $\color{Orange} {\checkmark}$
   Sql Server | $\color{Orange} {\checkmark}$
   SQlite | $\color{Orange} {\checkmark}$
-
-- Syntax
-
-  `year_add(:datetime, :int)`
 
 ### YEAR_DIFF
 
 > The YEAR_DIFF() function returns the number of years between two date values.
 
+- Syntax
+  > `YEAR_DIFF(a, b)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  a | date or timestamp | The start date.
+  b | date or timestamp | The end date.
+
 - Support
   Database | Support
   -- | --
@@ -1283,15 +1426,20 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   MySQL | $\color{Orange} {\checkmark}$
   Sql Server | $\color{Orange} {\checkmark}$
   SQlite | $\color{Orange} {\checkmark}$
-
-- Syntax
-
-  `year_diff(start:datetime, end: datetime)`
 
 ### YEAR_SUB
 
 > The YEAR_SUB() function subtracts a year or serveral years interval to a date and then returns the date.
 
+- Syntax
+  > `YEAR_SUB(D, N)`
+
+- Argument
+  Name | Data Type | Description
+  -- | -- | --
+  D | The date to be modifiled
+  N | the number of years to substract
+
 - Support
   Database | Support
   -- | --
@@ -1300,7 +1448,3 @@ NULLIF | Returns NULL if two expressions are equal, otherwise it returns the fir
   MySQL | $\color{Orange} {\checkmark}$
   Sql Server | $\color{Orange} {\checkmark}$
   SQlite | $\color{Orange} {\checkmark}$
-
-- Syntax
-
-  `year_sub(:datetime, :int)`
